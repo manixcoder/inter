@@ -1,0 +1,113 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Session;
+use Response;
+use DB;
+use Auth;
+use User;
+use Recruiter;
+use Hash;
+
+class RecruiterController extends Controller
+{
+  public function __construct(){
+    $this->middleware('auth');
+    $this->middleware('role');
+  }
+
+  public function index() {
+    $Data = app('App\User')->where('users_role', 3)->orderBy('id', 'Desc')->get();
+    $DataCount = app('App\User')->where('users_role', 3)->count();
+
+    $data['content'] = 'admin.recruiter.list_recruiter';
+    return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount'=>$DataCount]);
+  }
+
+  public function today_recruiter_list() {
+    $todaysdate = date('Y-m-d').' 00:00:00';
+    $Data = DB::table('users')->Where('users_role', 3)->where('created_at', '>=', $todaysdate)->paginate(10);    
+    $DataCount = DB::table('users')->Where('users_role', 3)->where('created_at', '>=', $todaysdate)->count();
+
+    $data['content'] = 'admin.recruiter.list_recruiter';
+    return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount'=>$DataCount]);
+  }
+
+  public function status_update($id) {   
+    $jobsdata = app('App\User')->where('id', $id)->first();
+
+    if($jobsdata->status == 1) {
+      $update = app('App\User')->where('id', $id)->update(['status'=>'0']);
+    }else {
+      $update = app('App\User')->where('id', $id)->update(['status'=>'1']);
+    }    
+  } 
+
+  public function delete($id) {
+    $delete = app('App\User')->where('id', $id)->delete();
+    $deleteRelatedJobs = app('App\Jobs')->where('user_id', $id)->delete();
+    return back();
+  } 
+
+  public function redirect_recruiter() {
+    $data['content'] = 'admin.recruiter.add_recruiter';
+    return view('layouts.content', compact('data'));   
+  }
+
+    public function create(Request $request) { 
+      
+        $emailcheck = DB::table('users')->where('email', $request->email)->count(); 
+        $phonecheck = DB::table('users')->where('phone', $request->phone)->count(); 
+        
+        /*dd($emailcheck);*/
+        
+        if($emailcheck > 0){
+            return back()->with('error', 'Email is already registered.!');
+        }
+        elseif($phonecheck > 0){
+           return back()->with('error', 'Phone is already registered.!'); 
+        }
+        else{
+            if($files = $request->image){
+              $destinationPath = public_path('/assets/org_images/');
+              $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
+              $path =  $files->move($destinationPath, $profileImage);
+              $image = $insert['photo'] = "$profileImage";
+            }
+        
+            $data = array(        
+              'org_image' => $image,    
+              'email' => $request->email,      
+              'name' => $request->name,      
+              'org_name' => $request->org_name,      
+              'phone' => $request->phone,       
+              'password' => Hash::make($request->password),       
+              'status' => 0,       
+              'users_role' => 3,       
+              'create_by' => Session::get('gorgID'),       
+            );
+        
+            $insertData = app('App\User')->insert($data);
+           
+        }
+    
+        return redirect('recruiter-list');    
+    }
+
+  public function recruiter_detail($id) {
+    $recruiterDetail = app('App\User')->where('id', base64_decode($id))->first();
+    $totalListedJobs =  DB::table('jobs')->where('user_id', $recruiterDetail->id)->orderBy('id', 'DESC')->get();
+
+    $data['content'] = 'admin.recruiter.recruiter_detail';
+    return view('layouts.content', compact('data'))->with(['recruiterDetail' => $recruiterDetail, 'totalListedJobs' => $totalListedJobs]);
+  }
+}
