@@ -17,7 +17,47 @@
         
         
       @include('fruntend.student.inc.top-menu')     
-        
+      <?php
+      $userRole = Session::get('userRole');
+      $count = 30;
+      $userid = Session::get('gorgID');
+      $loginby = DB::table('users')->where('id', $userid)->first();
+      $education = DB::table('education')->where('user_id', $userid)->first();
+      $certificate = DB::table('certificates')->where('user_id', $userid)->first();
+      $myfavorite = DB::table('my_favorite_industries')->where('user_id', $userid)->first();
+      $businesses = DB::table('business_functions')->where('user_id', $userid)->first();
+      $hobbies = DB::table('hobbies_and_interests')->where('user_id', $userid)->first();
+      $accomplishments = DB::table('accomplishments')->where('user_id', $userid)->first();
+      $studentData = DB::table('users')->where('id', $userid)->first();
+      // echo "<pre>";
+      // print_r($education);
+      // die;
+      if ($loginby->address != '') {
+        $count = $count + 10;
+      }
+      if ($loginby->about != '') {
+        $count = $count + 5;
+      }
+      if ($education) {
+        $count = $count + 10;
+      }
+      if ($certificate) {
+        $count = $count + 15;
+      }
+      if ($myfavorite) {
+        $count = $count + 5;
+      }
+      if($businesses){
+        $count = $count + 10;
+      }
+      if ($hobbies) {
+        $count = $count + 10;
+      }
+      if ($accomplishments) {
+        $count = $count + 5;
+      }
+      
+      ?> 
         
       </div>
     </header>
@@ -27,7 +67,12 @@
           <div class="innerrow">                       
             <div class="col_grid9">
               <div class="profile_publicimg">
-                <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="img"/>
+              @if($studentData->profile_image =='no-image.png')
+                      <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="img" />                      
+                      @else
+                      <img src="{{ asset('public/assets/student_image/'.$studentData->profile_image)}}" alt="img" />
+                      @endif
+                <!-- <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="img"/> -->
               </div>                                                
               <div class="profile_publicDetail">
                 <h4 class="clrwht font36text  semiboldfont_fmly">{{$OrgData->name}}</h4>
@@ -37,12 +82,12 @@
                   <div class="progressbar_cont fw">
                     <span></span>  
                   </div>
-                  30% profile completed
+                  <?php echo $count;?>% profile completed
                 </div>
               </div>
             </div>
             <div class="col_grid3">
-              <div class="rightPublic text-right font24Text">
+              <!--div class="rightPublic text-right font24Text">
                 Public Profile<div class="profileToggle">
                   <div class="k-switch">
                     <div class="track"></div> 
@@ -50,7 +95,7 @@
                    <div class="ball red"></div>
                    </div>
                 </div>           
-              </div>
+              </div-->
             </div>
           </div>
         </div>
@@ -78,7 +123,7 @@
                 $userRole = Session::get('userRole');
                 $id = Session::get('gorgID');
                 $users = DB::table('users')->where('id', $id)->first();
-             $posts = DB::table('posts')->where('user_id', $id)->orderBy('id', 'desc')->get();
+                $posts = DB::table('posts')->where('user_id', $id)->orderBy('id', 'desc')->get();
                 @endphp
                 <h3 class="font36text clrBlack semiboldfont_fmly">
                   You have posted (0{{count($posts)}} Posts)
@@ -90,10 +135,26 @@
 
 
               @foreach($posts as $post)
+              @php
+              $userid = Session::get('gorgID');
+              $loginby = app('App\user')->where('id', $userid)->first();
+              $createdby = app('App\user')->where('id', $post->user_id)->first(); 
+              $likeby = DB::table('post_like')->where('post_id', $post->id)->where('like_unlike', 0)->count();
+              $commentby = DB::table('post_comment')->where('post_id', $post->id)->count();
+              $commentbydata = DB::table('post_comment')->where('post_id', $post->id)->get(); 
+              $likeorUnlike = DB::table('post_like')->where('user_id', $userid)->where('post_id', $post->id)->first();
+              @endphp
               <div class="content-group fw">
                 <div class="text-cont fw">
                   <div class="userCommnet_deta fw">
-                    <span><img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="icon"></span>
+                    <span>
+                    @if($users->profile_image =='no-image.png')
+                      <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="icon" />                      
+                      @else
+                      <img src="{{ asset('public/assets/student_image/'.$studentData->profile_image)}}" alt="icon" />
+                      @endif
+                      <!-- <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="icon"> -->
+                    </span>
                     <div class="userCommnet_Name">
                       <h4>{{$users->name}} <span>{!! date('d M Y H:i:s', strtotime($post->date_time)) !!}</span> <span class="delete_postbtn"><a href="{{ url('delete_student_post/'.$post->id) }}"><i><img src="{{ asset('public/assets/images/delete.png')}}" alt="delete-icon" /></i>Delete Post</a></span></h4>
                     </div>
@@ -109,18 +170,90 @@
                   </figure>
                 </div>
                 <ul class="commntsMsgBox fw">
+                    @if($likeby == null)
                   <li>
-                    <a href="#"><span><img src="{{ asset('public/assets/images/likedIcon.png')}}" alt="icon"></span> 35 Likes</a>
+                    <a href="javascript:void(0);" onclick="editRecords({{ $post->id }})">
+                        <span><img src="{{ asset('public/assets/images/likedIcon.png')}}" alt="icon">
+                        </span>{{ $likeby ?? ''}} Likes</a>
                   </li>
+                  @else
                   <li>
-                    <a href="#"><span><img src="{{ asset('public/assets/images/commentIcon.png')}}" alt="icon"></span> 05 Comments</a>
+                  <a href="javascript:void(0);" onclick="editRecords({{ $post->id }})" style="color:#ba3143";><span><img src="{{ asset('public/assets/images/likedIcon.png')}}" alt="icon"></span> {{ $likeby ?? ''}} Likes</a>
+                        </li>
+                    @endif
+                  <li class="commentbyopne">
+                    <a href="javascript:void(0);">
+                        <span>
+                            <img src="{{ asset('public/assets/images/commentIcon.png')}}" alt="icon">
+                        </span> {{ $commentby ?? '' }} Comments
+                    </a>
                   </li>
+                  <div class="commentBox-usersec">
+                        <div class="commentBox-heading">Comments
+                            <span>({{ $commentby ?? '' }})</span>
+                            <span class="closebtn">
+                                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <div class="commentBox-chats">
+                            @if(isset($commentbydata))
+                                @foreach($commentbydata as $comments)
+                                @php $commentbyuser = DB::table('users')->where('id', $comments->user_id)->first(); @endphp
+                                    <div class="commentBox-chats-wapper">
+                                        @if($userRole == 3)
+                                            <span class="usericon"><img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $commentbyuser->org_image ?? ''}}" alt="icon" /></span>
+                                        @else
+                                            <span class="usericon"><img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $commentbyuser->profile_image ?? ''}}" alt="icon" /></span>
+                                        @endif
+                                        <div class="commentuser-rightuser">
+                                            <h4>{{ $commentbyuser->name ?? ''}}</h4>
+                                            <p>{{ $comments->comment ?? ''}}</p>
+                                            <div class="comticon">
+                                                <!--<span><i class="fa fa-thumbs-up" aria-hidden="true"></i> - 312</span><span><a href="#" class="reply">Reply</a></span>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
+                            
+                                <form  action="{{ URL::to('add-comment')}}" method="POST" id="FormValidation" enctype="multipart/form-data">
+                                @csrf
+                                <input type="hidden" name="post_id" id="postid" value="{{ $post->id ?? ''}} " class="form-control">
+                               
+                                <div class="comment-inputmsg">
+                                    <input type="text" name="comment" id="commentdata" class="form-control" required="">
+                                    <button type="submit" class="btn"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                                </div>
+                                </form>
+                           
+                        </div>
+                    </div>
                   <li>
                     <a href="#"><span><img src="{{ asset('public/assets/images/messageIcon.png')}}" alt="icon"></span> Message</a>
                   </li>
-                  <li>
-                    <a href="#"><span><img src="{{ asset('public/assets/images/shareIcon.png')}}" alt="icon"></span> Share</a>
+                  <li class="shareclickon">
+                    <a href="javascript:void(0);"><span><img src="{{ asset('public/assets/images/shareIcon.png')}}" alt="icon"></span> Share</a>
                   </li>
+                  <div class="sharebox-sec">
+                        <div class="sharebox-user"> 
+                            
+                             @if($userRole == 3)
+                                <span><img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $loginby->org_image ?? ''}}"></span>
+                            @else
+                                <span><img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $loginby->profile_image ?? ''}}"></span>
+                            @endif
+                            
+                            {{ $loginby->name ?? ''}}
+                            <small class="shareclosebtn"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></small>
+                        </div>
+                        <form  action="{{ URL::to('share-post')}}" method="POST" id="FormValidation" enctype="multipart/form-data">
+                            @csrf
+                            <div class="sharebox-commnet">
+                                <input type="hidden" name="post_id" value="{{ $post->id }}" >
+                                <button type="submit" class="share-btn">share Now</button>
+                            </div>
+                        </form>
+                    </div>
                 </ul>
               </div>
 @endforeach
@@ -519,6 +652,47 @@
       });
       
   </script>
+  <script>
+    $(' .menu_right li').click(function() {
+       $(' .menu_right li').removeClass('active');
+     $(this).addClass('active');
+   });
+   
+        $(document).ready(function(){
+            $('.commentbyopne').on('click', function(){
+                $(this).removeClass('opencomments-active').addClass('opencomments-active');
+            });
+            $('.closebtn').on('click', function(){
+                $(' .commentbyopne').removeClass('opencomments-active');
+            });
+        });
+        $(document).ready(function(){
+            $('.shareclickon').on('click', function(){
+                $(this).removeClass('shareclickon-active').addClass('shareclickon-active');
+            });
+            $('.shareclosebtn').on('click', function(){
+                $(' .shareclickon').removeClass('shareclickon-active');
+            });
+        });
+  </script>
+    <script type="text/javascript">
+    	function editRecords(id){
+    		$.ajaxSetup({   
+    	        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+    	    }); 
+    	    $.ajax({   
+    	        url:"{{url('likefilter/')}}"+'/'+id,     
+    	        method:"GET",   
+    	        contentType : 'application/json',   
+    	        success: function( data ) {
+    	           var url = window.location.href;
+    	           $(".lightwht_bg").load(url);
+    	        }
+    	    });
+    	}
+    </script>
+    
+    
   <script>
     $(window).scroll(function() {    
       var scroll = $(window).scrollTop();

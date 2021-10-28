@@ -17,7 +17,30 @@
         
         
       @include('fruntend.student.inc.top-menu')     
-        
+       <?php 
+         $userRole = Session::get('userRole');
+         $count =20;
+         $userid = Session::get('gorgID');
+         $loginby = DB::table('users')->where('id', $userid)->first(); 
+         if($loginby->address !=''){
+         $count= $count+10; 
+        }
+         if($loginby->about !=''){
+         $count= $count+10; 
+         }
+         if($loginby->website !=''){
+         $count= $count+10;
+         }
+         if($loginby->industry !=''){
+         $count= $count+10; 
+         }
+         if($loginby->company_size !=''){
+         $count= $count+10;
+         }
+         if($loginby->headquarters !=''){
+         $count= $count+10;
+         }
+        ?> 
         
       </div>
     </header>
@@ -37,12 +60,12 @@
                   <div class="progressbar_cont fw">
                     <span></span>  
                   </div>
-                  30% profile completed
+                  <?php echo $count; ?>% profile completed
                 </div>
               </div>
             </div>
             <div class="col_grid3">
-              <div class="rightPublic text-right font24Text">
+              <!--div class="rightPublic text-right font24Text">
                 Public Profile<div class="profileToggle">
                   <div class="k-switch">
                     <div class="track"></div> 
@@ -50,7 +73,7 @@
                    <div class="ball red"></div>
                    </div>
                 </div>           
-              </div>
+              </div -->
             </div>
           </div>
         </div>

@@ -1,5 +1,28 @@
  @include('fruntend.common_pages.web_header')  
- 
+ <?php 
+         $userRole = Session::get('userRole');
+         $count =20;
+         $userid = Session::get('gorgID');
+         $loginby = DB::table('users')->where('id', $userid)->first(); 
+         if($loginby->address !=''){
+         $count= $count+10; 
+        }
+         if($loginby->about !=''){
+         $count= $count+10; 
+         }
+         if($loginby->website !=''){
+         $count= $count+10;
+         }
+         if($loginby->industry !=''){
+         $count= $count+10; 
+         }
+         if($loginby->company_size !=''){
+         $count= $count+10;
+         }
+         if($loginby->headquarters !=''){
+         $count= $count+10;
+         }
+        ?>
     <div class="body_wht-inners bloglgHome_sec">
       <div class="lgcontainer">
         <div class="innerrow">
@@ -16,14 +39,14 @@
                 <div class="progressbar_cont fw">
                   <span></span>                                           
                 </div>
-                30% profile completed
+                <?php echo $count; ?>% profile completed
               </div>
              <div class="userTablink fw">
                 <ul class="userTablink_cont fw">
                   <li><a href="{{ url('basic/info') }}">View Profile</a></li>
                   <li><a href="{{ URL::to('recruiter-posts')}}">My Posts</a></li>
                   <li><a href="{{ URL::to('recruiter-listings')}}">My Listing</a></li>
-                  <!--<li><a href="#">Messages</a></li>-->
+                  <li><a href="#">Messages</a></li>
                 </ul>
               </div>
             </div>
@@ -101,7 +124,7 @@
                                 @foreach($commentbydata as $comments)
                                 @php $commentbyuser = DB::table('users')->where('id', $comments->user_id)->first(); @endphp
                                     <div class="commentBox-chats-wapper">
-                                        @if($commentbyuser->users_role == 3)
+                                        @if($userRole == 3)
                                             <span class="usericon"><img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $commentbyuser->org_image ?? ''}}" alt="icon" /></span>
                                         @else
                                             <span class="usericon"><img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $commentbyuser->profile_image ?? ''}}" alt="icon" /></span>
@@ -134,9 +157,9 @@
                         <a href="javascript:void(0);"><span><img src="{{ asset('public/assets/images/shareIcon.png')}}" alt="icon"></span> Share</a>
                     </li>
                     <div class="sharebox-sec">
-                        <div class="sharebox-user">
+                        <div class="sharebox-user"> 
                             
-                             @if($loginby->users_role == 3)
+                             @if($userRole == 3)
                                 <span><img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $loginby->org_image ?? ''}}"></span>
                             @else
                                 <span><img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $loginby->profile_image ?? ''}}"></span>

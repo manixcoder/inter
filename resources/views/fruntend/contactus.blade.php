@@ -486,11 +486,6 @@
       $(this).addClass('active');
     });
   </script>
-  <script>
-      $('#pageclose').click(function() {
-        location.reload();
-    });
-  </script>
 </body>
 
 </html>

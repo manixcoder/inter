@@ -498,7 +498,7 @@
 
     <div class='modal personal_DtlPop createNewPost_popup' id='createNewPostrecuriter'>
       <div class="close fw">
-        <a class='btn close-modal' id='pageclose' data-modal="#createNewPostrecuriter" href="#"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></a>
+        <a class='btn close-modal' data-modal="#createNewPostrecuriter" href="#"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></a>
       </div>
       <div class='content fw'>
         <h3 class="modal_heading">Create a New Post</h3>
@@ -582,11 +582,6 @@
          }
       };
     </script>
-    <script>
-      $('#pageclose').click(function() {
-        location.reload();
-    });
-  </script>
 
   @include('fruntend.common_pages.web_footer')  
     

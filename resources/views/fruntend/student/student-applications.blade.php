@@ -17,7 +17,47 @@
         
         
       @include('fruntend.student.inc.top-menu')     
-        
+      <?php
+      $userRole = Session::get('userRole');
+      $count = 30;
+      $userid = Session::get('gorgID');
+      $loginby = DB::table('users')->where('id', $userid)->first();
+      $education = DB::table('education')->where('user_id', $userid)->first();
+      $certificate = DB::table('certificates')->where('user_id', $userid)->first();
+      $myfavorite = DB::table('my_favorite_industries')->where('user_id', $userid)->first();
+      $businesses = DB::table('business_functions')->where('user_id', $userid)->first();
+      $hobbies = DB::table('hobbies_and_interests')->where('user_id', $userid)->first();
+      $accomplishments = DB::table('accomplishments')->where('user_id', $userid)->first();
+      $studentData = DB::table('users')->where('id', $userid)->first();
+      // echo "<pre>";
+      // print_r($education);
+      // die;
+      if ($loginby->address != '') {
+        $count = $count + 10;
+      }
+      if ($loginby->about != '') {
+        $count = $count + 5;
+      }
+      if ($education) {
+        $count = $count + 10;
+      }
+      if ($certificate) {
+        $count = $count + 15;
+      }
+      if ($myfavorite) {
+        $count = $count + 5;
+      }
+      if($businesses){
+        $count = $count + 10;
+      }
+      if ($hobbies) {
+        $count = $count + 10;
+      }
+      if ($accomplishments) {
+        $count = $count + 5;
+      }
+      
+      ?>   
         
       </div>
     </header>
@@ -27,7 +67,12 @@
           <div class="innerrow">                       
             <div class="col_grid9">
               <div class="profile_publicimg">
-                <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="img"/>
+              @if($studentData->profile_image =='no-image.png')
+                      <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="img" />                      
+                      @else
+                      <img src="{{ asset('public/assets/student_image/'.$studentData->profile_image)}}" alt="img" />
+                      @endif
+                <!-- <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="img"/> -->
               </div>                                                
               <div class="profile_publicDetail">
                 <h4 class="clrwht font36text  semiboldfont_fmly">{{$OrgData->name}}</h4>
@@ -37,12 +82,12 @@
                   <div class="progressbar_cont fw">
                     <span></span>  
                   </div>
-                  30% profile completed
+                  <?php echo $count;?>% profile completed
                 </div>
               </div>
             </div>
             <div class="col_grid3">
-              <div class="rightPublic text-right font24Text">
+              <!--div class="rightPublic text-right font24Text">
                 Public Profile<div class="profileToggle">
                   <div class="k-switch">
                     <div class="track"></div> 
@@ -50,7 +95,7 @@
                    <div class="ball red"></div>
                    </div>
                 </div>           
-              </div>
+              </div-->
             </div>
           </div>
         </div>

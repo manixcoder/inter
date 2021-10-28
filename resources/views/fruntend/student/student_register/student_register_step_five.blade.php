@@ -40,7 +40,5 @@
       </div>
     </div>
     <script src="js/jquery-lb.js"></script>
-    
-   
   </body>
 </html>
