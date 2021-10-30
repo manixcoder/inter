@@ -28,10 +28,8 @@ class StudentDashboardController extends Controller
     $this->middleware('auth');
     $this->middleware('role');
   }
-
   public function Dashboard(Request $request)
   {
-
     $userRole = Session::get('userRole');
     $id = Session::get('gorgID');
     $OrgData = DB::table('users')->where('id', $id)->first();
@@ -42,13 +40,14 @@ class StudentDashboardController extends Controller
     } else {
       $SearchData = '';
     }
-
-    return view('fruntend.student.dashboard')->with(['OrgData' => $OrgData, 'SearchData' => $SearchData, 'userRole' => $userRole]);
+    return view('fruntend.student.dashboard')->with([
+      'OrgData' => $OrgData,
+      'SearchData' => $SearchData,
+      'userRole' => $userRole
+    ]);
   }
-
   public function basic_info(Request $request)
   {
-
     $userRole = Session::get('userRole');
     $id = Session::get('gorgID');
     $OrgData = DB::table('users')->where('id', $id)->first();
@@ -60,26 +59,19 @@ class StudentDashboardController extends Controller
     $hobbyData = DB::table('hobbies_and_interests')->where('user_id', $id)->get();
     $accomData = DB::table('accomplishments')->where('user_id', $id)->get();
     $todaysdate = date('Y-m-d') . ' 00:00:00';
-    //echo $id; die;
-    /*dd($todaysdate);*/
-
     return view('fruntend.student.basic-info')->with([
       'OrgData' => $OrgData,
-       'edData' => $edData, 
-       'exData' => $exData, 
-       'certData' => $certData, 
-       'indusData' => $indusData, 
-       'busiData' => $busiData, 
-       'hobbyData' => $hobbyData, 
-       'accomData' => $accomData
-      ]);
+      'edData' => $edData,
+      'exData' => $exData,
+      'certData' => $certData,
+      'indusData' => $indusData,
+      'busiData' => $busiData,
+      'hobbyData' => $hobbyData,
+      'accomData' => $accomData
+    ]);
   }
-
-
-
   public function student_posts(Request $request)
   {
-
     $userRole = Session::get('userRole');
     $id = Session::get('gorgID');
     $OrgData = DB::table('users')->where('id', $id)->first();
@@ -91,17 +83,19 @@ class StudentDashboardController extends Controller
     $hobbyData = DB::table('hobbies_and_interests')->where('user_id', $id)->get();
     $accomData = DB::table('accomplishments')->where('user_id', $id)->get();
     $todaysdate = date('Y-m-d') . ' 00:00:00';
-    //echo $id; die;
-    /*dd($todaysdate);*/
-
-    return view('fruntend.student.student-posts')->with(['OrgData' => $OrgData, 'edData' => $edData, 'exData' => $exData, 'certData' => $certData, 'indusData' => $indusData, 'busiData' => $busiData, 'hobbyData' => $hobbyData, 'accomData' => $accomData]);
+    return view('fruntend.student.student-posts')->with([
+      'OrgData' => $OrgData,
+      'edData' => $edData,
+      'exData' => $exData,
+      'certData' => $certData,
+      'indusData' => $indusData,
+      'busiData' => $busiData,
+      'hobbyData' => $hobbyData,
+      'accomData' => $accomData
+    ]);
   }
-
-
-
   public function student_applications(Request $request)
   {
-
     $userRole = Session::get('userRole');
     $id = Session::get('gorgID');
     $OrgData = DB::table('users')->where('id', $id)->first();
@@ -113,48 +107,43 @@ class StudentDashboardController extends Controller
     $hobbyData = DB::table('hobbies_and_interests')->where('user_id', $id)->get();
     $accomData = DB::table('accomplishments')->where('user_id', $id)->get();
     $todaysdate = date('Y-m-d') . ' 00:00:00';
-    //echo $id; die;
-    /*dd($todaysdate);*/
-
-    return view('fruntend.student.student-applications')->with(['OrgData' => $OrgData, 'edData' => $edData, 'exData' => $exData, 'certData' => $certData, 'indusData' => $indusData, 'busiData' => $busiData, 'hobbyData' => $hobbyData, 'accomData' => $accomData]);
+    return view('fruntend.student.student-applications')->with([
+      'OrgData' => $OrgData,
+      'edData' => $edData,
+      'exData' => $exData,
+      'certData' => $certData,
+      'indusData' => $indusData,
+      'busiData' => $busiData,
+      'hobbyData' => $hobbyData,
+      'accomData' => $accomData
+    ]);
   }
-
-
-
-
   public function update_student_personal_details(Request $request)
   {
     $id = Session::get('gorgID');
-    $update = DB::table('users')->where('id', $id)
-      ->update([
-        'name' => $request->name,
-        'email' => $request->email,
-        'phone' => $request->phone,
-        'dob' => $request->dob,
-        'gender' => $request->gender,
-      ]);
-
+    $update = DB::table('users')->where('id', $id)->update([
+      'name' => $request->name,
+      'email' => $request->email,
+      'phone' => $request->phone,
+      'dob' => $request->dob,
+      'gender' => $request->gender,
+    ]);
     return redirect()->back();
   }
-
   public function add_student_education(Request $request)
   {
     $id = Session::get('gorgID');
     $update = DB::table('education')
       ->insert([
-
         'user_id' => $id,
         'school_name' => $request->school_name,
         'name_of_technology' => $request->technology,
         'percentage' => $request->percentage,
         'year' => $request->year,
         'status' => 0,
-
       ]);
-
     return redirect()->back();
   }
-
   public function update_student_education(Request $request)
   {
     $update = DB::table('education')->where('id', $request->id)
@@ -167,19 +156,14 @@ class StudentDashboardController extends Controller
       ]);
     return redirect()->back();
   }
-
   public function add_student_experience(Request $request)
   {
     $id = Session::get('gorgID');
-    // dd($request->all());
-    // echo "<pre>";
-    // print_r($request->all());
-    // die;
     if ($files = $request->image) {
       $destinationPath = public_path('/assets/student_image/');
       $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
       $path =  $files->move($destinationPath, $profileImage);
-      $update = DB::table('users')->where('id', $id,)
+      $update = DB::table('users')->where('id', $id)
         ->update([
           'profile_image' => $profileImage,
         ]);
@@ -195,17 +179,14 @@ class StudentDashboardController extends Controller
       ]);
     return redirect()->back();
   }
-
-
   public function update_student_experience(Request $request)
   {
     $id = Session::get('gorgID');
-
     if ($files = $request->image) {
       $destinationPath = public_path('/assets/student_image/');
       $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
       $path =  $files->move($destinationPath, $profileImage);
-      $update = DB::table('users')->where('id', $id,)
+      $update = DB::table('users')->where('id', $id)
         ->update([
           'profile_image' => $profileImage,
         ]);
@@ -219,8 +200,7 @@ class StudentDashboardController extends Controller
         'duration_to' => $request->duration_to,
         'location' => $request->location,
       ]);
-
-    /*if ($files = $request->image) {
+      /*if ($files = $request->image) {
       $update = DB::table('experience')->where('id', $request->id)
         ->update([
 
@@ -235,21 +215,16 @@ class StudentDashboardController extends Controller
     } else {
       $update = DB::table('experience')->where('id', $request->id)
         ->update([
-
           'user_id' => $id,
           'company_name' => $request->company_name,
           'profile' => $request->profile_type,
           'duration_from' => $request->duration_from,
           'duration_to' => $request->duration_to,
           'location' => $request->location,
-
         ]);
     }*/
-
     return redirect()->back();
   }
-
-
   public function add_student_certificate(Request $request)
   {
     $id = Session::get('gorgID');

@@ -121,8 +121,7 @@
           if(empty($SearchData))
           {
           $posts = DB::table('posts')->orderBy('date_time', 'DESC')->get();
-          }
-          else{
+          }else{
           $generatequery = "SELECT * FROM posts WHERE heading LIKE '%' '".$SearchData."' '%' OR description LIKE '%' '".$SearchData."' '%' OR date_time LIKE '%' '".$SearchData."' '%' ";
           $posts = DB::select($generatequery);
 
@@ -131,6 +130,7 @@
 
 
           @foreach($posts as $post)
+
           @php
           $UsrData = DB::table('users')->where('id', $post->user_id)->first();
           $userid = Session::get('gorgID');
@@ -210,9 +210,8 @@
                     </div>
                   </form>
 
-                </div>
+                </div> 
               </div>
-
               <li class="shareclickon">
                 <a href="javascript:void(0);"><span><img src="{{ asset('public/assets/images/shareIcon.png')}}" alt="icon"></span> Share</a>
               </li>
@@ -549,6 +548,8 @@
     $('#pageclose').click(function() {
       location.reload();
     });
+
+    
   </script>
 </body>
 

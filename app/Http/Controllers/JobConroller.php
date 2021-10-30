@@ -44,28 +44,29 @@ class JobConroller extends Controller
   }
 
    public function create(Request $request) {
-
-    /*dd($request->all());*/
-
-    if($files = $request->logo){
-      $destinationPath = public_path('/assets/jobs_images/');
-      $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
-      $path =  $files->move($destinationPath, $profileImage);
-      $image = $insert['photo'] = "$profileImage";
-    }
-
-    if($files = $request->acttachPhoto){
-      $destinationPath = public_path('/assets/jobs_images/');
-      $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
-      $path =  $files->move($destinationPath, $profileImage);
-      $attachment = $insert['photo'] = "$profileImage";
-    }
+     //dd($request->all());
+     if($files = $request->logo){
+       $destinationPath = public_path('/assets/jobs_images/');
+       $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
+       $path =  $files->move($destinationPath, $profileImage);
+       $image = $insert['logo'] = "$profileImage";
+      }else{
+        $image ='';
+      }
+      if($files = $request->acttachPhoto){
+        $destinationPath = public_path('/assets/jobs_images/');
+        $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
+        $path =  $files->move($destinationPath, $profileImage);
+        $attachment = $insert['attachment'] = "$profileImage";
+      }else{
+        $attachment = '';
+      }
     
-    if(isset($attachment)){
-      $attachment_file = $attachment;
-    }else{
-      $attachment = '';
-    }
+      // if(isset($attachment)){
+      //   $attachment_file = $attachment;
+      // }else{
+      //   $attachment = '';
+      // }
 
     $data = array(        
       'attachment' => $attachment,    
@@ -80,6 +81,7 @@ class JobConroller extends Controller
     );
 
     $insertData = app('App\Jobs')->insert($data);
+    return back()->with(array('status' => 'success', 'message' =>  'Job created successfully!'));
     return back()->with('success', 'Job created successfully!');  
   }
 

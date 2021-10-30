@@ -18,13 +18,174 @@
       @include('fruntend.student.inc.top-menu')
     </div>
   </header>
+
   <div class="body_wht-inners ">
+      <div class="lgcontainer">
+        <div class="boxDetailbg fw">
+          <figure>
+            <img src="{{ asset('public/assets/jobs_images')}}/{{ $appl->attachment }}" alt="jobs">
+          </figure>
+        </div>
+        <div class="jobsDetailProfile fw">
+          <div class="innerrow">
+            <div class="col_grid9">
+              <div class="jobsDetailComp_img">
+                <img src="{{ asset('public/assets/jobs_images')}}/{{ $appl->logo }}" alt="newtechlogo">
+              </div>
+              <div class="jobsDetailComp_cont">
+                <h3>{{$appl->company_name}}</h3>
+                <h3><a href="#" class="lightblue_text">{{$appl->job_title}}</a></h3>
+                <p>{{$appl->location}}</p>
+              </div>
+            </div>
+            <div class="col_grid3">
+              <div class="retextbtn_sec">
+                <a href="#" class="retextbtn">View Company Profile 
+                  <span>
+                    <img src="{{ asset('public/assets/images/arrow_right_red.png')}}" alt="redarrow">
+                  </span>
+                </a>
+              </div>
+              <div class="commentsApply fw">
+                <div class="commantsChat">
+                  <img src="{{ asset('public/assets/images/messageIcon.png')}}" alt="icon">
+                </div>
+                <div class="applyBtn">
+                <?php
+                $userRole = Session::get('userRole');
+                $userid = Session::get('gorgID');
+                $jobCount = DB::table('job_applied')->where('student_id', $userid)->where('job_id', $appl->id)->count();
+                ?>
+                @if($jobCount==0)
+                <form method="post" action="{{ url('student_job_apply') }}">
+                  @csrf
+                  <input type="hidden" name="job_id" value="<?php echo $appl->id; ?>">
+                  <button type="submit" class="input-btn open-modal" data-modal="#successfullyModal">Apply</button>
+                  
+                </form>
+                @else
+                <a class="input-btn">Applied</a>
+                @endif
+                  <!--a href="javascript:void(0);" class="input-btn open-modal" data-modal="#successfullyModal">Apply</a -->
+                </div>
+              </div>
+            </div>
+            <div class="col_grid12 extraleft_pad mrtop_extra45 contact_profileinfo">
+              <div class="innerrow">
+                <!--div class="col_grid6 contactmail">
+                  <span>Contact: <a href="mailto:jenifer193@arknewtech.com" class="lightblue_text"> jenifer193@arknewtech.com</a></span>
+                </div -->
+                <div class="col_grid6 text-right checkbox_notify">
+                  <div class="custominputBox">
+                    <input type="checkbox" class="inputCheck">
+                    <span></span>
+                  </div>
+                  <span>Notify me for similar jobs</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="jobDescriptions_sec fw">
+          <h3 class="borderBox_heading">Offer</h3>
+          <ul>
+            <li>{!! $appl->offer !!}</li>
+          </ul>
+        </div>
+        <div class="jobDescriptions_sec fw">
+          <h3 class="borderBox_heading">Job Descriptions</h3>
+          <p>{!! $appl->job_description !!}</p>
+        </div>
+        <div class="fw similarBox_sec blog_intersted_box">
+          <div class="lgcontainer">
+            <div class="innerrow">
+              <div class="col_grid12 arrowheading_site right_after_arrow ">
+                <h3>Similar Jobs</h3>
+              </div>
+              @php
+            $jobs_data = DB::table('jobs')->where('status', 0)->where('id', '!=', $appl->id)->limit(2)->get();
+            @endphp
+            @foreach($jobs_data as $job)
+              <div class="col_grid6">
+                <div class="jobsDetailBox fw">
+                  <div class="profile_sec fw">
+                    <div class="compnayBoxImg">
+                      <img src="{{ asset('public/assets/images/newtechlogo.png')}}" alt="images">
+                    </div>
+                  </div>
+                  <div class="jobsDetailCont fw">
+                    <h3>ARK Newtech Private Limited</h3>
+                    <p><a href="#" class="lightblue_text">Junior Associate - SAS Programming</a></p>
+                    <div class="innerrow">
+                      <div class="col_grid12">
+                        <ul>
+                          <li>Great opportunity for freshers to kickstart their career</li>
+                          <li>Be part of a dynamic and supportive work environment</li>
+                        </ul>
+                      </div>
+                      <div class="col_grid8">
+                        <p><span>New Delhi</span><span class="dots">6 Months Internship</span></p>
+                      </div>
+                      <div class="col_grid4">
+                        <a href="javascript:void(0);" class="input-btn redBGmanage_btn open-modal" data-modal="#resumeUpload">View Job</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              @endforeach
+
+              <!-- div class="col_grid6">
+                <div class="jobsDetailBox fw">
+                  <div class="profile_sec fw">
+                    <div class="compnayBoxImg">
+                      <img src="{{ asset('public/assets/images/newtechlogo.png')}}" alt="images">
+                    </div>
+                  </div>
+                  <div class="jobsDetailCont fw">
+                    <h3>ARK Newtech Private Limited</h3>
+                    <p><a href="#" class="lightblue_text">Junior Associate - SAS Programming</a></p>
+                    <div class="innerrow">
+                      <div class="col_grid12">
+                        <ul>
+                          <li>Great opportunity for freshers to kickstart their career</li>
+                          <li>Be part of a dynamic and supportive work environment</li>
+                        </ul>
+                      </div>
+                      <div class="col_grid8">
+                        <p><span>New Delhi</span><span class="dots">6 Months Internship</span></p>
+                      </div>
+                      <div class="col_grid4">
+                        <a href="javascript:void(0);" class="input-btn redBGmanage_btn open-modal" data-modal="#resumeUpload">View Job</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="popupWapper"><div class="modal resumeUpload_popup successfullyModalPopup open" id="successfullyModal">
+      
+      <div class="content fw">
+        <div class="imgcheck_icon fw">
+          <img src="{{ asset('public/assets/images/succcessfull.png')}}" alt="icon">
+        </div>
+        <h3 class="">Job Applied Successfully</h3>
+        <p>You will be contacted through <br> your email or phone number, hang tight!</p>
+      </div>	
+    </div></div>
+
+  <!-- <div class="body_wht-inners ">
     <div class="lgcontainer">
       <div class="jobsDetailProfile fw">
         <div class="innerrow">
           <div class="col_grid9">
             <div class="jobsDetailComp_img">
-              <img src="{{ asset('public/assets/student_image/'.$appl->logo)}}" alt="newtechlogo" />
+              <img src="{{ asset('public/assets/jobs_images/'.$appl->logo)}}" alt="newtechlogo" />
             </div>
             <div class="jobsDetailComp_cont">
               <h3>{{$appl->company_name}}</h3>
@@ -34,7 +195,7 @@
           </div>
           <div class="col_grid3">
             <div class="retextbtn_sec">
-              <a href="./compnay_profile.html" class="retextbtn">View Company Profile <span><img src="{{ asset('public/assets/images/arrow_right_red.png')}}" alt="redarrow" /></span></a>
+              <a href="#" class="retextbtn">View Company Profile <span><img src="{{ asset('public/assets/images/arrow_right_red.png')}}" alt="redarrow" /></span></a>
             </div>
             <div class="commentsApply fw">
               <div class="applyBtn">
@@ -123,16 +284,11 @@
               </div>
             </div>
             @endforeach
-
-
-
-
-
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
 
 

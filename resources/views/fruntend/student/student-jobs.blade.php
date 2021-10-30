@@ -573,7 +573,16 @@
     </form>
   </div>
 
-
+  <!--div class="popupWapper open"><div class="modal resumeUpload_popup successfullyModalPopup open" id="successfullyModal">
+      
+      <div class="content fw">
+        <div class="imgcheck_icon fw">
+          <img src="images/succcessfull.png" alt="icon">
+        </div>
+        <h3 class="">Job Applied Successfully</h3>
+        <p>You will be contacted through <br> your email or phone number, hang tight!</p>
+      </div>	
+    </div></div -->
 
   <!----------------Popup end----------------------->
 

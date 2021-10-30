@@ -40,8 +40,10 @@ $todaysdate = date('Y-m-d').' 00:00:00';
               <span></span>
               <span></span>
             </div>
-
-            @if($OrgData->users_role == 2)
+<?php 
+$userRole = Session::get('userRole');
+?>
+            @if($userRole == 2)
 
             <ul class="menu_right">
               <li class="{{ request()->is('student-dashboard') ? 'active' : '' }}">
@@ -83,7 +85,7 @@ $todaysdate = date('Y-m-d').' 00:00:00';
             <div class="login_user">
               <a class="user_dropdown" href="#">
                 <i>
-                  @if($OrgData->users_role == 2)
+                  @if($userRole == 2)
                   <img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $OrgData->profile_image ?? ''}}" alt="img">
                   @else
                   <img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $OrgData->org_image }}" alt="img">
@@ -91,7 +93,7 @@ $todaysdate = date('Y-m-d').' 00:00:00';
                 </i>
                 <span>{{ $OrgData->name ?? ''}} <img src="{{ asset('public/assets/images/user-downarrow.png')}}" alt="img"></span>
               </a>
-              @if($OrgData->users_role == 2)
+              @if($userRole == 2)
               <ul class="userdrop_down">
                 <li class="{{ request()->is('student-dashboard') ? 'active' : '' }}">
                   <a href="{{url('student-dashboard')}}" class="username">{{$OrgData->name}}
