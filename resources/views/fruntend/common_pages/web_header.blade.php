@@ -25,7 +25,6 @@ $todaysdate = date('Y-m-d').' 00:00:00';
 <body class="lightwht_bg">
   <header class="header_sec flow2_header fw">
     <div class="lgcontainer">
-
       <div class="innerrow">
         <div class="col_grid3">
           <a href="{{ URL::to('recruiter-dashboard') }}" class="logo-flow2">
@@ -40,11 +39,10 @@ $todaysdate = date('Y-m-d').' 00:00:00';
               <span></span>
               <span></span>
             </div>
-<?php 
-$userRole = Session::get('userRole');
-?>
+            <?php 
+            $userRole = Session::get('userRole');
+            ?>
             @if($userRole == 2)
-
             <ul class="menu_right">
               <li class="{{ request()->is('student-dashboard') ? 'active' : '' }}">
                 <a href="{{url('student-dashboard')}}">Home </a>
@@ -62,7 +60,6 @@ $userRole = Session::get('userRole');
                 <a href="{{url('contact_us')}}">Contact Us </a>
               </li>
             </ul>
-
             @else
             <ul class="menu_right">
               <li class="{{ request()->is('recruiter-dashboard') ? 'active' : '' }}">
@@ -112,7 +109,6 @@ $userRole = Session::get('userRole');
                   </form>
                 </li>
               </ul>
-
               @else
               <ul class="userdrop_down">
                 <li class="{{ request()->is('recruiter/basic/info') ? 'active' : '' }}">

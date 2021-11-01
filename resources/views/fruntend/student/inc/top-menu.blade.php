@@ -13,19 +13,19 @@
                 <span></span>
               </div>
               <ul class="menu_right">
-                <li class="active">
+                <li class="{{ request()->is('student-dashboard') ? 'active' : '' }}">
                   <a href="{{url('student-dashboard')}}">Home </a>
                 </li>
-                <li>
+                <li class="{{ request()->is('web/blog') ? 'active' : '' }}">
                   <a href="{{url('web/blog')}}">Blogs </a>
                 </li>
-                <li>
+                <li class="{{ request()->is('student/jobs') ? 'active' : '' }}">
                   <a href="{{url('student/jobs')}}">Jobs </a>
                 </li>
-                <li>
+                <li class="{{ request()->is('notification') ? 'active' : '' }}">
                   <a href="{{url('notification')}}">Notifications </a>
                 </li>
-                <li>
+                <li class="{{ request()->is('contact_us') ? 'active' : '' }}">
                   <a href="{{url('contact_us')}}">Contact Us </a>
                 </li>
               </ul>

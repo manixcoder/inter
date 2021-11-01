@@ -17,7 +17,7 @@ use Response;
 use DB;
 use Hash;
 use Auth;
-use User;
+use User; 
 use Carbon;
 
 class RecruiterwebController extends Controller
@@ -81,9 +81,34 @@ class RecruiterwebController extends Controller
   public function edit_recruiter_profile(Request $request)
   {
     $editData = DB::table('users')->where('id', $request->edit_id)->first();
-
     if (isset($editData)) {
-      $update = app('App\User')->where('id', $request->edit_id)->update(['name' => $request->name, 'email' => $request->email, 'phone' => $request->phone, 'designation' => $request->designation]);
+      if ($files = $request->org_image) {
+        $destinationPath = public_path('/assets/org_images/');
+        $org_image = date('YmdHis') . "-" . $files->getClientOriginalName();
+        $path =  $files->move($destinationPath, $org_image);
+        $update = DB::table('users')->where('id', $request->edit_id)
+          ->update([
+            'org_image' => $org_image,
+          ]);
+      }
+
+      if ($files = $request->profile_image) {
+        $destinationPath = public_path('/assets/org_images/');
+        $profile_image = date('YmdHis') . "-" . $files->getClientOriginalName();
+        $path =  $files->move($destinationPath, $profile_image);
+        $update = DB::table('users')->where('id', $request->edit_id)
+          ->update([
+            'profile_image' => $profile_image,
+          ]);
+      }
+      $update = app('App\User')
+      ->where('id', $request->edit_id)
+      ->update([
+        'name' => $request->name, 
+        'email' => $request->email, 
+        'phone' => $request->phone, 
+        'designation' => $request->designation
+      ]);
     }
     return back();
   }

@@ -200,7 +200,7 @@ class StudentDashboardController extends Controller
         'duration_to' => $request->duration_to,
         'location' => $request->location,
       ]);
-      /*if ($files = $request->image) {
+    /*if ($files = $request->image) {
       $update = DB::table('experience')->where('id', $request->id)
         ->update([
 
@@ -339,6 +339,7 @@ class StudentDashboardController extends Controller
           'heading' => $request->post_title,
           'description' => $request->post_details,
           'post_image' => $profileImage,
+          'date_time' => date('Y-m-d H:i:s'),
           'status' => 0,
         ]);
     } else {
@@ -347,6 +348,7 @@ class StudentDashboardController extends Controller
           'user_id' => $id,
           'heading' => $request->post_title,
           'description' => $request->post_details,
+          'date_time' => date('Y-m-d H:i:s'),
           'status' => 0,
         ]);
     }
@@ -367,9 +369,9 @@ class StudentDashboardController extends Controller
     $job_title = $request->job_title;
     $location = $request->location;
     if (empty($job_title) and empty($location)) {
-      $jobsData = DB::table('jobs')->where('status', 0)->get();
+      $jobsData = DB::table('jobs')->where('status', 0)->orderBy('id', 'desc')->get();
     } else {
-      $jobsData = DB::table('jobs')->where('status', 0)->where('location', 'like', '%' . $location . '%')->where('job_title', 'like', '%' . $job_title . '%')->get();
+      $jobsData = DB::table('jobs')->where('status', 0)->where('location', 'like', '%' . $location . '%')->where('job_title', 'like', '%' . $job_title . '%')->orderBy('id', 'desc')->get();
     }
     return view('fruntend.student.student-jobs')->with(['OrgData' => $OrgData, 'jobsData' => $jobsData, 'locationData' => $locationData, 'titleData' => $titleData]);
   }

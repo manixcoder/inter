@@ -43,7 +43,7 @@
         $count = $count + 5;
       }
       if ($education) {
-        $count = $count + 10;
+        $count = $count + 20;
       }
       if ($certificate) {
         $count = $count + 15;
@@ -1184,6 +1184,7 @@
 
 
 
+
     function yearValidation(year, ev) {
 
       var text = /^[0-9]+$/;
@@ -1205,7 +1206,7 @@
           }
           var current_year = new Date().getFullYear();
           if ((year < 1970) || (year > current_year)) {
-            alert("Year should be in range 1970 to current year");
+            alert("Year should be in range 1970 to current year"); 
             document.getElementById('year').value = '';
             document.getElementById('year2').value = '';
             return false;
@@ -1214,6 +1215,10 @@
         }
       }
     }
+
+    $('.close-modal').click(function() {
+      location.reload();
+    });
   </script>
 </body>
 

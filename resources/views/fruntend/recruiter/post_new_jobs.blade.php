@@ -169,7 +169,7 @@
               </div>
 
               <div class="confirmApply postjob_btn col_grid12 fw">
-                <button type="submit" class="input-btn text-left open-modal" data-modal="#jobPostPopup">
+                <button type="submit" class="input-btn text-left" data-modal="#jobPostPopup">
                   Post Job <i><img src="{{ asset('public/assets/images/loginCheck_icon.png')}}" alt="icon" /></i>
                 </button>
               </div>

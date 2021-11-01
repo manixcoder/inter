@@ -26,13 +26,11 @@ class JobConroller extends Controller
   
    public function job_details($id){
     $Data = app('App\Jobs')->where('id', $id)->get();
-
     return view('fruntend.recruiter.job_detail_recruiter')->with(['Data' => $Data]);
   }
 
   public function job_profile($id){
     $Data = app('App\Jobs')->where('id', $id)->first();
-
     return view('fruntend.recruiter.job_detailecruiter')->with(['Data' => $Data]);
   }
   

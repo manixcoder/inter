@@ -13,7 +13,11 @@
       <div class="lgcontainer">
         <div class="boxDetailbg fw">
           <figure>
+          @if($recruiterInfo->profile->profile_image !='no-image.png')
+            <img src="{{ asset('public/assets/org_images')}}/{{ $recruiterInfo->profile_image }}" alt="jobs" />
+            @else
             <img src="{{ asset('public/assets/images/company_profileBG.png')}}" alt="jobs" />
+            @endif
           </figure>
         </div>
         <div class="compnayProfile_user fw">

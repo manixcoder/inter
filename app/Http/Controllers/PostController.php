@@ -37,14 +37,12 @@ class PostController extends Controller
               'comment' => $request->comment 
             );
             $insertData = DB::table('post_comment')->insert($data);
-            
             return back();
         }
         
         public function share_post(Request $request){
             $ldate = date('Y-m-d H:i:s');
             $data = array('date_time' => $ldate);
-            
             $updatedata = DB::table('posts')->where('id', $request->post_id)->update($data);
             return back();
         }

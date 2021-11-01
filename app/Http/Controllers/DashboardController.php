@@ -23,73 +23,69 @@ use Carbon;
 
 class DashboardController extends Controller
 {
-  public function __construct(){
+  public function __construct()
+  {
     $this->middleware('auth');
     $this->middleware('role');
   }
-  
-  public function notification(){
+  public function notification()
+  {
     $userRole = Session::get('userRole');
     $id = Session::get('gorgID');
 
-   /* dd($id);*/
+    /* dd($id);*/
 
     if ($userRole == 2) {
-      $notification = DB::table('announcement')->where('aim', 'Students')->orWhere('aim', 'Both')->get();
-    }else{
-      $notification = DB::table('announcement')->where('aim', 'Recruiters')->orWhere('aim', 'Both')->get();
+      $notification = DB::table('announcement')->where('aim', 'Students')->orWhere('aim', 'Both')->orderBy('id', 'DESC')->get();
+    } else {
+      $notification = DB::table('announcement')->where('aim', 'Recruiters')->orWhere('aim', 'Both')->orderBy('id', 'DESC')->get();
     }
-
     return view('fruntend.common_pages.notification')->with(['notification' => $notification]);
   }
-  
-  public function contactus_queryes(){
-        $Data = DB::table('contact_us')->orderBy('id', 'Desc')->get();
-        $DataCount = count($Data);
-
+  public function contactus_queryes()
+  {
+    $Data = DB::table('contact_us')->orderBy('id', 'Desc')->get();
+    $DataCount = count($Data);
     $data['content'] = 'admin.contactus_queryes';
-    return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount'=>$DataCount]);
+    return view('layouts.content', compact('data'))->with([
+      'Data' => $Data,
+      'DataCount' => $DataCount
+    ]);
   }
-  
-  public function query_delete ($id){
-        $delete = DB::table('contact_us')->where('id', $id)->delete();
-        return back();
-      
+
+  public function query_delete($id)
+  {
+    $delete = DB::table('contact_us')->where('id', $id)->delete();
+    return back();
   }
-  
-   public function search_header(Request $request){    
+  public function search_header(Request $request)
+  {
     if ($request->serch_in == 'Jobs') {
-
-      $generatequery = "SELECT * FROM jobs WHERE location LIKE '%' '".$request->search_text."' '%' OR job_title LIKE  '%' '".$request->search_text."' '%' OR company_name LIKE  '%' '".$request->search_text."' '%' OR applicant LIKE  '%' '".$request->search_text."' '%'  OR create_on LIKE  '%' '".$request->search_text."' '%' OR company_name LIKE  '%' '".$request->search_text."' '%' ";
-
+      $generatequery = "SELECT * FROM jobs WHERE location LIKE '%' '" . $request->search_text . "' '%' OR job_title LIKE  '%' '" . $request->search_text . "' '%' OR company_name LIKE  '%' '" . $request->search_text . "' '%' OR applicant LIKE  '%' '" . $request->search_text . "' '%'  OR create_on LIKE  '%' '" . $request->search_text . "' '%' OR company_name LIKE  '%' '" . $request->search_text . "' '%' ";
       $query = DB::select($generatequery);
       $Data = new Paginator($query, 10);
       $DataCount = count($Data);
-
       if ($DataCount > 0) {
         $data['content'] = 'admin.jobs.listedjobs';
-        return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount'=>$DataCount]);
-      }else{        
+        return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount' => $DataCount]);
+      } else {
         return redirect('dashboard')->with('status', 'Profile updated!');
       }
-    }
-    elseif($request->serch_in == 'Student') {
-      $generatequery = "SELECT * FROM users WHERE name LIKE '%' '".$request->search_text."'  '%' OR email LIKE  '%' '".$request->search_text."' '%' OR phone LIKE  '%' '".$request->search_text."' '%' OR id LIKE  '%' '".$request->search_text."' '%'  ";
-
+    } elseif ($request->serch_in == 'Student') {
+      $generatequery = "SELECT * FROM users WHERE name LIKE '%' '" . $request->search_text . "'  '%' OR email LIKE  '%' '" . $request->search_text . "' '%' OR phone LIKE  '%' '" . $request->search_text . "' '%' OR id LIKE  '%' '" . $request->search_text . "' '%'  ";
       $query = DB::select($generatequery);
       $Data = new Paginator($query, 10);
       $DataCount = count($Data);
-      
+
 
       if ($DataCount > 0) {
         $data['content'] = 'admin.student.student_list';
-        return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount'=>$DataCount]);
-      }else{        
+        return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount' => $DataCount]);
+      } else {
         return redirect('dashboard')->with('status', 'Profile updated!');
-      } 
-    }
-    elseif($request->serch_in == 'Recruiter') {
-     $generatequery = "SELECT * FROM users WHERE org_name LIKE '%' '".$request->search_text."'  '%' OR email LIKE  '%' '".$request->search_text."' '%' OR phone LIKE  '%' '".$request->search_text."' '%' OR id LIKE  '%' '".$request->search_text."' '%'  ";
+      }
+    } elseif ($request->serch_in == 'Recruiter') {
+      $generatequery = "SELECT * FROM users WHERE org_name LIKE '%' '" . $request->search_text . "'  '%' OR email LIKE  '%' '" . $request->search_text . "' '%' OR phone LIKE  '%' '" . $request->search_text . "' '%' OR id LIKE  '%' '" . $request->search_text . "' '%'  ";
 
       $query = DB::select($generatequery);
       $Data = new Paginator($query, 10);
@@ -97,11 +93,11 @@ class DashboardController extends Controller
 
       if ($DataCount > 0) {
         $data['content'] = 'admin.recruiter.list_recruiter';
-        return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount'=>$DataCount]);
-      }else{        
+        return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount' => $DataCount]);
+      } else {
         return redirect('dashboard')->with('status', 'Profile updated!');
-      }      
-    }    
+      }
+    }
   }
 
 
@@ -110,31 +106,31 @@ class DashboardController extends Controller
     $userRole = Session::get('userRole');
     $id = Session::get('gorgID');
     $OrgData = DB::table('users')->where('id', $id)->first();
-    $todaysdate = date('Y-m-d').' 00:00:00'; 
+    $todaysdate = date('Y-m-d') . ' 00:00:00';
 
-    if($userRole == '1'){
+    if ($userRole == '1') {
       $newStudents = DB::table('users')->Where('users_role', 2)->where('created_at', '>=', $todaysdate)->count();
-      $newRecruiters = DB::table('users')->where('users_role',3)->where('created_at', '>=', $todaysdate)->count();   
-      $todayJobs = DB::table('jobs')->where('created_at', '>=', $todaysdate)->count();      
+      $newRecruiters = DB::table('users')->where('users_role', 3)->where('created_at', '>=', $todaysdate)->count();
+      $todayJobs = DB::table('jobs')->where('created_at', '>=', $todaysdate)->count();
 
-      $totalStudents = DB::table('users')->where('users_role',2)->count();
-      $totalRecruiters = DB::table('users')->where('users_role',3)->count();      
-      $totalJobs = DB::table('jobs')->count(); 
+      $totalStudents = DB::table('users')->where('users_role', 2)->count();
+      $totalRecruiters = DB::table('users')->where('users_role', 3)->count();
+      $totalJobs = DB::table('jobs')->count();
 
-      
+
       $data['content'] = 'admin.dashboard.dashboard';
-      return view('layouts.content', compact('data'))->with(['newStudents' => $newStudents, 'newRecruiters'=>$newRecruiters, 'todayJobs'=>$todayJobs, 'totalStudents' => $totalStudents, 'totalRecruiters'=>$totalRecruiters, 'totalJobs'=>$totalJobs]);
+      return view('layouts.content', compact('data'))->with(['newStudents' => $newStudents, 'newRecruiters' => $newRecruiters, 'todayJobs' => $todayJobs, 'totalStudents' => $totalStudents, 'totalRecruiters' => $totalRecruiters, 'totalJobs' => $totalJobs]);
     }
-    if($userRole == '2'){
-      $usredata = DB::table('users')->count();      
+    if ($userRole == '2') {
+      $usredata = DB::table('users')->count();
       $data['content'] = 'admin.home';
-      return view('layouts.content', compact('data'))->with(['usredata' => $usredata ]);
+      return view('layouts.content', compact('data'))->with(['usredata' => $usredata]);
     }
   }
 
-  public function index(){
+  public function index()
+  {
     Session::flash('success', 'login Successfully..!');
     return Redirect::action('DashboardController@dashboard');
   }
-
 }

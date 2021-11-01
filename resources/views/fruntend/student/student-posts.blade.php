@@ -19,44 +19,47 @@
 
       @include('fruntend.student.inc.top-menu')
       <?php
-      $userRole = Session::get('userRole');
-      $count = 30;
-      $userid = Session::get('gorgID');
-      $loginby = DB::table('users')->where('id', $userid)->first();
-      $education = DB::table('education')->where('user_id', $userid)->first();
-      $certificate = DB::table('certificates')->where('user_id', $userid)->first();
-      $myfavorite = DB::table('my_favorite_industries')->where('user_id', $userid)->first();
-      $businesses = DB::table('business_functions')->where('user_id', $userid)->first();
-      $hobbies = DB::table('hobbies_and_interests')->where('user_id', $userid)->first();
-      $accomplishments = DB::table('accomplishments')->where('user_id', $userid)->first();
-      $studentData = DB::table('users')->where('id', $userid)->first();
-      // echo "<pre>";
-      // print_r($education);
-      // die;
-      if ($loginby->address != '') {
-        $count = $count + 10;
-      }
-      if ($loginby->about != '') {
-        $count = $count + 5;
-      }
-      if ($education) {
-        $count = $count + 10;
-      }
-      if ($certificate) {
-        $count = $count + 15;
-      }
-      if ($myfavorite) {
-        $count = $count + 5;
-      }
-      if ($businesses) {
-        $count = $count + 10;
-      }
-      if ($hobbies) {
-        $count = $count + 10;
-      }
-      if ($accomplishments) {
-        $count = $count + 5;
-      }
+     $userRole = Session::get('userRole');
+     $count = 30;
+     $userid = Session::get('gorgID');
+     $loginby = DB::table('users')->where('id', $userid)->first();
+     $education = DB::table('education')->where('user_id', $userid)->first();
+     $certificate = DB::table('certificates')->where('user_id', $userid)->first();
+     $myfavorite = DB::table('my_favorite_industries')->where('user_id', $userid)->first();
+     $businesses = DB::table('business_functions')->where('user_id', $userid)->first();
+     $hobbies = DB::table('hobbies_and_interests')->where('user_id', $userid)->first();
+     $accomplishments = DB::table('accomplishments')->where('user_id', $userid)->first();
+     $OrgData = DB::table('users')->where('id', $userid)->first();
+     // echo "<pre>";
+     // print_r($OrgData->profile_image);
+     // die;
+     // echo "<pre>";
+     // print_r($education);
+     // die;
+     if ($loginby->address != '') {
+       $count = $count + 10;
+     }
+     if ($loginby->about != '') {
+       $count = $count + 5;
+     }
+     if ($education) {
+       $count = $count + 10;
+     }
+     if ($certificate) {
+       $count = $count + 15;
+     }
+     if ($myfavorite) {
+       $count = $count + 5;
+     }
+     if ($businesses) {
+       $count = $count + 10;
+     }
+     if ($hobbies) {
+       $count = $count + 10;
+     }
+     if ($accomplishments) {
+       $count = $count + 5;
+     }
 
       ?>
 
@@ -68,10 +71,10 @@
         <div class="innerrow">
           <div class="col_grid9">
             <div class="profile_publicimg">
-              @if($studentData->profile_image =='no-image.png')
+              @if($loginby->profile_image =='no-image.png')
               <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="img" />
               @else
-              <img src="{{ asset('public/assets/student_image/'.$studentData->profile_image)}}" alt="img" />
+              <img src="{{ asset('public/assets/student_image/'.$loginby->profile_image)}}" alt="img" />
               @endif
               <!-- <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="img"/> -->
             </div>
@@ -159,7 +162,7 @@
                     @if($users->profile_image =='no-image.png')
                     <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="icon" />
                     @else
-                    <img src="{{ asset('public/assets/student_image/'.$studentData->profile_image)}}" alt="icon" />
+                    <img src="{{ asset('public/assets/student_image/'.$loginby->profile_image)}}" alt="icon" />
                     @endif
                     <!-- <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="icon"> -->
                   </span>
@@ -238,7 +241,7 @@
                   <a href="#"><span><img src="{{ asset('public/assets/images/messageIcon.png')}}" alt="icon"></span> Message</a>
                 </li>
                 <li class="shareclickon">
-                  <a href="javascript:void(0);"><span><img src="http://localhost/internify/public/assets/images/shareIcon.png" alt="icon"></span> Share</a>
+                  <a href="javascript:void(0);"><span><img src="{{ asset('public/assets/images/shareIcon.png')}}" alt="icon"></span> Share</a>
                 </li>
                 <div class="sharebox-sec">
                   <div class="sharebox-user">
@@ -593,9 +596,10 @@
           <div class="innerrow">
             <div class="col_grid12 upload_box_sec">
               <div class="uploadBox">
-                <input type="file" name="image" />
+                <!-- <input type="file" name="image" /> -->
+                <input type="file" name="image" onchange="loadFile(event)">
                 <div class="file_cont">
-                  <img src="{{ asset('public/assets/images/attach_img.png')}}" alt="icon" />
+                  <img src="{{ asset('public/assets/images/attach_img.png')}}" id="output" alt="icon" />
                   <h4 class="font24Text clrBlack">Attach Photo</h4>
                 </div>
               </div>
@@ -627,6 +631,15 @@
 
 
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
+  <script>
+    var loadFile = function(event) {
+      var output = document.getElementById('output');
+      output.src = URL.createObjectURL(event.target.files[0]);
+      output.onload = function() {
+        URL.revokeObjectURL(output.src) // free memory
+      }
+    };
+  </script>
   <script>
     $(document).ready(function() {
       $(".clicktobtm").click(function() {
@@ -683,7 +696,6 @@
   <script>
     $(window).scroll(function() {
       var scroll = $(window).scrollTop();
-
       if (scroll >= 1000) {
         $("body").addClass("blogLoginFixed_sec");
       } else {
@@ -697,10 +709,8 @@
     $(".open-modal").on('click', function(e) {
       e.preventDefault();
       e.stopImmediatePropagation;
-
       var $this = $(this),
         modal = $($this).data("modal");
-
       $(modal).parents(".popupWapper").addClass("open");
       setTimeout(function() {
         $(modal).addClass("open");
@@ -717,9 +727,7 @@
             $(target).removeClass("open");
           }, 350);
         }
-
       });
-
     });
 
     $(".close-modal").on('click', function(e) {
@@ -850,6 +858,9 @@
     $(' .menu_right li').click(function() {
       $(' .menu_right li').removeClass('active');
       $(this).addClass('active');
+    });
+    $('.close-modal').click(function() {
+      location.reload();
     });
   </script>
 </body>

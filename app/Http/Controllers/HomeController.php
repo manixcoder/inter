@@ -28,7 +28,7 @@ class HomeController extends Controller
   }*/
   
     public function web_blog(Request $request){
-        $Data = DB::table('blogs')->where('status', 0)->get();
+        $Data = DB::table('blogs')->where('status', 0)-> orderBy('id', 'desc')->get();
 
         if ($Data!=null) {
           return view('fruntend.common_pages.web_blog')->with('Data', $Data);

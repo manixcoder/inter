@@ -8,7 +8,7 @@ Route::get('clear-cache', function () {
 	$exitCode = Artisan::call('route:clear');
 	$exitCode = Artisan::call('view:clear');
 	$exitCode = Artisan::call('config:cache');
-	Session::flash('success', 'All Clear');
+	Session::flash('success', 'All Clear'); 
 	echo "DONE";
 });
 /* All web link Start... */

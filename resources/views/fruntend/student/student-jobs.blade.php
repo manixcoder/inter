@@ -769,6 +769,9 @@
       $(' .menu_right li').removeClass('active');
       $(this).addClass('active');
     });
+    $('.close-modal').click(function() {
+      location.reload();
+    });
   </script>
 </body>
 

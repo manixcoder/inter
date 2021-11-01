@@ -27,6 +27,10 @@
       $businesses = DB::table('business_functions')->where('user_id', $userid)->first();
       $hobbies = DB::table('hobbies_and_interests')->where('user_id', $userid)->first();
       $accomplishments = DB::table('accomplishments')->where('user_id', $userid)->first();
+      $OrgData = DB::table('users')->where('id', $userid)->first();
+      // echo "<pre>";
+      // print_r($OrgData->profile_image);
+      // die;
       // echo "<pre>";
       // print_r($education);
       // die;
@@ -37,7 +41,7 @@
         $count = $count + 5;
       }
       if ($education) {
-        $count = $count + 10;
+        $count = $count + 20;
       }
       if ($certificate) {
         $count = $count + 15;
@@ -45,7 +49,7 @@
       if ($myfavorite) {
         $count = $count + 5;
       }
-      if($businesses){
+      if ($businesses) {
         $count = $count + 10;
       }
       if ($hobbies) {
@@ -212,6 +216,7 @@
 
                 </div> 
               </div>
+              
               <li class="shareclickon">
                 <a href="javascript:void(0);"><span><img src="{{ asset('public/assets/images/shareIcon.png')}}" alt="icon"></span> Share</a>
               </li>
@@ -546,6 +551,10 @@
   </script>
   <script>
     $('#pageclose').click(function() {
+      location.reload();
+    });
+
+    $('.close-modal').click(function() {
       location.reload();
     });
 
