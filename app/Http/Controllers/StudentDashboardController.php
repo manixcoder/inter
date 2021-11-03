@@ -373,7 +373,12 @@ class StudentDashboardController extends Controller
     } else {
       $jobsData = DB::table('jobs')->where('status', 0)->where('location', 'like', '%' . $location . '%')->where('job_title', 'like', '%' . $job_title . '%')->orderBy('id', 'desc')->get();
     }
-    return view('fruntend.student.student-jobs')->with(['OrgData' => $OrgData, 'jobsData' => $jobsData, 'locationData' => $locationData, 'titleData' => $titleData]);
+    return view('fruntend.student.student-jobs')->with([
+      'OrgData' => $OrgData,
+      'jobsData' => $jobsData,
+      'locationData' => $locationData,
+      'titleData' => $titleData
+    ]);
   }
   public function student_job_details(Request $request, $id)
   {
@@ -381,7 +386,10 @@ class StudentDashboardController extends Controller
     $uid = Session::get('gorgID');
     $OrgData = DB::table('users')->where('id', $uid)->first();
     $jobsData = DB::table('jobs')->where('id',  $id)->first();
-    return view('fruntend.student.student-job-details')->with(['OrgData' => $OrgData, 'appl' => $jobsData]);
+    return view('fruntend.student.student-job-details')->with([
+      'OrgData' => $OrgData, 
+      'appl' => $jobsData
+    ]);
   }
   public function student_job_apply(Request $request)
   {
@@ -391,7 +399,7 @@ class StudentDashboardController extends Controller
         'student_id' => $id,
         'job_id' => $request->job_id,
       ]);
-    return redirect()->back();
+    return redirect()->back()->with(array('status' => 'success', 'message' => 'Job Applied Successfully'));;
   }
   public function upload_student_resume(Request $request)
   {
@@ -408,12 +416,14 @@ class StudentDashboardController extends Controller
           'student_id' => $id,
           'image' => $profileImage,
         ]);
+      return redirect()->back()->with(array('status' => 'success', 'message' => 'Resume Added'));
       return redirect()->back()->with(['success_msg' => "Resume Added"]);
     } else {
       $update = DB::table('student_resume')->where('student_id', $id)
         ->update([
           'image' => $profileImage,
         ]);
+      return redirect()->back()->with(array('status' => 'success', 'message' => 'Resume Updated'));
       return redirect()->back()->with(['success_msg' => "Resume Updated"]);
     }
   }
@@ -470,33 +480,26 @@ class StudentDashboardController extends Controller
   {
 
     $request->validate([
-
       'current_password' => 'required',
       'password' => 'required',
       'password_confirmation' => 'required|same:password',
     ]);
-
     $userRole = Session::get('userRole');
     $id = Session::get('gorgID');
-
     $currentPassword = Auth::User()->password;
     if (Hash::check($request->current_password, $currentPassword)) {
       $userId = Auth::User()->id;
       $user = User::find($userId);
       $user->password = Hash::make($request->password);;
       $user->save();
+      return back()->with(array('status' => 'success', 'message' => 'Your password has been updated successfully'));
       return back()->with('success_msg', 'Your password has been updated successfully.');
     } else {
       return back()->with('error_msg', 'Current password does not match.');
     }
   }
-
-
-
   public function user_logout(Request $request)
   {
-
-
     Auth::logout();
     return redirect('/');
   }

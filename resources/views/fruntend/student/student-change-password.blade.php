@@ -23,24 +23,29 @@
     .has-feedback .form-control-feedback {
       top: 33px;
     }
+
     .validate_cus {
       color: red;
       font-size: small;
     }
+
     label {
       display: inline-block;
       margin-bottom: 5px;
       font-weight: 700;
     }
+
     .top-row>div {
       float: left;
       width: 48%;
       margin-right: 4%;
     }
+
     .field-wrap {
       position: relative;
       margin-bottom: 20px;
     }
+
     input,
     textarea {
       font-size: 18px;
@@ -103,10 +108,6 @@
       @endif
     </div>
   </header>
-
-
-
-
   <div class="body_wht-inners ">
     <div class="fw  changePassword_sec">
       <div class="lgcontainer">
@@ -114,18 +115,32 @@
           <div class="changePassword_heading">
             <h3 class="font36text  bukhariSrptfont_fmly clrred">Change Password</h3>
           </div>
-
-
-
+          @if(Session::has('status'))
+          @if(Session::has('status') == 'success')
+          <div class="popupWapper">
+            <div class="modal cPassword_update_popup" id="cPassword_update">
+              <div class="close fw">
+                <a class="btn close-modal" data-modal="#cPassword_update" href="#"><img src="{{ asset('public/assets/images/images/close.png' )}}" alt="icon"></a>
+              </div>
+              <div class="content fw">
+                <div class="password_update_sec fw">
+                  <figure class="fw">
+                    <img src="{{ asset('public/assets/images/images/succcessfull.png') }}" alt="icon">
+                  </figure>
+                  <h3>{{ Session::get('message') }}</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          @endif
+          @endif
 
           <form class="form_sec fw" method="POST" action="{{ url('student-password-update') }}" id="signup-form">
-
-
-            @if(Session::has('success_msg'))
+            <!-- @if(Session::has('success_msg'))
             <div class="col_grid8" style="color:green">
               {{ Session::get('success_msg') }}
             </div>
-            @endif
+            @endif -->
 
             @if(Session::has('error_msg'))
             <div class="col_grid8" style="color:red">
@@ -141,11 +156,6 @@
             </div>
             @endforeach
             @endif
-
-
-
-
-
             @csrf
             <div class="innerrow">
               <div class="col_grid12 ">
@@ -154,7 +164,6 @@
                   <input type="password" name="current_password" placeholder="Enter your current password" class="form-control" required maxlength="50">
                 </div>
               </div>
-
               <div class="col_grid12 ">
                 <div class="form-group">
                   <label>New Password</label>
@@ -162,7 +171,6 @@
                   <span class="glyphicon form-control-feedback" id="password_reg1" style="color:red;">
                 </div>
               </div>
-
               <div class="col_grid12 ">
                 <div class="form-group">
                   <label>Confirm Password</label>
@@ -174,16 +182,12 @@
               <div class="col_grid12 confirmApply ">
                 <button type="submit" class="input-btn">Change Password <span><img src="{{ asset('public/assets/images/loginCheck_icon.png')}}" alt="icon" /></span></button>
               </div>
-
             </div>
           </form>
         </div>
       </div>
     </div>
   </div>
-
-
-
   <footer class="fw">
     @include('fruntend.student.inc.footer')
   </footer>
@@ -266,11 +270,6 @@
       </div>
     </form>
   </div>
-
-
-
-
-
   <div class='modal personal_DtlPop' id='experience_add_detail'>
     <div class="close fw">
       <a class='btn close-modal' data-modal="#experience_add_detail" href="#"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></a>
@@ -325,9 +324,6 @@
       </div>
     </form>
   </div>
-
-
-
   <div class='modal personal_DtlPop' id='certificate_add_detail'>
     <div class="close fw">
       <a class='btn close-modal' data-modal="#certificate_add_detail" href="#"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></a>
