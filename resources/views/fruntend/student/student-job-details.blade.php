@@ -86,6 +86,23 @@
           </div>
         </div>
       </div>
+
+      @if(Session::has('status'))
+      @if(Session::has('status') == 'success')
+      <div class="popupWapper">
+        <div class="modal resumeUpload_popup successfullyModalPopup" id="successfullyModal">
+
+          <div class="content fw">
+            <div class="imgcheck_icon fw">
+              <img src="{{ asset('public/assets/images/images/succcessfull.png') }}" alt="icon">
+            </div>
+            <h3 class="">{{ Session::get('message') }}</h3>
+            <p>You will be contacted through <br> your email or phone number, hang tight!</p>
+          </div>
+        </div>
+      </div>
+      @endif
+      @endif
       <div class="jobDescriptions_sec fw">
         <h3 class="borderBox_heading">Offer</h3>
         <ul>
