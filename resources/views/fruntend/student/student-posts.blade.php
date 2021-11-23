@@ -19,47 +19,47 @@
 
       @include('fruntend.student.inc.top-menu')
       <?php
-     $userRole = Session::get('userRole');
-     $count = 30;
-     $userid = Session::get('gorgID');
-     $loginby = DB::table('users')->where('id', $userid)->first();
-     $education = DB::table('education')->where('user_id', $userid)->first();
-     $certificate = DB::table('certificates')->where('user_id', $userid)->first();
-     $myfavorite = DB::table('my_favorite_industries')->where('user_id', $userid)->first();
-     $businesses = DB::table('business_functions')->where('user_id', $userid)->first();
-     $hobbies = DB::table('hobbies_and_interests')->where('user_id', $userid)->first();
-     $accomplishments = DB::table('accomplishments')->where('user_id', $userid)->first();
-     $OrgData = DB::table('users')->where('id', $userid)->first();
-     // echo "<pre>";
-     // print_r($OrgData->profile_image);
-     // die;
-     // echo "<pre>";
-     // print_r($education);
-     // die;
-     if ($loginby->address != '') {
-       $count = $count + 10;
-     }
-     if ($loginby->about != '') {
-       $count = $count + 5;
-     }
-     if ($education) {
-       $count = $count + 10;
-     }
-     if ($certificate) {
-       $count = $count + 15;
-     }
-     if ($myfavorite) {
-       $count = $count + 5;
-     }
-     if ($businesses) {
-       $count = $count + 10;
-     }
-     if ($hobbies) {
-       $count = $count + 10;
-     }
-     if ($accomplishments) {
-       $count = $count + 5;
-     }
+      $userRole = Session::get('userRole');
+      $count = 30;
+      $userid = Session::get('gorgID');
+      $loginby = DB::table('users')->where('id', $userid)->first();
+      $education = DB::table('education')->where('user_id', $userid)->first();
+      $certificate = DB::table('certificates')->where('user_id', $userid)->first();
+      $myfavorite = DB::table('my_favorite_industries')->where('user_id', $userid)->first();
+      $businesses = DB::table('business_functions')->where('user_id', $userid)->first();
+      $hobbies = DB::table('hobbies_and_interests')->where('user_id', $userid)->first();
+      $accomplishments = DB::table('accomplishments')->where('user_id', $userid)->first();
+      $OrgData = DB::table('users')->where('id', $userid)->first();
+      // echo "<pre>";
+      // print_r($OrgData->profile_image);
+      // die;
+      // echo "<pre>";
+      // print_r($education);
+      // die;
+      if ($loginby->address != '') {
+        $count = $count + 10;
+      }
+      if ($loginby->about != '') {
+        $count = $count + 5;
+      }
+      if ($education) {
+        $count = $count + 10;
+      }
+      if ($certificate) {
+        $count = $count + 15;
+      }
+      if ($myfavorite) {
+        $count = $count + 5;
+      }
+      if ($businesses) {
+        $count = $count + 10;
+      }
+      if ($hobbies) {
+        $count = $count + 10;
+      }
+      if ($accomplishments) {
+        $count = $count + 5;
+      }
 
       ?>
 
@@ -74,7 +74,7 @@
               @if($loginby->profile_image =='no-image.png')
               <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="img" />
               @else
-              <img src="{{ asset('public/assets/student_image/'.$loginby->profile_image)}}" alt="img" />
+              <img src="{{ asset('public/uploads/'.$loginby->profile_image)}}" alt="img" />
               @endif
               <!-- <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="img"/> -->
             </div>
@@ -148,26 +148,43 @@
             @foreach($posts as $post)
             @php
             $userid = Session::get('gorgID');
-            $loginby = app('App\user')->where('id', $userid)->first();
-            $createdby = app('App\user')->where('id', $post->user_id)->first();
+            $loginby = DB::table('users')->where('id', $userid)->first();
+            $createdby = DB::table('users')->where('id', $post->user_id)->first();
             $likeby = DB::table('post_like')->where('post_id', $post->id)->where('like_unlike', 0)->count();
             $commentby = DB::table('post_comment')->where('post_id', $post->id)->count();
             $commentbydata = DB::table('post_comment')->where('post_id', $post->id)->get();
             $likeorUnlike = DB::table('post_like')->where('user_id', $userid)->where('post_id', $post->id)->first();
+            
             @endphp
             <div class="content-group fw">
               <div class="text-cont fw">
                 <div class="userCommnet_deta fw">
                   <span>
                     @if($users->profile_image =='no-image.png')
-                    <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="icon" />
+                    <img src="{{ asset('public/uploads/userimg-icon.png')}}" alt="icon" />
                     @else
-                    <img src="{{ asset('public/assets/student_image/'.$loginby->profile_image)}}" alt="icon" />
+                    <img src="{{ asset('public/uploads/'.$loginby->profile_image)}}" alt="icon" />
                     @endif
                     <!-- <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="icon"> -->
                   </span>
                   <div class="userCommnet_Name">
-                    <h4>{{$users->name}} <span>{!! date('d M Y H:i:s', strtotime($post->date_time)) !!}</span> <span class="delete_postbtn"><a href="{{ url('delete_student_post/'.$post->id) }}"><i><img src="{{ asset('public/assets/images/delete.png')}}" alt="delete-icon" /></i>Delete Post</a></span></h4>
+                    <h4>{{$users->name}}
+                      <span>
+                        {!! date('d M Y H:i:s', strtotime($post->date_time)) !!}
+                      </span>
+                      
+                      @if($users->id != $post->user_id)
+                        @else
+                        <span class="delete_postbtn">
+                          <a href="{{ url('delete_student_post/'.$post->id) }}"><i>
+                            <img src="{{ asset('public/assets/images/delete.png')}}" alt="delete-icon" /></i>
+                            Delete Post
+                          </a>
+                        </span>
+                        @endif
+                      
+
+                    </h4>
                   </div>
                 </div>
                 <h3 class="font57text clrBlack semiboldfont_fmly">{{$post->heading}}</h3>
@@ -177,7 +194,7 @@
               </div>
               <div class="img-cont fw">
                 <figure class="full-img">
-                  <img src="{{ asset('public/assets/post_images/'.$post->post_image)}}" alt="img1">
+                  <img src="{{ asset('public/uploads/'.$post->post_image)}}" alt="img1">
                 </figure>
               </div>
               <ul class="commntsMsgBox fw">
@@ -212,9 +229,9 @@
                     @php $commentbyuser = DB::table('users')->where('id', $comments->user_id)->first(); @endphp
                     <div class="commentBox-chats-wapper">
                       @if($userRole == 3)
-                      <span class="usericon"><img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $commentbyuser->org_image ?? ''}}" alt="icon" /></span>
+                      <span class="usericon"><img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->org_image ?? ''}}" alt="icon" /></span>
                       @else
-                      <span class="usericon"><img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $commentbyuser->profile_image ?? ''}}" alt="icon" /></span>
+                      <span class="usericon"><img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->profile_image ?? ''}}" alt="icon" /></span>
                       @endif
                       <div class="commentuser-rightuser">
                         <h4>{{ $commentbyuser->name ?? ''}}</h4>
@@ -240,15 +257,15 @@
                 <li>
                   <a href="#"><span><img src="{{ asset('public/assets/images/messageIcon.png')}}" alt="icon"></span> Message</a>
                 </li>
-                <li class="shareclickon">
+                <!--li class="shareclickon">
                   <a href="javascript:void(0);"><span><img src="{{ asset('public/assets/images/shareIcon.png')}}" alt="icon"></span> Share</a>
-                </li>
+                </li -->
                 <div class="sharebox-sec">
                   <div class="sharebox-user">
                     @if($userRole == 3)
-                    <span><img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $loginby->org_image ?? ''}}"></span>
+                    <span><img src="{{ URL::asset('/public/uploads/') }}/{{ $loginby->org_image ?? ''}}"></span>
                     @else
-                    <span><img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $loginby->profile_image ?? ''}}"></span>
+                    <span><img src="{{ URL::asset('/public/uploads/') }}/{{ $loginby->profile_image ?? ''}}"></span>
                     @endif
                     {{ $loginby->name ?? ''}}
                     <small class="shareclosebtn"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></small>
@@ -399,8 +416,8 @@
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
-                <label>Profile Image</label>
-                <input type="file" name="image" class="form-control" maxlength="100" size="100" />
+                <label>Company Image</label>
+                <input type="file" name="company_image" class="form-control" maxlength="100" size="100" />
               </div>
             </div>
           </div>

@@ -41,7 +41,7 @@
 								@php $orgname = DB::table('users')->where('id', $value->user_id)->first(); @endphp
 									<tr>
 										<td>#{{ $value->id }}</td>
-										<td><i class="user_img"><img src="{{ URL::asset('/public/assets/jobs_images/') }}/{{ $value->logo }}" alt="usericon"></i> {{ $orgname->org_name ?? '' }}</td>
+										<td><i class="user_img"><img src="{{ URL::asset('/public/uploads/') }}/{{ $value->logo }}" alt="usericon"></i> {{ $orgname->org_name ?? '' }}</td>
 										<td>{{ $value->job_title }}</td>
 										<td>{{ $value->location }}</td>
 									

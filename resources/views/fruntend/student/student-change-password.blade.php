@@ -312,8 +312,8 @@
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
-                <label>Profile Image</label>
-                <input type="file" name="image" class="form-control" />
+                <label>Company Image</label>
+                <input type="file" name="company_image" class="form-control" />
               </div>
             </div>
           </div>
@@ -553,7 +553,7 @@
           <div class="col_grid6">
             @if(!empty($res->image))
             <figure class="resumeimg">
-              <iframe src="{{ asset('public/assets/student_image/'.$res->image) }}" width="300" height="300"></iframe>
+              <iframe src="{{ asset('public/uploads/'.$res->image) }}" width="300" height="300"></iframe>
             </figure>
 
             <span class="fw"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> {{$res->image}}</span>

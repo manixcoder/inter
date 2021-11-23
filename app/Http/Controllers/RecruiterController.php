@@ -41,6 +41,14 @@ class RecruiterController extends Controller
     $data['content'] = 'admin.recruiter.list_recruiter';
     return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount'=>$DataCount]);
   }
+  public function recruiterPosts(){
+    $todaysdate = date('Y-m-d').' 00:00:00';
+    $Data = DB::table('users')->Where('users_role', 3)->where('created_at', '>=', $todaysdate)->paginate(10);    
+    $DataCount = DB::table('users')->Where('users_role', 3)->where('created_at', '>=', $todaysdate)->count();
+
+    $data['content'] = 'fruntend.recruiter_profile_section.my_posts';
+    return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount'=>$DataCount]);
+  }
 
   public function status_update($id) {   
     $jobsdata = app('App\User')->where('id', $id)->first();
@@ -78,7 +86,7 @@ class RecruiterController extends Controller
         }
         else{
             if($files = $request->image){
-              $destinationPath = public_path('/assets/org_images/');
+              $destinationPath = public_path('/uploads/');
               $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
               $path =  $files->move($destinationPath, $profileImage);
               $image = $insert['photo'] = "$profileImage";

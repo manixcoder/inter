@@ -72,7 +72,7 @@ class StudentController extends Controller
     }else{
         
         if($files = $request->image){
-          $destinationPath = public_path('/assets/student_image/');
+          $destinationPath = public_path('/uploads/');
           $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
           $path =  $files->move($destinationPath, $profileImage);
           $image = $insert['photo'] = "$profileImage";

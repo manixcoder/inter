@@ -34,9 +34,9 @@
                   <i>
                     
                   @if($OrgData->users_role == 2)
-                      <img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $OrgData->profile_image ?? ''}}" alt="img">
+                      <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->profile_image ?? ''}}" alt="img">
                     @else
-                      <img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $OrgData->org_image }}" alt="img">
+                      <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->org_image }}" alt="img">
                     @endif
                 
                 </i>

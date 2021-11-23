@@ -96,7 +96,7 @@
                 <div class="jobsDetailBox fw">
                   <div class="profile_sec fw">
                     <div class="compnayBoxImg">
-                      <img src="{{ asset('public/assets/jobs_images/'.$appl->logo)}}" alt="images">
+                      <img src="{{ asset('public/uploads/'.$appl->logo)}}" alt="images">
                     </div>
                     <div class="compnay">
                       <h5>{{$appl->location}}</h5>

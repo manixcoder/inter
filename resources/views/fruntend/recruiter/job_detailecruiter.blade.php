@@ -16,7 +16,7 @@
           <div class="innerrow">
             <div class="col_grid9">
               <div class="jobsDetailComp_img">
-                <img src="{{ URL::asset('/public/assets/jobs_images/') }}/{{ $Data->logo }}" alt="newtechlogo" />
+                <img src="{{ URL::asset('/public/uploads/') }}/{{ $Data->logo }}" alt="newtechlogo" />
               </div>
               <div class="jobsDetailComp_cont">
                 <h3>{{ $recruiterDetails->org_name ?? ''}}</h3>

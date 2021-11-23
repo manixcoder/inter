@@ -53,7 +53,7 @@
          <li>                
               <div class="login_part">
                   <div class="dropdown">
-                    <figure><img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $username->org_image }}" alt="user-img"></figure>  
+                    <figure><img src="{{ URL::asset('/public/uploads/') }}/{{ $username->org_image }}" alt="user-img"></figure>  
                     <button onclick="myFunction()" class="dropbtn">{{ $username->name ?? ''}}<i class="fa fa-angle-down"></i></button>
                     <ul class="logout-dropdown">
                         <li>

@@ -34,7 +34,6 @@ class StudentDashboardController extends Controller
     $id = Session::get('gorgID');
     $OrgData = DB::table('users')->where('id', $id)->first();
     $todaysdate = date('Y-m-d') . ' 00:00:00';
-    // dd($userRole);
     if (!empty($request->search)) {
       $SearchData = $request->search;
     } else {
@@ -156,44 +155,63 @@ class StudentDashboardController extends Controller
       ]);
     return redirect()->back();
   }
+  public function studentImageUpload(Request $request){
+    
+    if($request->ajax()){
+      $id = Session::get('gorgID');
+      if ($files = $request->file('file')) {
+        $files = $request->file('file');
+        $destinationPath = public_path('/uploads/');
+        $profile_image = date('YmdHis') . "-" . $files->getClientOriginalName();
+        $path =  $files->move($destinationPath, $profile_image);
+        $update = DB::table('users')->where('id', $id)
+          ->update([
+            'profile_image' => $profile_image,
+          ]);
+      }
+      return response()->json([
+        'success' => 'done',
+        'valueimg'=>$path
+      ]);
+    }
+  }
   public function add_student_experience(Request $request)
   {
+    
     $id = Session::get('gorgID');
-    if ($files = $request->image) {
-      $destinationPath = public_path('/assets/student_image/');
+    if ($files = $request->company_image) {
+      $destinationPath = public_path('/uploads/');
       $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
       $path =  $files->move($destinationPath, $profileImage);
-      $update = DB::table('users')->where('id', $id)
-        ->update([
-          'profile_image' => $profileImage,
-        ]);
-    }
-    $update = DB::table('experience')
+      $update = DB::table('experience')
       ->insert([
         'user_id' => $id,
+        'company_image' => $profileImage,
         'company_name' => $request->company_name,
         'profile' => $request->profile_type,
         'duration_from' => $request->duration_from,
         'duration_to' => $request->duration_to,
         'location' => $request->location,
       ]);
-    return redirect()->back();
+    }
+    return redirect()->back()->with(array('status' => 'success', 'message' => 'add student experience successfully.'));
   }
   public function update_student_experience(Request $request)
   {
     $id = Session::get('gorgID');
     if ($files = $request->image) {
-      $destinationPath = public_path('/assets/student_image/');
+      $destinationPath = public_path('/uploads/');
       $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
       $path =  $files->move($destinationPath, $profileImage);
-      $update = DB::table('users')->where('id', $id)
-        ->update([
-          'profile_image' => $profileImage,
-        ]);
+      // $update = DB::table('users')->where('id', $id)
+      //   ->update([
+      //     'profile_image' => $profileImage,
+      //   ]);
     }
     $update = DB::table('experience')->where('id', $request->id)
       ->update([
         'user_id' => $id,
+        'company_image' => $profileImage,
         'company_name' => $request->company_name,
         'profile' => $request->profile_type,
         'duration_from' => $request->duration_from,
@@ -327,7 +345,7 @@ class StudentDashboardController extends Controller
   public function add_post(Request $request)
   {
     if ($files = $request->image) {
-      $destinationPath = public_path('/assets/post_images/');
+      $destinationPath = public_path('/uploads/');
       $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
       $path =  $files->move($destinationPath, $profileImage);
     }
@@ -373,7 +391,7 @@ class StudentDashboardController extends Controller
     } else {
       $jobsData = DB::table('jobs')->where('status', 0)->where('location', 'like', '%' . $location . '%')->where('job_title', 'like', '%' . $job_title . '%')->orderBy('id', 'desc')->get();
     }
-    return view('fruntend.student.student-jobs')->with([
+    return view('fruntend.student.student-jobs')->with([ 
       'OrgData' => $OrgData,
       'jobsData' => $jobsData,
       'locationData' => $locationData,
@@ -404,7 +422,7 @@ class StudentDashboardController extends Controller
   public function upload_student_resume(Request $request)
   {
     if ($files = $request->image) {
-      $destinationPath = public_path('/assets/student_image/');
+      $destinationPath = public_path('/uploads/');
       $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
       $path =  $files->move($destinationPath, $profileImage);
     }
@@ -421,7 +439,7 @@ class StudentDashboardController extends Controller
     } else {
       $update = DB::table('student_resume')->where('student_id', $id)
         ->update([
-          'image' => $profileImage,
+          'image' => $profileImage, 
         ]);
       return redirect()->back()->with(array('status' => 'success', 'message' => 'Resume Updated'));
       return redirect()->back()->with(['success_msg' => "Resume Updated"]);

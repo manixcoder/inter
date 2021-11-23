@@ -86,7 +86,7 @@ class PostController extends Controller
 
   public function create(Request $request) {
     if($files = $request->image){
-      $destinationPath = public_path('/assets/post_images/');
+      $destinationPath = public_path('/uploads/');
       $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
       $path =  $files->move($destinationPath, $profileImage);
       $image = $insert['photo'] = "$profileImage";

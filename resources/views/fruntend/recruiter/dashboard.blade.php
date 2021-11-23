@@ -42,7 +42,7 @@
          <div class="profile_leftsidebar fw">
            <div class="user_namesec fw">
              <figure>
-               <img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $OrgData->org_image ?? ''}}" alt="profile">
+               <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->org_image ?? ''}}" alt="profile">
              </figure>
              <h5>{{ $OrgData->name ?? ''}}</h5>
              <a href="mailto:jaiks4384@gmail.com">{{ $OrgData->email ?? ''}}</a>
@@ -100,7 +100,7 @@
            <div class="content-group fw">
              <div class="text-cont fw">
                <div class="userCommnet_deta fw">
-                 <span><img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $createdby->org_image ?? ''}}" alt="icon"></span>
+                 <span><img src="{{ URL::asset('/public/uploads/') }}/{{ $createdby->org_image ?? ''}}" alt="icon"></span>
                  <div class="userCommnet_Name">
                    <h4>{{ $createdby->name ?? ''}}<span>{{date('d M Y | H:i', strtotime($value->date_time))}}</span></h4>
                  </div>
@@ -110,7 +110,7 @@
              </div>
              <div class="img-cont fw">
                <figure class="full-img">
-                 <img src="{{ URL::asset('/public/assets/post_images/') }}/{{ $value->post_image }}" alt="img1" />
+                 <img src="{{ URL::asset('/public/uploads/') }}/{{ $value->post_image }}" alt="img1" />
                </figure>
              </div>
              <ul class="commntsMsgBox fw">
@@ -137,9 +137,9 @@
                    @php $commentbyuser = DB::table('users')->where('id', $comments->user_id)->first(); @endphp
                    <div class="commentBox-chats-wapper">
                      @if($userRole == 3)
-                     <span class="usericon"><img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $commentbyuser->org_image ?? ''}}" alt="icon" /></span>
+                     <span class="usericon"><img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->org_image ?? ''}}" alt="icon" /></span>
                      @else
-                     <span class="usericon"><img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $commentbyuser->profile_image ?? ''}}" alt="icon" /></span>
+                     <span class="usericon"><img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->profile_image ?? ''}}" alt="icon" /></span>
                      @endif
                      <div class="commentuser-rightuser">
                        <h4>{{ $commentbyuser->name ?? ''}}</h4>
@@ -172,9 +172,9 @@
                  <div class="sharebox-user">
 
                    @if($userRole == 3)
-                   <span><img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $loginby->org_image ?? ''}}"></span>
+                   <span><img src="{{ URL::asset('/public/uploads/') }}/{{ $loginby->org_image ?? ''}}"></span>
                    @else
-                   <span><img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $loginby->profile_image ?? ''}}"></span>
+                   <span><img src="{{ URL::asset('/public/uploads/') }}/{{ $loginby->profile_image ?? ''}}"></span>
                    @endif
 
                    {{ $loginby->name ?? ''}}

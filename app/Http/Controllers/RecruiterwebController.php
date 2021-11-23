@@ -83,17 +83,17 @@ class RecruiterwebController extends Controller
     $editData = DB::table('users')->where('id', $request->edit_id)->first();
     if (isset($editData)) {
       if ($files = $request->org_image) {
-        $destinationPath = public_path('/assets/org_images/');
+        $destinationPath = public_path('/uploads/');
         $org_image = date('YmdHis') . "-" . $files->getClientOriginalName();
         $path =  $files->move($destinationPath, $org_image);
         $update = DB::table('users')->where('id', $request->edit_id)
           ->update([
             'org_image' => $org_image,
-          ]);
+          ]); 
       }
 
       if ($files = $request->profile_image) {
-        $destinationPath = public_path('/assets/org_images/');
+        $destinationPath = public_path('/uploads/');
         $profile_image = date('YmdHis') . "-" . $files->getClientOriginalName();
         $path =  $files->move($destinationPath, $profile_image);
         $update = DB::table('users')->where('id', $request->edit_id)
@@ -101,7 +101,7 @@ class RecruiterwebController extends Controller
             'profile_image' => $profile_image,
           ]);
       }
-      $update = app('App\User')
+      $update = DB::table('users')
       ->where('id', $request->edit_id)
       ->update([
         'name' => $request->name, 

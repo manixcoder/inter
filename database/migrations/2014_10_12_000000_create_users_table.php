@@ -17,6 +17,8 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->integer('users_role');
             $table->string('profile_image')->nullable();
+            $table->string('provider_id')->nullable();
+            $table->string('avatar')->nullable();
             $table->string('org_image')->nullable();
             $table->string('org_name')->nullable();
             $table->string('phone')->nullable();

@@ -11,9 +11,9 @@
             <div class="notifivation_box fw">
               <div class="img_notiProfile">
                 @if($userdata->users_role == 2)
-                  <img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $userdata->profile_image ?? ''}}" alt="icon" />
+                  <img src="{{ URL::asset('/public/uploads/') }}/{{ $userdata->profile_image ?? ''}}" alt="icon" />
                 @else
-                  <img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $userdata->org_image }}" alt="icon" />
+                  <img src="{{ URL::asset('/public/uploads/') }}/{{ $userdata->org_image }}" alt="icon" />
                 @endif
               </div>
               <div class="notification_cont">

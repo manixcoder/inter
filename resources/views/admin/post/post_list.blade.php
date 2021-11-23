@@ -14,7 +14,7 @@
                   <div class="text-cont fw">
                      <div class="userCommnet_deta fw">
                         @php $userdetail = DB::table('users')->where('id', $postsdata->user_id)->first(); @endphp
-                        <span><img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $userdetail->org_image ?? ''}}" alt="icon"></span>
+                        <span><img src="{{ URL::asset('/public/uploads/') }}/{{ $userdetail->org_image ?? ''}}" alt="icon"></span>
                         <div class="userCommnet_Name">
                           <h4>{{ $userdetail->name ?? ''}} <span>{{ date('d M Y | H:i:s', strtotime($postsdata->date_time))}}</span> </h4>
                         </div>
@@ -26,7 +26,7 @@
                   </div>
                   <div class="img-cont fw">
                      <figure class="full-img">
-                        <img src="{{ URL::asset('/public/assets/post_images/') }}/{{ $postsdata->post_image }}" alt="img1">
+                        <img src="{{ URL::asset('/public/uploads/') }}/{{ $postsdata->post_image }}" alt="img1">
                      </figure>
                   </div>
                   <ul class="commntsMsgBox fw">

@@ -76,12 +76,7 @@
           <h3>Post A New Job</h3>
         </div>
         <div class="form_sec fw">
-          @if(Session::has('status'))
-          <div class="alert alert-{{ Session::get('status') }}">
-            <i class="ti-user"></i> {{ Session::get('message') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-          </div>
-          @endif
+         
           @if(Session::has('status'))
           <div class="hover_bkgr_fricc resumeUpload_popup successfullyModalPopup">
             <div class='content fw'>
@@ -99,7 +94,7 @@
             <div class="innerrow">
               <div class="col_grid12 upload_box_sec">
                 <div class="uploadBox">
-                  <input type="file" name="logo" onchange="loadFile(event)" required="">
+                  <input type="file" name="logo" onchange="loadFile(event)">
                   <div class="file_cont">
                     <img src="{{ asset('public/assets/images/attach_img.png')}}" id="output" alt="icon" class="jobpostnew-file" />
                     <h4 class="font24Text clrBlack">Attach any organization or work culture photo (It's optional)</h4>
@@ -119,10 +114,28 @@
                 </div>
               </div>
 
-              <div class="col_grid6 ">
+              <!-- div class="col_grid6 ">
                 <div class="form-group">
                   <label>Salary (Optional)</label>
                   <input type="text" name="salary" placeholder="Enter Salary" class="form-control" onkeyup="this.value=this.value.replace(/[^\d]/,'')" maxlength="10">
+                </div>
+              </div -->
+
+              <div class="col_grid6 ">
+                <div class="form-group">
+                  <label>Salary (Optional)</label>
+                  <div class="form_dev">
+                    <div class="inr_opction">
+                      <select name="currency">
+                        <!--option selected="" value="">Select Currency</option -->
+                        <option selected="" value="INR">INR</option>
+                        <option value="doller">doller</option>
+                      </select>
+                    </div>
+                    <div class="input_sec">
+                      <input type="number" name="salary" placeholder="Enter Salary" class="form-control" onkeyup="this.value=this.value.replace(/[^\d]/,'')" maxlength="10">
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -145,15 +158,25 @@
                 </div> -->
 
               <div class="col_grid12 ">
-                <div class="form-group">
+                <div class="form-group newoffer">
                   <label>Job Offers</label>
-                  <input type="text" name="offer" placeholder="Job Offer" class="form-control" required="" maxlength="100">
+                  <input  type="text" name="offer[]" placeholder="Job Offer" class="form-control" required="" maxlength="100">
+                  <div id="offer_add" style="margin-top: 10px;display: inline-block;width: 100%;"></div>
                 </div>
               </div>
 
               <div class="col_grid12 ">
                 <div class="form-group">
-                  <label>Job Description</label>
+                  <label>Job Description
+                    <div id="moreoffer">
+                      <span class="pull-right font20Text" id="add_more">
+                        <i>
+                          <img src="{{ asset('public/assets/images/add.png') }}" alt="img">
+                        </i>
+                        Add More Offer Point
+                      </span>
+                    </div>
+                  </label>
                   <textarea class="form-control" name="job_description"></textarea>
                 </div>
               </div>
@@ -182,7 +205,7 @@
   </div>
 
   <div class="popupWapper ">
-    <div class="modal jobPostPopup_sec open" id="jobPostPopup">
+    <div class="modal jobPostPopup_sec" id="jobPostPopup">
       <div class="content fw">
         <?php
         $userid = Session::get('gorgID');
@@ -191,33 +214,33 @@
         ?>
         <div class="boxDetailbg fw">
           <figure>
-            <img src="{{ asset('public/assets/jobs_images')}}/{{ $jobsData->attachment }}" alt="jobs">
+            <img src="{{ asset('public/uploads')}}/" alt="jobs">
           </figure>
         </div>
         <div class="jobsDetailProfile text-left fw">
           <div class="innerrow">
             <div class="col_grid12">
               <div class="jobsDetailComp_img">
-                <img src="{{ asset('public/assets/jobs_images')}}/{{ $jobsData->	logo }}" alt="newtechlogo">
+                <img src="{{ asset('public/uploads')}}" alt="newtechlogo">
               </div>
               <div class="jobsDetailComp_cont text-left">
                 <h3>{{ $loginUser->org_name }}</h3>
-                <h3><a href="#" class="lightblue_text">{{ $jobsData->job_title}}</a></h3>
-                <p>{{ $jobsData->location }}</p>
-                <p class="bold">{{ $jobsData->offer }}</p>
+                <h3><a href="#" class="lightblue_text">job_title</a></h3>
+                <p>location</p>
+                <p class="bold">offer</p>
               </div>
             </div>
             <div class="jobDescriptions_sec text-left fw">
               <h3 class="borderBox_heading">Offer</h3>
               <ul>
-                <li>{{ $jobsData->offer }}</li>
+                <li>offer</li>
                 <!--li>Be part of a dynamic and supportive work environment</li -->
               </ul>
             </div>
             <div class="jobDescriptions_sec text-left fw">
               <h3 class="borderBox_heading">Job Descriptions</h3>
-              <p>{{ $jobsData->job_description }}</p>
-            
+              <p>job_description</p>
+
               <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software. </p>
               <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
              -->
@@ -245,7 +268,6 @@
 
   <div class="popupWapper">
     <div class="modal resumeUpload_popup successfullyModalPopup open" id="savesuccessfullyModal">
-
       <div class="content fw">
         <div class="imgcheck_icon fw">
           <img src="{{ asset('public/assets/images/succcessfull.png') }}" alt="icon">
@@ -259,6 +281,17 @@
 
 
   @include('fruntend.common_pages.web_footer')
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+$(document).ready(function(){
+  
+
+  $("#add_more").click(function(){
+    $("#offer_add").append('<input  type="text" name="offer[]" style="margin-top: 10px;display: inline-block;width: 100%;" placeholder="Job Offer" class="form-control" required="" maxlength="100">');
+  });
+});
+</script>
+
   <script>
     /* Script for success popup */
     $(document).ready(function() {
@@ -269,11 +302,7 @@
     });
     $('.popupCloseButton').click(function() {
       $('.hover_bkgr_fricc').hide();
-
     });
-
-
-
     var loadFile = function(event) {
       var output = document.getElementById('output');
       output.src = URL.createObjectURL(event.target.files[0]);
@@ -281,7 +310,6 @@
         URL.revokeObjectURL(output.src) // free memory
       }
     };
-
     var loadFile2 = function(event) {
       var output = document.getElementById('output2');
       output.src = URL.createObjectURL(event.target.files[0]);

@@ -45,7 +45,7 @@
 										<td>{{$value->blog_heading}}</td>
 										<td>{{ $value->description}}</td>
 		                                <td>{{$new_date}}</td>
-		                                <td><i class="box_img"><img src="{{ URL::asset('/public/assets/blogs_images/') }}/{{ $value->blog_image }}" alt="usericon"></i></td>
+		                                <td><i class="box_img"><img src="{{ URL::asset('/public/uploads/') }}/{{ $value->blog_image }}" alt="usericon"></i></td>
 										<td>
 											<!-- <span class="edit_icon">
 												<a href="#">

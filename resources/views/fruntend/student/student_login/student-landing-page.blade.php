@@ -17,7 +17,7 @@
     <div class="login_wapper">
       <div class="login_contbox digitcode_sec reset_password">
         <div class="logo_img fw">
-          <a href="{{URL::to('hompepage')}}"><img src="{{ asset('public/assets/images/logo.svg') }}" alt="logo"></a>
+          <a href="{{URL::to('/')}}"><img src="{{ asset('public/assets/images/logo.svg') }}" alt="logo"></a>
         </div>
         <form action="{{ url('student_logged_in') }}" method="POST" enctype="multipart/form-data" class="welcome_cont fw">
           <h3>Welcome there!</h3>
@@ -57,7 +57,11 @@
                 <li><a href="#" class="login_icon"><img src="{{ asset('public/assets/images/login_google.png')}}" alt="icon"></a></li>
               </ul>
             </ul>
-            <h5>Don't have an account ? <a href="{{URL::to('student-register-step-one')}}" class="textbtn_green">Register now</a></h5>
+            <h5>Don't have an account ?
+              <a href="{{URL::to('student-register-step-one')}}" class="textbtn_green">
+                Register now
+              </a>
+            </h5>
           </div>
           <div class="footer_login fw">
             <h5>By logging in, you agree to our <a href="./terms_use-login.html" class="textbtn_green">terms and conditions</a> as well as our <a href="./privacy_policy-login.html" class="textbtn_green">privacy policy</a></h5>
@@ -68,4 +72,5 @@
   </div>
   <script src="js/jquery-lb.js"></script>
 </body>
+
 </html>

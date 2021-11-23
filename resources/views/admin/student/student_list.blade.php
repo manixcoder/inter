@@ -42,7 +42,7 @@
 								<td>{{$value->name }}</td>
 								<td>{{$value->email }}</td>
 								<td>{{$value->phone }}</td>	
-								<td><i class="user_img"><img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $value->profile_image }}" alt="usericon"></i> {{ $value->org_name }}</td>
+								<td><i class="user_img"><img src="{{ URL::asset('/public/uploads/') }}/{{ $value->profile_image }}" alt="usericon"></i> {{ $value->org_name }}</td>
 								<td>
 									<select class="active_salectbox" name="status" onchange="statuschange({{$value->id}})">
 										@if($value->status == 0)

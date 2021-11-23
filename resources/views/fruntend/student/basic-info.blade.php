@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf_token" content="{{csrf_token()}}">
   <title>internify - Home</title>
   <!-- Fontawesome 4 Cdn from BootstrapCDN -->
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -74,9 +75,12 @@
               @if($OrgData->profile_image =='no-image.png')
               <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="img" />
               @else
-              <img src="{{ asset('public/assets/student_image/')}}/{{$OrgData->profile_image}}" alt="img" />
+              <img id="stu_id" src="{{ asset('public/uploads/')}}/{{$OrgData->profile_image}}" alt="img" />
               @endif
-              
+              <div class="form-group">
+                <label>Profile Image</label>
+                <input type="file" name="student_image" id="studentImage">
+              </div>
             </div>
             <div class="profile_publicDetail">
               <h4 class="clrwht font36text  semiboldfont_fmly">{{$OrgData->name}}</h4>
@@ -312,7 +316,28 @@
         </div>
         @endforeach
         <div class="fw educationSec aboutusBg smaeHeading paddTop0">
+        
           <div class="fw aboutusBg_sec">
+          @if(Session::has('status'))
+          <!--div class="popupWapper"><div class="modal cPassword_update_popup open" id="cPassword_update">
+      <div class="close fw">
+        <a class="btn close-modal" data-modal="#cPassword_update" href="#"><img src="images/close.png" alt="icon"></a>
+      </div>
+      <div class="content fw">
+        <div class="password_update_sec fw">
+          <figure class="fw">
+            <img src="{{ asset('public/assets/images/succcessfull.png')}}" alt="icon">
+          </figure>
+          <h3>{{ Session::get('message') }}</h3>
+        </div>
+      </div>	
+    </div></div-->
+
+  <div class="alert alert-{{ Session::has('status') }}">
+    <i class="fa fa-building-o" aria-hidden="true"></i> {{ Session::get('message') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+  </div>
+  @endif
             <div class="lgcontainer">
               <h3 href="javascript:void(0);" data-modal="#experience_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">Experience 
                 <span class="pull-right font20Text">
@@ -323,6 +348,11 @@
                 </h3>
               <div class="boxShodewBg fw mrtop0 experienceBox">
                 @foreach($exData as $exp)
+                <?php 
+                // echo "<pre>";
+                // print_r($exp);
+                // die("2");
+                ?>
                 <div class="innerrow">
                   <div class="col_grid9">
                     <div class="userBox">
@@ -330,7 +360,7 @@
                       @if($OrgData->profile_image =='no-image.png')
                       <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="icon" />                      
                       @else
-                      <img src="{{ asset('public/assets/student_image/'.$OrgData->profile_image)}}" alt="icon" />
+                      <img src="{{ asset('public/uploads/'.$exp->company_image)}}" alt="icon" />
                       @endif
                     </div>
 
@@ -393,7 +423,7 @@
                               <label>Profile Image</label>
                               <input type="file" name="image" class="form-control" />
                               @if(!empty($OrgData->profile_image))
-                              <img style="width:100px" src="{{ asset('public/assets/student_image/'.$OrgData->profile_image)}}" alt="icon" />
+                              <img style="width:100px" src="{{ asset('public/uploads/'.$OrgData->profile_image)}}" alt="icon" />
                               @else
                               <img style="width:100px" src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="icon" />
                               @endif
@@ -768,8 +798,8 @@
             </div>
             <div class="col_grid6 file-popupinput">
               <div class="form-group">
-                <label>Profile Image</label>
-                <input type="file" name="image" class="form-control" />
+                <label>Company Image</label>
+                <input type="file" name="company_image" class="form-control" />
               </div>
             </div>
           </div>
@@ -997,7 +1027,81 @@
 
 
   <!----------------Popup end----------------------->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+ 
+<script type="text/javascript">
+  $('#studentImage').on('change',function(ev){
+    console.log("here inside");
+    var filedata=this.files[0];
+    var imgtype=filedata.type;
+    var match=['image/jpeg','image/jpg'];
+    if(!(imgtype==match[0])||(imgtype==match[1])){
+        $('#mgs_ta').html('<p style="color:red">Plz select a valid type image..only jpg jpeg allowed</p>');
+        }else{
+          $('#mgs_ta').empty();
+          //---image preview
+          var reader=new FileReader();
+          reader.onload=function(ev){
+            $('#stu_id').attr('src',ev.target.result).css('width','150px').css('height','150px');
+          }
+          reader.readAsDataURL(this.files[0]);
+          /// preview end
+          //upload
+          var postData=new FormData();
+          postData.append('file',this.files[0]);
+          var url="{{url('student-image-upload')}}";
+          $.ajax({
+            headers:{'X-CSRF-Token':$('meta[name=csrf_token]').attr('content')},
+            async:true,
+            type:"post",
+            contentType:false,
+            url:url,
+            data:postData,
+            processData:false,
+            success:function(){
+              console.log("success");
+            }
+            });
+          }
+      });
 
+
+      // $('#profile_image').on('change',function(ev){
+      //   console.log("here inside");
+      //   var filedata=this.files[0];
+      //   var imgtype=filedata.type;
+      //   var match=['image/jpeg','image/jpg'];
+      //   if(!(imgtype==match[0])||(imgtype==match[1])){
+      //     $('#mgs_ta').html('<p style="color:red">Plz select a valid type image..only jpg jpeg allowed</p>');
+      //     }else{
+      //     $('#mgs_ta').empty();
+      //     //---image preview
+      //     var reader=new FileReader();
+      //     reader.onload=function(ev){
+      //       $('#output').attr('src',ev.target.result).css('width','100%');
+      //     }
+      //     reader.readAsDataURL(this.files[0]);
+      //     /// preview end
+      //     //upload
+      //     var postData=new FormData();
+      //     postData.append('file',this.files[0]);
+      //     var url="{{url('profile-image-upload')}}";
+      //     $.ajax({
+      //       headers:{'X-CSRF-Token':$('meta[name=csrf_token]').attr('content')},
+      //       async:true,
+      //       type:"post",
+      //       contentType:false,
+      //       url:url,
+      //       data:postData,
+      //       processData:false,
+      //       success:function(){
+      //         console.log("success");
+      //       }
+      //       });
+      //     }
+      // });
+</script>
 
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
   <script>

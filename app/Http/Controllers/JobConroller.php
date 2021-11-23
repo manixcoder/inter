@@ -42,9 +42,9 @@ class JobConroller extends Controller
   }
 
    public function create(Request $request) {
-     //dd($request->all());
+    // dd($request->offer);
      if($files = $request->logo){
-       $destinationPath = public_path('/assets/jobs_images/');
+       $destinationPath = public_path('/uploads/');
        $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
        $path =  $files->move($destinationPath, $profileImage);
        $image = $insert['logo'] = "$profileImage";
@@ -52,7 +52,7 @@ class JobConroller extends Controller
         $image ='';
       }
       if($files = $request->acttachPhoto){
-        $destinationPath = public_path('/assets/jobs_images/');
+        $destinationPath = public_path('/uploads/');
         $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
         $path =  $files->move($destinationPath, $profileImage);
         $attachment = $insert['attachment'] = "$profileImage";
@@ -72,7 +72,7 @@ class JobConroller extends Controller
       'job_title' => $request->job_title,      
       'location' => $request->location,      
       'salary' => $request->salary,      
-      'offer' => $request->offer,      
+      'offer' => serialize($request->offer),      
       'job_description' => $request->job_description, 
       'status' => 0,        
       'user_id' => Session::get('gorgID'),       

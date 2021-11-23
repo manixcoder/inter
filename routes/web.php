@@ -11,7 +11,7 @@ Route::get('clear-cache', function () {
 	Session::flash('success', 'All Clear'); 
 	echo "DONE";
 });
-/* All web link Start... */
+/* All web link Start... */ 
 /* Recruiter basic info */
 Route::get('basic/info', function () {
 	return view('fruntend.recruiter_profile_section.basic_info');
@@ -123,9 +123,7 @@ Route::get('recruiter/basic/info', function () {
 	return view('fruntend.recruiter.recruiter_basicinfo');
 });
 
-// Route::get('recruiter/basic/info', function () {
-// 	return view('fruntend.recruiter.recruiter_basicinfo');
-// });
+
 
 Route::get('recruiter/myposts', function () {
 	return view('fruntend.recruiter.recruiter_myposts');
@@ -179,15 +177,12 @@ Route::get('home', 'DashboardController@index')->name('home');
 Route::get('dashboard', 'DashboardController@dashboard');
 Route::get('notification', 'DashboardController@notification');
 Route::any('web/blog', 'HomeController@web_blog');
+Route::any('org-image-upload', 'HomeController@orgImageUpload');
+Route::any('profile-image-upload', 'HomeController@profileImageUpload');
 
 
 
 /*################################ Student Routes By Ritik Start Here #############################*/
-
-
-
-
-
 
 Route::any('student-dashboard', 'StudentDashboardController@dashboard');
 
@@ -206,6 +201,7 @@ Route::post('add_student_education', 'StudentDashboardController@add_student_edu
 Route::post('update_student_education', 'StudentDashboardController@update_student_education');
 
 Route::post('add_student_experience', 'StudentDashboardController@add_student_experience');
+Route::any('student-image-upload', 'StudentDashboardController@studentImageUpload');
 
 Route::post('update_student_experience', 'StudentDashboardController@update_student_experience');
 

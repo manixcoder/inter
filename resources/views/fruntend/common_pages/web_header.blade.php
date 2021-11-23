@@ -13,6 +13,7 @@ $todaysdate = date('Y-m-d').' 00:00:00';
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf_token" content="{{csrf_token()}}">
   <title>internify - Home</title>
   <!-- Fontawesome 4 Cdn from BootstrapCDN -->
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -83,9 +84,9 @@ $todaysdate = date('Y-m-d').' 00:00:00';
               <a class="user_dropdown" href="#">
                 <i>
                   @if($userRole == 2)
-                  <img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $OrgData->profile_image ?? ''}}" alt="img">
+                  <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->profile_image ?? ''}}" alt="img">
                   @else
-                  <img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $OrgData->org_image }}" alt="img">
+                  <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->org_image }}" alt="img">
                   @endif
                 </i>
                 <span>{{ $OrgData->name ?? ''}} <img src="{{ asset('public/assets/images/user-downarrow.png')}}" alt="img"></span>

@@ -23,14 +23,14 @@
     <div class="lgcontainer">
       <div class="boxDetailbg fw">
         <figure>
-          <img src="{{ asset('public/assets/jobs_images')}}/{{ $appl->attachment }}" alt="jobs">
+          <img src="{{ asset('public/uploads')}}/{{ $appl->attachment }}" alt="jobs">
         </figure>
       </div>
       <div class="jobsDetailProfile fw">
         <div class="innerrow">
           <div class="col_grid9">
             <div class="jobsDetailComp_img">
-              <img src="{{ asset('public/assets/jobs_images')}}/{{ $appl->logo }}" alt="newtechlogo">
+              <img src="{{ asset('public/uploads')}}/{{ $appl->logo }}" alt="newtechlogo">
             </div>
             <div class="jobsDetailComp_cont">
               <h3>{{$appl->company_name}}</h3>
@@ -106,7 +106,10 @@
       <div class="jobDescriptions_sec fw">
         <h3 class="borderBox_heading">Offer</h3>
         <ul>
-          <li>{!! $appl->offer !!}</li>
+        @foreach(unserialize($appl->offer) as $offer)
+                              
+                              <li>{{ $offer }}</li>
+                              @endforeach
         </ul>
       </div>
       <div class="jobDescriptions_sec fw">
@@ -127,16 +130,19 @@
               <div class="jobsDetailBox fw">
                 <div class="profile_sec fw">
                   <div class="compnayBoxImg">
-                    <img src="{{ asset('public/assets/student_image/'.$job->logo)}}" alt="images">
+                    <img src="{{ asset('public/uploads/'.$job->logo)}}" alt="images">
                   </div>
                 </div>
                 <div class="jobsDetailCont fw">
-                  <h3>ARK Newtech Private Limited</h3>
+                  <h3>{{$job->job_title}}</h3>
                   <p><a href="#" class="lightblue_text">{{$job->job_title}}</a></p>
                   <div class="innerrow">
                     <div class="col_grid12">
                       <ul>
-                        <li>{{$job->offer}}</li>
+                      @foreach(unserialize($job->offer) as $offer)
+                              
+                              <li>{{ $offer }}</li>
+                              @endforeach
                       </ul>
                     </div>
                     <div class="col_grid8">
@@ -203,7 +209,7 @@
         <div class="innerrow">
           <div class="col_grid9">
             <div class="jobsDetailComp_img">
-              <img src="{{ asset('public/assets/jobs_images/'.$appl->logo)}}" alt="newtechlogo" />
+              <img src="{{ asset('public/uploads/'.$appl->logo)}}" alt="newtechlogo" />
             </div>
             <div class="jobsDetailComp_cont">
               <h3>{{$appl->company_name}}</h3>
@@ -278,7 +284,7 @@
               <div class="jobsDetailBox fw">
                 <div class="profile_sec fw">
                   <div class="compnayBoxImg">
-                    <img src="{{ asset('public/assets/student_image/'.$job->logo)}}" alt="images">
+                    <img src="{{ asset('public/uploads/'.$job->logo)}}" alt="images">
                   </div>
                 </div>
                 <div class="jobsDetailCont fw">

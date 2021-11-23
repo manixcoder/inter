@@ -2,9 +2,10 @@
 @include('fruntend.recruiter_profile_section.recruiter_basicinfo_sub_menues')
 
 @php
-use App\User;
 $userRole = Session::get('userRole');
 $id = Session::get('gorgID');
+
+
 $recruiterInfo = DB::table('users')->where('id', $id)->first();
 $studentdata = DB::table('users')->where('status', 0)->where('users_role', 2)->get();
 $recruiterdata = DB::table('users')->where('status', 0)->where('users_role', 3)->get();
@@ -14,6 +15,7 @@ $todaysdate = date('Y-m-d').' 00:00:00';
 
 $posts = DB::table('posts')->where('user_id', $recruiterInfo->id)->where('status', 0)->orderBy('id', 'Desc')->get();
 $listedjobs = DB::table('jobs')->where('user_id', $id)->orderBy('id', 'Desc')->get();
+
 @endphp
 <!-- Recruiter Posts section -->
 <div class="profileTab_contBox " id="profileTab_link2">
@@ -33,14 +35,28 @@ $listedjobs = DB::table('jobs')->where('user_id', $id)->orderBy('id', 'Desc')->g
     @php
     $likeby = DB::table('post_like')->where('post_id', $postdata->id)->where('like_unlike', 0)->count();
     $commentby = DB::table('post_comment')->where('post_id', $postdata->id)->count();
-    $loginby = app('App\user')->where('id', $id)->first();
+    $loginby = DB::table('users')->where('id', $id)->first();
     @endphp
     <div class="content-group fw">
       <div class="text-cont fw">
         <div class="userCommnet_deta fw">
-          <span><img src="{{ URL::asset('/public/assets/post_images/') }}/{{ $recruiterInfo->profile_image }}" alt="icon"></span>
+          <span><img src="{{ URL::asset('/public/uploads/') }}/{{ $recruiterInfo->profile_image }}" alt="icon"></span>
           <div class="userCommnet_Name">
-            <h4>{{ $recruiterInfo->name ?? ''}}<span>{{ date('d M Y | H:i', strtotime($postdata->date_time)) }}</span> <span class="delete_postbtn"><a href="{{ URL::to('post-delete',$postdata->id) }}" onclick="return confirm('Are you sure you want to delete this item?');"> <i><img src="{{ URL::asset('/public/assets/images/delete.png') }}" alt="delete-icon" /></i> Delete Post</a></span></h4>
+            <h4>
+              {{ $recruiterInfo->name ?? ''}}
+              <span>
+                {{ date('d M Y | H:i', strtotime($postdata->date_time)) }}
+              </span>
+              @if($id != $postdata->user_id)
+              @else
+              <span class="delete_postbtn">
+                <a href="{{ url('delete_student_post/'.$postdata->id) }}"><i>
+                    <img src="{{ asset('public/assets/images/delete.png')}}" alt="delete-icon" /></i>
+                  Delete Post
+                </a>
+              </span>
+              @endif
+            </h4>
           </div>
         </div>
         <h1>{{ $postdata->heading ?? ''}}</h1>
@@ -48,7 +64,7 @@ $listedjobs = DB::table('jobs')->where('user_id', $id)->orderBy('id', 'Desc')->g
       </div>
       <div class="img-cont fw">
         <figure class="full-img">
-          <img src="{{ URL::asset('/public/assets/post_images/') }}/{{ $postdata->post_image }}" alt="img1">
+          <img src="{{ URL::asset('/public/uploads/') }}/{{ $postdata->post_image }}" alt="img1">
         </figure>
       </div>
       <ul class="commntsMsgBox fw">
@@ -65,7 +81,13 @@ $listedjobs = DB::table('jobs')->where('user_id', $id)->orderBy('id', 'Desc')->g
         <a href="#"><span><img src="{{ URL::asset('/public/assets/images/likedIcon.png') }}" alt="icon"></span> {{ $likeby ?? '' }} Likes</a>
       </li -->
         <li class="commentbyopne">
-          <a href="javascript:void(0);"><span><img src="{{ URL::asset('/public/assets/images/commentIcon.png') }}" alt="icon"></span> {{ $commentby ?? '' }} Comments</a>
+          <a href="javascript:void(0);">
+            <span>
+              <img src="{{ URL::asset('/public/assets/images/commentIcon.png') }}" alt="icon">
+            </span>
+            {{ $commentby ?? '' }}
+            Comments
+          </a>
         </li>
         <div class="commentBox-usersec">
           <div class="commentBox-heading">Comments <span>({{ $commentby ?? '' }})</span><span class="closebtn"><i class="fa fa-times-circle" aria-hidden="true"></i></span></div>
@@ -75,9 +97,9 @@ $listedjobs = DB::table('jobs')->where('user_id', $id)->orderBy('id', 'Desc')->g
             @php $commentbyuser = DB::table('users')->where('id', $comments->user_id)->first(); @endphp
             <div class="commentBox-chats-wapper">
               @if($userRole == 3)
-              <span class="usericon"><img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $commentbyuser->org_image ?? ''}}" alt="icon" /></span>
+              <span class="usericon"><img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->org_image ?? ''}}" alt="icon" /></span>
               @else
-              <span class="usericon"><img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $commentbyuser->profile_image ?? ''}}" alt="icon" /></span>
+              <span class="usericon"><img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->profile_image ?? ''}}" alt="icon" /></span>
               @endif
               <div class="commentuser-rightuser">
                 <h4>{{ $commentbyuser->name ?? ''}}</h4>
@@ -102,17 +124,17 @@ $listedjobs = DB::table('jobs')->where('user_id', $id)->orderBy('id', 'Desc')->g
 
           </div>
         </div>
-        <li class="shareclickon">
+        <!--li class="shareclickon">
           <a href="javascript:void(0);"><span><img src="{{ URL::asset('/public/assets/images/shareIcon.png') }}" alt="icon"></span> Share</a>
-        </li>
+        </li-->
 
         <div class="sharebox-sec">
           <div class="sharebox-user">
 
             @if($userRole == 3)
-            <span><img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $loginby->org_image ?? ''}}"></span>
+            <span><img src="{{ URL::asset('/public/uploads/') }}/{{ $loginby->org_image ?? ''}}"></span>
             @else
-            <span><img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $loginby->profile_image ?? ''}}"></span>
+            <span><img src="{{ URL::asset('/public/uploads/') }}/{{ $loginby->profile_image ?? ''}}"></span>
             @endif
 
             {{ $loginby->name ?? ''}}
@@ -250,8 +272,8 @@ $listedjobs = DB::table('jobs')->where('user_id', $id)->orderBy('id', 'Desc')->g
   });
 
   $('.close-modal').click(function() {
-      location.reload();
-    });
+    location.reload();
+  });
 </script>
 
 @include('fruntend.common_pages.web_footer')

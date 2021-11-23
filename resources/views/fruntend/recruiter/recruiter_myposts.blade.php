@@ -14,15 +14,15 @@
         <div class="boxDetailbg fw">
           <figure>
           @if($recruiterInfo->profile_image !='no-image.png')
-            <img src="{{ asset('public/assets/org_images')}}/{{ $recruiterInfo->profile_image }}" alt="jobs" />
+            <img src="{{ asset('public/uploads')}}/{{ $recruiterInfo->profile_image }}" alt="jobs" />
             @else
-            <img src="{{ asset('public/assets/images/company_profileBG.png')}}" alt="jobs" />
+            <img src="{{ asset('public/uploads/company_profileBG.png')}}" alt="jobs" />
             @endif
           </figure>
         </div>
         <div class="compnayProfile_user fw">
           <div class="userBox_img">
-            <img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $recruiterInfo->org_image ?? ''}}" alt="icon_logo" />
+            <img src="{{ URL::asset('/public/uploads/') }}/{{ $recruiterInfo->org_image ?? ''}}" alt="icon_logo" />
           </div>
         </div> 
         <div class="tabCompnay_profile text-center fw">
@@ -39,12 +39,12 @@
             <li>
               <a href="#profileTab_link3">My Listings</a>
             </li>
-            <li>
+            <!--li>
               <a href="#profileTab_link4">Followers</a>
             </li>
             <li>
               <a href="#profileTab_link5">People</a>
-            </li>
+            </li -->
           </ul>
 
           <!-- Recruiter Basic info section -->
@@ -187,16 +187,30 @@
                   <div class="content-group fw">
                     <div class="text-cont fw">
                       <div class="userCommnet_deta fw">
-                        <span><img src="{{ URL::asset('/public/assets/post_images/') }}/{{ $recruiterInfo->profile_image }}" alt="icon"></span>
+                        <span><img src="{{ URL::asset('/public/uploads/') }}/{{ $recruiterInfo->profile_image }}" alt="icon"></span>
                         <div class="userCommnet_Name">
-                          <h4>{{ $recruiterInfo->name ?? ''}}<span>{{ date('d M Y | H:i', strtotime($postdata->date_time)) }}</span> <span class="delete_postbtn"><a href="{{ URL::to('post-delete',$postdata->id) }}" onclick="return confirm('Are you sure you want to delete this item?');"> <i><img src="{{ URL::asset('/public/assets/images/delete.png') }}" alt="delete-icon" /></i> Delete Post</a></span></h4>
+                          <h4>
+                            {{ $recruiterInfo->name ?? ''}}
+                            <span>
+                              {{ date('d M Y | H:i', strtotime($postdata->date_time)) }}
+                            </span> 
+                            @if($users->id != $postdata->user_id)
+                        @else
+                        <span class="delete_postbtn">
+                          <a href="{{ url('delete_student_post/'.$postdata->id) }}"><i>
+                            <img src="{{ asset('public/assets/images/delete.png')}}" alt="delete-icon" /></i>
+                            Delete Post
+                          </a>
+                        </span>
+                        @endif
+                        </h4>
                         </div>
                       </div>
                       <p class="site-pra">{{ $postdata->description ?? ''}}</p>
                     </div>
                     <div class="img-cont fw">
                       <figure class="full-img">
-                        <img src="{{ URL::asset('/public/assets/post_images/') }}/{{ $postdata->post_image }}" alt="img1">
+                        <img src="{{ URL::asset('/public/uploads/') }}/{{ $postdata->post_image }}" alt="img1">
                       </figure>
                     </div>
                     <ul class="commntsMsgBox fw">

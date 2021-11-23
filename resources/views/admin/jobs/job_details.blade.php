@@ -40,7 +40,7 @@
          <div class="companyWapper">
             <div class="fw company_cant">
                <ul class="jobsdetails_text">
-                  <li>Company Logo<b><span class="imgbox"><img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $job_created_by->org_image }}" alt="icon"></span></b></li>
+                  <li>Company Logo<b><span class="imgbox"><img src="{{ URL::asset('/public/uploads/') }}/{{ $job_created_by->org_image }}" alt="icon"></span></b></li>
                   <li>Company Name <b>{{ $job_created_by->org_name ?? ''}}</b></li>
                   <li>Official Email <b>{{ $job_created_by->email ?? ''}}</b></li>
                </ul>

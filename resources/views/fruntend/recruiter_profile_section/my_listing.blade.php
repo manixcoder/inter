@@ -48,7 +48,7 @@
                     <div class="jobsDetailBox fw">
                       <div class="profile_sec fw" >
                         <div class="compnayBoxImg">
-                          <img src="{{ URL::asset('/public/assets/jobs_images/') }}/{{ $value->logo }}" alt="images" />
+                          <img src="{{ URL::asset('/public/uploads/') }}/{{ $value->logo }}" alt="images" />
                         </div>
                         <div class="compnay">
                           <h5>{{ $value->location ?? ''}}</h5>
@@ -59,9 +59,13 @@
                         <h3>{{ $userdetail->org_name ?? ''}}</h3>
                         <p><a href="#" class="lightblue_text">{{ $value->job_title ?? ''}}</a></p>
                         <div class="innerrow">
+                         
                           <div class="col_grid9">
                             <ul>
-                              <li>{{$value->job_description}}</li>
+                              @foreach(unserialize($value->offer) as $offer)
+                              
+                              <li>{{ $offer }}</li>
+                              @endforeach
                               <!-- <li>Be part of a dynamic and supportive work environment</li> -->
                             </ul>
                           </div>

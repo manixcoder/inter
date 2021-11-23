@@ -70,11 +70,15 @@
           <div class="profile_leftsidebar fw">
             <div class="user_namesec fw">
               <figure>
-
+<?php 
+// echo "<pre>";
+// print_r($OrgData);
+// die;
+?>
                 @if($userRole === 2)
-                <img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $OrgData->profile_image ?? ''}}" alt="img">
+                <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->profile_image ?? ''}}" alt="img">
                 @else
-                <img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $OrgData->org_image }}" alt="img">
+                <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->profile_image }}" alt="img">
                 @endif
               </figure>
               <h5>{{$OrgData->name}}</h5>
@@ -149,10 +153,24 @@
             <div class="text-cont fw">
               <div class="userCommnet_deta fw">
                 <span>
-                  <img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $UsrData->profile_image ?? ''}}" alt="img">
+                  <img src="{{ URL::asset('/public/uploads/') }}/{{ $UsrData->profile_image ?? ''}}" alt="img">
                 </span>
                 <div class="userCommnet_Name">
-                      <h4>@if(!empty($UsrData->name)) {{$UsrData->name}} @endif <span>{!! date('d M Y H:i:s', strtotime($post->date_time)) !!}</span> <span class="delete_postbtn"><a href="{{ url('delete_student_post/'.$post->id) }}"><i><img src="{{ asset('public/assets/images/delete.png')}}" alt="delete-icon" /></i>Delete Post</a></span></h4>
+                      <h4>@if(!empty($UsrData->name)) {{$UsrData->name}} @endif 
+                        <span>{!! date('d M Y H:i:s', strtotime($post->date_time)) !!}
+
+                        </span> 
+                        @if($users->id != $post->user_id)
+                        @else
+                        <span class="delete_postbtn">
+                          <a href="{{ url('delete_student_post/'.$post->id) }}"><i>
+                            <img src="{{ asset('public/assets/images/delete.png')}}" alt="delete-icon" /></i>
+                            Delete Post
+                          </a>
+                        </span>
+                        @endif
+                        
+                      </h4>
                     </div>
               </div>
               <h3 class="font57text clrBlack semiboldfont_fmly">{{$post->heading}}</h3>
@@ -162,7 +180,7 @@
             </div>
             <div class="img-cont fw">
               <figure class="full-img">
-                <img src="{{ asset('public/assets/post_images/'.$post->post_image)}}" alt="img1">
+                <img src="{{ asset('public/uploads/'.$post->post_image)}}" alt="img1">
               </figure>
             </div>
             <ul class="commntsMsgBox fw">
@@ -189,9 +207,9 @@
                   @php $commentbyuser = DB::table('users')->where('id', $comments->user_id)->first(); @endphp
                   <div class="commentBox-chats-wapper">
                     @if($userRole == 3)
-                    <span class="usericon"><img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $commentbyuser->org_image ?? ''}}" alt="icon" /></span>
+                    <span class="usericon"><img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->org_image ?? ''}}" alt="icon" /></span>
                     @else
-                    <span class="usericon"><img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $commentbyuser->profile_image ?? ''}}" alt="icon" /></span>
+                    <span class="usericon"><img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->profile_image ?? ''}}" alt="icon" /></span>
                     @endif
                     <div class="commentuser-rightuser">
                       <h4>{{ $commentbyuser->name ?? ''}}</h4>
@@ -217,16 +235,16 @@
                 </div> 
               </div>
               
-              <li class="shareclickon">
+              <!--li class="shareclickon">
                 <a href="javascript:void(0);"><span><img src="{{ asset('public/assets/images/shareIcon.png')}}" alt="icon"></span> Share</a>
-              </li>
+              </li-->
               <div class="sharebox-sec">
                 <div class="sharebox-user">
 
                   @if($loginby->users_role == 3)
-                  <span><img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $loginby->org_image ?? ''}}"></span>
+                  <span><img src="{{ URL::asset('/public/uploads/') }}/{{ $loginby->org_image ?? ''}}"></span>
                   @else
-                  <span><img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $loginby->profile_image ?? ''}}"></span>
+                  <span><img src="{{ URL::asset('/public/uploads/') }}/{{ $loginby->profile_image ?? ''}}"></span>
                   @endif
 
                   {{ $loginby->name ?? ''}}

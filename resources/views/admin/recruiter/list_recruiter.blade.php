@@ -26,7 +26,7 @@
 									@endphp
 									<tr>
 										<td>#{{ $value->id }}</td>
-										<td><i class="user_img"><img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $value->org_image }}" alt="usericon"></i> {{ $value->org_name }}</td>
+										<td><i class="user_img"><img src="{{ URL::asset('/public/uploads/') }}/{{ $value->org_image }}" alt="usericon"></i> {{ $value->org_name }}</td>
 										<!--<td>{{ $value->name }}</td>-->
 										<td>{{ $value->email }}</td>
 										<td>{{ $value->phone }}</td>

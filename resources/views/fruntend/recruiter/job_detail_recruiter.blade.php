@@ -16,7 +16,7 @@
         <div class="innerrow">
           <div class="col_grid12">
             <div class="jobsDetailComp_img">
-              <img src="{{ URL::asset('/public/assets/jobs_images/') }}/{{ $Data[0]->logo }}" alt="newtechlogo" />
+              <img src="{{ URL::asset('/public/uploads/') }}/{{ $Data[0]->logo }}" alt="newtechlogo" />
             </div>
             <div class="jobsDetailComp_cont">
               <h3>{{ $recruiterDetails->org_name}}</h3>
@@ -54,7 +54,7 @@
                 <div class="innerrow">
                   <div class="col_grid8">
                     <div class="intercandidates_imgbox">
-                      <img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $studentDetails->profile_image ?? ''}}" alt="img">
+                      <img src="{{ URL::asset('/public/uploads/') }}/{{ $studentDetails->profile_image ?? ''}}" alt="img">
                     </div>
                     <div class="intercandidates_contbox">
                       <h3 class="clrblack bold">{{ $studentDetails->name ?? ''}}</h3>

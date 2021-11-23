@@ -74,7 +74,7 @@
               @if($loginby->profile_image =='no-image.png')
               <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="img" />
               @else
-              <img src="{{ asset('public/assets/student_image/'.$loginby->profile_image)}}" alt="img" />
+              <img src="{{ asset('public/uploads/'.$loginby->profile_image)}}" alt="img" />
               @endif
               <!-- <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="img"/> -->
             </div>
@@ -145,7 +145,7 @@
               <div class="jobsDetailBox fw">
                 <div class="profile_sec fw">
                   <div class="compnayBoxImg">
-                    <img src="{{ asset('public/assets/jobs_images/'.$appl->logo)}}" alt="images">
+                    <img src="{{ asset('public/uploads/'.$appl->logo)}}" alt="images">
                   </div>
                   <div class="compnay">
                     <h5>{{$appl->location}}</h5>
@@ -323,8 +323,8 @@
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
-                <label>Profile Image</label>
-                <input type="file" name="image" class="form-control" />
+                <label>Company Image</label>
+                <input type="file" name="company_image" class="form-control" />
               </div>
             </div>
           </div>
