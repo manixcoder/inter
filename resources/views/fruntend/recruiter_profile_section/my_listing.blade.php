@@ -63,7 +63,6 @@
                           <div class="col_grid9">
                             <ul>
                               @foreach(unserialize($value->offer) as $offer)
-                              
                               <li>{{ $offer }}</li>
                               @endforeach
                               <!-- <li>Be part of a dynamic and supportive work environment</li> -->
