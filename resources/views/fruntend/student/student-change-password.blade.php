@@ -134,7 +134,6 @@
           </div>
           @endif
           @endif
-
           <form class="form_sec fw" method="POST" action="{{ url('student-password-update') }}" id="signup-form">
             <!-- @if(Session::has('success_msg'))
             <div class="col_grid8" style="color:green">
@@ -147,8 +146,6 @@
               {{ Session::get('error_msg') }}
             </div>
             @endif
-
-
             @if ($errors->any())
             @foreach ($errors->all() as $error)
             <div class="form-group">
@@ -225,9 +222,7 @@
       </div>
     </div>
   </div>
-
   <!----------------Popup Start----------------------->
-
   <div class='modal personal_DtlPop' id='education_add_detail'>
     <div class="close fw">
       <a class='btn close-modal' data-modal="#education_add_detail" href="#"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></a>
@@ -361,9 +356,6 @@
       </div>
     </form>
   </div>
-
-
-
   <div class='modal personal_DtlPop' id='industry_add_detail'>
     <div class="close fw">
       <a class='btn close-modal' data-modal="#industry_add_detail" href="#"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></a>
@@ -380,8 +372,6 @@
                 <input type="text" name="industry_name" class="form-control" required />
               </div>
             </div>
-
-
           </div>
           <div class="confirmApply fw">
             <button type="submit" class="input-btn">Save</button>
@@ -390,9 +380,6 @@
       </div>
     </form>
   </div>
-
-
-
   <div class='modal personal_DtlPop' id='business_add_detail'>
     <div class="close fw">
       <a class='btn close-modal' data-modal="#business_add_detail" href="#"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></a>
@@ -409,8 +396,6 @@
                 <input type="text" name="business_function_name" class="form-control" required />
               </div>
             </div>
-
-
           </div>
           <div class="confirmApply fw">
             <button type="submit" class="input-btn">Save</button>
@@ -419,9 +404,6 @@
       </div>
     </form>
   </div>
-
-
-
   <div class='modal personal_DtlPop' id='hobbies_add_detail'>
     <div class="close fw">
       <a class='btn close-modal' data-modal="#hobbies_add_detail" href="#"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></a>
@@ -448,9 +430,6 @@
       </div>
     </form>
   </div>
-
-
-
   <div class='modal personal_DtlPop' id='accomplishment_add_detail'>
     <div class="close fw">
       <a class='btn close-modal' data-modal="#accomplishment_add_detail" href="#"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></a>
@@ -493,9 +472,6 @@
       </div>
     </form>
   </div>
-
-
-
   <div class='modal personal_DtlPop' id='createNewPost'>
     <div class="close fw">
       <a class='btn close-modal' data-modal="#createNewPost" href="#"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></a>
@@ -524,14 +500,12 @@
                 <input type="file" name="image" class="form-control" />
               </div>
             </div>
-
-
-          </div>
-          <div class="confirmApply fw">
-            <button type="submit" class="input-btn">Save</button>
+            /div>
+            <div class="confirmApply fw">
+              <button type="submit" class="input-btn">Save</button>
+            </div>
           </div>
         </div>
-      </div>
     </form>
   </div>
 
