@@ -30,8 +30,16 @@ class JobConroller extends Controller
   }
 
   public function job_profile($id){
+    
+    $jobApplied = DB::table('job_applied as ja')
+            ->join('users as r', 'ja.student_id', '=', 'r.id')
+            ->where('ja.job_id', $id)
+            ->select('ja.id', 'r.*')
+            ->get();
+            dd($jobApplied);
+    
     $Data = app('App\Jobs')->where('id', $id)->first();
-    return view('fruntend.recruiter.job_detailecruiter')->with(['Data' => $Data]);
+    return view('fruntend.recruiter.job_detailecruiter')->with(['Data' => $jobApplied ]);
   }
   
 

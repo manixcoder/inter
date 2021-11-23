@@ -118,9 +118,6 @@
           </li>
         </ul>
       </div>
-
-
-
       <div class="profileTab_contBox fw" id="profileTab_Applications3">
         <div class="fw myPostSec">
           <div class="small_contaner">
@@ -128,7 +125,6 @@
               @php
               $userRole = Session::get('userRole');
               $id = Session::get('gorgID');
-
               $applications=DB::table('jobs')
               ->leftjoin('job_applied', 'jobs.id', '=', 'job_applied.job_id')
               ->select('jobs.*')
@@ -139,8 +135,6 @@
               <h3 class="font36text  semiboldfont_fmly">
                 You have applied for (0{{count($applications)}} Jobs)
               </h3>
-
-
               @foreach($applications as $appl)
               <div class="jobsDetailBox fw">
                 <div class="profile_sec fw">
@@ -158,7 +152,9 @@
                   <div class="innerrow">
                     <div class="col_grid9">
                       <ul>
-                        <li>{{$appl->job_description}}</li>
+                        @foreach(unserialize($appl->offer) as $offer)
+                        <li>{{ $offer }}</li>
+                        @endforeach
 
                       </ul>
                     </div>

@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>internify - Home</title>
-  <!-- Fontawesome 4 Cdn from BootstrapCDN -->
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="{{ asset('public/assets/web_assets/css/style.css')}}" rel="stylesheet">
   <link href="{{ asset('public/assets/web_assets/fonts/fonts.css')}}" rel="stylesheet">
@@ -91,7 +89,6 @@
       @if(Session::has('status') == 'success')
       <div class="popupWapper">
         <div class="modal resumeUpload_popup successfullyModalPopup" id="successfullyModal">
-
           <div class="content fw">
             <div class="imgcheck_icon fw">
               <img src="{{ asset('public/assets/images/images/succcessfull.png') }}" alt="icon">
@@ -106,10 +103,9 @@
       <div class="jobDescriptions_sec fw">
         <h3 class="borderBox_heading">Offer</h3>
         <ul>
-        @foreach(unserialize($appl->offer) as $offer)
-                              
-                              <li>{{ $offer }}</li>
-                              @endforeach
+          @foreach(unserialize($appl->offer) as $offer)
+          <li>{{ $offer }}</li>
+          @endforeach
         </ul>
       </div>
       <div class="jobDescriptions_sec fw">
@@ -139,10 +135,10 @@
                   <div class="innerrow">
                     <div class="col_grid12">
                       <ul>
-                      @foreach(unserialize($job->offer) as $offer)
-                              
-                              <li>{{ $offer }}</li>
-                              @endforeach
+                        @foreach(unserialize($job->offer) as $offer)
+
+                        <li>{{ $offer }}</li>
+                        @endforeach
                       </ul>
                     </div>
                     <div class="col_grid8">
@@ -157,33 +153,7 @@
             </div>
             @endforeach
 
-            <!-- div class="col_grid6">
-                <div class="jobsDetailBox fw">
-                  <div class="profile_sec fw">
-                    <div class="compnayBoxImg">
-                      <img src="{{ asset('public/assets/images/newtechlogo.png')}}" alt="images">
-                    </div>
-                  </div>
-                  <div class="jobsDetailCont fw">
-                    <h3>ARK Newtech Private Limited</h3>
-                    <p><a href="#" class="lightblue_text">Junior Associate - SAS Programming</a></p>
-                    <div class="innerrow">
-                      <div class="col_grid12">
-                        <ul>
-                          <li>Great opportunity for freshers to kickstart their career</li>
-                          <li>Be part of a dynamic and supportive work environment</li>
-                        </ul>
-                      </div>
-                      <div class="col_grid8">
-                        <p><span>New Delhi</span><span class="dots">6 Months Internship</span></p>
-                      </div>
-                      <div class="col_grid4">
-                        <a href="javascript:void(0);" class="input-btn redBGmanage_btn open-modal" data-modal="#resumeUpload">View Job</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div -->
+
           </div>
         </div>
       </div>

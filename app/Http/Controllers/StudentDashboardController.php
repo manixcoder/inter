@@ -198,15 +198,16 @@ class StudentDashboardController extends Controller
   }
   public function update_student_experience(Request $request)
   {
+    
     $id = Session::get('gorgID');
+   
     if ($files = $request->image) {
       $destinationPath = public_path('/uploads/');
       $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
       $path =  $files->move($destinationPath, $profileImage);
-      // $update = DB::table('users')->where('id', $id)
-      //   ->update([
-      //     'profile_image' => $profileImage,
-      //   ]);
+    }else{
+      $experienceData = DB::table('experience')->where('id', $request->id)->first();
+      $profileImage=$experienceData->company_image;
     }
     $update = DB::table('experience')->where('id', $request->id)
       ->update([

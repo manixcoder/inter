@@ -11,7 +11,10 @@
          </ul>
          <div class="offer_textcant">
             <h4 class="greentext">Offers</h4>
-            <p>{{$jobDetail->offer ?? ''}}</p>
+            @foreach(unserialize($jobDetail->offer) as $offer)
+            <li>{{ $offer }}</li>
+            @endforeach
+            <!-- <p>{{$jobDetail->offer ?? ''}}</p> -->
          </div>
          <div class="offer_textcant">
             <h4 class="greentext">Job Description</h4>

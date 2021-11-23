@@ -31,12 +31,8 @@
       $hobbies = DB::table('hobbies_and_interests')->where('user_id', $userid)->first();
       $accomplishments = DB::table('accomplishments')->where('user_id', $userid)->first();
       $OrgData = DB::table('users')->where('id', $userid)->first();
-      // echo "<pre>";
-      // print_r($OrgData->profile_image);
-      // die;
-      // echo "<pre>";
-      // print_r($education);
-      // die;
+      
+      
       if ($loginby->address != '') {
         $count = $count + 10;
       }
@@ -95,15 +91,8 @@
             </div>
           </div>
           <div class="col_grid3">
-            <!--div class="rightPublic text-right font24Text">
-                Public Profile<div class="profileToggle">
-                  <div class="k-switch">
-                    <div class="track"></div> 
-                   <div class="ball green"></div>
-                   <div class="ball red"></div>
-                   </div>
-                </div>           
-              </div -->
+            
+          
           </div>
         </div>
       </div>
@@ -132,12 +121,6 @@
                   <form class="form_sec fw col_grid12" action="{{ url('update_student_personal_details') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="innerrow">
-                      <!--div class="col_grid12 "> 
-                          <div class="form-group">
-                            <label>Profile Image</label>
-                            <input type="file" name="Profile" class="form-control" >
-                          </div>
-                        </div-->
                       <div class="col_grid12 ">
                         <div class="form-group">
                           <label>Your Name</label>
@@ -206,13 +189,11 @@
                     <textarea name="about" class="grytextPra">{!! $OrgData->about !!}</textarea>
                   </div>
                 </div>
-
                 <div class="col_grid3 profile_update_btn text-center">
                   <div class="form-group">
                     <input type="submit" value="Update" class="input-btn">
                   </div>
                 </div>
-
               </div>
             </form>
 
@@ -316,49 +297,30 @@
         </div>
         @endforeach
         <div class="fw educationSec aboutusBg smaeHeading paddTop0">
-        
           <div class="fw aboutusBg_sec">
-          @if(Session::has('status'))
-          <!--div class="popupWapper"><div class="modal cPassword_update_popup open" id="cPassword_update">
-      <div class="close fw">
-        <a class="btn close-modal" data-modal="#cPassword_update" href="#"><img src="images/close.png" alt="icon"></a>
-      </div>
-      <div class="content fw">
-        <div class="password_update_sec fw">
-          <figure class="fw">
-            <img src="{{ asset('public/assets/images/succcessfull.png')}}" alt="icon">
-          </figure>
-          <h3>{{ Session::get('message') }}</h3>
-        </div>
-      </div>	
-    </div></div-->
-
-  <div class="alert alert-{{ Session::has('status') }}">
-    <i class="fa fa-building-o" aria-hidden="true"></i> {{ Session::get('message') }}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-  </div>
-  @endif
+            @if(Session::has('status'))
+            <div class="alert alert-{{ Session::has('status') }}">
+              <i class="fa fa-building-o" aria-hidden="true"></i> {{ Session::get('message') }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+            @endif
             <div class="lgcontainer">
-              <h3 href="javascript:void(0);" data-modal="#experience_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">Experience 
+              <h3 href="javascript:void(0);" data-modal="#experience_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">Experience
                 <span class="pull-right font20Text">
                   <i>
                     <img src="{{ asset('public/assets/images/add.png')}}" alt="img" /></i>
-                    Add
-                  </span>
-                </h3>
+                  Add
+                </span>
+              </h3>
               <div class="boxShodewBg fw mrtop0 experienceBox">
                 @foreach($exData as $exp)
-                <?php 
-                // echo "<pre>";
-                // print_r($exp);
-                // die("2");
-                ?>
+
                 <div class="innerrow">
                   <div class="col_grid9">
                     <div class="userBox">
-                   
+
                       @if($OrgData->profile_image =='no-image.png')
-                      <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="icon" />                      
+                      <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="icon" />
                       @else
                       <img src="{{ asset('public/uploads/'.$exp->company_image)}}" alt="icon" />
                       @endif
@@ -373,8 +335,8 @@
                   </div>
                   <div class="col_grid3">
                     <span class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#experience_update_detail_{{$exp->id}}"><i>
-                      <img src="{{ asset('public/assets/images/edit.png')}}" alt="img">
-                    </i>Edit</span>
+                        <img src="{{ asset('public/assets/images/edit.png')}}" alt="img">
+                      </i>Edit</span>
                   </div>
                 </div>
                 <div class='modal personal_DtlPop' id='experience_update_detail_{{$exp->id}}'>
@@ -437,16 +399,7 @@
                     </div>
                   </form>
                 </div>
-
-
-
-
-
                 @endforeach
-
-
-
-
               </div>
             </div>
           </div>
@@ -485,10 +438,6 @@
                     <h3><span class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#certificate_update_detail_{{$cert->id}}"><i><img src="{{ asset('public/assets/images/add.png')}}" alt="img" /></i>Edit</span></h3>
                   </div>
                 </div>
-
-
-
-
                 <div class='modal personal_DtlPop' id='certificate_update_detail_{{$cert->id}}'>
                   <div class="close fw">
                     <a class='btn close-modal' data-modal="#certificate_update_detail_{{$cert->id}}" href="#"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></a>
@@ -527,11 +476,7 @@
                     </div>
                   </form>
                 </div>
-
                 @endforeach
-
-
-
               </div>
             </div>
           </div>
@@ -542,7 +487,14 @@
               <h3 data-modal="#industry_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">My Favourite Industries <span class="pull-right font20Text"><i><img src="{{ asset('public/assets/images/add.png')}}" alt="img" /></i>Add</span></h3>
               <ul class="favouriteIndus_sec fw">
                 @foreach($indusData as $indus)
-                <li><a href="#" class="input-btn">{{$indus->industries_name}}</a><a href="{{ url('delete_student_industry/'.$indus->id) }}" class="cross-iconpopup"><i class="fa fa-times" aria-hidden="true"></i></a></li>
+                <li>
+                  <a href="#" class="input-btn">
+                    {{$indus->industries_name}}
+                  </a>
+                  <a href="{{ url('delete_student_industry/'.$indus->id) }}" class="cross-iconpopup">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                  </a>
+                </li>
                 @endforeach
               </ul>
             </div>
@@ -565,11 +517,9 @@
             <div class="lgcontainer">
               <h3 data-modal="#hobbies_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">Hobbies & Interests <span class="pull-right font20Text"><i><img src="{{ asset('public/assets/images/add.png')}}" alt="img" /></i>Add</span></h3>
               <ul class="favouriteIndus_sec fw">
-
                 @foreach($hobbyData as $hobby)
                 <li><a href="#" class="input-btn">{{$hobby->hobbies_name}}</a><a href="{{ url('delete_student_hobby/'.$hobby->id) }}" class="cross-iconpopup"><i class="fa fa-times" aria-hidden="true"></i></a></li>
                 @endforeach
-
               </ul>
             </div>
           </div>
@@ -578,13 +528,20 @@
           <div class="fw aboutusBg_sec form_sec">
             <div class="lgcontainer">
               <div class="boxShodewBg fw">
-                <h3 data-modal="#accomplishment_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">Accomplishments <span class="pull-right font20Text"><i><img src="{{ asset('public/assets/images/add.png')}}" alt="img" /></i>Add</span></h3>
+                <h3 data-modal="#accomplishment_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
+                  Accomplishments
+                  <span class="pull-right font20Text">
+                    <i><img src="{{ asset('public/assets/images/add.png')}}" alt="img" /></i>
+                    Add
+                  </span>
+                </h3>
 
-
-                @foreach($accomData as $accom)
+                <?php $i = 1; ?>
+                @foreach($accomData as $key=> $accom)
                 <div class="coursesBox fw">
                   <div class="innerrow">
                     <div class="col_grid9 text-left">
+                      <h3>{{ $i }}</h3>
                       <h3>{{$accom->course_name}}</h3>
                       <p>{{$accom->awards}}</p>
                       <p>{{$accom->test_scores}}</p>
@@ -595,9 +552,6 @@
                     </div>
                   </div>
                 </div>
-
-
-
                 <div class='modal personal_DtlPop' id='accomplishment_update_detail_{{$accom->id}}'>
                   <div class="close fw">
                     <a class='btn close-modal' data-modal="#accomplishment_update_detail_{{$accom->id}}" href="#"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></a>
@@ -641,26 +595,13 @@
                     </div>
                   </form>
                 </div>
-
-
+                <?php $i++ ?>
                 @endforeach
-
-
-
-
-
               </div>
             </div>
           </div>
         </div>
       </div>
-
-
-
-
-
-
-
     </div>
   </div>
   </div>
@@ -1023,85 +964,84 @@
       </div>
     </form>
   </div>
-
-
-
   <!----------------Popup end----------------------->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
- 
-<script type="text/javascript">
-  $('#studentImage').on('change',function(ev){
-    console.log("here inside");
-    var filedata=this.files[0];
-    var imgtype=filedata.type;
-    var match=['image/jpeg','image/jpg'];
-    if(!(imgtype==match[0])||(imgtype==match[1])){
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript">
+    $('#studentImage').on('change', function(ev) {
+      console.log("here inside");
+      var filedata = this.files[0];
+      var imgtype = filedata.type;
+      var match = ['image/jpeg', 'image/jpg'];
+      if (!(imgtype == match[0]) || (imgtype == match[1])) {
         $('#mgs_ta').html('<p style="color:red">Plz select a valid type image..only jpg jpeg allowed</p>');
-        }else{
-          $('#mgs_ta').empty();
-          //---image preview
-          var reader=new FileReader();
-          reader.onload=function(ev){
-            $('#stu_id').attr('src',ev.target.result).css('width','150px').css('height','150px');
+      } else {
+        $('#mgs_ta').empty();
+        //---image preview
+        var reader = new FileReader();
+        reader.onload = function(ev) {
+          $('#stu_id').attr('src', ev.target.result).css('width', '150px').css('height', '150px');
+        }
+        reader.readAsDataURL(this.files[0]);
+        /// preview end
+        //upload
+        var postData = new FormData();
+        postData.append('file', this.files[0]);
+        var url = "{{url('student-image-upload')}}";
+        $.ajax({
+          headers: {
+            'X-CSRF-Token': $('meta[name=csrf_token]').attr('content')
+          },
+          async: true,
+          type: "post",
+          contentType: false,
+          url: url,
+          data: postData,
+          processData: false,
+          success: function() {
+            console.log("success");
           }
-          reader.readAsDataURL(this.files[0]);
-          /// preview end
-          //upload
-          var postData=new FormData();
-          postData.append('file',this.files[0]);
-          var url="{{url('student-image-upload')}}";
-          $.ajax({
-            headers:{'X-CSRF-Token':$('meta[name=csrf_token]').attr('content')},
-            async:true,
-            type:"post",
-            contentType:false,
-            url:url,
-            data:postData,
-            processData:false,
-            success:function(){
-              console.log("success");
-            }
-            });
-          }
-      });
+        });
+      }
+    });
 
 
-      // $('#profile_image').on('change',function(ev){
-      //   console.log("here inside");
-      //   var filedata=this.files[0];
-      //   var imgtype=filedata.type;
-      //   var match=['image/jpeg','image/jpg'];
-      //   if(!(imgtype==match[0])||(imgtype==match[1])){
-      //     $('#mgs_ta').html('<p style="color:red">Plz select a valid type image..only jpg jpeg allowed</p>');
-      //     }else{
-      //     $('#mgs_ta').empty();
-      //     //---image preview
-      //     var reader=new FileReader();
-      //     reader.onload=function(ev){
-      //       $('#output').attr('src',ev.target.result).css('width','100%');
-      //     }
-      //     reader.readAsDataURL(this.files[0]);
-      //     /// preview end
-      //     //upload
-      //     var postData=new FormData();
-      //     postData.append('file',this.files[0]);
-      //     var url="{{url('profile-image-upload')}}";
-      //     $.ajax({
-      //       headers:{'X-CSRF-Token':$('meta[name=csrf_token]').attr('content')},
-      //       async:true,
-      //       type:"post",
-      //       contentType:false,
-      //       url:url,
-      //       data:postData,
-      //       processData:false,
-      //       success:function(){
-      //         console.log("success");
-      //       }
-      //       });
-      //     }
-      // });
-</script>
+    // $('#profile_image').on('change',function(ev){
+    //   console.log("here inside");
+    //   var filedata=this.files[0];
+    //   var imgtype=filedata.type;
+    //   var match=['image/jpeg','image/jpg'];
+    //   if(!(imgtype==match[0])||(imgtype==match[1])){
+    //     $('#mgs_ta').html('<p style="color:red">Plz select a valid type image..only jpg jpeg allowed</p>');
+    //     }else{
+    //     $('#mgs_ta').empty();
+    //     //---image preview
+    //     var reader=new FileReader();
+    //     reader.onload=function(ev){
+    //       $('#output').attr('src',ev.target.result).css('width','100%');
+    //     }
+    //     reader.readAsDataURL(this.files[0]);
+    //     /// preview end
+    //     //upload
+    //     var postData=new FormData();
+    //     postData.append('file',this.files[0]);
+    //     var url="{{url('profile-image-upload')}}";
+    //     $.ajax({
+    //       headers:{'X-CSRF-Token':$('meta[name=csrf_token]').attr('content')},
+    //       async:true,
+    //       type:"post",
+    //       contentType:false,
+    //       url:url,
+    //       data:postData,
+    //       processData:false,
+    //       success:function(){
+    //         console.log("success");
+    //       }
+    //       });
+    //     }
+    // });
+  </script>
 
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
   <script>
@@ -1310,7 +1250,7 @@
           }
           var current_year = new Date().getFullYear();
           if ((year < 1970) || (year > current_year)) {
-            alert("Year should be in range 1970 to current year"); 
+            alert("Year should be in range 1970 to current year");
             document.getElementById('year').value = '';
             document.getElementById('year2').value = '';
             return false;
