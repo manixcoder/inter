@@ -23,7 +23,6 @@
     .has-feedback .form-control-feedback {
       top: 33px;
     }
-
     .validate_cus {
       color: red;
       font-size: small;
