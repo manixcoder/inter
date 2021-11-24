@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,8 +17,31 @@
       @include('fruntend.student.inc.top-menu')
     </div>
   </header>
-
   <div class="body_wht-inners ">
+    @if(Session::has('status'))
+    @if(Session::has('status') == 'success')
+    <div class="popupWapper">
+      <div class="modal resumeUpload_popup successfullyModalPopup" id="successfullyModal">
+        <div class="content fw">
+          <div class="imgcheck_icon fw">
+            <img src="{{ asset('public/assets/images/images/succcessfull.png') }}" alt="icon">
+          </div>
+          <h3 class="">{{ Session::get('message') }}</h3>
+          <p>You will be contacted through <br> your email or phone number, hang tight!</p>
+        </div>
+      </div>
+    </div>
+    @endif
+    @endif
+
+    @if(Session::has('status'))
+    <div class="alert alert-{{ Session::get('status') }}">
+      <i class="fa fa-building-o" aria-hidden="true"></i> {{ Session::get('message') }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+    </div>
+    @endif
+
+
     <div class="lgcontainer">
       <div class="boxDetailbg fw">
         <figure>
@@ -38,7 +62,7 @@
           </div>
           <div class="col_grid3">
             <div class="retextbtn_sec">
-              <a href="#" class="retextbtn">View Company Profile
+              <a href="{{ url('compnay-profile') }}/{{ $OrgData->id }}" class="retextbtn">View Company Profile
                 <span>
                   <img src="{{ asset('public/assets/images/arrow_right_red.png')}}" alt="redarrow">
                 </span>
@@ -50,29 +74,25 @@
               </div>
               <div class="applyBtn">
                 <?php
-                $userRole = Session::get('userRole');
-                $userid = Session::get('gorgID');
-                $jobCount = DB::table('job_applied')->where('student_id', $userid)->where('job_id', $appl->id)->count();
+                $userRole   = Session::get('userRole');
+                $userid     = Session::get('gorgID');
+                $jobCount   = DB::table('job_applied')->where('student_id', $userid)->where('job_id', $appl->id)->count();
                 ?>
                 @if($jobCount==0)
                 <form method="post" action="{{ url('student_job_apply') }}">
                   @csrf
-                  <input type="hidden" name="job_id" value="<?php echo $appl->id; ?>">
+                  <input type="hidden" name="job_id" value="{{ $appl->id }}">
                   <button type="submit" class="input-btn" data-modal="#successfullyModal">Apply</button>
-
                 </form>
                 @else
                 <a class="input-btn">Applied</a>
                 @endif
-                <!--a href="javascript:void(0);" class="input-btn open-modal" data-modal="#successfullyModal">Apply</a -->
               </div>
             </div>
           </div>
           <div class="col_grid12 extraleft_pad mrtop_extra45 contact_profileinfo">
             <div class="innerrow">
-              <!--div class="col_grid6 contactmail">
-                  <span>Contact: <a href="mailto:jenifer193@arknewtech.com" class="lightblue_text"> jenifer193@arknewtech.com</a></span>
-                </div -->
+              
               <div class="col_grid6 text-right checkbox_notify">
                 <div class="custominputBox">
                   <input type="checkbox" class="inputCheck">
@@ -84,22 +104,6 @@
           </div>
         </div>
       </div>
-
-      @if(Session::has('status'))
-      @if(Session::has('status') == 'success')
-      <div class="popupWapper">
-        <div class="modal resumeUpload_popup successfullyModalPopup" id="successfullyModal">
-          <div class="content fw">
-            <div class="imgcheck_icon fw">
-              <img src="{{ asset('public/assets/images/images/succcessfull.png') }}" alt="icon">
-            </div>
-            <h3 class="">{{ Session::get('message') }}</h3>
-            <p>You will be contacted through <br> your email or phone number, hang tight!</p>
-          </div>
-        </div>
-      </div>
-      @endif
-      @endif
       <div class="jobDescriptions_sec fw">
         <h3 class="borderBox_heading">Offer</h3>
         <ul>
@@ -142,10 +146,12 @@
                       </ul>
                     </div>
                     <div class="col_grid8">
-                      <p><span>{{$job->location}}</span><span class="dots">6 Months Internship</span></p>
+                      <p><span>{{$job->location}}</span>
+                      <!--span class="dots">6 Months Internship</span -->
+                    </p>
                     </div>
                     <div class="col_grid4">
-                      <a href="{{url('student-job-details/'.$job->id)}}" class="input-btn redBGmanage_btn open-modal" data-modal="#resumeUpload">View Job</a>
+                      <a href="{{url('student-job-details/'.$job->id)}}" class="input-btn redBGmanage_btn">View Job</a>
                     </div>
                   </div>
                 </div>
@@ -172,120 +178,6 @@
       </div>
     </div>
   </div>
-
-  <!-- <div class="body_wht-inners ">
-    <div class="lgcontainer">
-      <div class="jobsDetailProfile fw">
-        <div class="innerrow">
-          <div class="col_grid9">
-            <div class="jobsDetailComp_img">
-              <img src="{{ asset('public/uploads/'.$appl->logo)}}" alt="newtechlogo" />
-            </div>
-            <div class="jobsDetailComp_cont">
-              <h3>{{$appl->company_name}}</h3>
-              <h3><a href="#" class="lightblue_text">{{$appl->job_title}}</a></h3>
-              <p>{{$appl->location}}</p>
-            </div>
-          </div>
-          <div class="col_grid3">
-            <div class="retextbtn_sec">
-              <a href="#" class="retextbtn">View Company Profile <span><img src="{{ asset('public/assets/images/arrow_right_red.png')}}" alt="redarrow" /></span></a>
-            </div>
-            <div class="commentsApply fw">
-              <div class="applyBtn">
-                <?php
-                $userRole = Session::get('userRole');
-                $uid = Session::get('gorgID');
-                $jobCount = DB::table('job_applied')->where('student_id', $uid)->where('job_id', $appl->id)->count();
-                ?>
-                @if($jobCount==0)
-                <form method="post" action="{{ url('student_job_apply') }}">
-                  @csrf
-                  <input type="hidden" name="job_id" value="<?php echo $appl->id; ?>">
-                  <button type="submit" class="input-btn">Apply</button>
-                </form>
-                @else
-                <a class="input-btn">Applied</a>
-                @endif
-              </div>
-            </div>
-          </div>
-          <div class="col_grid12 extraleft_pad mrtop_extra45 contact_profileinfo">
-            <div class="innerrow">
-              <div class="col_grid6 contactmail">
-                <span>Contact: <a href="mailto:{{$appl->official_email}}" class="lightblue_text"> {{$appl->official_email}}</a></span>
-              </div>
-              <div class="col_grid6 text-right checkbox_notify">
-                <div class="custominputBox">
-                  <input type="checkbox" class="inputCheck" />
-                  <span></span>
-                </div>
-                <span>Notify me for similar jobs</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="jobDescriptions_sec fw">
-        <h3 class="borderBox_heading">Offer</h3>
-        <ul>
-          <li>{!! $appl->offer !!}</li>
-
-        </ul>
-      </div>
-      <div class="jobDescriptions_sec fw">
-        <h3 class="borderBox_heading">Job Descriptions</h3>
-        <p>{!! $appl->job_description !!}</p>
-
-      </div>
-      <div class="fw similarBox_sec blog_intersted_box">
-        <div class="lgcontainer">
-          <div class="innerrow">
-            <div class="col_grid12 arrowheading_site right_after_arrow ">
-              <h3>Similar Jobs</h3>
-            </div>
-
-            @php
-            $jobs_data = DB::table('jobs')->where('status', 0)->where('id', '!=', $appl->id)->limit(2)->get();
-            @endphp
-
-            @foreach($jobs_data as $job)
-            <div class="col_grid6">
-              <div class="jobsDetailBox fw">
-                <div class="profile_sec fw">
-                  <div class="compnayBoxImg">
-                    <img src="{{ asset('public/uploads/'.$job->logo)}}" alt="images">
-                  </div>
-                </div>
-                <div class="jobsDetailCont fw">
-                  <h3>{{$job->company_name}}</h3>
-                  <p><a href="#" class="lightblue_text">{{$job->job_title}}</a></p>
-                  <div class="innerrow">
-                    <div class="col_grid12">
-                      <ul>
-                        <li>{{$job->offer}}</li>
-
-                      </ul>
-                    </div>
-                    <div class="col_grid8">
-                      <p><span>{{$job->location}}</span><span class="dots">6 Months Internship</span></p>
-                    </div>
-                    <div class="col_grid4">
-                      <a href="{{url('student-job-details/'.$job->id)}}" class="input-btn redBGmanage_btn">View Job</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            @endforeach
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-
-
   <footer class="fw">
     @include('fruntend.student.inc.footer')
   </footer>

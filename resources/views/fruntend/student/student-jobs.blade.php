@@ -180,20 +180,8 @@
         </div>
       </div>
       @endforeach
-
-
-
-
-
-
-
-
-
     </div>
   </div>
-
-
-
   <footer class="fw">
     @include('fruntend.student.inc.footer')
   </footer>

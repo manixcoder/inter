@@ -232,6 +232,7 @@ Route::any('delete_student_post/{id}', 'StudentDashboardController@delete_studen
 Route::get('student/jobs', 'StudentDashboardController@student_jobs');
 
 Route::any('student-job-details/{id}', 'StudentDashboardController@student_job_details');
+Route::any('compnay-profile/{id}', 'StudentDashboardController@compnayProfile');
 
 Route::post('student_job_apply', 'StudentDashboardController@student_job_apply');
 

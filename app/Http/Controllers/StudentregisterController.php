@@ -80,22 +80,19 @@ class StudentregisterController extends Controller
 
 	public function student_logged_in(Request $request)
 	{
-
 		$email = $request->input('email');
 		$password = $request->input('password');
-
-
 		$email_count = DB::table('users')->where('email', $email)->where('users_role', 2)->count();
-
 		if ($email_count == 1) {
 			$get_pass = DB::table('users')->where('email', $email)->get();
 			foreach ($get_pass as $data) {
 				$db_password = $data->password;
 			}
-
 			if (Hash::check($password, $db_password)) {
-
 				if (Auth::attempt(['email' => $email, 'password' => $password, 'users_role' => 2])) {
+					DB::table('users')->where('email', $email)->where('users_role', 2)->update([
+						'last_login' => date("Y-m-d H:i:s")
+					]);
 					return redirect('student-dashboard')->with(array(
 						'status' => 'success',
 						'message' => 'You have loggedin.',

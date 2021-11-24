@@ -33,19 +33,19 @@
                 <a class="user_dropdown" href="#">
                   <i>
                     
-                  @if($OrgData->users_role == 2)
-                      <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->profile_image ?? ''}}" alt="img">
+                  @if(Auth::user()->users_role == 2)
+                      <img src="{{ URL::asset('/public/uploads/') }}/{{ Auth::user()->profile_image ?? ''}}" alt="img">
                     @else
-                      <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->org_image }}" alt="img">
+                      <img src="{{ URL::asset('/public/uploads/') }}/{{ Auth::user()->org_image }}" alt="img">
                     @endif
                 
                 </i>
-                  <span>{{$OrgData->name}} <img src="{{ asset('public/assets/images/user-downarrow.png')}}" alt="img"></span>
+                  <span>{{ Auth::user()->name}} <img src="{{ asset('public/assets/images/user-downarrow.png')}}" alt="img"></span>
                 </a>
                 <ul class="userdrop_down">
                   <li>
-                    <a href="{{url('student-dashboard')}}" class="username">{{$OrgData->name}}
-                    <span >{{$OrgData->email}}</span></a>
+                    <a href="{{url('student-dashboard')}}" class="username">{{Auth::user()->name}}
+                    <span >{{Auth::user()->email}}</span></a>
                   </li>
                   <li>
                     <a href="{{url('student_setting')}}">Settings</a>

@@ -96,11 +96,9 @@ class HomeController extends Controller
 
   public function web_login(Request $request)
   {
-
     $email = $request->input('email');
     $password = $request->input('password');
     $rolecheck = DB::table('users')->where('email', $email)->first();
-
     if ($rolecheck == null) {
       echo "email not register";
       die;
@@ -119,6 +117,9 @@ class HomeController extends Controller
         if ($get_pass != null) {
           if (Hash::check($password, $db_password)) {
             if (Auth::attempt(['email' => $email, 'password' => $password])) {
+              DB::table('users')->where('email', $email)->where('users_role', 2)->update([
+                'last_login' => date("Y-m-d H:i:s")
+              ]);
               return redirect('recruiter-dashboard')->with(array(
                 'success_msg' => 'You have loggedin.',
               ));
