@@ -100,7 +100,9 @@ class StudentController extends Controller
   }
 
   public function student_detail($id) {
-    $studentDetail = app('App\User')->where('id', base64_decode($id))->first();
+    //dd($id);
+    $studentDetail = app('App\User')->where('id', $id)->first();
+    //dd($studentDetail);
     $education =  DB::table('education')->where('user_id', $studentDetail->id)->orderBy('id', 'DESC')->first();
     $experience =  DB::table('experience')->where('user_id', $studentDetail->id)->orderBy('id', 'DESC')->first();
     $certificate =  DB::table('certificates')->where('user_id', $studentDetail->id)->orderBy('id', 'DESC')->first();
@@ -108,6 +110,15 @@ class StudentController extends Controller
     $accomplishments =  DB::table('accomplishments')->where('user_id', $studentDetail->id)->orderBy('id', 'DESC')->first();
 
     $data['content'] = 'admin.student.student_details';
-    return view('layouts.content', compact('data'))->with(['studentDetail' => $studentDetail, 'education' => $education, 'experience'=>$experience, 'certificate'=>$certificate, 'intrest'=>$intrest, 'accomplishments'=>$accomplishments]);
+    return view('layouts.content', compact('data'))
+    ->with([
+      'studentDetail' => $studentDetail, 
+      'education' => $education, 
+      'experience'=>$experience, 
+      'certificate'=>$certificate, 
+      'intrest'=>$intrest, 
+      'accomplishments'=>$accomplishments
+    ]);
   }
+  
 }

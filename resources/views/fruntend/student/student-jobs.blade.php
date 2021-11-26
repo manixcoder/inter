@@ -137,7 +137,11 @@
       <div class="jobsDetailBox fw">
         <div class="profile_sec fw">
           <div class="compnayBoxImg">
-            <img src="{{ asset('public/uploads/'.$appl->logo)}}" alt="images">
+            @if($appl->users_role =='3')
+            <img src="{{ asset('public/uploads/'.$appl->org_image)}}" alt="images">
+            @else
+            <img src="{{ asset('public/uploads/'.$appl->profile_image)}}" alt="images">
+            @endif
           </div>
           <div class="compnay">
             <h5>{{$appl->location}}</h5>
@@ -162,7 +166,7 @@
           </div>
         </div>
         <div class="jobsDetailCont fw">
-          <h3>{{$appl->company_name}}</h3>
+          <h3>{{ $appl->org_name }}</h3>
           <p><a href="#" class="lightblue_text">{{$appl->job_title}}</a></p>
           <div class="innerrow">
             <div class="col_grid9">

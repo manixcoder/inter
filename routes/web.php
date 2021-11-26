@@ -186,8 +186,11 @@ Route::any('profile-image-upload', 'HomeController@profileImageUpload');
 
 Route::any('student-dashboard', 'StudentDashboardController@dashboard');
 
+//Here 
 Route::get('student-profile-basic-info', 'StudentDashboardController@basic_info');
-
+Route::any('student-profiles/{id}', 'StudentDashboardController@studentProfiles');
+Route::any('student-reject/{id}/{r_id}', 'StudentDashboardController@studentReject');
+Route::any('student-selected/{id}/{r_id}', 'StudentDashboardController@studentSelected');
 Route::get('student-posts', 'StudentDashboardController@student_posts');
 
 Route::get('student-applications', 'StudentDashboardController@student_applications');
@@ -308,6 +311,7 @@ Route::any('student-change/{id}', 'StudentController@status_update');
 Route::any('student-delete/{id}', 'StudentController@delete');
 Route::any('add-student', 'StudentController@create');
 Route::any('student-detail/{id}', 'StudentController@student_detail');
+
 Route::get('today-student-list', 'StudentController@today_student_list');
 
 /* Posts */

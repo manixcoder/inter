@@ -84,9 +84,17 @@
                 <img src="{{ asset('public/assets/images/succcessfull.png')}}" alt="icon" />
               </div>
               <h3 class="">Job Posted Successfully</h3>
-              <p>Recruiter will contact you through <br />your email or mobile number.</p>
+              <!--p>Recruiter will contact you through <br />your email or mobile number.</p -->
             </div>
           </div>
+          <?php 
+         // sleep(10);
+          ?>
+          <!-- <script type="text/javascript">
+            window.location = "{{ URL::to('/recruiter-listings') }}";//here double curly bracket
+            </script> -->
+         
+          
           @endif
 
           <form action="{{ URL::to('add-job')}}" method="POST" id="FormValidation" enctype="multipart/form-data">
@@ -104,13 +112,29 @@
               <div class="col_grid12 ">
                 <div class="form-group">
                   <label>Write Job Title</label>
-                  <input type="text" name="job_title" placeholder="" class="form-control" required="" maxlength="100">
+                  <select name="job_title" class="form-contorl" id="selectbox2">
+                        <option value="">Select Job Title</option>                        
+                        <option value="Sales & Marketing Executive">Sales & Marketing Executive</option>
+                        <option value="Front-end Developer">Front-end Developer</option>
+                        <option value="Financial Analyst">Financial Analyst</option>
+                      </select>
+                  <!-- <input type="text" name="job_title" placeholder="" class="form-control" required="" maxlength="100"> -->
                 </div>
               </div>
               <div class="col_grid6 ">
                 <div class="form-group">
                   <label>Job Location</label>
-                  <input type="text" name="location" placeholder="" class="form-control" required="" maxlength="100">
+                  <!-- <input type="text" name="location" placeholder="" class="form-control" required="" maxlength="100"> -->
+                  <select name="location" class="form-contorl" id="selectbox2">
+                        <option value="">Select Location</option>                        
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Bangalore">Bangalore</option>
+                        <option value="Pune">Pune</option>
+                        <option value="Mohali">Mohali</option>
+                        <option value="Chandigarh">Chandigarh</option>
+                        <option value="Hydrabad">Hydrabad</option>
+                      </select>
                 </div>
               </div>
 

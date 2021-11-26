@@ -19,11 +19,11 @@
                 <form class="fw">
                   <div class="from-group">
                     <div class="input-icon">
-                      <i><img src="images/searchIcon.png" alt="icon"></i>
+                      <i><img src="{{ URL::asset('/public/assets/images/searchIcon.png') }}" alt="icon"></i>
                       <input class="form-control" type="text" name="search" placeholder="Find your friends or companies you want to work at!">
                     </div>
                     <div class="btn_group">
-                      <button type="button" class="input-btn">Search</button>
+                      <button type="submit" class="input-btn">Search</button>
                     </div>
                   </div>
                 </form>
@@ -48,7 +48,11 @@
                     <div class="jobsDetailBox fw">
                       <div class="profile_sec fw" >
                         <div class="compnayBoxImg">
-                          <img src="{{ URL::asset('/public/uploads/') }}/{{ $value->logo }}" alt="images" />
+                          @if($userdetail->org_image !='')
+                          <img src="{{ URL::asset('/public/uploads/') }}/{{ $userdetail->org_image }}" alt="images" />
+                          @else
+                          <img src="{{ URL::asset('/public/uploads/no-image.png') }}" alt="images" />
+                          @endif
                         </div>
                         <div class="compnay">
                           <h5>{{ $value->location ?? ''}}</h5>
@@ -69,7 +73,7 @@
                             </ul>
                           </div>
                           <div class="col_grid3">
-                            <a href="{{ URL::to('job-profile',$value->id) }}"  class="input-btn redBGmanage_btn ">View Job</a>
+                            <a href="{{ URL::to('job-details',$value->id) }}"  class="input-btn redBGmanage_btn ">View Job</a>
                           </div>
                         </div>
                       </div>

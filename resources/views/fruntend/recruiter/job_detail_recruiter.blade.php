@@ -16,7 +16,7 @@
         <div class="innerrow">
           <div class="col_grid12">
             <div class="jobsDetailComp_img">
-              <img src="{{ URL::asset('/public/uploads/') }}/{{ $Data[0]->logo }}" alt="newtechlogo" />
+              <img src="{{ URL::asset('/public/uploads/') }}/{{ $recruiterDetails->org_image }}" alt="newtechlogo" />
             </div>
             <div class="jobsDetailComp_cont">
               <h3>{{ $recruiterDetails->org_name}}</h3>
@@ -40,13 +40,26 @@
           <!--<div class="col_grid12 Jobextend_details text-center">-->
           <!--  <a href="javascript:void(0);" class="lightblue_text">Extend Details <span><img src="images/arrow_drop_down_blue.png" /></span></a>-->
           <!--</div>-->
+
+          @if(Session::has('status'))
+                    <div class="alert alert-{{ Session::get('status') }}">
+                        <i class="fa fa-building-o" aria-hidden="true"></i> {{ Session::get('message') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                    </div>
+            @endif
           <div class=" intercandidates_sec fw">
             <h3>{{ count($intrestedCandidate ?? '')}} Interested Candidates</h3>
 
+            
+
             @if(isset($intrestedCandidate))
             @foreach($intrestedCandidate as $value)
+            
+            
 
-            @php $studentDetails = DB::table('users')->where('id', $value->student_id)->first();
+            @php 
+            $studentDetails = DB::table('users')->where('id', $value->student_id)->first();
+            $studentResume = DB::table('student_resume')->where('student_id', $value->student_id)->first();
 
             @endphp
             <div class="intercandidates_box fw">
@@ -58,8 +71,14 @@
                     </div>
                     <div class="intercandidates_contbox">
                       <h3 class="clrblack bold">{{ $studentDetails->name ?? ''}}</h3>
-                      <h4 class="clrblack "><a href="mailto:jaiks4384@gmail.com" class="clrblack">{{ $studentDetails->email ?? ''}}</a></h4>
-                      <h4 class="clrblack ">{{ $studentDetails->phone ?? ''}}</h4>
+                      <h4 class="clrblack ">
+                        <a href="mailto:{{ $studentDetails->email ?? ''}}" class="clrblack">
+                          {{ $studentDetails->email ?? ''}}
+                        </a>
+                      </h4>
+                      <h4 class="clrblack ">
+                        {{ $studentDetails->phone ?? ''}}
+                      </h4>
                     </div>
                   </div>
 
@@ -69,7 +88,7 @@
                         <img src="{{ URL::asset('/public/assets/images/messageIcon.png') }}" alt="icon">
                       </div>
                       <div class="applyBtn">
-                        <a href="javascript:void(0);" class="input-btn">Shortlist & Send Email</a>
+                        <a href="{{ URL::to('student-selected',$studentDetails->id) }}/{{ $Data[0]->user_id }}" class="input-btn">Shortlist & Send Email</a>
                       </div>
                     </div>
                   </div>
@@ -77,14 +96,16 @@
                     <div class="innerrow">
                       <div class="col_grid9">
                         <div class="cvpdf">
-                          <a href="#">
+                          @if(!empty($studentResume))
+                          <a href="{{ URL::asset('/public/uploads/') }}/{{ $studentResume->image ?? ''}}" download>
                             <img src="{{ URL::asset('/public/assets/images/fileupload_sec.png') }}" alt="icon">
                             {{ $value->resume ?? ''}}
                             <img src="{{ URL::asset('/public/assets/images/download.png') }}" alt="icon">
                           </a>
+                          @endif
                         </div>
                         <div class="retextbtn_sec">
-                          <a href="{{ URL::to('company-details',$Data[0]->id) }}" class="retextbtn">
+                          <a href="{{ URL::to('student-profiles',$studentDetails->id) }}" class="retextbtn">
                             View Profile
                             <span>
                               <img src="{{ URL::asset('/public/assets/images/arrow_right_red.png') }}" alt="redarrow">
@@ -94,7 +115,7 @@
                       </div>
                       <div class="text-right  col_grid3">
                         <div class="applyBtn">
-                          <a href="javascript:void(0);" class="input-btn redText">Reject</a>
+                          <a href="{{ URL::to('student-reject',$studentDetails->id) }}/{{ $Data[0]->user_id }}" class="input-btn redText">Reject</a>
                         </div>
                       </div>
                     </div>

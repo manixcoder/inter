@@ -52,12 +52,12 @@
       if ($businesses) {
         $count = $count + 10;
       }
-      if ($hobbies) {
-        $count = $count + 10;
-      }
-      if ($accomplishments) {
-        $count = $count + 5;
-      }
+      // if ($hobbies) {
+      //   $count = $count + 10;
+      // }
+      // if ($accomplishments) {
+      //   $count = $count + 5;
+      // }
       
       ?>
 
@@ -103,7 +103,7 @@
           </div>
         </div>
         <div class="col_grid8">
-          <div class="findblog_search blogView_search fw">
+          <!-- div class="findblog_search blogView_search fw">
             <form class="fw" method="get" action="student-dashboard">
               <div class="from-group">
                 <div class="input-icon">
@@ -115,7 +115,7 @@
                 </div>
               </div>
             </form>
-          </div>
+          </div -->
 
 
 

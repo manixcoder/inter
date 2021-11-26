@@ -14,7 +14,7 @@
                   <div class="form-group">
                     <label>Overview</label>
                     <input type="hidden" name="edit_id" value="{{ $recruiterInfo->id }}">
-                    <textarea name="requirter_overview" id="requirter_overview" cols="30" rows="10" class="form-control" maxlength="500">{{ $recruiterInfo->requirter_overview }}</textarea>
+                    <textarea name="requirter_overview" id="requirter_overview" cols="100" rows="200" class="form-control" maxlength="500">{{ $recruiterInfo->requirter_overview }}</textarea>
                     <span style="display:none; color: red;" class="val_verview">Please enter overview.</span>
                   </div>
                 </div>
@@ -36,7 +36,7 @@
                 <div class="col_grid6 ">
                   <div class="form-group">
                     <label>Company size</label>
-                    <input type="text" name="company_size" id="company_size" placeholder="" class="form-control" value="{{ $recruiterInfo->company_size ?? ''}}" maxlength="10">
+                    <input type="text" name="company_size" id="company_size" placeholder="" class="form-control" value="{{ $recruiterInfo->company_size ?? ''}}" maxlength="50">
                     <span style="display:none; color: red;" class="val_company_size">Please enter company size.</span>
                   </div>
                 </div>

@@ -20,9 +20,15 @@
 
       @include('fruntend.student.inc.top-menu')
       <?php
+      if(!empty($user_id))
+      {
+        $userid=$user_id;
+      }else{
+        $userid = Session::get('gorgID');
+      }
       $userRole = Session::get('userRole');
       $count = 30;
-      $userid = Session::get('gorgID');
+      
       $loginby = DB::table('users')->where('id', $userid)->first();
       $education = DB::table('education')->where('user_id', $userid)->first();
       $certificate = DB::table('certificates')->where('user_id', $userid)->first();
@@ -73,10 +79,12 @@
               @else
               <img id="stu_id" src="{{ asset('public/uploads/')}}/{{$OrgData->profile_image}}" alt="img" />
               @endif
+              @if($userRole !='3')
               <div class="form-group">
                 <label>Profile Image</label>
                 <input type="file" name="student_image" id="studentImage">
               </div>
+              @endif
             </div>
             <div class="profile_publicDetail">
               <h4 class="clrwht font36text  semiboldfont_fmly">{{$OrgData->name}}</h4>
@@ -365,13 +373,13 @@
                           <div class="col_grid6 ">
                             <div class="form-group">
                               <label>Duration From</label>
-                              <input type="text" name="duration_from" value="{{$exp->duration_from}}" class="form-control" required />
+                              <input type="date" name="duration_from" value="{{$exp->duration_from}}" class="form-control" required />
                             </div>
                           </div>
                           <div class="col_grid6 ">
                             <div class="form-group">
                               <label>Duration To</label>
-                              <input type="text" name="duration_to" value="{{$exp->duration_to}}" maxlength="200" class="form-control" required />
+                              <input type="date" name="duration_to" value="{{$exp->duration_to}}" maxlength="200" class="form-control" required />
                             </div>
                           </div>
                           <div class="col_grid6 ">
@@ -382,10 +390,9 @@
                           </div>
                           <div class="col_grid6 file-popupinput ">
                             <div class="form-group">
-                              <label>Profile Image</label>
-                              <input type="file" name="image" class="form-control" />
-                              @if(!empty($OrgData->profile_image))
-                              <img style="width:100px" src="{{ asset('public/uploads/'.$OrgData->profile_image)}}" alt="icon" />
+                              
+                              @if(!empty($exp->company_image))
+                              <img style="width:100px" src="{{ asset('public/uploads/'.$exp->company_image)}}" alt="icon" />
                               @else
                               <img style="width:100px" src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="icon" />
                               @endif
@@ -722,13 +729,13 @@
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Duration From</label>
-                <input type="text" name="duration_from" placeholder="Ex. 2021-08-02" class="form-control" required />
+                <input type="date" name="duration_from" placeholder="Ex. 2021-08-02" class="form-control" required />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Duration To</label>
-                <input type="text" name="duration_to" placeholder="Ex. 2023-08-02" class="form-control" required />
+                <input type="date" name="duration_to" placeholder="Ex. 2023-08-02" class="form-control" required />
               </div>
             </div>
             <div class="col_grid6 ">

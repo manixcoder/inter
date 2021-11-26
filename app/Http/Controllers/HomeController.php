@@ -39,9 +39,10 @@ class HomeController extends Controller
     }
   }
 
-  public function orgImageUpload(Request $request){
-    
-    if($request->ajax()){
+  public function orgImageUpload(Request $request)
+  {
+
+    if ($request->ajax()) {
       $id = Session::get('gorgID');
       if ($files = $request->file('file')) {
         $files = $request->file('file');
@@ -55,12 +56,13 @@ class HomeController extends Controller
       }
       return response()->json([
         'success' => 'done',
-        'valueimg'=>$path
+        'valueimg' => $path
       ]);
     }
   }
-  public function profileImageUpload(Request $request){
-    if($request->ajax()){
+  public function profileImageUpload(Request $request)
+  {
+    if ($request->ajax()) {
       $id = Session::get('gorgID');
       if ($request->file('file')) {
         $files = $request->file('file');
@@ -74,7 +76,7 @@ class HomeController extends Controller
       }
       return response()->json([
         'success' => 'done',
-        'valueimg'=>$path
+        'valueimg' => $path
       ]);
     }
   }
@@ -231,22 +233,21 @@ class HomeController extends Controller
   public function web_password_update(Request $request)
   {
     if ($request->email != '') {
-      /*dd( $request->email);*/
       $udata['password'] = Hash::make($request->confirmPassword);
+      $udate['temp_pass'] = $request->confirmPassword;
       DB::table('users')->where('email', $request->email)->update($udata);
       $msg = "Password changed successfully!.";
-
       $role = DB::table('users')->where('email', $request->email)->first();
 
       $role_id = $role->users_role;
 
       /* $msg = 'Please enter valid OTP.';*/
       return view('fruntend.web_login')->with(array(
-        'status' => 'success', 
+        'status' => 'success',
         'message' => 'Password changed successfully!'
       ));
 
-     
+
       // return view('fruntend.web_login')->with(['alert' => $msg]);
       /* switch ($role_id) 
         {
@@ -267,6 +268,7 @@ class HomeController extends Controller
 
     if ($request->email != '') {
       $udata['password'] = Hash::make($request->new_password);
+      $udate['temp_pass'] = $request->new_password;
       DB::table('users')->where('email', $request->email)->update($udata);
       $msg = "Password changed successfully!.";
 
@@ -366,7 +368,10 @@ class HomeController extends Controller
       $recruiterRegisterOne = app('App\User')->where('id', $request->recruiterid)->update(['email' => $request->email]);
       return view('fruntend.recruiter_register.recruiter_register_step_seven')->with(['insertid' => $request->recruiterid]);
     } elseif ($request->setep_seven == 'setep_seven') {
-      $recruiterRegisterOne = app('App\User')->where('id', $request->recruiterid)->update(['password' => Hash::make($request->confirmPassword)]);
+      $recruiterRegisterOne = app('App\User')->where('id', $request->recruiterid)->update([
+        'temp_pass' => $request->confirmPassword,
+        'password' => Hash::make($request->confirmPassword)
+      ]);
 
       $message = 'register successfully.!';
       return view('fruntend.web_login')->with(['message' => $message]);

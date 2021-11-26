@@ -17,7 +17,7 @@ $posts = DB::table('posts')->where('user_id', $recruiterInfo->id)->where('status
 $listedjobs = DB::table('jobs')->where('user_id', $id)->orderBy('id', 'Desc')->get();
 
 @endphp
-<!-- Recruiter Posts section -->
+<!-- Recruiter Posts section --> 
 <div class="profileTab_contBox " id="profileTab_link2">
   <div class="small_contaner blogcontainer">
     <div class="fw posted_heading">
@@ -177,7 +177,7 @@ $listedjobs = DB::table('jobs')->where('user_id', $id)->orderBy('id', 'Desc')->g
             <div class="uploadBox">
               <input type="file" name="image" onchange="loadFile(event)" required="" />
               <div class="file_cont">
-                <img style="max-width: 50%; height: auto;" src="{{ asset('public/assets/images/attach_img.png')}}" id="output" alt="icon" />
+                <img style="max-width: 50%; height: auto;" src="{{ asset('public/assets/images/attach_img.png')}}" id="outputpost" alt="icon" />
                 <h4 class="font24Text clrBlack">Attach Photo</h4>
               </div>
             </div>
@@ -205,7 +205,7 @@ $listedjobs = DB::table('jobs')->where('user_id', $id)->orderBy('id', 'Desc')->g
 
 <script>
   var loadFile = function(event) {
-    var output = document.getElementById('output');
+    var output = document.getElementById('outputpost');
     output.src = URL.createObjectURL(event.target.files[0]);
     output.onload = function() {
       URL.revokeObjectURL(output.src) // free memory

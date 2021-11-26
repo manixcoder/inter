@@ -79,7 +79,7 @@ class JobConroller extends Controller
       'logo' => $image,    
       'job_title' => $request->job_title,      
       'location' => $request->location,      
-      'salary' => $request->salary,      
+      'salary' => $request->currency.' '.$request->salary,      
       'offer' => serialize($request->offer),      
       'job_description' => $request->job_description, 
       'status' => 0,        

@@ -28,12 +28,12 @@
   if ($businesses) {
     $count = $count + 10;
   }
-  if ($hobbies) {
-    $count = $count + 10;
-  }
-  if ($accomplishments) {
-    $count = $count + 10;
-  }
+  // if ($hobbies) {
+  //   $count = $count + 10;
+  // }
+  // if ($accomplishments) {
+  //   $count = $count + 10;
+  // }
   ?>
  <div class="body_wht-inners bloglgHome_sec">
    <div class="lgcontainer">
@@ -65,7 +65,7 @@
        </div>
        <div class="col_grid8">
 
-         <div class="findblog_search blogView_search fw">
+         <!-- div class="findblog_search blogView_search fw">
            <form action="{{ URL::to('search/filter/recruiter/posts')}}" method="POST" id="signup-form" enctype="multipart/form-data">
              @csrf
              <div class="from-group">
@@ -78,7 +78,7 @@
                </div>
              </div>
            </form>
-         </div>
+         </div -->
          <div class="createPost_Sec fw">
            <a href="javascript:void(0);" class="open-modal createBtn" data-modal="#createHomePostrecuriter">Hi! Create your post</a>
          </div>
@@ -130,13 +130,20 @@
                </li>
 
                <div class="commentBox-usersec">
-                 <div class="commentBox-heading">Comments <span>({{ $commentby ?? '' }})</span><span class="closebtn"><i class="fa fa-times-circle" aria-hidden="true"></i></span></div>
+                 <div class="commentBox-heading">
+                   Comments 
+                   <span>({{ $commentby ?? '' }})                     
+                   </span>
+                   <span class="closebtn">
+                     <i class="fa fa-times-circle" aria-hidden="true"></i>
+                    </span>
+                  </div>
                  <div class="commentBox-chats">
                    @if(isset($commentbydata))
                    @foreach($commentbydata as $comments)
                    @php $commentbyuser = DB::table('users')->where('id', $comments->user_id)->first(); @endphp
                    <div class="commentBox-chats-wapper">
-                     @if($userRole == 3)
+                     @if($commentbyuser->users_role == 3)
                      <span class="usericon"><img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->org_image ?? ''}}" alt="icon" /></span>
                      @else
                      <span class="usericon"><img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->profile_image ?? ''}}" alt="icon" /></span>
@@ -165,7 +172,7 @@
                  </div>
                </div>
 
-               <li class="shareclickon">
+               <!--li class="shareclickon">
                  <a href="javascript:void(0);"><span><img src="{{ asset('public/assets/images/shareIcon.png')}}" alt="icon"></span> Share</a>
                </li>
                <div class="sharebox-sec">
@@ -187,7 +194,7 @@
                      <button type="submit" class="share-btn">share Now</button>
                    </div>
                  </form>
-               </div>
+               </div -->
                <li>
                  <a href="#"><span><img src="{{ URL::asset('/public/assets/images/messageIcon.png') }}" alt="icon"></span> Message</a>
                </li>

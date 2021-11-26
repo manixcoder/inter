@@ -41,23 +41,36 @@
     </div>
     @endif
 
-
+<?php 
+// echo "<pre>";
+// print_r($appl);
+// die;
+?>
     <div class="lgcontainer">
       <div class="boxDetailbg fw">
         <figure>
-          <img src="{{ asset('public/uploads')}}/{{ $appl->attachment }}" alt="jobs">
+        @if($appl->users_role =='3')
+          <img src="{{ asset('public/uploads')}}/{{ $appl->org_image }}" alt="jobs">
+          @else
+          <img src="{{ asset('public/uploads')}}/{{ $appl->org_image }}" alt="newtechlogo">
+          @endif
         </figure>
       </div>
       <div class="jobsDetailProfile fw">
         <div class="innerrow">
           <div class="col_grid9">
             <div class="jobsDetailComp_img">
-              <img src="{{ asset('public/uploads')}}/{{ $appl->logo }}" alt="newtechlogo">
+              @if($appl->users_role =='3')
+              <img src="{{ asset('public/uploads')}}/{{ $appl->org_image }}" alt="newtechlogo">
+              @else
+              <img src="{{ asset('public/uploads')}}/{{ $appl->profile_image }}" alt="newtechlogo">
+              @endif
             </div>
             <div class="jobsDetailComp_cont">
-              <h3>{{$appl->company_name}}</h3>
+              <h3>{{ $appl->org_name }}</h3>
               <h3><a href="#" class="lightblue_text">{{$appl->job_title}}</a></h3>
               <p>{{ $appl->salary }}</p>
+              <p>{{ $appl->location }}</p>
             </div>
           </div>
           <div class="col_grid3">
