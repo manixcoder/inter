@@ -8954,3 +8954,27 @@ small.shareclosebtn img {
 .basicInfo_tab h3 .input-btn[data-modal="#createNewPostrecuriter"], .mylisting_recuriter .posted_heading h3 a.input-btn {
     margin-top: -22px;
 }
+.newPostJob_pg .form-group.newform-control select {
+    color: #000;
+}
+.newPostJob_pg .form-group.newform-control  ul.options {
+    position: relative;
+    width: 100%;
+    float: left;
+    display: none;
+}
+.newPostJob_pg .form-group.newform-control ul.options li {
+    background: #f5f5f5;
+    padding: 12px;
+    border: 1px solid #eee;
+    border-bottom: 0;
+    transition: all .5s ease .0s;
+
+}
+.newPostJob_pg .form-group.newform-control ul.options li:hover{
+    background: #ba3143;
+    color: #fff;
+}
+.newPostJob_pg .form-group.newform-control select.s-hidden[name="currency"] {
+    display: none;
+}

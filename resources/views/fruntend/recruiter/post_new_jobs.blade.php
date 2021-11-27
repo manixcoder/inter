@@ -110,7 +110,7 @@
                 </div>
               </div>
               <div class="col_grid12 ">
-                <div class="form-group">
+                <div class="form-group newform-control">
                   <label>Write Job Title</label>
                   <select name="job_title" class="form-contorl" id="selectbox2">
                         <option value="">Select Job Title</option>                        
@@ -122,9 +122,9 @@
                 </div>
               </div>
               <div class="col_grid6 ">
-                <div class="form-group">
+                <div class="form-group newform-control">
                   <label>Job Location</label>
-                  <!-- <input type="text" name="location" placeholder="" class="form-control" required="" maxlength="100"> -->
+                  
                   <select name="location" class="form-contorl" id="selectbox2">
                         <option value="">Select Location</option>                        
                         <option value="Mumbai">Mumbai</option>
@@ -146,7 +146,7 @@
               </div -->
 
               <div class="col_grid6 ">
-                <div class="form-group">
+                <div class="form-group newform-control">
                   <label>Salary (Optional)</label>
                   <div class="form_dev">
                     <div class="inr_opction">
