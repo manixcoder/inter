@@ -11,7 +11,7 @@
                          <img src="{{ asset('public/assets/images/delete.svg')}}">
                    </a></i>
                 </h3>
-                <p>{{ $value->text }}</p>
+                <p>{{  strip_tags($value->description) }}</p>
             </div>
         @endforeach
    @endif  

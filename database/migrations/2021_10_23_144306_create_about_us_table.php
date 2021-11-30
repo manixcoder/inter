@@ -17,7 +17,7 @@ class CreateAboutUsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->string('heading');
-            $table->longText('text');
+            $table->longText('description');
             $table->enum('status', ['1', '0'])->default(0)->comment = '0=Active, 1=Inactive';
             $table->timestamps();
         });

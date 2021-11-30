@@ -100,7 +100,16 @@
            <div class="content-group fw">
              <div class="text-cont fw">
                <div class="userCommnet_deta fw">
-                 <span><img src="{{ URL::asset('/public/uploads/') }}/{{ $createdby->org_image ?? ''}}" alt="icon"></span>
+                 <span>
+                   @if($createdby->users_role ==='1')
+                   <img src="{{ URL::asset('/public/uploads/') }}/{{ $createdby->org_image ?? ''}}" alt="icon">
+                   @endif
+                   @if($createdby->users_role ==='3')
+                   <img src="{{ URL::asset('/public/uploads/') }}/{{ $createdby->org_image ?? ''}}" alt="icon">
+                   @else
+                   <img src="{{ URL::asset('/public/uploads/') }}/{{ $createdby->profile_image ?? ''}}" alt="icon">
+                   @endif
+                  </span>
                  <div class="userCommnet_Name">
                    <h4>{{ $createdby->name ?? ''}}<span>{{date('d M Y | H:i', strtotime($value->date_time))}}</span></h4>
                  </div>
@@ -143,7 +152,7 @@
                    @foreach($commentbydata as $comments)
                    @php $commentbyuser = DB::table('users')->where('id', $comments->user_id)->first(); @endphp
                    <div class="commentBox-chats-wapper">
-                     @if($commentbyuser->users_role == 3)
+                     @if($commentbyuser->users_role ==='3')
                      <span class="usericon"><img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->org_image ?? ''}}" alt="icon" /></span>
                      @else
                      <span class="usericon"><img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->profile_image ?? ''}}" alt="icon" /></span>

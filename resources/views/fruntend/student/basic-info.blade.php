@@ -20,15 +20,14 @@
 
       @include('fruntend.student.inc.top-menu')
       <?php
-      if(!empty($user_id))
-      {
-        $userid=$user_id;
-      }else{
+      if (!empty($user_id)) {
+        $userid = $user_id;
+      } else {
         $userid = Session::get('gorgID');
       }
       $userRole = Session::get('userRole');
       $count = 30;
-      
+
       $loginby = DB::table('users')->where('id', $userid)->first();
       $education = DB::table('education')->where('user_id', $userid)->first();
       $certificate = DB::table('certificates')->where('user_id', $userid)->first();
@@ -37,8 +36,8 @@
       $hobbies = DB::table('hobbies_and_interests')->where('user_id', $userid)->first();
       $accomplishments = DB::table('accomplishments')->where('user_id', $userid)->first();
       $OrgData = DB::table('users')->where('id', $userid)->first();
-      
-      
+
+
       if ($loginby->address != '') {
         $count = $count + 10;
       }
@@ -74,10 +73,11 @@
         <div class="innerrow">
           <div class="col_grid9">
             <div class="profile_publicimg">
-              @if($OrgData->profile_image =='no-image.png')
-              <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="img" />
-              @else
+
+              @if($OrgData->users_role =='2')
               <img id="stu_id" src="{{ asset('public/uploads/')}}/{{$OrgData->profile_image}}" alt="img" />
+              @else
+              <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="img" />
               @endif
               @if($userRole !='3')
               <div class="form-group">
@@ -99,8 +99,8 @@
             </div>
           </div>
           <div class="col_grid3">
-            
-          
+
+
           </div>
         </div>
       </div>
@@ -373,13 +373,13 @@
                           <div class="col_grid6 ">
                             <div class="form-group">
                               <label>Duration From</label>
-                              <input type="date" name="duration_from" value="{{$exp->duration_from}}" class="form-control" required />
+                              <input type="date" name="duration_from" value="{{ $exp->duration_from }}" class="form-control" required />
                             </div>
                           </div>
                           <div class="col_grid6 ">
                             <div class="form-group">
                               <label>Duration To</label>
-                              <input type="date" name="duration_to" value="{{$exp->duration_to}}" maxlength="200" class="form-control" required />
+                              <input type="date" name="duration_to" value="{{ $exp->duration_to }}" maxlength="200" class="form-control" required />
                             </div>
                           </div>
                           <div class="col_grid6 ">
@@ -388,9 +388,15 @@
                               <input type="text" name="location" value="{{$exp->location}}" maxlength="200" class="form-control" required />
                             </div>
                           </div>
+                          <div class="col_grid6 file-popupinput">
+                            <div class="form-group">
+                              <label>Company Image</label>
+                              <input type="file" name="company_image" class="form-control" />
+                            </div>
+                          </div>
                           <div class="col_grid6 file-popupinput ">
                             <div class="form-group">
-                              
+
                               @if(!empty($exp->company_image))
                               <img style="width:100px" src="{{ asset('public/uploads/'.$exp->company_image)}}" alt="icon" />
                               @else

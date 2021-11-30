@@ -2,6 +2,7 @@
 $userRole = Session::get('userRole');
 $id = Session::get('gorgID');
 $OrgData = DB::table('users')->where('id', $id)->first();
+//dd($OrgData);
 $todaysdate = date('Y-m-d').' 00:00:00';
 @endphp
 
@@ -83,8 +84,9 @@ $todaysdate = date('Y-m-d').' 00:00:00';
             <div class="login_user">
               <a class="user_dropdown" href="#">
                 <i>
-                  @if($userRole == 2)
-                  <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->profile_image ?? ''}}" alt="img">
+
+                  @if($OrgData->users_role ==='2')
+                  <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->profile_image }}" alt="img">
                   @else
                   <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->org_image }}" alt="img">
                   @endif

@@ -130,9 +130,9 @@
               $posts = DB::table('posts')->where('user_id', $id)->orderBy('id', 'desc')->get();
               if(empty($SearchData))
               {
-              $posts = DB::table('posts')->orderBy('date_time', 'DESC')->get();
+              $posts = DB::table('posts')->where('user_id', $id)->orderBy('date_time', 'DESC')->get();
               }else{
-              $generatequery = "SELECT * FROM posts WHERE heading LIKE '%' '".$SearchData."' '%' OR description LIKE '%' '".$SearchData."' '%' OR date_time LIKE '%' '".$SearchData."' '%' ";
+              $generatequery = "SELECT * FROM posts WHERE user_id='".$id."' WHERE heading LIKE '%' '".$SearchData."' '%' OR description LIKE '%' '".$SearchData."' '%' OR date_time LIKE '%' '".$SearchData."' '%' ";
               $posts = DB::select($generatequery);
 
               }
@@ -160,11 +160,20 @@
               <div class="text-cont fw">
                 <div class="userCommnet_deta fw">
                   <span>
-                    @if($users->profile_image =='no-image.png')
+                    @if($createdby->users_role==='1')
+                    <img src="{{ asset('public/uploads/'.$loginby->profile_image)}}" alt="icon" />
+                    @elseif($createdby->users_role==='2')
+                    <img src="{{ asset('public/uploads/'.$loginby->profile_image)}}" alt="icon" />
+                    @elseif($createdby->users_role==='3')
+                    <img src="{{ asset('public/uploads/'.$loginby->profile_image)}}" alt="icon" />
+                    @else
+                    <img src="{{ asset('public/uploads/userimg-icon.png')}}" alt="icon" />
+                    @endif
+                    <!-- @if($users->profile_image =='no-image.png')
                     <img src="{{ asset('public/uploads/userimg-icon.png')}}" alt="icon" />
                     @else
                     <img src="{{ asset('public/uploads/'.$loginby->profile_image)}}" alt="icon" />
-                    @endif
+                    @endif -->
                     <!-- <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="icon"> -->
                   </span>
                   <div class="userCommnet_Name">

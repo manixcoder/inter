@@ -235,10 +235,10 @@
   <footer class="fw">
     <div class="lgcontainer">
       <ul class="footer_menu col_grid7 text-left">
-        <li><a href="./aboutus.html">About Us</a></li>
-        <li><a href="./contact_us.html">Contact Us</a></li>
-        <li><a href="./terms_use.html">Terms of Use</a></li>
-        <li><a href="./privacy_policy.html">Privacy Policy</a></li>
+      <li><a href="{{ URL::to('aboutus')}}">About Us</a></li>
+          <li><a href="{{ URL::to('contactus')}}">Contact Us</a></li>
+          <li><a href="{{ URL::to('termsofuse')}}">Terms of Use</a></li>
+          <li><a href="{{ URL::to('privacypolicy')}}">Privacy Policy</a></li>
       </ul>
       <ul class="social_icon col_grid5 text-right">
         <li>

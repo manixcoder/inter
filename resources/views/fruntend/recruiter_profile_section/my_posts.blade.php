@@ -40,7 +40,9 @@ $listedjobs = DB::table('jobs')->where('user_id', $id)->orderBy('id', 'Desc')->g
     <div class="content-group fw">
       <div class="text-cont fw">
         <div class="userCommnet_deta fw">
-          <span><img src="{{ URL::asset('/public/uploads/') }}/{{ $recruiterInfo->profile_image }}" alt="icon"></span>
+          <span>
+            <img src="{{ URL::asset('/public/uploads/') }}/{{ $recruiterInfo->org_image }}" alt="icon">
+          </span>
           <div class="userCommnet_Name">
             <h4>
               {{ $recruiterInfo->name ?? ''}}

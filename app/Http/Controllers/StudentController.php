@@ -91,7 +91,9 @@ class StudentController extends Controller
         'password' => Hash::make($request->password),       
         'status' => 0,       
         'users_role' => 2,       
-        'create_by' => Session::get('gorgID'),       
+        'create_by' => Session::get('gorgID'),
+        'created_at'=> date("Y-m-d H:i:s"),
+        'updated_at'=> date("Y-m-d H:i:s")      
       );
 
       $insertData = app('App\User')->insert($data);

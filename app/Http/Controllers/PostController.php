@@ -72,9 +72,6 @@ class PostController extends Controller
 
   public function index() {
     $Data = app('App\Posts')->orderBy('id', 'Desc')->get();
-    
-    
-    
     $data['content'] = 'admin.post.post_list';
     return view('layouts.content', compact('data'))->with(['Data' => $Data]);
   }

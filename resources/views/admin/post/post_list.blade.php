@@ -14,7 +14,18 @@
                   <div class="text-cont fw">
                      <div class="userCommnet_deta fw">
                         @php $userdetail = DB::table('users')->where('id', $postsdata->user_id)->first(); @endphp
-                        <span><img src="{{ URL::asset('/public/uploads/') }}/{{ $userdetail->org_image ?? ''}}" alt="icon"></span>
+                        <span>
+                           @if($userdetail->users_role ==='1')
+                           <img src="{{ URL::asset('/public/uploads/') }}/{{ $userdetail->org_image ?? ''}}" alt="icon">
+                           @elseif($userdetail->users_role ==='2')
+                           <img src="{{ URL::asset('/public/uploads/') }}/{{ $userdetail->profile_image ?? ''}}" alt="icon">
+                           @elseif($userdetail->users_role ==='3')
+                           <img src="{{ URL::asset('/public/uploads/') }}/{{ $userdetail->org_image ?? ''}}" alt="icon">
+                           @else
+                           <img src="{{ URL::asset('/public/uploads/') }}/{{ $userdetail->profile_image ?? ''}}" alt="icon">
+                           @endif
+                           
+                        </span>
                         <div class="userCommnet_Name">
                           <h4>{{ $userdetail->name ?? ''}} <span>{{ date('d M Y | H:i:s', strtotime($postsdata->date_time))}}</span> </h4>
                         </div>

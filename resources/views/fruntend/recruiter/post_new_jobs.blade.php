@@ -1,6 +1,7 @@
   @include('fruntend.common_pages.web_header')
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  
 
   <style>
     /* Popup box BEGIN */
@@ -111,21 +112,19 @@
               </div>
               <div class="col_grid12 ">
                 <div class="form-group newform-control">
-                  <label>Write Job Title</label>
-                  <select name="job_title" class="form-contorl" id="selectbox2">
+                  <label for='job_title'>Write Job Title</label>
+                  <select name="job_title" class="form-contorl" id="job_title" required>
                         <option value="">Select Job Title</option>                        
                         <option value="Sales & Marketing Executive">Sales & Marketing Executive</option>
                         <option value="Front-end Developer">Front-end Developer</option>
                         <option value="Financial Analyst">Financial Analyst</option>
                       </select>
-                  <!-- <input type="text" name="job_title" placeholder="" class="form-control" required="" maxlength="100"> -->
                 </div>
               </div>
               <div class="col_grid6 ">
                 <div class="form-group newform-control">
-                  <label>Job Location</label>
-                  
-                  <select name="location" class="form-contorl" id="selectbox2">
+                  <label for="location">Job Location</label>
+                  <select name="location" class="form-contorl" id="location"  required>
                         <option value="">Select Location</option>                        
                         <option value="Mumbai">Mumbai</option>
                         <option value="Delhi">Delhi</option>
@@ -138,12 +137,7 @@
                 </div>
               </div>
 
-              <!-- div class="col_grid6 ">
-                <div class="form-group">
-                  <label>Salary (Optional)</label>
-                  <input type="text" name="salary" placeholder="Enter Salary" class="form-control" onkeyup="this.value=this.value.replace(/[^\d]/,'')" maxlength="10">
-                </div>
-              </div -->
+              
 
               <div class="col_grid6 ">
                 <div class="form-group newform-control">
@@ -153,7 +147,7 @@
                       <select name="currency">
                         <!--option selected="" value="">Select Currency</option -->
                         <option selected="" value="INR">INR</option>
-                        <option value="doller">doller</option>
+                        <option value="USD">USD</option>
                       </select>
                     </div>
                     <div class="input_sec">
@@ -163,23 +157,7 @@
                 </div>
               </div>
 
-              <!--  <div class="col_grid6 ">
-                  <div class="form-group">
-                    <label>Salary (Optional)</label>
-                    <div class="form_dev">
-                      <div class="inr_opction">
-                        <select name="salary" required="">
-                          <option selected>INR</option>
-                          <option >INR</option>
-                          <option >INR</option>
-                        </select>
-                      </div>
-                      <div class="input_sec">
-                        <input type="number" name="" placeholder="" class="form-control">
-                      </div>
-                    </div>
-                  </div>
-                </div> -->
+              
 
               <div class="col_grid12 ">
                 <div class="form-group newoffer">
@@ -228,84 +206,18 @@
     </div>
   </div>
 
-  <div class="popupWapper ">
-    <div class="modal jobPostPopup_sec" id="jobPostPopup">
-      <div class="content fw">
-        <?php
-        $userid = Session::get('gorgID');
-        $loginUser = DB::table('users')->where('id', $userid)->first();
-        $jobsData = DB::table('jobs')->where('user_id', $userid)->orderBy('id', 'desc')->first();
-        ?>
-        <div class="boxDetailbg fw">
-          <figure>
-            <img src="{{ asset('public/uploads')}}/" alt="jobs">
-          </figure>
-        </div>
-        <div class="jobsDetailProfile text-left fw">
-          <div class="innerrow">
-            <div class="col_grid12">
-              <div class="jobsDetailComp_img">
-                <img src="{{ asset('public/uploads')}}" alt="newtechlogo">
-              </div>
-              <div class="jobsDetailComp_cont text-left">
-                <h3>{{ $loginUser->org_name }}</h3>
-                <h3><a href="#" class="lightblue_text">job_title</a></h3>
-                <p>location</p>
-                <p class="bold">offer</p>
-              </div>
-            </div>
-            <div class="jobDescriptions_sec text-left fw">
-              <h3 class="borderBox_heading">Offer</h3>
-              <ul>
-                <li>offer</li>
-                <!--li>Be part of a dynamic and supportive work environment</li -->
-              </ul>
-            </div>
-            <div class="jobDescriptions_sec text-left fw">
-              <h3 class="borderBox_heading">Job Descriptions</h3>
-              <p>job_description</p>
+ 
 
-              <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software. </p>
-              <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
-             -->
-            </div>
-            <div class="confirmApply postjob_btn col_grid12 fw">
-              <span class="confirbtn_span redconfirbtn">
-                <a href="javascript:void(0);" class="input-btn text-left ">
-                  Back to Edit
-                  <i>
-                    <img src="{{ asset('public/assets/images/back_to_edit.png')}}" alt="icon">
-                  </i>
-                </a>
-              </span>
-              <span class="confirbtn_span">
-                <a href="javascript:void(0);" class="input-btn text-left open-modal  " data-modal="#savesuccessfullyModal">
-                  Confirm &amp; Post<i>
-                    <img src="{{ asset('public/assets/images/loginCheck_icon.png')}}" alt="icon"></i></a></span>
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="popupWapper">
-    <div class="modal resumeUpload_popup successfullyModalPopup open" id="savesuccessfullyModal">
-      <div class="content fw">
-        <div class="imgcheck_icon fw">
-          <img src="{{ asset('public/assets/images/succcessfull.png') }}" alt="icon">
-        </div>
-        <h3 class="">Job Posted Successfully</h3>
-        <p>You will be notified when <br>candidates apply for this opening.</p>
-      </div>
-    </div>
-  </div>
+  
 
 
 
   @include('fruntend.common_pages.web_footer')
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+  <script type="text/javascript">
+		CKEDITOR.replace('job_description');
+	</script>
   <script>
 $(document).ready(function(){
   

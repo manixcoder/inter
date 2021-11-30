@@ -113,18 +113,17 @@ class StudentDashboardController extends Controller
         <body>
         <p>This email contains HTML Tags!</p>
         <table>
-<tr>
-<th>Firstname</th>
-<th>Lastname</th>
-</tr>
-<tr>
-<td>John</td>
-<td>Doe</td>
-</tr>
-</table>
-</body>
-</html>
-";
+        <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        </tr>
+        <tr>
+        <td>John</td>
+        <td>Doe</td>
+        </tr>
+        </table>
+        </body>
+        </html>";
 
     // Always set content-type when sending HTML email
     $headers = "MIME-Version: 1.0" . "\r\n";
@@ -148,21 +147,21 @@ class StudentDashboardController extends Controller
     $message = "<html>
                   <head>
                   <title>HTML email</title>
-        </head>
-        <body>
-        <p>This email contains HTML Tags!</p>
-        <table>
-        <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        </tr>
-        <tr>
-        <td>John</td>
-        <td>Doe</td>
-        </tr>
-        </table>
-        </body>
-        </html>";
+                  </head>
+                  <body>
+                  <p>This email contains HTML Tags!</p>
+                  <table>
+                  <tr>
+                  <th>Firstname</th>
+                  <th>Lastname</th>
+                  </tr>
+                  <tr>
+                  <td>John</td>
+                  <td>Doe</td>
+                  </tr>
+                  </table>
+                  </body>
+                  </html>";
 
     // Always set content-type when sending HTML email
     $headers = "MIME-Version: 1.0" . "\r\n";
@@ -307,7 +306,7 @@ class StudentDashboardController extends Controller
 
     $id = Session::get('gorgID');
 
-    if ($files = $request->image) {
+    if ($files = $request->company_image) {
       $destinationPath = public_path('/uploads/');
       $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
       $path =  $files->move($destinationPath, $profileImage);

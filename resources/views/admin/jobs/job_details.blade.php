@@ -25,7 +25,7 @@
             <li>
                Status
                	<b>
-                  	<select name="status" onchange="statuschange({{$jobDetail->id}})">
+                  	<select name="status" onchange="statuschange({{ $jobDetail->id }})">
 	                    @if($jobDetail->status == 0)
 	                    	<option value="0">Active</option>
 	                    	<option value="1">Inactive</option>
@@ -78,21 +78,30 @@
                      <tbody>
                         @if(isset($appliedjobs))
                            @foreach($appliedjobs as $value)
-                              @php $student_name = DB::table('users')->where('id', $value->student_id)->first(); @endphp
+                              @php 
+                              $student_name = DB::table('users')->where('id', $value->student_id)->first(); 
+                              
+                              @endphp
                               <tr>
                                  <td>#{{ $value->id ?? ''}}</td>
                                  <td>{{$student_name->name ?? '' }}</td>
                                  <td>{{$student_name->email ?? ''}}</td>
                                  <td>{{$student_name->phone ?? ''}}</td>
-                                 <td><i>
-                                    <a href="{{URL::to('download-resume', base64_encode($value->id)) }}">
+                                 <td>
+                                    <i>
+                                       @php 
+                                       $resume = DB::table('student_resume')->where('student_id', $student_name->id)->first();
+                                       
+                                        @endphp
+                                    <a href="{{ URL::asset('/public/uploads/') }}/{{ $resume->image ?? ''}}" download>
                                         <img src="{{ URL::asset('/public/assets/images/download.svg') }}"></i>
                                     </a>
-                                    <?php   $resume = DB::table('student_resume')->where('id', $value->student_id)->first();
+                                    <?php   
+                                    // $resume = DB::table('student_resume')->where('id', $student_name->id)->first();
                                 
-                                        if(isset($file)){
-                                            $url = (base_path('public/resume/'.$resume->resume));
-                                        }
+                                    //     if(isset($file)){
+                                    //         $url = (base_path('public/resume/'.$resume->resume));
+                                    //     }
                                     ?>
                                  </td>
                               </tr>

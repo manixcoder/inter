@@ -19,7 +19,7 @@ use DB;
 use Hash;
 use Auth;
 use User;
-use Carbon;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -109,9 +109,10 @@ class DashboardController extends Controller
     $todaysdate = date('Y-m-d') . ' 00:00:00';
 
     if ($userRole == '1') {
-      $newStudents = DB::table('users')->Where('users_role', 2)->where('created_at', '>=', $todaysdate)->count();
-      $newRecruiters = DB::table('users')->where('users_role', 3)->where('created_at', '>=', $todaysdate)->count();
-      $todayJobs = DB::table('jobs')->where('created_at', '>=', $todaysdate)->count();
+      
+      $newStudents = DB::table('users')->Where('users_role', 2)->whereDate('created_at', Carbon::today())->count();
+      $newRecruiters = DB::table('users')->where('users_role', 3)->whereDate('created_at', Carbon::today())->count();
+      $todayJobs = DB::table('jobs')->whereDate('created_at', Carbon::today())->count();
 
       $totalStudents = DB::table('users')->where('users_role', 2)->count();
       $totalRecruiters = DB::table('users')->where('users_role', 3)->count();
@@ -119,7 +120,14 @@ class DashboardController extends Controller
 
 
       $data['content'] = 'admin.dashboard.dashboard';
-      return view('layouts.content', compact('data'))->with(['newStudents' => $newStudents, 'newRecruiters' => $newRecruiters, 'todayJobs' => $todayJobs, 'totalStudents' => $totalStudents, 'totalRecruiters' => $totalRecruiters, 'totalJobs' => $totalJobs]);
+      return view('layouts.content', compact('data'))->with([
+        'newStudents' => $newStudents,
+        'newRecruiters' => $newRecruiters,
+        'todayJobs' => $todayJobs,
+        'totalStudents' => $totalStudents,
+        'totalRecruiters' => $totalRecruiters,
+        'totalJobs' => $totalJobs
+      ]);
     }
     if ($userRole == '2') {
       $usredata = DB::table('users')->count();

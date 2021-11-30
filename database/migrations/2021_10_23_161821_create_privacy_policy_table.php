@@ -16,9 +16,8 @@ class CreatePrivacyPolicyTable extends Migration
         Schema::create('privacy_policy', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id');
-            $table->string('text1');
             $table->string('heading');
-            $table->string('text');
+            $table->string('description');
             $table->enum('status', ['1', '0'])->default(0)->comment = '0=Active, 1=Inactive';
             $table->timestamps();
         });

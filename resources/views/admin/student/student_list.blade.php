@@ -35,9 +35,10 @@
 				</thead>
 				<tbody id="tabledata">
 					@if(isset($Data))
+					<?php $i=1;?>
 						@foreach($Data as $value)
 							<tr>
-								<td>#{{$value->id }}</td>
+								<td>#{{ $i }}</td>
 								
 								<td>{{$value->name }}</td>
 								<td>{{$value->email }}</td>
@@ -55,7 +56,7 @@
 									</select>
 								</td>
 								<td>
-									<a href="{{ URL::to('student-detail',base64_encode($value->id)) }}">
+									<a href="{{ URL::to('student-detail',$value->id) }}">
 										<img src="{{ asset('public/assets/images/view.svg')}}" alt="icon">
 									</a>
 									<!-- <span class="edit_icon">
@@ -68,6 +69,7 @@
 									</span>
 								</td>
 							</tr>
+							<?php $i++ ?>
 						@endforeach
 						@endif
 				</tbody>

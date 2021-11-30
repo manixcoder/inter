@@ -20,98 +20,107 @@ use Hash;
 
 class RecruiterController extends Controller
 {
-  public function __construct(){
+  public function __construct()
+  {
     $this->middleware('auth');
     $this->middleware('role');
   }
 
-  public function index() {
+  public function index()
+  {
     $Data = app('App\User')->where('users_role', 3)->orderBy('id', 'Desc')->get();
     $DataCount = app('App\User')->where('users_role', 3)->count();
 
     $data['content'] = 'admin.recruiter.list_recruiter';
-    return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount'=>$DataCount]);
+    return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount' => $DataCount]);
   }
 
-  public function today_recruiter_list() {
-    $todaysdate = date('Y-m-d').' 00:00:00';
-    $Data = DB::table('users')->Where('users_role', 3)->where('created_at', '>=', $todaysdate)->paginate(10);    
+  public function today_recruiter_list()
+  {
+    $todaysdate = date('Y-m-d') . ' 00:00:00';
+    $Data = DB::table('users')->Where('users_role', 3)->where('created_at', '>=', $todaysdate)->paginate(10);
     $DataCount = DB::table('users')->Where('users_role', 3)->where('created_at', '>=', $todaysdate)->count();
 
     $data['content'] = 'admin.recruiter.list_recruiter';
-    return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount'=>$DataCount]);
+    return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount' => $DataCount]);
   }
-  public function recruiterPosts(){
-    $todaysdate = date('Y-m-d').' 00:00:00';
-    $Data = DB::table('users')->Where('users_role', 3)->where('created_at', '>=', $todaysdate)->paginate(10);    
+  public function recruiterPosts()
+  {
+    $todaysdate = date('Y-m-d') . ' 00:00:00';
+    $Data = DB::table('users')->Where('users_role', 3)->where('created_at', '>=', $todaysdate)->paginate(10);
     $DataCount = DB::table('users')->Where('users_role', 3)->where('created_at', '>=', $todaysdate)->count();
 
     $data['content'] = 'fruntend.recruiter_profile_section.my_posts';
-    return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount'=>$DataCount]);
+    return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount' => $DataCount]);
   }
 
-  public function status_update($id) {   
+  public function status_update($id)
+  {
     $jobsdata = app('App\User')->where('id', $id)->first();
 
-    if($jobsdata->status == 1) {
-      $update = app('App\User')->where('id', $id)->update(['status'=>'0']);
-    }else {
-      $update = app('App\User')->where('id', $id)->update(['status'=>'1']);
-    }    
-  } 
+    if ($jobsdata->status == 1) {
+      $update = app('App\User')->where('id', $id)->update(['status' => '0']);
+    } else {
+      $update = app('App\User')->where('id', $id)->update(['status' => '1']);
+    }
+  }
 
-  public function delete($id) {
+  public function delete($id)
+  {
     $delete = app('App\User')->where('id', $id)->delete();
     $deleteRelatedJobs = app('App\Jobs')->where('user_id', $id)->delete();
     return back();
-  } 
-
-  public function redirect_recruiter() {
-    $data['content'] = 'admin.recruiter.add_recruiter';
-    return view('layouts.content', compact('data'));   
   }
 
-    public function create(Request $request) { 
-      
-        $emailcheck = DB::table('users')->where('email', $request->email)->count(); 
-        $phonecheck = DB::table('users')->where('phone', $request->phone)->count(); 
-        
-        /*dd($emailcheck);*/
-        
-        if($emailcheck > 0){
-            return back()->with('error', 'Email is already registered.!');
-        }
-        elseif($phonecheck > 0){
-           return back()->with('error', 'Phone is already registered.!'); 
-        }
-        else{
-            if($files = $request->image){
-              $destinationPath = public_path('/uploads/');
-              $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
-              $path =  $files->move($destinationPath, $profileImage);
-              $image = $insert['photo'] = "$profileImage";
-            }
-        
-            $data = array(        
-              'org_image' => $image,    
-              'email' => $request->email,      
-              'name' => $request->name,      
-              'org_name' => $request->org_name,      
-              'phone' => $request->phone,       
-              'password' => Hash::make($request->password),       
-              'status' => 0,       
-              'users_role' => 3,       
-              'create_by' => Session::get('gorgID'),       
-            );
-        
-            $insertData = app('App\User')->insert($data);
-           
-        }
-    
-        return redirect('recruiter-list');    
+  public function redirect_recruiter()
+  {
+    $data['content'] = 'admin.recruiter.add_recruiter';
+    return view('layouts.content', compact('data'));
+  }
+
+  public function create(Request $request)
+  {
+
+    $emailcheck = DB::table('users')->where('email', $request->email)->count();
+    $phonecheck = DB::table('users')->where('phone', $request->phone)->count();
+
+    /*dd($emailcheck);*/
+
+    if ($emailcheck > 0) {
+      return back()->with('error', 'Email is already registered.!');
+    } elseif ($phonecheck > 0) {
+      return back()->with('error', 'Phone is already registered.!');
+    } else {
+      if ($files = $request->image) {
+        $destinationPath = public_path('/uploads/');
+        $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
+        $path =  $files->move($destinationPath, $profileImage);
+        $image = $insert['photo'] = "$profileImage";
+      }
+
+      $data = array(
+        'org_image' => $image,
+        'profile_image'=>'company_profileBG.png',
+        'email' => $request->email,
+        'name' => $request->name,
+        'org_name' => $request->org_name,
+        'phone' => $request->phone,
+        'password' => Hash::make($request->password),
+        'status' => 0,
+        'users_role' => 3,
+        'create_by' => Session::get('gorgID'),
+        'created_at' => date("Y-m-d H:i:s"),
+        'updated_at' => date("Y-m-d H:i:s")
+      );
+
+      $insertData = app('App\User')->insert($data);
     }
 
-  public function recruiter_detail($id) {
+    return redirect('recruiter-list');
+  }
+
+  public function recruiter_detail($id)
+  {
     $recruiterDetail = app('App\User')->where('id', base64_decode($id))->first();
     $totalListedJobs =  DB::table('jobs')->where('user_id', $recruiterDetail->id)->orderBy('id', 'DESC')->get();
 

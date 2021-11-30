@@ -15,7 +15,9 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('users_role');
+            $table->enum('users_role', ['1', '2','3'])->default(2)->comment = '1 = Admin  2 = Student 3 = Recruiter';
+            $table->string('name');
+            $table->string('email')->unique();
             $table->string('profile_image')->nullable();
             $table->string('provider_id')->nullable();
             $table->string('avatar')->nullable();
@@ -40,9 +42,7 @@ class CreateUsersTable extends Migration
             $table->string('headquarters')->nullable();
             $table->string('specialties')->nullable();
             $table->string('type')->nullable();
-            $table->string('founded')->nullable();
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->string('founded')->nullable();            
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->rememberToken();

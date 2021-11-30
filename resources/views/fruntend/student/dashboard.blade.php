@@ -70,11 +70,14 @@
           <div class="profile_leftsidebar fw">
             <div class="user_namesec fw">
               <figure>
-<?php 
-// echo "<pre>";
-// print_r($OrgData);
-// die;
-?>
+                <?php 
+                // echo "<pre>";
+                // print_r($OrgData);
+                // die;
+                ?>
+                @if($userRole === 1)
+                <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->org_image ?? ''}}" alt="img">
+                @endif
                 @if($userRole === 2)
                 <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->profile_image ?? ''}}" alt="img">
                 @else
