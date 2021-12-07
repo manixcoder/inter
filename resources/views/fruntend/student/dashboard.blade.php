@@ -52,12 +52,12 @@
       if ($businesses) {
         $count = $count + 10;
       }
-      if ($hobbies) {
-        $count = $count + 10;
-      }
-      if ($accomplishments) {
-        $count = $count + 5;
-      }
+      // if ($hobbies) {
+      //   $count = $count + 10;
+      // }
+      // if ($accomplishments) {
+      //   $count = $count + 5;
+      // }
       
       ?>
 
@@ -70,11 +70,18 @@
           <div class="profile_leftsidebar fw">
             <div class="user_namesec fw">
               <figure>
-
+                <?php 
+                // echo "<pre>";
+                // print_r($OrgData);
+                // die;
+                ?>
+                @if($userRole === 1)
+                <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->org_image ?? ''}}" alt="img">
+                @endif
                 @if($userRole === 2)
-                <img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $OrgData->profile_image ?? ''}}" alt="img">
+                <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->profile_image ?? ''}}" alt="img">
                 @else
-                <img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $OrgData->org_image }}" alt="img">
+                <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->profile_image }}" alt="img">
                 @endif
               </figure>
               <h5>{{$OrgData->name}}</h5>
@@ -99,7 +106,7 @@
           </div>
         </div>
         <div class="col_grid8">
-          <div class="findblog_search blogView_search fw">
+          <!-- div class="findblog_search blogView_search fw">
             <form class="fw" method="get" action="student-dashboard">
               <div class="from-group">
                 <div class="input-icon">
@@ -111,7 +118,7 @@
                 </div>
               </div>
             </form>
-          </div>
+          </div -->
 
 
 
@@ -124,7 +131,7 @@
           $users = DB::table('users')->where('id', $id)->first();
           if(empty($SearchData))
           {
-          $posts = DB::table('posts')->orderBy('date_time', 'DESC')->get();
+          $posts = DB::table('posts')->orderBy('id', 'DESC')->get();
           }else{
           $generatequery = "SELECT * FROM posts WHERE heading LIKE '%' '".$SearchData."' '%' OR description LIKE '%' '".$SearchData."' '%' OR date_time LIKE '%' '".$SearchData."' '%' ";
           $posts = DB::select($generatequery);
@@ -132,11 +139,11 @@
           }
           @endphp
 
-
           @foreach($posts as $post)
 
           @php
           $UsrData = DB::table('users')->where('id', $post->user_id)->first();
+          //dd($UsrData);
           $userid = Session::get('gorgID');
           $loginby = app('App\user')->where('id', $userid)->first();
           $createdby = app('App\user')->where('id', $post->user_id)->first();
@@ -149,20 +156,40 @@
             <div class="text-cont fw">
               <div class="userCommnet_deta fw">
                 <span>
-                  <img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $UsrData->profile_image ?? ''}}" alt="img">
+                    @if($UsrData->users_role ==='3')
+                   
+                  <img src="{{ URL::asset('/public/uploads') }}/{{ $UsrData->org_image ?? ''}}" alt="img">
+                  @elseif($UsrData->users_role ==='2')
+                 
+                   <img src="{{ URL::asset('/public/uploads') }}/{{ $UsrData->profile_image ?? ''}}" alt="img">
+                   @else
+                  <img src="{{ URL::asset('/public/uploads/placeholder.png') }}" alt="img">
+                  @endif
                 </span>
                 <div class="userCommnet_Name">
-                      <h4>@if(!empty($UsrData->name)) {{$UsrData->name}} @endif <span>{!! date('d M Y H:i:s', strtotime($post->date_time)) !!}</span> <span class="delete_postbtn"><a href="{{ url('delete_student_post/'.$post->id) }}"><i><img src="{{ asset('public/assets/images/delete.png')}}" alt="delete-icon" /></i>Delete Post</a></span></h4>
+                      <h4>
+                          @if(!empty($UsrData->name)) {{ $UsrData->name }} @endif
+                          <span>{!! date('d M Y H:i:s', strtotime($post->date_time)) !!}</span> 
+                        @if($users->id != $post->user_id)
+                        @else
+                        <span class="delete_postbtn">
+                          <a href="{{ url('delete_student_post/'.$post->id) }}"><i>
+                            <img src="{{ asset('public/assets/images/delete.png')}}" alt="delete-icon" /></i>
+                            Delete Post
+                          </a>
+                        </span>
+                        @endif
+                        </h4>
                     </div>
               </div>
               <h3 class="font57text clrBlack semiboldfont_fmly">{{$post->heading}}</h3>
               <p class="site-pra">
-                {!! $post->description !!}
+                {!! strip_tags($post->description) !!}
               </p>
             </div>
             <div class="img-cont fw">
               <figure class="full-img">
-                <img src="{{ asset('public/assets/post_images/'.$post->post_image)}}" alt="img1">
+                <img src="{{ asset('public/uploads/'.$post->post_image)}}" alt="img1">
               </figure>
             </div>
             <ul class="commntsMsgBox fw">
@@ -175,12 +202,9 @@
                 <a href="javascript:void(0);" onclick="editRecords({{ $post->id }})" style="color:#ba3143" ;><span><img src="{{ asset('public/assets/images/likedIcon.png')}}" alt="icon"></span> {{ $likeby ?? ''}} Likes</a>
               </li>
               @endif
-
-
               <li class="commentbyopne">
                 <a href="javascript:void(0);"><span><img src="{{ asset('public/assets/images/commentIcon.png')}}" alt="icon"></span> {{ $commentby ?? '' }} Comments</a>
               </li>
-
               <div class="commentBox-usersec">
                 <div class="commentBox-heading">Comments <span>({{ $commentby ?? '' }})</span><span class="closebtn"><i class="fa fa-times-circle" aria-hidden="true"></i></span></div>
                 <div class="commentBox-chats">
@@ -189,9 +213,9 @@
                   @php $commentbyuser = DB::table('users')->where('id', $comments->user_id)->first(); @endphp
                   <div class="commentBox-chats-wapper">
                     @if($userRole == 3)
-                    <span class="usericon"><img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $commentbyuser->org_image ?? ''}}" alt="icon" /></span>
+                    <span class="usericon"><img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->org_image ?? ''}}" alt="icon" /></span>
                     @else
-                    <span class="usericon"><img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $commentbyuser->profile_image ?? ''}}" alt="icon" /></span>
+                    <span class="usericon"><img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->profile_image ?? ''}}" alt="icon" /></span>
                     @endif
                     <div class="commentuser-rightuser">
                       <h4>{{ $commentbyuser->name ?? ''}}</h4>
@@ -217,16 +241,16 @@
                 </div> 
               </div>
               
-              <li class="shareclickon">
+              <!--li class="shareclickon">
                 <a href="javascript:void(0);"><span><img src="{{ asset('public/assets/images/shareIcon.png')}}" alt="icon"></span> Share</a>
-              </li>
+              </li-->
               <div class="sharebox-sec">
                 <div class="sharebox-user">
 
                   @if($loginby->users_role == 3)
-                  <span><img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $loginby->org_image ?? ''}}"></span>
+                  <span><img src="{{ URL::asset('/public/uploads/') }}/{{ $loginby->org_image ?? ''}}"></span>
                   @else
-                  <span><img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $loginby->profile_image ?? ''}}"></span>
+                  <span><img src="{{ URL::asset('/public/uploads/') }}/{{ $loginby->profile_image ?? ''}}"></span>
                   @endif
 
                   {{ $loginby->name ?? ''}}

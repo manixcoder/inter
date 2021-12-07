@@ -10,7 +10,7 @@
                  <input type="text" name="heading" placeholder="Title" class="form_control" required="" value="{{ $editData->heading ?? ''}}">
               </div>
               <div class="form_group small_btn">
-                 <textarea name="text" placeholder="Write Content......" class="form_control textarea" required="">{{ $editData->text ?? ''}}</textarea>
+                 <textarea name="description" placeholder="Write Content......" class="form_control textarea" required="">{{ $editData->description ?? ''}}</textarea>
               </div>             
               <div class="form_group small_btn">
                 <button type="submit"  class="form_control btn" >send</button>

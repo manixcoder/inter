@@ -74,7 +74,7 @@
               @if($loginby->profile_image =='no-image.png')
               <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="img" />
               @else
-              <img src="{{ asset('public/assets/student_image/'.$loginby->profile_image)}}" alt="img" />
+              <img src="{{ asset('public/uploads/'.$loginby->profile_image)}}" alt="img" />
               @endif
               <!-- <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="img"/> -->
             </div>
@@ -118,9 +118,6 @@
           </li>
         </ul>
       </div>
-
-
-
       <div class="profileTab_contBox fw" id="profileTab_Applications3">
         <div class="fw myPostSec">
           <div class="small_contaner">
@@ -128,24 +125,25 @@
               @php
               $userRole = Session::get('userRole');
               $id = Session::get('gorgID');
+              
 
-              $applications=DB::table('jobs')
-              ->leftjoin('job_applied', 'jobs.id', '=', 'job_applied.job_id')
-              ->select('jobs.*')
-              ->where('job_applied.student_id', '=', $id)
+
+              $applications=DB::table('job_applied as ja')
+              ->join('jobs as jo', 'ja.job_id', '=', 'jo.id')
+              ->join('users as r', 'jo.user_id', '=', 'r.id')
+              ->select('jo.*','r.org_name')
+              ->where('ja.student_id', '=', $id)
               ->get();
-
+              //dd($applications);
               @endphp
               <h3 class="font36text  semiboldfont_fmly">
                 You have applied for (0{{count($applications)}} Jobs)
               </h3>
-
-
               @foreach($applications as $appl)
               <div class="jobsDetailBox fw">
                 <div class="profile_sec fw">
                   <div class="compnayBoxImg">
-                    <img src="{{ asset('public/assets/jobs_images/'.$appl->logo)}}" alt="images">
+                    <img src="{{ asset('public/uploads/'.$appl->logo)}}" alt="images">
                   </div>
                   <div class="compnay">
                     <h5>{{$appl->location}}</h5>
@@ -153,12 +151,14 @@
                   </div>
                 </div>
                 <div class="jobsDetailCont fw">
-                  <h3>{{$appl->company_name}}</h3>
+                  <h3>{{ $appl->org_name }}</h3>
                   <p><a href="#" class="lightblue_text">{{$appl->job_title}}</a></p>
                   <div class="innerrow">
                     <div class="col_grid9">
                       <ul>
-                        <li>{{$appl->job_description}}</li>
+                        @foreach(unserialize($appl->offer) as $offer)
+                        <li>{{ $offer }}</li>
+                        @endforeach
 
                       </ul>
                     </div>
@@ -323,8 +323,8 @@
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
-                <label>Profile Image</label>
-                <input type="file" name="image" class="form-control" />
+                <label>Company Image</label>
+                <input type="file" name="company_image" class="form-control" />
               </div>
             </div>
           </div>

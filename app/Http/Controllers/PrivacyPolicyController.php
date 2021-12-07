@@ -41,7 +41,7 @@ class PrivacyPolicyController extends Controller {
   public function create(Request $request) {    
     $data = array(      
       'heading' => $request->heading,      
-      'text' => $request->text,          
+      'description' => $request->description,          
       'status' => 0,        
       'user_id' => Session::get('gorgID'),       
     );

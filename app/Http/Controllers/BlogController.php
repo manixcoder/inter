@@ -22,7 +22,7 @@ class BlogController extends Controller
 {
   public function __construct(){
     $this->middleware('auth');
-    $this->middleware('role');
+    $this->middleware('role'); 
   }
   
   public function web_blog_detail($id){
@@ -50,7 +50,7 @@ class BlogController extends Controller
 
   public function create(Request $request) {    
     if($files = $request->image){
-      $destinationPath = public_path('/assets/blogs_images/');
+      $destinationPath = public_path('/uploads/');
       $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
       $path =  $files->move($destinationPath, $profileImage);
       $image = $insert['photo'] = "$profileImage";

@@ -137,7 +137,11 @@
       <div class="jobsDetailBox fw">
         <div class="profile_sec fw">
           <div class="compnayBoxImg">
-            <img src="{{ asset('public/assets/jobs_images/'.$appl->logo)}}" alt="images">
+            @if($appl->users_role =='3')
+            <img src="{{ asset('public/uploads/'.$appl->org_image)}}" alt="images">
+            @else
+            <img src="{{ asset('public/uploads/'.$appl->profile_image)}}" alt="images">
+            @endif
           </div>
           <div class="compnay">
             <h5>{{$appl->location}}</h5>
@@ -162,12 +166,14 @@
           </div>
         </div>
         <div class="jobsDetailCont fw">
-          <h3>{{$appl->company_name}}</h3>
+          <h3>{{ $appl->org_name }}</h3>
           <p><a href="#" class="lightblue_text">{{$appl->job_title}}</a></p>
           <div class="innerrow">
             <div class="col_grid9">
               <ul>
-                <li>{{$appl->job_description}}</li>
+              @foreach(unserialize($appl->offer) as $offer)
+              <li>{{ $offer }}</li>
+              @endforeach
 
               </ul>
             </div>
@@ -178,20 +184,8 @@
         </div>
       </div>
       @endforeach
-
-
-
-
-
-
-
-
-
     </div>
   </div>
-
-
-
   <footer class="fw">
     @include('fruntend.student.inc.footer')
   </footer>
@@ -321,8 +315,8 @@
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
-                <label>Profile Image</label>
-                <input type="file" name="image" class="form-control" />
+                <label>Company Image</label>
+                <input type="file" name="company_image" class="form-control" />
               </div>
             </div>
           </div>
@@ -565,7 +559,7 @@
           <div class="col_grid6">
             @if(!empty($res->image))
             <figure class="resumeimg">
-              <iframe src="{{ asset('public/assets/student_image/'.$res->image) }}" width="300" height="300"></iframe>
+              <iframe src="{{ asset('public/uploads/'.$res->image) }}" width="300" height="300"></iframe>
             </figure>
 
             <span class="fw"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> {{$res->image}}</span>

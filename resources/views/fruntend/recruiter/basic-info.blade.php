@@ -15,8 +15,6 @@
 <body class="lightwht_bg">
   <header class="header_sec flow2_header fw">
     <div class="lgcontainer">
-
-
       @include('fruntend.student.inc.top-menu')
       <?php
       $userRole = Session::get('userRole');
@@ -45,7 +43,9 @@
 
     </div>
   </header>
+
   <div class="body_wht-inners ">
+  
     <div class="profile_public  fw">
       <div class="lgcontainer">
         <div class="innerrow">
@@ -267,6 +267,7 @@
           </div>
         </div>
         <div class="fw educationSec aboutusBg smaeHeading paddTop0">
+          
           <div class="fw aboutusBg_sec">
             <div class="lgcontainer">
               <h3 href="javascript:void(0);" data-modal="#experience_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">Experience <span class="pull-right font20Text"><i><img src="{{ asset('public/assets/images/add.png')}}" alt="img" /></i>Add</span></h3>
@@ -274,11 +275,16 @@
 
 
                 @foreach($exData as $exp)
+                <?php 
+                // echo "<pre>";
+                // print_r($exp);
+                // die("1");
+                ?>
                 <div class="innerrow">
                   <div class="col_grid9">
                     <div class="userBox">
                       @if(!empty($exp->company_image))
-                      <img src="{{ asset('public/assets/student_image/'.$exp->company_image)}}" alt="icon" />
+                      <img src="{{ asset('public/uploads/'.$exp->company_image)}}" alt="icon" />
                       @else
                       <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="icon" />
                       @endif
@@ -344,7 +350,7 @@
                               <label>Profile Image</label>
                               <input type="file" name="image" class="form-control" />
                               @if(!empty($exp->company_image))
-                              <img style="width:100px" src="{{ asset('public/assets/student_image/'.$exp->company_image)}}" alt="icon" />
+                              <img style="width:100px" src="{{ asset('public/uploads/'.$exp->company_image)}}" alt="icon" />
                               @else
                               <img style="width:100px" src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="icon" />
                               @endif
@@ -583,7 +589,18 @@
                 <div class="userCommnet_deta fw">
                   <span><img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="icon"></span>
                   <div class="userCommnet_Name">
-                    <h4>John Doe <span>27 May 2021 | 10:30</span> <span class="delete_postbtn"><i><img src="{{ asset('public/assets/images/delete.png')}}" alt="delete-icon" /></i>Delete Post</span></h4>
+                    <h4>
+                      John Doe 
+                      <span>
+                        27 May 2021 | 10:30
+                      </span> 
+                      <span class="delete_postbtn">
+                        <i>
+                          <img src="{{ asset('public/assets/images/delete.png')}}" alt="delete-icon" />
+                        </i>
+                        Delete Post
+                      </span>
+                    </h4>
                   </div>
                 </div>
                 <p class="site-pra">
@@ -615,7 +632,18 @@
                 <div class="userCommnet_deta fw">
                   <span><img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="icon"></span>
                   <div class="userCommnet_Name">
-                    <h4>John Doe <span>27 May 2021 | 10:30</span> <span class="delete_postbtn"><i><img src="{{ asset('public/assets/images/delete.png')}}" alt="delete-icon" /></i>Delete Post</span></h4>
+                    <h4>
+                      John Doe 
+                      <span>
+                        27 May 2021 | 10:30
+                      </span> 
+                      <span class="delete_postbtn">
+                        <i>
+                          <img src="{{ asset('public/assets/images/delete.png')}}" alt="delete-icon" />
+                        </i>
+                        Delete Post
+                      </span>
+                    </h4>
                   </div>
                 </div>
                 <p class="site-pra">
@@ -915,8 +943,8 @@
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
-                <label>Profile Image</label>
-                <input type="file" name="image" class="form-control" />
+                <label>Company Image</label>
+                <input type="file" name="company_image" class="form-control" />
               </div>
             </div>
           </div>

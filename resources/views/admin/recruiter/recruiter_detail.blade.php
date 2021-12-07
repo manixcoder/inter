@@ -5,7 +5,7 @@
          <h4 class="greentext">Basic Info</h4>
          <div class="personalUser_cont">
             <div class="userIcon">
-               <img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $recruiterDetail->org_image }}" />
+               <img src="{{ URL::asset('/public/uploads/') }}/{{ $recruiterDetail->org_image }}" />
             </div>
            <div class="userdetail_cont">
                <!-- <a href="#"><i><img src="{{ URL::asset('/public/assets/images/chat_2.svg') }}" alt="chat"></i></a>
@@ -17,7 +17,7 @@
             <li>Recruiter  Name <b>{{ $recruiterDetail->name ?? ''}}</b></li>
             <li>Email Address <b>{{ $recruiterDetail->email ?? ''}}</b></li>
             <li>Mobile Number <b>{{ $recruiterDetail->phone ?? ''}}</b></li>
-            <li>Last Login<b>{{date('d-M-Y | H:i', strtotime($studentDetail->last_login ?? ''))}}</b></li>
+            <li>Last Login<b>{{ date('d-M-Y | H:i', strtotime($recruiterDetail->last_login ?? ''))}}</b></li>
             <li>
                Status 
                <b>

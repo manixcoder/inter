@@ -11,7 +11,9 @@ Route::get('clear-cache', function () {
 	Session::flash('success', 'All Clear'); 
 	echo "DONE";
 });
-/* All web link Start... */
+
+
+/* All web link Start... */ 
 /* Recruiter basic info */
 Route::get('basic/info', function () {
 	return view('fruntend.recruiter_profile_section.basic_info');
@@ -123,9 +125,7 @@ Route::get('recruiter/basic/info', function () {
 	return view('fruntend.recruiter.recruiter_basicinfo');
 });
 
-// Route::get('recruiter/basic/info', function () {
-// 	return view('fruntend.recruiter.recruiter_basicinfo');
-// });
+
 
 Route::get('recruiter/myposts', function () {
 	return view('fruntend.recruiter.recruiter_myposts');
@@ -179,20 +179,20 @@ Route::get('home', 'DashboardController@index')->name('home');
 Route::get('dashboard', 'DashboardController@dashboard');
 Route::get('notification', 'DashboardController@notification');
 Route::any('web/blog', 'HomeController@web_blog');
+Route::any('org-image-upload', 'HomeController@orgImageUpload');
+Route::any('profile-image-upload', 'HomeController@profileImageUpload');
 
 
 
 /*################################ Student Routes By Ritik Start Here #############################*/
 
-
-
-
-
-
 Route::any('student-dashboard', 'StudentDashboardController@dashboard');
 
+//Here 
 Route::get('student-profile-basic-info', 'StudentDashboardController@basic_info');
-
+Route::any('student-profiles/{id}', 'StudentDashboardController@studentProfiles');
+Route::any('student-reject/{id}/{r_id}', 'StudentDashboardController@studentReject');
+Route::any('student-selected/{id}/{r_id}', 'StudentDashboardController@studentSelected');
 Route::get('student-posts', 'StudentDashboardController@student_posts');
 
 Route::get('student-applications', 'StudentDashboardController@student_applications');
@@ -206,6 +206,7 @@ Route::post('add_student_education', 'StudentDashboardController@add_student_edu
 Route::post('update_student_education', 'StudentDashboardController@update_student_education');
 
 Route::post('add_student_experience', 'StudentDashboardController@add_student_experience');
+Route::any('student-image-upload', 'StudentDashboardController@studentImageUpload');
 
 Route::post('update_student_experience', 'StudentDashboardController@update_student_experience');
 
@@ -236,6 +237,7 @@ Route::any('delete_student_post/{id}', 'StudentDashboardController@delete_studen
 Route::get('student/jobs', 'StudentDashboardController@student_jobs');
 
 Route::any('student-job-details/{id}', 'StudentDashboardController@student_job_details');
+Route::any('compnay-profile/{id}', 'StudentDashboardController@compnayProfile');
 
 Route::post('student_job_apply', 'StudentDashboardController@student_job_apply');
 
@@ -311,6 +313,7 @@ Route::any('student-change/{id}', 'StudentController@status_update');
 Route::any('student-delete/{id}', 'StudentController@delete');
 Route::any('add-student', 'StudentController@create');
 Route::any('student-detail/{id}', 'StudentController@student_detail');
+
 Route::get('today-student-list', 'StudentController@today_student_list');
 
 /* Posts */
@@ -366,3 +369,18 @@ Route::get('privacypolicy-list', 'PrivacyPolicyController@index');
 Route::any('edit-privacypolicy/{id}', 'PrivacyPolicyController@edit');
 Route::any('delete-privacypolicy/{id}', 'PrivacyPolicyController@delete');
 Route::any('add-privacypolicy', 'PrivacyPolicyController@create');
+
+Auth::routes();
+Route::prefix('facebook')->name('facebook.')->group( function(){
+    Route::get('auth', 'FaceBookController@loginUsingFacebook')->name('login');
+    Route::get('callback', 'FaceBookController@callbackFromFacebook')->name('callback');
+});
+Route::prefix('linkedin')->name('linkedin.')->group( function(){
+Route::get('/auth', 'SocialAuthLinkedinController@redirect')->name('login');
+Route::get('/callback', 'SocialAuthLinkedinController@callback')->name('callback');
+});
+
+Route::prefix('google')->name('google.')->group( function(){
+	Route::get('google', 'GoogleController@redirectToGoogle')->name('login');
+	Route::get('callback', 'GoogleController@handleGoogleCallback')->name('callback');
+});

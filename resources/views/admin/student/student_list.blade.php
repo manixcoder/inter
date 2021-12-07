@@ -35,14 +35,15 @@
 				</thead>
 				<tbody id="tabledata">
 					@if(isset($Data))
+					<?php $i=1;?>
 						@foreach($Data as $value)
 							<tr>
-								<td>#{{$value->id }}</td>
+								<td>#{{ $i }}</td>
 								
 								<td>{{$value->name }}</td>
 								<td>{{$value->email }}</td>
 								<td>{{$value->phone }}</td>	
-								<td><i class="user_img"><img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $value->profile_image }}" alt="usericon"></i> {{ $value->org_name }}</td>
+								<td><i class="user_img"><img src="{{ URL::asset('/public/uploads/') }}/{{ $value->profile_image }}" alt="usericon"></i> {{ $value->org_name }}</td>
 								<td>
 									<select class="active_salectbox" name="status" onchange="statuschange({{$value->id}})">
 										@if($value->status == 0)
@@ -55,7 +56,7 @@
 									</select>
 								</td>
 								<td>
-									<a href="{{ URL::to('student-detail',base64_encode($value->id)) }}">
+									<a href="{{ URL::to('student-detail',$value->id) }}">
 										<img src="{{ asset('public/assets/images/view.svg')}}" alt="icon">
 									</a>
 									<!-- <span class="edit_icon">
@@ -68,6 +69,7 @@
 									</span>
 								</td>
 							</tr>
+							<?php $i++ ?>
 						@endforeach
 						@endif
 				</tbody>

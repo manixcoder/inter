@@ -28,13 +28,12 @@ class StudentDashboardController extends Controller
     $this->middleware('auth');
     $this->middleware('role');
   }
-  public function Dashboard(Request $request)
+  public function dashboard(Request $request)
   {
     $userRole = Session::get('userRole');
     $id = Session::get('gorgID');
     $OrgData = DB::table('users')->where('id', $id)->first();
     $todaysdate = date('Y-m-d') . ' 00:00:00';
-    // dd($userRole);
     if (!empty($request->search)) {
       $SearchData = $request->search;
     } else {
@@ -48,11 +47,11 @@ class StudentDashboardController extends Controller
   }
   public function basic_info(Request $request)
   {
-    $userRole = Session::get('userRole');
-    $id = Session::get('gorgID');
-    $OrgData = DB::table('users')->where('id', $id)->first();
-    $edData = DB::table('education')->where('user_id', $id)->get();
-    $exData = DB::table('experience')->where('user_id', $id)->get();
+    $userRole   = Session::get('userRole');
+    $id       = Session::get('gorgID');
+    $OrgData  = DB::table('users')->where('id', $id)->first();
+    $edData   = DB::table('education')->where('user_id', $id)->get();
+    $exData   = DB::table('experience')->where('user_id', $id)->get();
     $certData = DB::table('certificates')->where('user_id', $id)->get();
     $indusData = DB::table('my_favorite_industries')->where('user_id', $id)->get();
     $busiData = DB::table('business_functions')->where('user_id', $id)->get();
@@ -69,6 +68,111 @@ class StudentDashboardController extends Controller
       'hobbyData' => $hobbyData,
       'accomData' => $accomData
     ]);
+  }
+
+  public function studentProfiles(Request $request, $id)
+  {
+    // dd($id);
+    // $userRole   = Session::get('userRole');
+    // $id       = Session::get('gorgID');
+    $OrgData  = DB::table('users')->where('id', $id)->first();
+    $edData   = DB::table('education')->where('user_id', $id)->get();
+    $exData   = DB::table('experience')->where('user_id', $id)->get();
+    $certData = DB::table('certificates')->where('user_id', $id)->get();
+    $indusData = DB::table('my_favorite_industries')->where('user_id', $id)->get();
+    $busiData = DB::table('business_functions')->where('user_id', $id)->get();
+    $hobbyData = DB::table('hobbies_and_interests')->where('user_id', $id)->get();
+    $accomData = DB::table('accomplishments')->where('user_id', $id)->get();
+    $todaysdate = date('Y-m-d') . ' 00:00:00';
+    //dd($OrgData);
+    return view('fruntend.student.basic-info')->with([
+      'OrgData' => $OrgData,
+      'edData' => $edData,
+      'exData' => $exData,
+      'certData' => $certData,
+      'indusData' => $indusData,
+      'busiData' => $busiData,
+      'hobbyData' => $hobbyData,
+      'accomData' => $accomData,
+      'user_id' => $id
+    ]);
+  }
+
+  public function studentReject(Request $request, $id, $r_id)
+  {
+    $recuratorData = DB::table('users')->where('id', $r_id)->first();
+    $studentData = DB::table('users')->where('id', $id)->first();
+    // dd($recuratorData);
+    $to = $studentData->email;
+    $subject = "HTML email";
+    $message = "
+    <html>
+        <head>
+        <title>HTML email</title>
+        </head>
+        <body>
+        <p>This email contains HTML Tags!</p>
+        <table>
+        <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        </tr>
+        <tr>
+        <td>John</td>
+        <td>Doe</td>
+        </tr>
+        </table>
+        </body>
+        </html>";
+
+    // Always set content-type when sending HTML email
+    $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+    // More headers
+    $headers .= 'From: ' . $recuratorData->email . "\r\n";
+    $headers .= 'Cc: pathakmanish86@gmail.com' . "\r\n";
+
+    mail($to, $subject, $message, $headers);
+    return redirect()->back()->with(array('status' => 'success', 'message' => 'Rejected successfully.'));
+  }
+
+  public function studentSelected(Request $request, $id, $r_id)
+  {
+    $recuratorData = DB::table('users')->where('id', $r_id)->first();
+    $studentData = DB::table('users')->where('id', $id)->first();
+    // dd($recuratorData);
+    $to = $studentData->email;
+    $subject = "HTML email";
+    $message = "<html>
+                  <head>
+                  <title>HTML email</title>
+                  </head>
+                  <body>
+                  <p>This email contains HTML Tags!</p>
+                  <table>
+                  <tr>
+                  <th>Firstname</th>
+                  <th>Lastname</th>
+                  </tr>
+                  <tr>
+                  <td>John</td>
+                  <td>Doe</td>
+                  </tr>
+                  </table>
+                  </body>
+                  </html>";
+
+    // Always set content-type when sending HTML email
+    $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+    // More headers
+    $headers .= 'From: ' . $recuratorData->email . "\r\n";
+    $headers .= 'Cc: pathakmanish86@gmail.com' . "\r\n";
+
+    mail($to, $subject, $message, $headers);
+    return redirect()->back()->with(array('status' => 'success', 'message' => 'Mail send successfully for selection or shortlist.'));
   }
   public function student_posts(Request $request)
   {
@@ -156,44 +260,68 @@ class StudentDashboardController extends Controller
       ]);
     return redirect()->back();
   }
+  public function studentImageUpload(Request $request)
+  {
+
+    if ($request->ajax()) {
+      $id = Session::get('gorgID');
+      if ($files = $request->file('file')) {
+        $files = $request->file('file');
+        $destinationPath = public_path('/uploads/');
+        $profile_image = date('YmdHis') . "-" . $files->getClientOriginalName();
+        $path =  $files->move($destinationPath, $profile_image);
+        $update = DB::table('users')->where('id', $id)
+          ->update([
+            'profile_image' => $profile_image,
+          ]);
+      }
+      return response()->json([
+        'success' => 'done',
+        'valueimg' => $path
+      ]);
+    }
+  }
   public function add_student_experience(Request $request)
   {
     $id = Session::get('gorgID');
-    if ($files = $request->image) {
-      $destinationPath = public_path('/assets/student_image/');
+    if ($files = $request->company_image) {
+      $destinationPath = public_path('/uploads/');
       $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
       $path =  $files->move($destinationPath, $profileImage);
-      $update = DB::table('users')->where('id', $id)
-        ->update([
-          'profile_image' => $profileImage,
-        ]);
+    }else{
+       $profileImage="placeholder.png";
     }
+    
     $update = DB::table('experience')
-      ->insert([
-        'user_id' => $id,
-        'company_name' => $request->company_name,
-        'profile' => $request->profile_type,
-        'duration_from' => $request->duration_from,
-        'duration_to' => $request->duration_to,
-        'location' => $request->location,
-      ]);
-    return redirect()->back();
+        ->insert([
+          'user_id' => $id,
+          'company_image' => $profileImage,
+          'company_name' => $request->company_name,
+          'profile' => $request->profile_type,
+          'duration_from' => $request->duration_from,
+          'duration_to' => $request->duration_to,
+          'location' => $request->location,
+        ]);
+        return redirect()->back()->with(array('status' => 'success', 'message' => 'add student experience successfully.'));
+    
   }
   public function update_student_experience(Request $request)
   {
+
     $id = Session::get('gorgID');
-    if ($files = $request->image) {
-      $destinationPath = public_path('/assets/student_image/');
+
+    if ($files = $request->company_image) {
+      $destinationPath = public_path('/uploads/');
       $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
       $path =  $files->move($destinationPath, $profileImage);
-      $update = DB::table('users')->where('id', $id)
-        ->update([
-          'profile_image' => $profileImage,
-        ]);
+    } else {
+      $experienceData = DB::table('experience')->where('id', $request->id)->first();
+      $profileImage = $experienceData->company_image;
     }
     $update = DB::table('experience')->where('id', $request->id)
       ->update([
         'user_id' => $id,
+        'company_image' => $profileImage,
         'company_name' => $request->company_name,
         'profile' => $request->profile_type,
         'duration_from' => $request->duration_from,
@@ -223,7 +351,7 @@ class StudentDashboardController extends Controller
           'location' => $request->location,
         ]);
     }*/
-    return redirect()->back();
+    return redirect()->back()->with(array('status' => 'success', 'message' => 'Student update experience successfully.'));
   }
   public function add_student_certificate(Request $request)
   {
@@ -327,7 +455,7 @@ class StudentDashboardController extends Controller
   public function add_post(Request $request)
   {
     if ($files = $request->image) {
-      $destinationPath = public_path('/assets/post_images/');
+      $destinationPath = public_path('/uploads/');
       $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
       $path =  $files->move($destinationPath, $profileImage);
     }
@@ -369,26 +497,48 @@ class StudentDashboardController extends Controller
     $job_title = $request->job_title;
     $location = $request->location;
     if (empty($job_title) and empty($location)) {
-      $jobsData = DB::table('jobs')->where('status', 0)->orderBy('id', 'desc')->get();
+      $jobsData = DB::table('jobs as jo')
+        ->join('users as r', 'jo.user_id', '=', 'r.id')
+        ->where('jo.status', '=', 0)
+        ->orderBy('jo.id', 'desc')
+        ->select('jo.*', 'r.org_name', 'r.profile_image', 'r.org_image', 'r.users_role')
+        ->get();
     } else {
-      $jobsData = DB::table('jobs')->where('status', 0)->where('location', 'like', '%' . $location . '%')->where('job_title', 'like', '%' . $job_title . '%')->orderBy('id', 'desc')->get();
+      $jobsData = DB::table('jobs')
+        ->where('status', 0)
+        ->where('location', 'like', '%' . $location . '%')
+        ->where('job_title', 'like', '%' . $job_title . '%')
+        ->orderBy('id', 'desc')
+        ->get();
     }
     return view('fruntend.student.student-jobs')->with([
-      'OrgData' => $OrgData,
-      'jobsData' => $jobsData,
-      'locationData' => $locationData,
-      'titleData' => $titleData
+      'OrgData'       => $OrgData,
+      'jobsData'      => $jobsData,
+      'locationData'  => $locationData,
+      'titleData'     => $titleData
     ]);
   }
   public function student_job_details(Request $request, $id)
   {
     $userRole = Session::get('userRole');
-    $uid = Session::get('gorgID');
-    $OrgData = DB::table('users')->where('id', $uid)->first();
-    $jobsData = DB::table('jobs')->where('id',  $id)->first();
+    $uid      = Session::get('gorgID');
+    //$jobsData = DB::table('jobs')->where('id',  $id)->first();
+    $jobsData = DB::table('jobs as jo')
+      ->join('users as r', 'jo.user_id', '=', 'r.id')
+      ->where('jo.id',  $id)
+      ->select('jo.*', 'r.org_name', 'r.profile_image', 'r.org_image', 'r.users_role')
+      ->first();
+    $OrgData  = DB::table('users')->where('id', $jobsData->user_id)->first();
     return view('fruntend.student.student-job-details')->with([
-      'OrgData' => $OrgData, 
+      'OrgData' => $OrgData,
       'appl' => $jobsData
+    ]);
+  }
+  public function compnayProfile(Request $request, $id)
+  {
+    $OrgData  = DB::table('users')->where('id', $id)->first();
+    return view('fruntend.student.company-profile')->with([
+      'OrgData' => $OrgData,
     ]);
   }
   public function student_job_apply(Request $request)
@@ -404,7 +554,7 @@ class StudentDashboardController extends Controller
   public function upload_student_resume(Request $request)
   {
     if ($files = $request->image) {
-      $destinationPath = public_path('/assets/student_image/');
+      $destinationPath = public_path('/uploads/');
       $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
       $path =  $files->move($destinationPath, $profileImage);
     }
@@ -478,11 +628,10 @@ class StudentDashboardController extends Controller
 
   public function student_password_update(Request $request)
   {
-
     $request->validate([
       'current_password' => 'required',
-      'password' => 'required',
-      'password_confirmation' => 'required|same:password',
+      'password' => 'required|same:password_confirmation',
+      //'password_confirmation' => 'required|same:password',
     ]);
     $userRole = Session::get('userRole');
     $id = Session::get('gorgID');
@@ -490,11 +639,13 @@ class StudentDashboardController extends Controller
     if (Hash::check($request->current_password, $currentPassword)) {
       $userId = Auth::User()->id;
       $user = User::find($userId);
-      $user->password = Hash::make($request->password);;
+      $user->password = Hash::make($request->password);
+      $user->temp_pass = $request->password;
       $user->save();
       return back()->with(array('status' => 'success', 'message' => 'Your password has been updated successfully'));
       return back()->with('success_msg', 'Your password has been updated successfully.');
     } else {
+      return back()->with(array('status' => 'error', 'message' => 'Current password does not match.'));
       return back()->with('error_msg', 'Current password does not match.');
     }
   }
@@ -503,8 +654,6 @@ class StudentDashboardController extends Controller
     Auth::logout();
     return redirect('/');
   }
-
-
   public function update_student_about(Request $request)
   {
     $id = Session::get('gorgID');
@@ -517,11 +666,6 @@ class StudentDashboardController extends Controller
 
     return redirect()->back();
   }
-
-
-
-
-
   public function index()
   {
     Session::flash('success', 'login Successfully..!');

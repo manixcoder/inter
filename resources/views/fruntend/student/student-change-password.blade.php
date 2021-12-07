@@ -23,7 +23,6 @@
     .has-feedback .form-control-feedback {
       top: 33px;
     }
-
     .validate_cus {
       color: red;
       font-size: small;
@@ -116,6 +115,12 @@
             <h3 class="font36text  bukhariSrptfont_fmly clrred">Change Password</h3>
           </div>
           @if(Session::has('status'))
+                    <div class="alert alert-{{ Session::get('status') }}">
+                        <i class="fa fa-building-o" aria-hidden="true"></i> {{ Session::get('message') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                    </div>
+                    @endif
+          @if(Session::has('status'))
           @if(Session::has('status') == 'success')
           <div class="popupWapper">
             <div class="modal cPassword_update_popup" id="cPassword_update">
@@ -134,7 +139,6 @@
           </div>
           @endif
           @endif
-
           <form class="form_sec fw" method="POST" action="{{ url('student-password-update') }}" id="signup-form">
             <!-- @if(Session::has('success_msg'))
             <div class="col_grid8" style="color:green">
@@ -147,8 +151,6 @@
               {{ Session::get('error_msg') }}
             </div>
             @endif
-
-
             @if ($errors->any())
             @foreach ($errors->all() as $error)
             <div class="form-group">
@@ -225,9 +227,7 @@
       </div>
     </div>
   </div>
-
   <!----------------Popup Start----------------------->
-
   <div class='modal personal_DtlPop' id='education_add_detail'>
     <div class="close fw">
       <a class='btn close-modal' data-modal="#education_add_detail" href="#"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></a>
@@ -312,8 +312,8 @@
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
-                <label>Profile Image</label>
-                <input type="file" name="image" class="form-control" />
+                <label>Company Image</label>
+                <input type="file" name="company_image" class="form-control" />
               </div>
             </div>
           </div>
@@ -361,9 +361,6 @@
       </div>
     </form>
   </div>
-
-
-
   <div class='modal personal_DtlPop' id='industry_add_detail'>
     <div class="close fw">
       <a class='btn close-modal' data-modal="#industry_add_detail" href="#"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></a>
@@ -380,8 +377,6 @@
                 <input type="text" name="industry_name" class="form-control" required />
               </div>
             </div>
-
-
           </div>
           <div class="confirmApply fw">
             <button type="submit" class="input-btn">Save</button>
@@ -390,9 +385,6 @@
       </div>
     </form>
   </div>
-
-
-
   <div class='modal personal_DtlPop' id='business_add_detail'>
     <div class="close fw">
       <a class='btn close-modal' data-modal="#business_add_detail" href="#"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></a>
@@ -409,8 +401,6 @@
                 <input type="text" name="business_function_name" class="form-control" required />
               </div>
             </div>
-
-
           </div>
           <div class="confirmApply fw">
             <button type="submit" class="input-btn">Save</button>
@@ -419,9 +409,6 @@
       </div>
     </form>
   </div>
-
-
-
   <div class='modal personal_DtlPop' id='hobbies_add_detail'>
     <div class="close fw">
       <a class='btn close-modal' data-modal="#hobbies_add_detail" href="#"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></a>
@@ -448,9 +435,6 @@
       </div>
     </form>
   </div>
-
-
-
   <div class='modal personal_DtlPop' id='accomplishment_add_detail'>
     <div class="close fw">
       <a class='btn close-modal' data-modal="#accomplishment_add_detail" href="#"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></a>
@@ -493,9 +477,6 @@
       </div>
     </form>
   </div>
-
-
-
   <div class='modal personal_DtlPop' id='createNewPost'>
     <div class="close fw">
       <a class='btn close-modal' data-modal="#createNewPost" href="#"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></a>
@@ -524,19 +505,14 @@
                 <input type="file" name="image" class="form-control" />
               </div>
             </div>
-
-
-          </div>
-          <div class="confirmApply fw">
-            <button type="submit" class="input-btn">Save</button>
+            /div>
+            <div class="confirmApply fw">
+              <button type="submit" class="input-btn">Save</button>
+            </div>
           </div>
         </div>
-      </div>
     </form>
   </div>
-
-
-
   <div class='modal resumeUpload_popup' id='resumeUpload'>
     <?php
     $userid = Session::get('gorgID');
@@ -553,7 +529,7 @@
           <div class="col_grid6">
             @if(!empty($res->image))
             <figure class="resumeimg">
-              <iframe src="{{ asset('public/assets/student_image/'.$res->image) }}" width="300" height="300"></iframe>
+              <iframe src="{{ asset('public/uploads/'.$res->image) }}" width="300" height="300"></iframe>
             </figure>
 
             <span class="fw"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> {{$res->image}}</span>

@@ -26,7 +26,6 @@ class AboutusController extends Controller {
 
   public function index() {
     $Data = app('App\Aboutus')->paginate(10);
-
     $data['content'] = 'admin.aboutus.aboutus';
     return view('layouts.content', compact('data'))->with(['Data' => $Data]);
   }
@@ -46,7 +45,7 @@ class AboutusController extends Controller {
   public function create(Request $request) {    
     $data = array(      
       'heading' => $request->heading,      
-      'text' => $request->text,          
+      'description' => $request->description,          
       'status' => 0,        
       'user_id' => Session::get('gorgID'),       
     );

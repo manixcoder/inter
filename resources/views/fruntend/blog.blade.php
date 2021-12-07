@@ -157,7 +157,7 @@
               </div>
               <div class="img-cont fw">
                 <figure class="full-img">
-                  <img src="{{ URL::asset('/public/assets/blogs_images/') }}/{{ $value->blog_image }}" alt="img1" />
+                  <img src="{{ URL::asset('/public/uploads/') }}/{{ $value->blog_image }}" alt="img1" />
                 </figure>
               </div>
               <div class="admin-date-box fw">

@@ -5,7 +5,7 @@
                         <h4 class="greentext">Personal Details</h4>
                         <div class="personalUser_cont">
                           <div class="userIcon">
-                            <img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $studentDetail->profile_image ?? ''}}" />
+                            <img src="{{ URL::asset('/public/uploads/') }}/{{ $studentDetail->profile_image ?? ''}}" />
                           </div>
                           <div class="userdetail_cont">
                            <!--  <a href="#"><i><img src="{{ URL::asset('/public/assets/images/chat_2.svg') }}" alt="chat"></i></a> -->

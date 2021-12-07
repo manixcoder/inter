@@ -14,19 +14,38 @@
                   <div class="text-cont fw">
                      <div class="userCommnet_deta fw">
                         @php $userdetail = DB::table('users')->where('id', $postsdata->user_id)->first(); @endphp
-                        <span><img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $userdetail->org_image ?? ''}}" alt="icon"></span>
+                        <span>
+                           @if($userdetail->users_role ==='1')
+                           <img src="{{ URL::asset('/public/uploads/') }}/{{ $userdetail->org_image ?? ''}}" alt="icon">
+                           @elseif($userdetail->users_role ==='2')
+                           <img src="{{ URL::asset('/public/uploads/') }}/{{ $userdetail->profile_image ?? ''}}" alt="icon">
+                           @elseif($userdetail->users_role ==='3')
+                           <img src="{{ URL::asset('/public/uploads/') }}/{{ $userdetail->org_image ?? ''}}" alt="icon">
+                           @else
+                           <img src="{{ URL::asset('/public/uploads/') }}/{{ $userdetail->profile_image ?? ''}}" alt="icon">
+                           @endif
+                           
+                        </span>
                         <div class="userCommnet_Name">
                           <h4>{{ $userdetail->name ?? ''}} <span>{{ date('d M Y | H:i:s', strtotime($postsdata->date_time))}}</span> </h4>
                         </div>
                       </div>
                       <h3 class="siteheading">{{ $postsdata->heading ?? ''}}</h3>
                       <p class="site-pra">
-                        {{ $postsdata->description ?? ''}}
+                          @php
+                          $clear = strip_tags($postsdata->description);
+                          $clear = html_entity_decode($clear);
+                          $clear = urldecode($clear);
+                          $clear = preg_replace('/[^A-Za-z0-9]/', ' ', $clear);
+                          $clear = preg_replace('/ +/', ' ', $clear);
+                          $clear = trim($clear);
+                          @endphp
+                        {{ $clear ?? ''}}
                       </p>
                   </div>
                   <div class="img-cont fw">
                      <figure class="full-img">
-                        <img src="{{ URL::asset('/public/assets/post_images/') }}/{{ $postsdata->post_image }}" alt="img1">
+                        <img src="{{ URL::asset('/public/uploads/') }}/{{ $postsdata->post_image }}" alt="img1">
                      </figure>
                   </div>
                   <ul class="commntsMsgBox fw">

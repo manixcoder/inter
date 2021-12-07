@@ -30,14 +30,14 @@ class RecruiterwebController extends Controller
 
   public function search_filter_recruiter_posts(Request $request)
   {
-    /*dd($request->search_text);*/
+    /*dd($request->search_text);*/ 
 
     $generatequery = "SELECT * FROM posts WHERE heading LIKE '%' '" . $request->search_text . "' '%' OR description LIKE  '%' '" . $request->search_text . "' '%' OR date_time LIKE  '%' '" . $request->search_text . "' '%' ";
     $posts = DB::select($generatequery);
 
     $id = Session::get('gorgID');
     $OrgData = DB::table('users')->where('id', $id)->first();
-
+ 
 
     if ($posts > 0) {
       return view('fruntend.recruiter.dashboard')->with(['OrgData' => $OrgData, 'posts' => $posts]);
@@ -52,10 +52,11 @@ class RecruiterwebController extends Controller
     $id = Session::get('gorgID');
     $OrgData = DB::table('users')->where('id', $id)->first();
     $todaysdate = date('Y-m-d') . ' 00:00:00';
-
-    $posts = app('App\Posts')->orderBy('date_time', 'DESC')->get();
-
-    return view('fruntend.recruiter.dashboard')->with(['OrgData' => $OrgData, 'posts' => $posts]);
+    $posts = app('App\Posts')->orderBy('id', 'DESC')->get();
+    return view('fruntend.recruiter.dashboard')->with([
+      'OrgData' => $OrgData, 
+      'posts' => $posts
+    ]);
   }
   public function follow(Request $request, $id, $by_id)
   {
@@ -82,26 +83,26 @@ class RecruiterwebController extends Controller
   {
     $editData = DB::table('users')->where('id', $request->edit_id)->first();
     if (isset($editData)) {
-      if ($files = $request->org_image) {
-        $destinationPath = public_path('/assets/org_images/');
-        $org_image = date('YmdHis') . "-" . $files->getClientOriginalName();
-        $path =  $files->move($destinationPath, $org_image);
-        $update = DB::table('users')->where('id', $request->edit_id)
-          ->update([
-            'org_image' => $org_image,
-          ]);
-      }
+      // if ($files = $request->org_image) {
+      //   $destinationPath = public_path('/uploads/');
+      //   $org_image = date('YmdHis') . "-" . $files->getClientOriginalName();
+      //   $path =  $files->move($destinationPath, $org_image);
+      //   $update = DB::table('users')->where('id', $request->edit_id)
+      //     ->update([
+      //       'org_image' => $org_image,
+      //     ]); 
+      // }
 
-      if ($files = $request->profile_image) {
-        $destinationPath = public_path('/assets/org_images/');
-        $profile_image = date('YmdHis') . "-" . $files->getClientOriginalName();
-        $path =  $files->move($destinationPath, $profile_image);
-        $update = DB::table('users')->where('id', $request->edit_id)
-          ->update([
-            'profile_image' => $profile_image,
-          ]);
-      }
-      $update = app('App\User')
+      // if ($files = $request->profile_image) {
+      //   $destinationPath = public_path('/uploads/');
+      //   $profile_image = date('YmdHis') . "-" . $files->getClientOriginalName();
+      //   $path =  $files->move($destinationPath, $profile_image);
+      //   $update = DB::table('users')->where('id', $request->edit_id)
+      //     ->update([
+      //       'profile_image' => $profile_image,
+      //     ]);
+      // }
+      $update = DB::table('users')
       ->where('id', $request->edit_id)
       ->update([
         'name' => $request->name, 

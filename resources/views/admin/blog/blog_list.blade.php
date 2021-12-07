@@ -35,17 +35,18 @@
 						</thead>
 						<tbody id="tabledata">
 							@if(isset($Data))
+							<?php $i=1;?>
 								@foreach($Data as $value)
 									@php 
 										$old_date_timestamp = strtotime($value->posted_date_and_time);
 										$new_date = date('d-M-Y', $old_date_timestamp);  
 									@endphp
 									<tr>
-										<td>#{{ $value->id }}</td>
+										<td>#{{ $i }}</td>
 										<td>{{$value->blog_heading}}</td>
-										<td>{{ $value->description}}</td>
+										<td>{{  strip_tags($value->description) }}</td>
 		                                <td>{{$new_date}}</td>
-		                                <td><i class="box_img"><img src="{{ URL::asset('/public/assets/blogs_images/') }}/{{ $value->blog_image }}" alt="usericon"></i></td>
+		                                <td><i class="box_img"><img src="{{ URL::asset('/public/uploads/') }}/{{ $value->blog_image }}" alt="usericon"></i></td>
 										<td>
 											<!-- <span class="edit_icon">
 												<a href="#">
@@ -62,6 +63,7 @@
 											</span>
 										</td>
 									</tr>
+									<?php $i++;  ?>
 								@endforeach
 							@endif
 						</tbody>

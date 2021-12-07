@@ -31,20 +31,20 @@ class StudentregisterController extends Controller
 	/* student register controllers */
 	public function student_register_step_one(Request $request)
 	{
-
-
-
 		if ($request->setep_one == 'setep_one') {
-			$studentRegisterOne = app('App\User')->insertGetId(['name' => $request->name, 'users_role' => 2]);
-			return view('fruntend.student.student_register.student_register_step_two')->with(['insertid' => $studentRegisterOne]);
+			$studentRegisterOne = app('App\User')->insertGetId(['name' => $request->name, 'users_role' => 2,'profile_image'=>'no-image.png','created_at'=>date("Y-m-d H:i:s"),'updated_at'=>date("Y-m-d H:i:s")]);
+			return view('fruntend.student.student_register.student_register_step_two')->with([
+				'insertid' => $studentRegisterOne
+			]);
 		} elseif ($request->setep_two == 'setep_two') {
-
 			$phoneCount = DB::table('users')->where('phone', $request->phone)->count();
-
 			if ($phoneCount == 0) {
-
-				$studentRegisterOne = app('App\User')->where('id', $request->student_id)->update(['phone' => $request->phone]);
-				return view('fruntend.student.student_register.student_register_step_three')->with(['insertid' => $request->student_id]);
+				$studentRegisterOne = app('App\User')->where('id', $request->student_id)->update([
+					'phone' => $request->phone
+				]);
+				return view('fruntend.student.student_register.student_register_step_three')->with([
+					'insertid' => $request->student_id
+				]);
 			} else {
 				return view('fruntend.student.student_register.student_register_step_two')->with(['insertid' => $request->student_id, 'error_msg' => 'Sorry, Your phone already exist.',]);
 			}
@@ -67,7 +67,9 @@ class StudentregisterController extends Controller
 			if (Auth::loginUsingId($request->student_id)) {
 				return redirect('student-dashboard');
 			} else {
-				return view('fruntend.student.student_register.student_register_step_five')->with(['insertid' => $request->student_id]);
+				return view('fruntend.student.student_register.student_register_step_five')->with([
+					'insertid' => $request->student_id
+				]);
 			}
 		}
 	}
@@ -78,42 +80,44 @@ class StudentregisterController extends Controller
 
 	public function student_logged_in(Request $request)
 	{
-
 		$email = $request->input('email');
 		$password = $request->input('password');
-
-
 		$email_count = DB::table('users')->where('email', $email)->where('users_role', 2)->count();
-
 		if ($email_count == 1) {
 			$get_pass = DB::table('users')->where('email', $email)->get();
 			foreach ($get_pass as $data) {
 				$db_password = $data->password;
 			}
-
 			if (Hash::check($password, $db_password)) {
-
 				if (Auth::attempt(['email' => $email, 'password' => $password, 'users_role' => 2])) {
-
-
+					DB::table('users')->where('email', $email)->where('users_role', 2)->update([
+						'last_login' => date("Y-m-d H:i:s")
+					]);
 					return redirect('student-dashboard')->with(array(
+						'status' => 'success',
+						'message' => 'You have loggedin.',
 						'success_msg' => 'You have loggedin.',
-
 					));
 				} else {
 					return redirect()->back()->with(array(
+						'status' => 'danger',
+						'message' =>  'Sorry, Your account deactivate by admin.',
 						'error_msg' => 'Sorry, Your account deactivate by admin.',
 						'email' => $email,
 					));
 				}
 			} else {
 				return redirect()->back()->with(array(
+					'status' => 'danger',
+					'message' =>  'Password does not match.',
 					'error_msg' => 'Password does not match.',
 					'email' => $email,
 				));
 			}
 		} else {
 			return redirect()->back()->with(array(
+				'status' => 'danger',
+				'message' =>  'Sorry! Email not registered.',
 				'error_msg' => 'Sorry! Email not registered.'
 			));
 		}

@@ -72,26 +72,30 @@ class StudentController extends Controller
     }else{
         
         if($files = $request->image){
-          $destinationPath = public_path('/assets/student_image/');
+          $destinationPath = public_path('/uploads/');
           $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
           $path =  $files->move($destinationPath, $profileImage);
-          $image = $insert['photo'] = "$profileImage";
+          $profile_image = $insert['photo'] = "$profileImage";
+        }else{
+           $profile_image = 'placeholder.png';
         }
         
-        if($request->image!=''){
-            $imagecheck = $image;
-        }else{
-            $imagecheck = 'no-image.png';
-        }
+        // if($request->image!=''){
+        //     $imagecheck = $image;
+        // }else{
+        //     $imagecheck = 'no-image.png';
+        // }
       $data = array(   
-        'profile_image' => $imagecheck,      
+        'profile_image' => $profile_image,      
         'name' => $request->name,      
         'email' => $request->email,    
         'phone' => $request->phone,       
         'password' => Hash::make($request->password),       
         'status' => 0,       
         'users_role' => 2,       
-        'create_by' => Session::get('gorgID'),       
+        'create_by' => Session::get('gorgID'),
+        'created_at'=> date("Y-m-d H:i:s"),
+        'updated_at'=> date("Y-m-d H:i:s")      
       );
 
       $insertData = app('App\User')->insert($data);
@@ -100,7 +104,9 @@ class StudentController extends Controller
   }
 
   public function student_detail($id) {
-    $studentDetail = app('App\User')->where('id', base64_decode($id))->first();
+    //dd($id);
+    $studentDetail = app('App\User')->where('id', $id)->first();
+    //dd($studentDetail);
     $education =  DB::table('education')->where('user_id', $studentDetail->id)->orderBy('id', 'DESC')->first();
     $experience =  DB::table('experience')->where('user_id', $studentDetail->id)->orderBy('id', 'DESC')->first();
     $certificate =  DB::table('certificates')->where('user_id', $studentDetail->id)->orderBy('id', 'DESC')->first();
@@ -108,6 +114,15 @@ class StudentController extends Controller
     $accomplishments =  DB::table('accomplishments')->where('user_id', $studentDetail->id)->orderBy('id', 'DESC')->first();
 
     $data['content'] = 'admin.student.student_details';
-    return view('layouts.content', compact('data'))->with(['studentDetail' => $studentDetail, 'education' => $education, 'experience'=>$experience, 'certificate'=>$certificate, 'intrest'=>$intrest, 'accomplishments'=>$accomplishments]);
+    return view('layouts.content', compact('data'))
+    ->with([
+      'studentDetail' => $studentDetail, 
+      'education' => $education, 
+      'experience'=>$experience, 
+      'certificate'=>$certificate, 
+      'intrest'=>$intrest, 
+      'accomplishments'=>$accomplishments
+    ]);
   }
+  
 }

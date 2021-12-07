@@ -11,7 +11,6 @@ $recruiterInfo = DB::table('users')->where('id', $id)->first();
 <div class="profileTab_contBox" id="profileTab_link0">
   <div class="comProInfo_cont fw">
     <div class="innerrow">
-
       <form class="form_sec fw col_grid12" action="{{ URL::to('edit/recruiter/profile')}}" method="POST" id="FormValidation" enctype="multipart/form-data">
         @csrf
         <div class="fw praDesignation">
@@ -52,21 +51,26 @@ $recruiterInfo = DB::table('users')->where('id', $id)->first();
             </div>
           </div>
 
-          <div class="col_grid6 ">
+          <!-- <div class="col_grid6 ">
             <div class="form-group">
               <label>Profile Image</label>
                <input type="file" name="org_image" >              
             </div>
-          </div>
+          </div> -->
 
-          <div class="col_grid6 ">
+          <!-- <div class="col_grid6 ">
             <div class="form-group">
               <label>Banner Image</label>
                <input type="file" name="profile_image" >              
             </div>
-          </div>
+          </div> -->
           <div class="confirmApply postjob_btn col_grid12 fw">
-            <button type="submit" class="input-btn text-left" id='btnValidate' data-modal="#createNewPostrecuriter">Edit Info<i><img src="{{ asset('public/assets/images/edit_info.png')}}" alt="icon"></i></button>
+            <button type="submit" class="input-btn text-left" id='btnValidate' data-modal="#createNewPostrecuriter">
+              Edit Info
+              <i>
+                <img src="{{ asset('public/assets/images/edit_info.png')}}" alt="icon">
+              </i>
+            </button>
           </div>
         </div>
       </form>

@@ -45,41 +45,60 @@
             <div class="innerrow">
               <div class="col_grid5 rightmap_icon">
                 <div class="form_group">
-                  <select name="location" class="form-contorl" id="selectbox2">
+                  <!-- <select name="location" class="form-contorl" id="selectbox2">
                     <?php
-                    if(!empty($location))
-                    {
-                      $location=$location;
-                    }
-                    else {
-                      $location="";
-                    }
+                    // if(!empty($location))
+                    // {
+                    //   $location=$location;
+                    // }
+                    // else {
+                    //   $location="";
+                    // }
                       ?>
                     <option value="{{$location}}" >{{$location}}</option>
                     @foreach($locationData as $ld)
-                    <option value="<?php echo $ld->location ?>" ><?php echo $ld->location ?></option>
+                    <option value="<?php //echo $ld->location ?>" ><?php // echo $ld->location ?></option>
                    @endforeach
 
-                  </select>
+                  </select> -->
+
+                  <select name="location" class="form-contorl" id="selectbox2">
+                  <option value="">Select Location</option>                        
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Bangalore">Bangalore</option>
+                        <option value="Pune">Pune</option>
+                        <option value="Mohali">Mohali</option>
+                        <option value="Chandigarh">Chandigarh</option>
+                        <option value="Hydrabad">Hydrabad</option>
+                      </select>
+                  
                 </div>  
               </div>
               <div class="col_grid4">
                 <div class="form_group">
-                  <select name="job_title" class="form-contorl" id="selectbox1">
+                  <!-- select name="job_title" class="form-contorl" id="selectbox1">
                     <?php
-                    if(!empty($job_title))
-                    {
-                      $job_title=$job_title;
-                    }
-                    else {
-                      $job_title="";
-                    }
+                    // if(!empty($job_title))
+                    // {
+                    //   $job_title=$job_title;
+                    // }
+                    // else {
+                    //   $job_title="";
+                    // }
                       ?>
                     <option value="{{$job_title}}" >{{$job_title}}</option>
                     @foreach($titleData as $td)
-                    <option value="<?php echo $td->job_title ?>" ><?php echo $td->job_title ?></option>
+                    <option value="<?php //echo $td->job_title ?>" ><?php // echo $td->job_title ?></option>
                    @endforeach
-                  </select>
+                  </select -->
+
+                  <select name="job_title" class="form-contorl" id="selectbox2">
+                        <option value="">Select Job Title</option>                        
+                        <option value="Sales & Marketing Executive">Sales & Marketing Executive</option>
+                        <option value="Front-end Developer">Front-end Developer</option>
+                        <option value="Financial Analyst">Financial Analyst</option>
+                      </select>
                 </div>
               </div>
               <div class="col_grid3  ">
@@ -96,7 +115,7 @@
                 <div class="jobsDetailBox fw">
                   <div class="profile_sec fw">
                     <div class="compnayBoxImg">
-                      <img src="{{ asset('public/assets/jobs_images/'.$appl->logo)}}" alt="images">
+                      <img src="{{ asset('public/uploads/'.$appl->logo)}}" alt="images">
                     </div>
                     <div class="compnay">
                       <h5>{{$appl->location}}</h5>

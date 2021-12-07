@@ -22,7 +22,7 @@ $listedjobs = DB::table('jobs')->where('user_id', $id)->orderBy('id', 'Desc')->g
       <div class="innerrow">
         <div class="col_grid8 text-left">
           <div class="img_box">
-            <img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $value->org_image }}" alt="icon">
+            <img src="{{ URL::asset('/public/uploads/') }}/{{ $value->org_image }}" alt="icon">
           </div>
           <span class="font24Text clrBlack">{{ $value->name ?? ''}}
             <small>{{ $value->designation ?? ''}}</small>

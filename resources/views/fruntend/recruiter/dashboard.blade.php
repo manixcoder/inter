@@ -28,12 +28,12 @@
   if ($businesses) {
     $count = $count + 10;
   }
-  if ($hobbies) {
-    $count = $count + 10;
-  }
-  if ($accomplishments) {
-    $count = $count + 10;
-  }
+  // if ($hobbies) {
+  //   $count = $count + 10;
+  // }
+  // if ($accomplishments) {
+  //   $count = $count + 10;
+  // }
   ?>
  <div class="body_wht-inners bloglgHome_sec">
    <div class="lgcontainer">
@@ -42,7 +42,7 @@
          <div class="profile_leftsidebar fw">
            <div class="user_namesec fw">
              <figure>
-               <img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $OrgData->org_image ?? ''}}" alt="profile">
+               <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->org_image ?? ''}}" alt="profile">
              </figure>
              <h5>{{ $OrgData->name ?? ''}}</h5>
              <a href="mailto:jaiks4384@gmail.com">{{ $OrgData->email ?? ''}}</a>
@@ -65,7 +65,7 @@
        </div>
        <div class="col_grid8">
 
-         <div class="findblog_search blogView_search fw">
+         <!-- div class="findblog_search blogView_search fw">
            <form action="{{ URL::to('search/filter/recruiter/posts')}}" method="POST" id="signup-form" enctype="multipart/form-data">
              @csrf
              <div class="from-group">
@@ -78,7 +78,7 @@
                </div>
              </div>
            </form>
-         </div>
+         </div -->
          <div class="createPost_Sec fw">
            <a href="javascript:void(0);" class="open-modal createBtn" data-modal="#createHomePostrecuriter">Hi! Create your post</a>
          </div>
@@ -100,17 +100,34 @@
            <div class="content-group fw">
              <div class="text-cont fw">
                <div class="userCommnet_deta fw">
-                 <span><img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $createdby->org_image ?? ''}}" alt="icon"></span>
+                 <span>
+                   @if($createdby->users_role ==='1')
+                   <img src="{{ URL::asset('/public/uploads/') }}/{{ $createdby->org_image ?? ''}}" alt="icon">
+                   @endif
+                   @if($createdby->users_role ==='3')
+                   <img src="{{ URL::asset('/public/uploads/') }}/{{ $createdby->org_image ?? ''}}" alt="icon">
+                   @else
+                   <img src="{{ URL::asset('/public/uploads/') }}/{{ $createdby->profile_image ?? ''}}" alt="icon">
+                   @endif
+                  </span>
                  <div class="userCommnet_Name">
                    <h4>{{ $createdby->name ?? ''}}<span>{{date('d M Y | H:i', strtotime($value->date_time))}}</span></h4>
                  </div>
                </div>
                <h1>{{ $value->heading ?? ''}}</h1>
-               <p class="site-pra">{{ $value->description ?? ''}}</p>
+               @php
+                          $clear = strip_tags($value->description);
+                          $clear = html_entity_decode($clear);
+                          $clear = urldecode($clear);
+                          $clear = preg_replace('/[^A-Za-z0-9]/', ' ', $clear);
+                          $clear = preg_replace('/ +/', ' ', $clear);
+                          $clear = trim($clear);
+                          @endphp
+               <p class="site-pra">{{ $clear ?? ''}}</p>
              </div>
              <div class="img-cont fw">
                <figure class="full-img">
-                 <img src="{{ URL::asset('/public/assets/post_images/') }}/{{ $value->post_image }}" alt="img1" />
+                 <img src="{{ URL::asset('/public/uploads/') }}/{{ $value->post_image }}" alt="img1" />
                </figure>
              </div>
              <ul class="commntsMsgBox fw">
@@ -130,16 +147,23 @@
                </li>
 
                <div class="commentBox-usersec">
-                 <div class="commentBox-heading">Comments <span>({{ $commentby ?? '' }})</span><span class="closebtn"><i class="fa fa-times-circle" aria-hidden="true"></i></span></div>
+                 <div class="commentBox-heading">
+                   Comments 
+                   <span>({{ $commentby ?? '' }})                     
+                   </span>
+                   <span class="closebtn">
+                     <i class="fa fa-times-circle" aria-hidden="true"></i>
+                    </span>
+                  </div>
                  <div class="commentBox-chats">
                    @if(isset($commentbydata))
                    @foreach($commentbydata as $comments)
                    @php $commentbyuser = DB::table('users')->where('id', $comments->user_id)->first(); @endphp
                    <div class="commentBox-chats-wapper">
-                     @if($userRole == 3)
-                     <span class="usericon"><img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $commentbyuser->org_image ?? ''}}" alt="icon" /></span>
+                     @if($commentbyuser->users_role ==='3')
+                     <span class="usericon"><img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->org_image ?? ''}}" alt="icon" /></span>
                      @else
-                     <span class="usericon"><img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $commentbyuser->profile_image ?? ''}}" alt="icon" /></span>
+                     <span class="usericon"><img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->profile_image ?? ''}}" alt="icon" /></span>
                      @endif
                      <div class="commentuser-rightuser">
                        <h4>{{ $commentbyuser->name ?? ''}}</h4>
@@ -165,16 +189,16 @@
                  </div>
                </div>
 
-               <li class="shareclickon">
+               <!--li class="shareclickon">
                  <a href="javascript:void(0);"><span><img src="{{ asset('public/assets/images/shareIcon.png')}}" alt="icon"></span> Share</a>
                </li>
                <div class="sharebox-sec">
                  <div class="sharebox-user">
 
                    @if($userRole == 3)
-                   <span><img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $loginby->org_image ?? ''}}"></span>
+                   <span><img src="{{ URL::asset('/public/uploads/') }}/{{ $loginby->org_image ?? ''}}"></span>
                    @else
-                   <span><img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $loginby->profile_image ?? ''}}"></span>
+                   <span><img src="{{ URL::asset('/public/uploads/') }}/{{ $loginby->profile_image ?? ''}}"></span>
                    @endif
 
                    {{ $loginby->name ?? ''}}
@@ -187,7 +211,7 @@
                      <button type="submit" class="share-btn">share Now</button>
                    </div>
                  </form>
-               </div>
+               </div -->
                <li>
                  <a href="#"><span><img src="{{ URL::asset('/public/assets/images/messageIcon.png') }}" alt="icon"></span> Message</a>
                </li>

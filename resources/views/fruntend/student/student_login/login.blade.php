@@ -17,7 +17,7 @@
     <div class="login_wapper">
       <div class="login_contbox digitcode_sec reset_password">
         <div class="logo_img fw">
-          <a href="{{URL::to('hompepage')}}"><img src="{{ asset('public/assets/images/logo.svg') }}" alt="logo"></a>
+          <a href="{{URL::to('/')}}"><img src="{{ asset('public/assets/images/logo.svg') }}" alt="logo"></a>
         </div>
         <form action="{{ url('student_logged_in') }}" method="POST" enctype="multipart/form-data" class="welcome_cont fw">
           <h3>Welcome there!</h3>
@@ -55,15 +55,48 @@
             <h4><span><a href="./home-pg.html">Or Login With</a></span></h4>
             <ul class="social_icon fw">
               <ul class="social_icon fw">
-                <li><a href="https://www.facebook.com/Theinternify" class="login_icon"><img src="{{ asset('public/assets/images/login_facebook.png')}}" alt="icon"></a></li>
-                <li><a href="https://www.linkedin.com/company/the-internify/" class="login_icon"><img src="{{ asset('public/assets/images/login_linkedin.png')}}" alt="icon"></a></li>
-                <li><a href="https://open.spotify.com/user/64p2h14btruk2aydbijnajk9o" class="login_icon"><img src="{{ asset('public/assets/images/login_google.png')}}" alt="icon"></a></li>
+                <li>
+                  <a href="{{ route('facebook.login') }}" class="login_icon">
+                    <img src="{{ asset('public/assets/images/login_facebook.png')}}" alt="icon">
+                  </a>
+
+                  <!-- <a href="https://www.facebook.com/Theinternify" class="login_icon">
+                    <img src="{{ asset('public/assets/images/login_facebook.png')}}" alt="icon">
+                  </a> -->
+                  
+                </li>
+                <li>
+                <a href="{{ route('linkedin.login') }}" class="login_icon">
+                    <img src="{{ asset('public/assets/images/login_linkedin.png')}}" alt="icon">
+                  </a>
+                  <!-- <a href="https://www.linkedin.com/company/the-internify/" class="login_icon">
+                    <img src="{{ asset('public/assets/images/login_linkedin.png')}}" alt="icon">
+                  </a> -->
+                </li>
+                <li>
+                <!-- <a href="{{ route('google.login') }}" class="login_icon">
+                    <img src="{{ asset('public/assets/images/login_google.png')}}" alt="icon">
+                  </a> -->
+                  <a href="https://open.spotify.com/user/64p2h14btruk2aydbijnajk9o" class="login_icon">
+                    <img src="{{ asset('public/assets/images/login_google.png')}}" alt="icon">
+                  </a>
+                </li>
               </ul>
             </ul>
-            <h5>Don't have an account ? <a href="{{URL::to('student-register-step-one')}}" class="textbtn_green">Register now</a></h5>
+            <h5>
+              Don't have an account ?
+              <a href="{{URL::to('student-register-step-one')}}" class="textbtn_green">
+                Register now
+              </a>
+            </h5>
           </div>
           <div class="footer_login fw">
-            <h5>By logging in, you agree to our <a href="{{url('termsofuse')}}" class="textbtn_green">terms and conditions</a> as well as our <a href="{{url('privacypolicy')}}" class="textbtn_green">privacy policy</a></h5>
+            <h5>
+              By logging in, you agree to our 
+              <a href="{{url('termsofuse')}}" class="textbtn_green">
+                terms and conditions
+              </a> 
+              as well as our <a href="{{url('privacypolicy')}}" class="textbtn_green">privacy policy</a></h5>
           </div>
         </form>
       </div>
@@ -71,4 +104,5 @@
   </div>
   <script src="js/jquery-lb.js"></script>
 </body>
+
 </html>

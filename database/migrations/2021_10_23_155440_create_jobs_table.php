@@ -26,7 +26,7 @@ class CreateJobsTable extends Migration
             $table->string('create_on');
             $table->string('official_email');
             $table->string('offer');
-            $table->string('job_description');
+            $table->string('description');
             $table->enum('status', ['1', '0'])->default(0)->comment = '0=Active, 1=Inactive';
             $table->timestamps();
         });

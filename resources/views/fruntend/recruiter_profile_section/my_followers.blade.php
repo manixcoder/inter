@@ -38,9 +38,9 @@ $listedjobs = DB::table('jobs')->where('user_id', $id)->orderBy('id', 'Desc')->g
         <div class="col_grid8 text-left">
           <div class="img_box">
             @if($value->users_role=='3')
-            <img src="{{ URL::asset('/public/assets/org_images/') }}/{{ $value->org_image }}" alt="icon">
+            <img src="{{ URL::asset('/public/uploads/') }}/{{ $value->org_image }}" alt="icon">
             @else
-            <img src="{{ URL::asset('/public/assets/student_image/') }}/{{ $value->profile_image }}" alt="icon">
+            <img src="{{ URL::asset('/public/uploads/') }}/{{ $value->profile_image }}" alt="icon">
             @endif
           </div>
           <span class="font24Text clrBlack">{{ $value->name ?? ''}}</span>

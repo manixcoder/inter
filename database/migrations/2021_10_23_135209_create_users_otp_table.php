@@ -29,6 +29,6 @@ class CreateUsersOtpTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_otp');  
+        Schema::dropIfExists('users_otp');
     }
 }

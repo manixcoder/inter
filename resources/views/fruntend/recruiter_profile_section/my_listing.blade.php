@@ -16,19 +16,25 @@
           <div class="profileTab_contBox" id="profileTab_link3">
             <div class="small_contaner mylisting_recuriter">
               <div class="findblog_search blogView_search fw">
+                 
                 <form class="fw">
                   <div class="from-group">
                     <div class="input-icon">
-                      <i><img src="images/searchIcon.png" alt="icon"></i>
+                      <i><img src="{{ URL::asset('/public/assets/images/searchIcon.png') }}" alt="icon"></i>
                       <input class="form-control" type="text" name="search" placeholder="Find your friends or companies you want to work at!">
                     </div>
                     <div class="btn_group">
-                      <button type="button" class="input-btn">Search</button>
+                      <button type="submit" class="input-btn">Search</button>
                     </div>
                   </div>
                 </form>
               </div>
-              
+               @if(Session::has('status'))
+                    <div class="alert alert-{{ Session::get('status') }}">
+                        <i class="fa fa-building-o" aria-hidden="true"></i> {{ Session::get('message') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                    </div>
+                    @endif
               <div class="fw posted_heading">
                 <h3 class="font36text clrBlack semiboldfont_fmly">
                   <span>You have listed ({{ count($listedjobs ?? '') }} jobs)</span> 
@@ -48,7 +54,11 @@
                     <div class="jobsDetailBox fw">
                       <div class="profile_sec fw" >
                         <div class="compnayBoxImg">
-                          <img src="{{ URL::asset('/public/assets/jobs_images/') }}/{{ $value->logo }}" alt="images" />
+                          @if($userdetail->org_image !='')
+                          <img src="{{ URL::asset('/public/uploads/') }}/{{ $userdetail->org_image }}" alt="images" />
+                          @else
+                          <img src="{{ URL::asset('/public/uploads/no-image.png') }}" alt="images" />
+                          @endif
                         </div>
                         <div class="compnay">
                           <h5>{{ $value->location ?? ''}}</h5>
@@ -59,14 +69,17 @@
                         <h3>{{ $userdetail->org_name ?? ''}}</h3>
                         <p><a href="#" class="lightblue_text">{{ $value->job_title ?? ''}}</a></p>
                         <div class="innerrow">
+                         
                           <div class="col_grid9">
                             <ul>
-                              <li>{{$value->job_description}}</li>
+                              @foreach(unserialize($value->offer) as $offer)
+                              <li>{{ $offer }}</li>
+                              @endforeach
                               <!-- <li>Be part of a dynamic and supportive work environment</li> -->
                             </ul>
                           </div>
                           <div class="col_grid3">
-                            <a href="{{ URL::to('job-profile',$value->id) }}"  class="input-btn redBGmanage_btn ">View Job</a>
+                            <a href="{{ URL::to('job-details',$value->id) }}"  class="input-btn redBGmanage_btn ">View Job</a>
                           </div>
                         </div>
                       </div>
