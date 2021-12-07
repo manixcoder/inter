@@ -32,7 +32,7 @@ class StudentregisterController extends Controller
 	public function student_register_step_one(Request $request)
 	{
 		if ($request->setep_one == 'setep_one') {
-			$studentRegisterOne = app('App\User')->insertGetId(['name' => $request->name, 'users_role' => 2]);
+			$studentRegisterOne = app('App\User')->insertGetId(['name' => $request->name, 'users_role' => 2,'profile_image'=>'no-image.png','created_at'=>date("Y-m-d H:i:s"),'updated_at'=>date("Y-m-d H:i:s")]);
 			return view('fruntend.student.student_register.student_register_step_two')->with([
 				'insertid' => $studentRegisterOne
 			]);

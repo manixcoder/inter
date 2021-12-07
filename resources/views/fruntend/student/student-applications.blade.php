@@ -125,12 +125,16 @@
               @php
               $userRole = Session::get('userRole');
               $id = Session::get('gorgID');
-              $applications=DB::table('jobs')
-              ->leftjoin('job_applied', 'jobs.id', '=', 'job_applied.job_id')
-              ->select('jobs.*')
-              ->where('job_applied.student_id', '=', $id)
-              ->get();
+              
 
+
+              $applications=DB::table('job_applied as ja')
+              ->join('jobs as jo', 'ja.job_id', '=', 'jo.id')
+              ->join('users as r', 'jo.user_id', '=', 'r.id')
+              ->select('jo.*','r.org_name')
+              ->where('ja.student_id', '=', $id)
+              ->get();
+              //dd($applications);
               @endphp
               <h3 class="font36text  semiboldfont_fmly">
                 You have applied for (0{{count($applications)}} Jobs)
@@ -147,7 +151,7 @@
                   </div>
                 </div>
                 <div class="jobsDetailCont fw">
-                  <h3>{{$appl->company_name}}</h3>
+                  <h3>{{ $appl->org_name }}</h3>
                   <p><a href="#" class="lightblue_text">{{$appl->job_title}}</a></p>
                   <div class="innerrow">
                     <div class="col_grid9">

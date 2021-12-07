@@ -28,7 +28,7 @@
            {{ $value->blog_heading ?? ''}}
          </h3>
          <p class="site-pra addReadMore showlesscontent">
-           {{ $value->description ?? ''}} ..
+           {{ strip_tags($value->description) ?? ''}} ..
            <a href="{{URL::to('web/blog/detail/')}}/{{ $value->id }}" class="read_more_btn">
              READ MORE
            </a>

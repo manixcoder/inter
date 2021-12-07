@@ -133,7 +133,10 @@
                     <span style="display:none; color: red;" class="validate_msg">Please enter message.</span>
                   </div>
                   <div class="form-group col_grid12 text-center">
-                    <button type="submit" id="btnValidate" class="btn btn-default"><img src="{{ asset('public/assets/images/loginCheck_icon.png')}}" alt="icon" /> Submit</button>
+                    <button type="submit" id="btnValidate" class="btn btn-default">
+                      <img src="{{ asset('public/assets/images/loginCheck_icon.png')}}" alt="icon" />
+                      Submit
+                    </button>
                   </div>
                 </form>
               </div>
@@ -174,6 +177,10 @@
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
   <script src="{{ asset('public/assets/web_assets/js/commen-hd.js')}}"></script>
   <script src="http://code.jquery.com/jquery-1.5.js"></script>
+  <script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+  <script type="text/javascript">
+    CKEDITOR.replace('message');
+  </script>
   <script>
     $(document).ready(function() {
       var len = 0;

@@ -513,9 +513,6 @@
         </div>
     </form>
   </div>
-
-
-
   <div class='modal resumeUpload_popup' id='resumeUpload'>
     <?php
     $userid = Session::get('gorgID');

@@ -80,9 +80,10 @@
           @endphp
           @if(isset($privacypolicydata))
             @foreach($privacypolicydata as $value)
+            
               <div class="aboutCont_box">
                 <h3>{{ $value->heading }}</h3>
-                <p>{{ $value->text }}</p>
+                <?php echo $value->description ?>
               </div>
             @endforeach
           @endif         

@@ -44,7 +44,7 @@
 									<tr>
 										<td>#{{ $i }}</td>
 										<td>{{$value->blog_heading}}</td>
-										<td>{{ $value->description}}</td>
+										<td>{{  strip_tags($value->description) }}</td>
 		                                <td>{{$new_date}}</td>
 		                                <td><i class="box_img"><img src="{{ URL::asset('/public/uploads/') }}/{{ $value->blog_image }}" alt="usericon"></i></td>
 										<td>

@@ -16,6 +16,7 @@
           <div class="profileTab_contBox" id="profileTab_link3">
             <div class="small_contaner mylisting_recuriter">
               <div class="findblog_search blogView_search fw">
+                 
                 <form class="fw">
                   <div class="from-group">
                     <div class="input-icon">
@@ -28,7 +29,12 @@
                   </div>
                 </form>
               </div>
-              
+               @if(Session::has('status'))
+                    <div class="alert alert-{{ Session::get('status') }}">
+                        <i class="fa fa-building-o" aria-hidden="true"></i> {{ Session::get('message') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                    </div>
+                    @endif
               <div class="fw posted_heading">
                 <h3 class="font36text clrBlack semiboldfont_fmly">
                   <span>You have listed ({{ count($listedjobs ?? '') }} jobs)</span> 

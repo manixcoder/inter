@@ -17,7 +17,7 @@
             <li>Recruiter  Name <b>{{ $recruiterDetail->name ?? ''}}</b></li>
             <li>Email Address <b>{{ $recruiterDetail->email ?? ''}}</b></li>
             <li>Mobile Number <b>{{ $recruiterDetail->phone ?? ''}}</b></li>
-            <li>Last Login<b>{{date('d-M-Y | H:i', strtotime($studentDetail->last_login ?? ''))}}</b></li>
+            <li>Last Login<b>{{ date('d-M-Y | H:i', strtotime($recruiterDetail->last_login ?? ''))}}</b></li>
             <li>
                Status 
                <b>

@@ -18,7 +18,7 @@
          </div>
          <div class="offer_textcant">
             <h4 class="greentext">Job Description</h4>
-            <p>{{$jobDetail->job_description}}</p>
+            <p>{{ strip_tags($jobDetail->job_description) }}</p>
          </div>
          <ul class="jobsdetails_text">
             <li>Created On <b>{{date('d-M-Y', strtotime($jobDetail->created_at))}}</b></li>

@@ -28,7 +28,7 @@ class StudentDashboardController extends Controller
     $this->middleware('auth');
     $this->middleware('role');
   }
-  public function Dashboard(Request $request)
+  public function dashboard(Request $request)
   {
     $userRole = Session::get('userRole');
     $id = Session::get('gorgID');
@@ -74,7 +74,7 @@ class StudentDashboardController extends Controller
   {
     // dd($id);
     // $userRole   = Session::get('userRole');
-   // $id       = Session::get('gorgID');
+    // $id       = Session::get('gorgID');
     $OrgData  = DB::table('users')->where('id', $id)->first();
     $edData   = DB::table('education')->where('user_id', $id)->get();
     $exData   = DB::table('experience')->where('user_id', $id)->get();
@@ -94,7 +94,7 @@ class StudentDashboardController extends Controller
       'busiData' => $busiData,
       'hobbyData' => $hobbyData,
       'accomData' => $accomData,
-      'user_id'=>$id
+      'user_id' => $id
     ]);
   }
 
@@ -102,7 +102,7 @@ class StudentDashboardController extends Controller
   {
     $recuratorData = DB::table('users')->where('id', $r_id)->first();
     $studentData = DB::table('users')->where('id', $id)->first();
-   // dd($recuratorData);
+    // dd($recuratorData);
     $to = $studentData->email;
     $subject = "HTML email";
     $message = "
@@ -130,7 +130,7 @@ class StudentDashboardController extends Controller
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
     // More headers
-    $headers .= 'From: '.$recuratorData->email . "\r\n";
+    $headers .= 'From: ' . $recuratorData->email . "\r\n";
     $headers .= 'Cc: pathakmanish86@gmail.com' . "\r\n";
 
     mail($to, $subject, $message, $headers);
@@ -141,7 +141,7 @@ class StudentDashboardController extends Controller
   {
     $recuratorData = DB::table('users')->where('id', $r_id)->first();
     $studentData = DB::table('users')->where('id', $id)->first();
-   // dd($recuratorData);
+    // dd($recuratorData);
     $to = $studentData->email;
     $subject = "HTML email";
     $message = "<html>
@@ -168,7 +168,7 @@ class StudentDashboardController extends Controller
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
     // More headers
-    $headers .= 'From: '.$recuratorData->email . "\r\n";
+    $headers .= 'From: ' . $recuratorData->email . "\r\n";
     $headers .= 'Cc: pathakmanish86@gmail.com' . "\r\n";
 
     mail($to, $subject, $message, $headers);
@@ -288,7 +288,11 @@ class StudentDashboardController extends Controller
       $destinationPath = public_path('/uploads/');
       $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
       $path =  $files->move($destinationPath, $profileImage);
-      $update = DB::table('experience')
+    }else{
+       $profileImage="placeholder.png";
+    }
+    
+    $update = DB::table('experience')
         ->insert([
           'user_id' => $id,
           'company_image' => $profileImage,
@@ -298,8 +302,8 @@ class StudentDashboardController extends Controller
           'duration_to' => $request->duration_to,
           'location' => $request->location,
         ]);
-    }
-    return redirect()->back()->with(array('status' => 'success', 'message' => 'add student experience successfully.'));
+        return redirect()->back()->with(array('status' => 'success', 'message' => 'add student experience successfully.'));
+    
   }
   public function update_student_experience(Request $request)
   {
@@ -347,7 +351,7 @@ class StudentDashboardController extends Controller
           'location' => $request->location,
         ]);
     }*/
-    return redirect()->back();
+    return redirect()->back()->with(array('status' => 'success', 'message' => 'Student update experience successfully.'));
   }
   public function add_student_certificate(Request $request)
   {
@@ -497,9 +501,9 @@ class StudentDashboardController extends Controller
         ->join('users as r', 'jo.user_id', '=', 'r.id')
         ->where('jo.status', '=', 0)
         ->orderBy('jo.id', 'desc')
-        ->select('jo.*', 'r.org_name','r.profile_image','r.org_image','r.users_role')
+        ->select('jo.*', 'r.org_name', 'r.profile_image', 'r.org_image', 'r.users_role')
         ->get();
-      } else {
+    } else {
       $jobsData = DB::table('jobs')
         ->where('status', 0)
         ->where('location', 'like', '%' . $location . '%')
@@ -522,7 +526,7 @@ class StudentDashboardController extends Controller
     $jobsData = DB::table('jobs as jo')
       ->join('users as r', 'jo.user_id', '=', 'r.id')
       ->where('jo.id',  $id)
-      ->select('jo.*', 'r.org_name','r.profile_image','r.org_image','r.users_role')
+      ->select('jo.*', 'r.org_name', 'r.profile_image', 'r.org_image', 'r.users_role')
       ->first();
     $OrgData  = DB::table('users')->where('id', $jobsData->user_id)->first();
     return view('fruntend.student.student-job-details')->with([
@@ -626,8 +630,8 @@ class StudentDashboardController extends Controller
   {
     $request->validate([
       'current_password' => 'required',
-      'password' => 'required',
-      'password_confirmation' => 'required|same:password',
+      'password' => 'required|same:password_confirmation',
+      //'password_confirmation' => 'required|same:password',
     ]);
     $userRole = Session::get('userRole');
     $id = Session::get('gorgID');
@@ -650,8 +654,6 @@ class StudentDashboardController extends Controller
     Auth::logout();
     return redirect('/');
   }
-
-
   public function update_student_about(Request $request)
   {
     $id = Session::get('gorgID');
@@ -664,11 +666,6 @@ class StudentDashboardController extends Controller
 
     return redirect()->back();
   }
-
-
-
-
-
   public function index()
   {
     Session::flash('success', 'login Successfully..!');

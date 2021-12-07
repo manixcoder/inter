@@ -49,10 +49,10 @@
     <div class="lgcontainer">
       <div class="boxDetailbg fw">
         <figure>
-        @if($appl->users_role =='3')
-          <img src="{{ asset('public/uploads')}}/{{ $appl->org_image }}" alt="jobs">
+        @if($appl->logo !='')
+          <img src="{{ asset('public/uploads')}}/{{ $appl->logo }}" alt="jobs">
           @else
-          <img src="{{ asset('public/uploads')}}/{{ $appl->org_image }}" alt="newtechlogo">
+          <img src="{{ asset('public/uploads/placeholder.png')}}" alt="newtechlogo">
           @endif
         </figure>
       </div>
@@ -129,6 +129,16 @@
         <h3 class="borderBox_heading">Job Descriptions</h3>
         <p>{!! $appl->job_description !!}</p>
       </div>
+      @if($appl->attachment !='')
+      <div class="jobDescriptions_sec fw">
+      <h3 class="borderBox_heading">Attachment</h3>
+      <a href="{{ URL::asset('/public/uploads/') }}/{{ $appl->attachment ?? ''}}" download>
+                            <img src="{{ URL::asset('/public/assets/images/fileupload_sec.png') }}" alt="icon">
+                            
+                            <img src="{{ URL::asset('/public/assets/images/download.png') }}" alt="icon">
+                          </a>
+      </div>
+      @endif
       <div class="fw similarBox_sec blog_intersted_box">
         <div class="lgcontainer">
           <div class="innerrow">

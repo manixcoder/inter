@@ -13,12 +13,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Mail\Mailer;
 use Illuminate\Pagination\Paginator;
+use App\Notifications\PostCommentNotification;
 use Session;
 use Response;
 use DB;
 use Hash;
 use Auth;
-use User;
+use App\User;
 use Carbon\Carbon;
 
 class DashboardController extends Controller
@@ -32,15 +33,22 @@ class DashboardController extends Controller
   {
     $userRole = Session::get('userRole');
     $id = Session::get('gorgID');
+    $user = User::find($id);
+    //dd($user);
+  //   foreach ($user->notifications as $notification) {
+  //     dd($notification);
+  // }
+    
+   // $notification = DB::table('notifications')->where('notifiable_id', $id)->orderBy('id', 'DESC')->get();
 
     /* dd($id);*/
 
-    if ($userRole == 2) {
-      $notification = DB::table('announcement')->where('aim', 'Students')->orWhere('aim', 'Both')->orderBy('id', 'DESC')->get();
-    } else {
-      $notification = DB::table('announcement')->where('aim', 'Recruiters')->orWhere('aim', 'Both')->orderBy('id', 'DESC')->get();
-    }
-    return view('fruntend.common_pages.notification')->with(['notification' => $notification]);
+    // if ($userRole == 2) {
+    //   $notification = DB::table('announcement')->where('aim', 'Students')->orWhere('aim', 'Both')->orderBy('id', 'DESC')->get();
+    // } else {
+    //   $notification = DB::table('announcement')->where('aim', 'Recruiters')->orWhere('aim', 'Both')->orderBy('id', 'DESC')->get();
+    // }
+    return view('fruntend.common_pages.notification');
   }
   public function contactus_queryes()
   {

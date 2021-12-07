@@ -173,21 +173,14 @@
 <script type="text/javascript">
    function editRecords(id) { 
    
-    $.ajaxSetup({
-   
-     headers: {
-   
-       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-   
-     }
-   
-   });
-   
-    $.ajax({
-   
-     url:"{{url('user/role/edit/')}}"+'/'+id,  
-   
-     method:"POST", 
+    $.ajaxSetup({ 
+       headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+          });
+          $.ajax({
+             url:"{{url('user/role/edit/')}}"+'/'+id,  
+              method:"POST", 
    
      contentType : 'application/json',
    
@@ -232,36 +225,21 @@
    
    
    function viewRecords(id) { 
-   
-   $.ajaxSetup({
-   
-   headers: {
-   
-     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-   
-   }
-   
-   });
-   
-   $.ajax({
-   
-   url:"{{url('unique/edit/')}}"+'/'+id,  
-   
-   method:"POST", 
-   
-   contentType : 'application/json',
-   
-   success: function( data ) {
-      
+      $.ajaxSetup({
+         headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         }
+      });
+      $.ajax({ 
+         url:"{{url('unique/edit/')}}"+'/'+id,  
+         method:"POST", 
+         contentType : 'application/json',
+         success: function( data ) {
             document.getElementById("job_id").value = data.job_id;
-   
             document.getElementById("v_emp_id").innerText = data.emp_id;
-   
             document.getElementById("v_reg_no").innerHTML = data.reg_no;
-   
             $('#unique-view-model').modal('show');
-   
-          }
+         }
         });
    }
 </script>

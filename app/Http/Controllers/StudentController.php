@@ -75,16 +75,18 @@ class StudentController extends Controller
           $destinationPath = public_path('/uploads/');
           $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
           $path =  $files->move($destinationPath, $profileImage);
-          $image = $insert['photo'] = "$profileImage";
+          $profile_image = $insert['photo'] = "$profileImage";
+        }else{
+           $profile_image = 'placeholder.png';
         }
         
-        if($request->image!=''){
-            $imagecheck = $image;
-        }else{
-            $imagecheck = 'no-image.png';
-        }
+        // if($request->image!=''){
+        //     $imagecheck = $image;
+        // }else{
+        //     $imagecheck = 'no-image.png';
+        // }
       $data = array(   
-        'profile_image' => $imagecheck,      
+        'profile_image' => $profile_image,      
         'name' => $request->name,      
         'email' => $request->email,    
         'phone' => $request->phone,       

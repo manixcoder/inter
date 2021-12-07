@@ -98,12 +98,12 @@
           
           @endif
 
-          <form action="{{ URL::to('add-job')}}" method="POST" id="FormValidation" enctype="multipart/form-data">
+          <form action="{{ URL::to('add-job')}}" method="POST" id="FormValidation" name="postJob" enctype="multipart/form-data">
             @csrf
             <div class="innerrow">
               <div class="col_grid12 upload_box_sec">
                 <div class="uploadBox">
-                  <input type="file" name="logo" onchange="loadFile(event)">
+                  <input type="file" name="logo" onchange="loadFile(event)" accept="image/png, image/gif, image/jpeg">
                   <div class="file_cont">
                     <img src="{{ asset('public/assets/images/attach_img.png')}}" id="output" alt="icon" class="jobpostnew-file" />
                     <h4 class="font24Text clrBlack">Attach any organization or work culture photo (It's optional)</h4>
@@ -112,7 +112,7 @@
               </div>
               <div class="col_grid12 ">
                 <div class="form-group newform-control">
-                  <label for='job_title'>Write Job Title</label>
+                  <label>Write Job Title</label>
                   <select name="job_title" class="form-contorl" id="job_title" required>
                         <option value="">Select Job Title</option>                        
                         <option value="Sales & Marketing Executive">Sales & Marketing Executive</option>
@@ -123,7 +123,7 @@
               </div>
               <div class="col_grid6 ">
                 <div class="form-group newform-control">
-                  <label for="location">Job Location</label>
+                  <label>Job Location</label>
                   <select name="location" class="form-contorl" id="location"  required>
                         <option value="">Select Location</option>                        
                         <option value="Mumbai">Mumbai</option>
@@ -166,11 +166,8 @@
                   <div id="offer_add" style="margin-top: 10px;display: inline-block;width: 100%;"></div>
                 </div>
               </div>
-
               <div class="col_grid12 ">
-                <div class="form-group">
-                  <label>Job Description
-                    <div id="moreoffer">
+              <div id="moreoffer">
                       <span class="pull-right font20Text" id="add_more">
                         <i>
                           <img src="{{ asset('public/assets/images/add.png') }}" alt="img">
@@ -178,17 +175,28 @@
                         Add More Offer Point
                       </span>
                     </div>
-                  </label>
-                  <textarea class="form-control" name="job_description"></textarea>
+              </div>
+              <div class="col_grid12 ">
+              
+                <div class="form-group">
+                <label>Job Description</label>
+                </div>
+              </div>
+              <div class="col_grid12 ">
+              
+                <div class="form-group">
+           
+                  
+                  <textarea class="form-control" name="job_description" id='job_description'></textarea>
                 </div>
               </div>
 
               <div class="col_grid12 upload_box_sec jobUpload_sec">
                 <div class="uploadBox">
-                  <input type="file" name="acttachPhoto" onchange="loadFile2(event)" />
+                  <input type="file" name="acttachPhoto"  accept=".pdf,.docx"/>
                   <div class="file_cont fileupload2">
                     <img src="{{ asset('public/assets/images/upload_file.png')}}" id="output2" alt="icon" />
-                    <h4 class="font24Text clrBlack">Attach any organization or work culture photo (It's optional)</h4>
+                    <h4 class="font24Text clrBlack">Drag and drop or upload a file (It's optional)</h4>
                   </div>
                 </div>
               </div>
@@ -214,10 +222,56 @@
 
   @include('fruntend.common_pages.web_footer')
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
   <script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
   <script type="text/javascript">
 		CKEDITOR.replace('job_description');
 	</script>
+
+
+<script>
+  $(function() {
+  // Initialize form validation on the registration form.
+  // It has the name attribute "registration"
+  $("form[name='postJob']").validate({
+    // Specify validation rules
+    rules: {
+      // The key name on the left side is the name attribute
+      // of an input field. Validation rules are defined
+      // on the right side
+      job_title: "required",
+      location: "required",
+      job_description:"required",
+      email: {
+        required: true,
+        // Specify that email should be validated
+        // by the built-in "email" rule
+        email: true
+      },
+      password: {
+        required: true,
+        minlength: 5
+      }
+    },
+    // Specify validation error messages
+    messages: {
+      job_title: "Please enter your job title",
+      location: "Please enter your location",
+      job_description:"Please enter your job description",
+      password: {
+        required: "Please provide a password",
+        minlength: "Your password must be at least 5 characters long"
+      },
+      email: "Please enter a valid email address"
+    },
+    // Make sure the form is submitted to the destination defined
+    // in the "action" attribute of the form when valid
+    submitHandler: function(form) {
+      form.submit();
+    }
+  });
+});
+</script>
   <script>
 $(document).ready(function(){
   

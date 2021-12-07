@@ -76,9 +76,10 @@
           @endphp
           @if(isset($aboutusdata))
             @foreach($aboutusdata as $value)
+            <?php //dd($value);?>
               <div class="aboutCont_box">
                 <h3>{{ $value->heading }}</h3>
-                <p>{{ $value->text }}</p>
+                <p><?php echo $value->description ?></p>
               </div>
             @endforeach
           @endif

@@ -115,7 +115,15 @@
                  </div>
                </div>
                <h1>{{ $value->heading ?? ''}}</h1>
-               <p class="site-pra">{{ $value->description ?? ''}}</p>
+               @php
+                          $clear = strip_tags($value->description);
+                          $clear = html_entity_decode($clear);
+                          $clear = urldecode($clear);
+                          $clear = preg_replace('/[^A-Za-z0-9]/', ' ', $clear);
+                          $clear = preg_replace('/ +/', ' ', $clear);
+                          $clear = trim($clear);
+                          @endphp
+               <p class="site-pra">{{ $clear ?? ''}}</p>
              </div>
              <div class="img-cont fw">
                <figure class="full-img">

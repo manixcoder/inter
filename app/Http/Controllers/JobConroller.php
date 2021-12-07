@@ -10,11 +10,13 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
+use App\Notifications\PostJobsNotification;
+use Illuminate\Support\Facades\Notification;
+use App\User;
 use Session;
 use Response;
 use DB;
 use Auth;
-use User;
 use Jobs;
 use Carbon\Carbon;
 
@@ -40,7 +42,7 @@ class JobConroller extends Controller
       ->where('ja.job_id', $id)
       ->select('ja.id', 'r.*')
       ->get();
-    dd($jobApplied);
+    //dd($jobApplied);
 
     $Data = app('App\Jobs')->where('id', $id)->first();
     return view('fruntend.recruiter.job_detailecruiter')->with(['Data' => $jobApplied]);
@@ -95,8 +97,23 @@ class JobConroller extends Controller
     );
 
     $insertData = app('App\Jobs')->insert($data);
-    return back()->with(array('status' => 'success', 'message' =>  'Job created successfully!'));
-    return back()->with('success', 'Job created successfully!');
+
+    $users = User::where('id', '!=', Session::get('gorgID'))->get();
+    $notificationData = array(
+      'comment_user' => Auth::user()->id,
+      'post_title' => $request->job_title,
+      'notification_type' => 'Post a new Jobs',
+      'comment' => strip_tags($request->job_description)
+    );
+    foreach ($users as $user) {
+      $user->notify(new PostJobsNotification($notificationData));
+    }
+    
+    if($insertData){
+      return redirect('/recruiter-listings')->with(array('status' => 'success', 'message' => 'Job created successfully!'));
+    }else{
+      return back()->with(array('status' => 'error', 'message' =>  'Something want wrong !'));
+    }
   }
 
   public function index()

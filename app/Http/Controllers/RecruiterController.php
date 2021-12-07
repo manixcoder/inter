@@ -113,7 +113,7 @@ class RecruiterController extends Controller
         'updated_at' => date("Y-m-d H:i:s")
       );
 
-      $insertData = app('App\User')->insert($data);
+      $insertData = app('App\User')->insert($data); 
     }
 
     return redirect('recruiter-list');

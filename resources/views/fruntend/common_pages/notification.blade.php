@@ -4,40 +4,37 @@
         <div class=" arrowheading_site text-left right_after_arrow afterHide_arrow">
           <h3>Notifications</h3>
         </div>
-        
-        @if(count($notification)>0)
-          @foreach($notification as $value)
-          @php $userdata = DB::table('users')->where('id', $value->user_id)->first(); @endphp
+        @foreach(auth()->user()->notifications as $notification)
+            @php 
+            $userData = DB::table('users')->where('id',  $notification->data['comment_user'])->first();
+            @endphp
             <div class="notifivation_box fw">
               <div class="img_notiProfile">
-                @if($userdata->users_role == 2)
-                  <img src="{{ URL::asset('/public/uploads/') }}/{{ $userdata->profile_image ?? ''}}" alt="icon" />
+                @if($userData->users_role==='2')
+                <img src="{{ URL::asset('/public/uploads/') }}/{{ $userData->profile_image}}" alt="icon" />
                 @else
-                  <img src="{{ URL::asset('/public/uploads/') }}/{{ $userdata->org_image }}" alt="icon" />
+                <img src="{{ URL::asset('/public/uploads/') }}/{{ $userData->org_image}}" alt="icon" />
                 @endif
               </div>
               <div class="notification_cont">
                 <div class="innerrow">
                   <div class="col_grid8 text-left">
-                    <h4>{{ $userdata->name ?? '' }} <span> {{ $value->title ?? ''}}</span> </h4>
+                    <h4> <span>{{ $userData->name}} </span> </h4>
+                    <p>{{ $notification->data['notification_type']}}</p>
                   </div>
                   <div class="col_grid4 text-right">
                     <div class="fw text-right dateText">
-                      {{$value->created_at ?? ''}}
+                    <p>{{ $notification->data['comment']}}</p>
                     </div>
                   </div>
                 </div>
                 <div class="notipra_text fw">
-                   <p>{{ $value->description ?? ''}}</p>
+                  
                 </div>
               </div>
             </div>
-          @endforeach
-          @else
-          <h2>404</h2> 
-          <p>Data not found.</p>
-        @endif        
-      </div>
+            @endforeach 
+          </div>
     </div>
      @include('fruntend.common_pages.web_footer')  
     

@@ -32,7 +32,15 @@
                       </div>
                       <h3 class="siteheading">{{ $postsdata->heading ?? ''}}</h3>
                       <p class="site-pra">
-                        {{ $postsdata->description ?? ''}}
+                          @php
+                          $clear = strip_tags($postsdata->description);
+                          $clear = html_entity_decode($clear);
+                          $clear = urldecode($clear);
+                          $clear = preg_replace('/[^A-Za-z0-9]/', ' ', $clear);
+                          $clear = preg_replace('/ +/', ' ', $clear);
+                          $clear = trim($clear);
+                          @endphp
+                        {{ $clear ?? ''}}
                       </p>
                   </div>
                   <div class="img-cont fw">

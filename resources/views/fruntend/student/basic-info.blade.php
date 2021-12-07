@@ -326,11 +326,11 @@
                 <div class="innerrow">
                   <div class="col_grid9">
                     <div class="userBox">
-
-                      @if($OrgData->profile_image =='no-image.png')
-                      <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="icon" />
-                      @else
+                      @if($exp->company_image !='')
                       <img src="{{ asset('public/uploads/'.$exp->company_image)}}" alt="icon" />
+                      
+                      @else
+                      <img src="{{ asset('public/uploads/placeholder.png')}}" alt="icon" />
                       @endif
                     </div>
 

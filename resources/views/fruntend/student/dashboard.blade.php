@@ -131,7 +131,7 @@
           $users = DB::table('users')->where('id', $id)->first();
           if(empty($SearchData))
           {
-          $posts = DB::table('posts')->orderBy('date_time', 'DESC')->get();
+          $posts = DB::table('posts')->orderBy('id', 'DESC')->get();
           }else{
           $generatequery = "SELECT * FROM posts WHERE heading LIKE '%' '".$SearchData."' '%' OR description LIKE '%' '".$SearchData."' '%' OR date_time LIKE '%' '".$SearchData."' '%' ";
           $posts = DB::select($generatequery);
@@ -139,11 +139,11 @@
           }
           @endphp
 
-
           @foreach($posts as $post)
 
           @php
           $UsrData = DB::table('users')->where('id', $post->user_id)->first();
+          //dd($UsrData);
           $userid = Session::get('gorgID');
           $loginby = app('App\user')->where('id', $userid)->first();
           $createdby = app('App\user')->where('id', $post->user_id)->first();
@@ -156,13 +156,20 @@
             <div class="text-cont fw">
               <div class="userCommnet_deta fw">
                 <span>
-                  <img src="{{ URL::asset('/public/uploads/') }}/{{ $UsrData->profile_image ?? ''}}" alt="img">
+                    @if($UsrData->users_role ==='3')
+                   
+                  <img src="{{ URL::asset('/public/uploads') }}/{{ $UsrData->org_image ?? ''}}" alt="img">
+                  @elseif($UsrData->users_role ==='2')
+                 
+                   <img src="{{ URL::asset('/public/uploads') }}/{{ $UsrData->profile_image ?? ''}}" alt="img">
+                   @else
+                  <img src="{{ URL::asset('/public/uploads/placeholder.png') }}" alt="img">
+                  @endif
                 </span>
                 <div class="userCommnet_Name">
-                      <h4>@if(!empty($UsrData->name)) {{$UsrData->name}} @endif 
-                        <span>{!! date('d M Y H:i:s', strtotime($post->date_time)) !!}
-
-                        </span> 
+                      <h4>
+                          @if(!empty($UsrData->name)) {{ $UsrData->name }} @endif
+                          <span>{!! date('d M Y H:i:s', strtotime($post->date_time)) !!}</span> 
                         @if($users->id != $post->user_id)
                         @else
                         <span class="delete_postbtn">
@@ -172,13 +179,12 @@
                           </a>
                         </span>
                         @endif
-                        
-                      </h4>
+                        </h4>
                     </div>
               </div>
               <h3 class="font57text clrBlack semiboldfont_fmly">{{$post->heading}}</h3>
               <p class="site-pra">
-                {!! $post->description !!}
+                {!! strip_tags($post->description) !!}
               </p>
             </div>
             <div class="img-cont fw">
@@ -196,12 +202,9 @@
                 <a href="javascript:void(0);" onclick="editRecords({{ $post->id }})" style="color:#ba3143" ;><span><img src="{{ asset('public/assets/images/likedIcon.png')}}" alt="icon"></span> {{ $likeby ?? ''}} Likes</a>
               </li>
               @endif
-
-
               <li class="commentbyopne">
                 <a href="javascript:void(0);"><span><img src="{{ asset('public/assets/images/commentIcon.png')}}" alt="icon"></span> {{ $commentby ?? '' }} Comments</a>
               </li>
-
               <div class="commentBox-usersec">
                 <div class="commentBox-heading">Comments <span>({{ $commentby ?? '' }})</span><span class="closebtn"><i class="fa fa-times-circle" aria-hidden="true"></i></span></div>
                 <div class="commentBox-chats">

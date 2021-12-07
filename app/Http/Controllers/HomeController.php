@@ -119,7 +119,7 @@ class HomeController extends Controller
         if ($get_pass != null) {
           if (Hash::check($password, $db_password)) {
             if (Auth::attempt(['email' => $email, 'password' => $password])) {
-              DB::table('users')->where('email', $email)->where('users_role', 2)->update([
+              DB::table('users')->where('email', $email)->update([
                 'last_login' => date("Y-m-d H:i:s")
               ]);
               return redirect('recruiter-dashboard')->with(array(
@@ -334,7 +334,7 @@ class HomeController extends Controller
   {
 
     if ($request->setep_one == 'setep_one') {
-      $recruiterRegisterOne = app('App\User')->insertGetId(['name' => $request->name, 'users_role' => 3]);
+      $recruiterRegisterOne = app('App\User')->insertGetId(['name' => $request->name, 'users_role' => 3,'created_at'=>date("Y-m-d H:i:s"),'updated_at'=>date("Y-m-d H:i:s")]);
       return view('fruntend.recruiter_register.recruiter_register_step_two')->with(['insertid' => $recruiterRegisterOne]);
     } elseif ($request->setep_two == 'setep_two') {
       $phonecheck = app('App\User')->where('phone', $request->phone)->first();

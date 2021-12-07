@@ -75,9 +75,10 @@
           @endphp
           @if(isset($termsofusedata))
             @foreach($termsofusedata as $value)
+            <?php // dd($value);?>
               <div class="aboutCont_box">
                 <h3>{{ $value->heading }}</h3>
-                <p>{{ $value->description }}</p>
+                <?php echo  $value->description ?>
               </div>
             @endforeach
           @endif         

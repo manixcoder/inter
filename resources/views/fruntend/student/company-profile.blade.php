@@ -31,7 +31,11 @@
             </div>
             <div class="compnayProfile_user fw">
                 <div class="userBox_img">
+                    @if($OrgData->profile_image !='')
                     <img src="{{ asset('public/uploads')}}/{{ $OrgData->profile_image }}" alt="icon_logo" />
+                    @else
+                    <img src="{{ asset('public/uploads/placeholder.png') }}" alt="icon_logo" />
+                    @endif
                 </div>
             </div>
             <div class="tabCompnay_profile text-center fw">

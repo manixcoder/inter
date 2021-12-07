@@ -4,12 +4,16 @@
   $recruiterDetails = DB::table('users')->where('id', $Data[0]->user_id)->first();
   $intrestedCandidate = DB::table('job_applied')->where('job_id', $Data[0]->id)->get();
   @endphp
-
+<?php // dd($Data[0]->logo);?>
   <div class="body_wht-inners ">
     <div class="lgcontainer">
       <div class="boxDetailbg fw">
         <figure>
-          <img src="{{ URL::asset('/public/assets/images/jobsDetailBG.png') }}" alt="jobs" />
+           @if($Data[0]->logo !='')
+          <img src="{{ URL::asset('/public/uploads/'.$Data[0]->logo) }}" alt="jobs" />
+          @else
+          <img src="{{ URL::asset('/public/uploads/jobsDetailBG.png') }}" alt="jobs" />
+          @endif
         </figure>
       </div>
       <div class="jobsDetailProfile fw">
@@ -49,14 +53,8 @@
             @endif
           <div class=" intercandidates_sec fw">
             <h3>{{ count($intrestedCandidate ?? '')}} Interested Candidates</h3>
-
-            
-
             @if(isset($intrestedCandidate))
             @foreach($intrestedCandidate as $value)
-            
-            
-
             @php 
             $studentDetails = DB::table('users')->where('id', $value->student_id)->first();
             $studentResume = DB::table('student_resume')->where('student_id', $value->student_id)->first();

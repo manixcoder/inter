@@ -11,6 +11,8 @@ Route::get('clear-cache', function () {
 	Session::flash('success', 'All Clear'); 
 	echo "DONE";
 });
+
+
 /* All web link Start... */ 
 /* Recruiter basic info */
 Route::get('basic/info', function () {
@@ -367,3 +369,18 @@ Route::get('privacypolicy-list', 'PrivacyPolicyController@index');
 Route::any('edit-privacypolicy/{id}', 'PrivacyPolicyController@edit');
 Route::any('delete-privacypolicy/{id}', 'PrivacyPolicyController@delete');
 Route::any('add-privacypolicy', 'PrivacyPolicyController@create');
+
+Auth::routes();
+Route::prefix('facebook')->name('facebook.')->group( function(){
+    Route::get('auth', 'FaceBookController@loginUsingFacebook')->name('login');
+    Route::get('callback', 'FaceBookController@callbackFromFacebook')->name('callback');
+});
+Route::prefix('linkedin')->name('linkedin.')->group( function(){
+Route::get('/auth', 'SocialAuthLinkedinController@redirect')->name('login');
+Route::get('/callback', 'SocialAuthLinkedinController@callback')->name('callback');
+});
+
+Route::prefix('google')->name('google.')->group( function(){
+	Route::get('google', 'GoogleController@redirectToGoogle')->name('login');
+	Route::get('callback', 'GoogleController@handleGoogleCallback')->name('callback');
+});

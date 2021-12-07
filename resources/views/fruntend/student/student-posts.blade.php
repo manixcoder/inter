@@ -130,7 +130,7 @@
               $posts = DB::table('posts')->where('user_id', $id)->orderBy('id', 'desc')->get();
               if(empty($SearchData))
               {
-              $posts = DB::table('posts')->where('user_id', $id)->orderBy('date_time', 'DESC')->get();
+              $posts = DB::table('posts')->where('user_id', $id)->orderBy('id', 'DESC')->get();
               }else{
               $generatequery = "SELECT * FROM posts WHERE user_id='".$id."' WHERE heading LIKE '%' '".$SearchData."' '%' OR description LIKE '%' '".$SearchData."' '%' OR date_time LIKE '%' '".$SearchData."' '%' ";
               $posts = DB::select($generatequery);
