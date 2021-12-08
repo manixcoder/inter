@@ -99,7 +99,7 @@
                 <li><a href="{{ url('student-profile-basic-info') }}">View Profile</a></li>
                 <li><a href="{{ url('student-posts') }}">My Posts</a></li>
                 <li><a href="{{ url('student-applications') }}">My Applications</a></li>
-                <li><a href="#">Messages</a></li>
+                <li><a href="{{ URL::to('/message')}}">Messages</a></li>
 
               </ul>
             </div>
@@ -160,19 +160,18 @@
                    
                   <img src="{{ URL::asset('/public/uploads') }}/{{ $UsrData->org_image ?? ''}}" alt="img">
                   @elseif($UsrData->users_role ==='2')
-                 
-                   <img src="{{ URL::asset('/public/uploads') }}/{{ $UsrData->profile_image ?? ''}}" alt="img">
-                   @else
+                  <img src="{{ URL::asset('/public/uploads') }}/{{ $UsrData->profile_image ?? ''}}" alt="img">
+                  @else
                   <img src="{{ URL::asset('/public/uploads/placeholder.png') }}" alt="img">
                   @endif
                 </span>
                 <div class="userCommnet_Name">
-                      <h4>
-                          @if(!empty($UsrData->name)) {{ $UsrData->name }} @endif
-                          <span>{!! date('d M Y H:i:s', strtotime($post->date_time)) !!}</span> 
-                        @if($users->id != $post->user_id)
-                        @else
-                        <span class="delete_postbtn">
+                  <h4>
+                    @if(!empty($UsrData->name)) {{ $UsrData->name }} @endif
+                    <span>{!! date('d M Y H:i:s', strtotime($post->date_time)) !!}</span> 
+                    @if($users->id != $post->user_id)
+                    @else
+                    <span class="delete_postbtn">
                           <a href="{{ url('delete_student_post/'.$post->id) }}"><i>
                             <img src="{{ asset('public/assets/images/delete.png')}}" alt="delete-icon" /></i>
                             Delete Post
@@ -184,7 +183,7 @@
               </div>
               <h3 class="font57text clrBlack semiboldfont_fmly">{{$post->heading}}</h3>
               <p class="site-pra">
-                {!! strip_tags($post->description) !!}
+                <?php echo $post->description ?>
               </p>
             </div>
             <div class="img-cont fw">
@@ -199,7 +198,11 @@
               </li>
               @else
               <li>
-                <a href="javascript:void(0);" onclick="editRecords({{ $post->id }})" style="color:#ba3143" ;><span><img src="{{ asset('public/assets/images/likedIcon.png')}}" alt="icon"></span> {{ $likeby ?? ''}} Likes</a>
+                <a href="javascript:void(0);" onclick="editRecords({{ $post->id }})" style="color:#ba3143";>
+                <span>
+                  <img src="{{ asset('public/assets/images/likedIcon.png')}}" alt="icon">
+                </span> {{ $likeby ?? ''}} Likes
+              </a>
               </li>
               @endif
               <li class="commentbyopne">
@@ -246,13 +249,11 @@
               </li-->
               <div class="sharebox-sec">
                 <div class="sharebox-user">
-
                   @if($loginby->users_role == 3)
                   <span><img src="{{ URL::asset('/public/uploads/') }}/{{ $loginby->org_image ?? ''}}"></span>
                   @else
                   <span><img src="{{ URL::asset('/public/uploads/') }}/{{ $loginby->profile_image ?? ''}}"></span>
                   @endif
-
                   {{ $loginby->name ?? ''}}
                   <small class="shareclosebtn"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></small>
                 </div>
@@ -267,10 +268,6 @@
             </ul>
           </div>
           @endforeach
-
-
-
-
         </div>
       </div>
     </div>

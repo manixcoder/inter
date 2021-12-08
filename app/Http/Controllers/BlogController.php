@@ -63,7 +63,9 @@ class BlogController extends Controller
       'description' => $request->description,         
       'status' => 0,        
       'created_by' => Session::get('gorgID'),       
-      'posted_date_and_time' => now(),       
+      'posted_date_and_time' => now(),
+      'created_at' => date("Y-m-d H:i:s"),
+      'updated_at' => date("Y-m-d H:i:s")       
     );
 
     $insertData = app('App\Blog')->insert($data);

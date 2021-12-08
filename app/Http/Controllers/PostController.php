@@ -78,21 +78,27 @@ class PostController extends Controller
       $data = array(
         'user_id' => $userid,
         'post_id' => $id,
-        'like_unlike' => 0
+        'like_unlike' => 0,
+        'created_at' => date("Y-m-d H:i:s"),
+        'updated_at' => date("Y-m-d H:i:s")
       );
       $insertData = DB::table('post_like')->insert($data);
     } else {
       if ($postdata->like_unlike == 0) {
-        $data = array('like_unlike' => 1);
+        $data = array(
+          'like_unlike' => 1,
+          'updated_at' => date("Y-m-d H:i:s")
+        );
         $updatedata = DB::table('post_like')->where('id', $postdata->id)->update($data);
         $notificationData = array(
           'comment_user' => Auth::user()->id,
           'post_title' => "Like Post",
           'notification_type' => 'Liked your post',
           'comment' => $postData->heading
+          
         );
       } else {
-        $data = array('like_unlike' => 0);
+        $data = array('like_unlike' => 0,);
         $notificationData = array(
           'comment_user' => Auth::user()->id,
           'post_title' => "Like Post",
@@ -138,11 +144,13 @@ class PostController extends Controller
       'date_time' => Carbon::now(),
       'status' => 0,
       'user_id' => Session::get('gorgID'),
+      'created_at' => date("Y-m-d H:i:s"),
+      'updated_at' => date("Y-m-d H:i:s")
     );
     $insertData = app('App\Posts')->insert($data);
-    $users = User::all();
+    $users = User::where('id', '!=', Session::get('gorgID'))->get();
     $notificationData = array(
-      'comment_user' => Auth::user()->name,
+      'comment_user' => Auth::user()->id,
       'post_title' => $request->heading,
       'notification_type' => 'Posted a post',
       'comment' => $request->description

@@ -241,7 +241,7 @@
                   <a href="#"><span><img src="{{ URL::asset('/public/assets/images/commentIcon.png') }}" alt="icon"></span> 05 Comments</a>
                 </li>
                 <li>
-                  <a href="#"><span><img src="{{ URL::asset('/public/assets/images/messageIcon.png') }}" alt="icon"></span> Message</a>
+                <a href="{{ URL::to('/message')}}" target="_blank"><span><img src="{{ URL::asset('/public/assets/images/messageIcon.png') }}" alt="icon"></span> Message</a>
                 </li>
                 <li>
                   <a href="#"><span><img src="{{ URL::asset('/public/assets/images/shareIcon.png') }}" alt="icon"></span> Share</a>

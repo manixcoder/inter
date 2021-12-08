@@ -42,7 +42,7 @@
        </div>
        <div class="viewdetail_pra fw">
          <p class="site-pra">
-           {{ $Data->description ?? ''}}
+           <?php echo  $Data->description ?>
          </p>
        </div>
      </div>
@@ -71,7 +71,7 @@
                  </h3>
                  <div class="viewdetail_pra fw">
                    <p class="site-pra">
-                     {{ $value->description ?? ''}}
+                     <?php echo $value->description ?>
                      <a href="{{URL::to('web/blog/detail/')}}/{{ $value->id }}" class="read_more_btn">
                        READ MORE
                      </a>

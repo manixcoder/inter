@@ -20,7 +20,7 @@ class SocialAuthLinkedinController extends Controller
     {
         try {
             $linkdinUser = Socialite::driver('linkedin')->user();
-            dd($linkdinUser);
+            // dd($linkdinUser);
             $existUser = User::where('email',$linkdinUser->email)->first();
             if($existUser) {
                 Auth::loginUsingId($existUser->id);

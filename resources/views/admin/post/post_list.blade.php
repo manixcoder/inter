@@ -56,7 +56,7 @@
                         <a href="javascript::void(0)"><span><img src="{{ URL::asset('/public/assets/images/commentIcon.png') }}" alt="icon"></span> {{ $commentby ?? '' }} Comments</a>
                      </li>
                     <!-- <li>
-                        <a href="#"><span><img src="{{ URL::asset('/public/assets/images/messageIcon.png') }}" alt="icon"></span> Message</a>
+                        <a href="{{ URL::to('/message')}}" target="_blank"><span><img src="{{ URL::asset('/public/assets/images/messageIcon.png') }}" alt="icon"></span> Message</a>
                      </li>-->
                      <li>
                          <a href="{{ URL::to('post-delete',$postsdata->id) }}" onclick="return confirm('Are you sure you want to delete this item?');"> <img src="{{ asset('public/assets/images/delete.svg')}}"><span></span> Delete </a>

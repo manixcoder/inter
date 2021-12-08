@@ -58,7 +58,7 @@
                <li><a href="{{ url('basic/info') }}">View Profile</a></li>
                <li><a href="{{ URL::to('recruiter-posts')}}">My Posts</a></li>
                <li><a href="{{ URL::to('recruiter-listings')}}">My Listing</a></li>
-               <li><a href="#">Messages</a></li>
+               <li><a href="{{ URL::to('/message')}}" target="_blank">Messages</a></li>
              </ul>
            </div>
          </div>
@@ -116,14 +116,14 @@
                </div>
                <h1>{{ $value->heading ?? ''}}</h1>
                @php
-                          $clear = strip_tags($value->description);
-                          $clear = html_entity_decode($clear);
-                          $clear = urldecode($clear);
-                          $clear = preg_replace('/[^A-Za-z0-9]/', ' ', $clear);
-                          $clear = preg_replace('/ +/', ' ', $clear);
-                          $clear = trim($clear);
-                          @endphp
-               <p class="site-pra">{{ $clear ?? ''}}</p>
+               $clear = strip_tags($value->description);
+               $clear = html_entity_decode($clear);
+               $clear = urldecode($clear);
+               $clear = preg_replace('/[^A-Za-z0-9]/', ' ', $clear);
+               $clear = preg_replace('/ +/', ' ', $clear);
+               $clear = trim($clear);
+               @endphp
+               <p class="site-pra"><?php echo $value->description ?></p>
              </div>
              <div class="img-cont fw">
                <figure class="full-img">
@@ -213,7 +213,12 @@
                  </form>
                </div -->
                <li>
-                 <a href="#"><span><img src="{{ URL::asset('/public/assets/images/messageIcon.png') }}" alt="icon"></span> Message</a>
+                 <a href="{{ URL::to('/message')}}" target="_blank">
+                   <span>
+                     <img src="{{ URL::asset('/public/assets/images/messageIcon.png') }}" alt="icon">
+                    </span> 
+                    Message
+                  </a>
                </li>
              </ul>
            </div>

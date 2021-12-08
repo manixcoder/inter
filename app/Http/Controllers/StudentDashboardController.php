@@ -12,6 +12,9 @@ use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Mail\Mailer;
+use App\Notifications\PostCommentNotification;
+use App\Notifications\JobsApplyNotification;
+use App\Notifications\UserLikePost;
 use Session;
 use Response;
 use DB;
@@ -468,6 +471,8 @@ class StudentDashboardController extends Controller
           'description' => $request->post_details,
           'post_image' => $profileImage,
           'date_time' => date('Y-m-d H:i:s'),
+          'created_at' => date('Y-m-d H:i:s'),
+          'updated_at'=> date('Y-m-d H:i:s'),
           'status' => 0,
         ]);
     } else {
@@ -477,8 +482,20 @@ class StudentDashboardController extends Controller
           'heading' => $request->post_title,
           'description' => $request->post_details,
           'date_time' => date('Y-m-d H:i:s'),
+          'created_at' => date('Y-m-d H:i:s'),
+          'updated_at'=> date('Y-m-d H:i:s'),
           'status' => 0,
         ]);
+    }
+    $users = User::where('id', '!=', Session::get('gorgID'))->get();
+    $notificationData = array(
+      'comment_user' => Auth::user()->id,
+      'post_title' => $request->heading,
+      'notification_type' => 'Posted a post',
+      'comment' => $request->description
+    );
+    foreach ($users as $user) {
+      $user->notify(new PostCommentNotification($notificationData));
     }
     return redirect()->back();
   }
@@ -544,11 +561,25 @@ class StudentDashboardController extends Controller
   public function student_job_apply(Request $request)
   {
     $id = Session::get('gorgID');
+    $jobData  = DB::table('jobs')->where('id', $request->job_id)->first();
     $update = DB::table('job_applied')
       ->insert([
         'student_id' => $id,
         'job_id' => $request->job_id,
+        'created_at'=> date("Y-m-d H:i:s"),
+        'updated_at'=> date("Y-m-d H:i:s")
       ]);
+      //$users = User::where('id', $jobData->user_id)->get();
+      $users = User::where('id', '!=', Session::get('gorgID'))->get();
+      $notificationData = array(
+        'comment_user' => Auth::user()->id,
+        'post_title' => $jobData->job_title,
+        'notification_type' => 'applied for',
+        'comment' => $jobData->job_description
+      );
+      foreach ($users as $user) {
+        $user->notify(new JobsApplyNotification($notificationData));
+      } 
     return redirect()->back()->with(array('status' => 'success', 'message' => 'Job Applied Successfully'));;
   }
   public function upload_student_resume(Request $request)

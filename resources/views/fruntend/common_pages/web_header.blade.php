@@ -55,8 +55,12 @@ $todaysdate = date('Y-m-d').' 00:00:00';
               <li class="{{ request()->is('student/jobs') ? 'active' : '' }}">
                 <a href="{{url('student/jobs')}}">Jobs </a>
               </li>
-              <li class="{{ request()->is('notifications') ? 'active' : '' }}">
-                <a href="{{url('notification')}}">Notifications </a>
+              <li class="{{ request()->is('notification') ? 'active' : '' }}">
+                <a href="{{url('notification')}}">Notifications 
+                  @if(auth()->user()->unreadNotifications->count() > 0)
+                  <span class="badge badge-light">{{ auth()->user()->unreadNotifications->count() }}</span> 
+                  @endif
+                </a>
               </li>
               <li class="{{ request()->is('contact_us') ? 'active' : '' }}">
                 <a href="{{url('contact_us')}}">Contact Us </a>
@@ -74,7 +78,11 @@ $todaysdate = date('Y-m-d').' 00:00:00';
                 <a href="{{URL::to('web/post/jobs')}}" class="subcategory">Post a Job </a>
               </li>
               <li class="{{ request()->is('notification') ? 'active' : '' }}">
-                <a href="{{URL::to('notification')}}" class="subcategory">Notifications </a>
+                <a href="{{URL::to('notification')}}" class="subcategory">Notifications
+                @if(auth()->user()->unreadNotifications->count() > 0)
+                  <span class="badge badge-light">{{ auth()->user()->unreadNotifications->count() }}</span>
+                @endif                  
+              </a>
               </li>
               <li class="{{ request()->is('contact_us') ? 'active' : '' }}">
                 <a href="{{URL::to('contact_us')}}" class="subcategory">Contact Us </a>

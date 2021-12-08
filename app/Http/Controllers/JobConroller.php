@@ -153,9 +153,15 @@ class JobConroller extends Controller
     $jobsdata = app('App\Jobs')->where('id', $id)->first();
 
     if ($jobsdata->status == 1) {
-      $update = app('App\Jobs')->where('id', $id)->update(['status' => '0']);
+      $update = app('App\Jobs')->where('id', $id)->update([
+        'status' => '0',
+        'updated_at' => date("Y-m-d H:i:s")
+      ]);
     } else {
-      $update = app('App\Jobs')->where('id', $id)->update(['status' => '1']);
+      $update = app('App\Jobs')->where('id', $id)->update([
+        'status' => '1',
+        'updated_at' => date("Y-m-d H:i:s")
+      ]);
     }
   }
 

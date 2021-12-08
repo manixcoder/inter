@@ -108,7 +108,8 @@ class RecruiterwebController extends Controller
         'name' => $request->name, 
         'email' => $request->email, 
         'phone' => $request->phone, 
-        'designation' => $request->designation
+        'designation' => $request->designation,
+        'updated_at' => date("Y-m-d H:i:s")
       ]);
     }
     return back();

@@ -191,7 +191,7 @@
                                             </div>
                                         </div>
                                         <li>
-                                            <a href="#"><span><img src="{{ asset('public/assets/images/messageIcon.png')}}" alt="icon"></span> Message</a>
+                                        <a href="{{ URL::to('/message')}}" target="_blank"><span><img src="{{ asset('public/assets/images/messageIcon.png')}}" alt="icon"></span> Message</a>
                                         </li>
                                         <!-- li>
                                             <a href="#"><span><img src="{{ asset('public/assets/images/shareIcon.png')}}" alt="icon"></span> Share</a>

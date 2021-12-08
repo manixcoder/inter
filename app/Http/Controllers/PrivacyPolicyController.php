@@ -43,7 +43,9 @@ class PrivacyPolicyController extends Controller {
       'heading' => $request->heading,      
       'description' => $request->description,          
       'status' => 0,        
-      'user_id' => Session::get('gorgID'),       
+      'user_id' => Session::get('gorgID'), 
+      'created_at' => date("Y-m-d H:i:s"),
+      'updated_at' => date("Y-m-d H:i:s")      
     );
 
     if ($request->edit_id) {

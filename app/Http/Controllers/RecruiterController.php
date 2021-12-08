@@ -59,9 +59,15 @@ class RecruiterController extends Controller
     $jobsdata = app('App\User')->where('id', $id)->first();
 
     if ($jobsdata->status == 1) {
-      $update = app('App\User')->where('id', $id)->update(['status' => '0']);
+      $update = app('App\User')->where('id', $id)->update([
+        'status' => '0',
+        'updated_at' => date("Y-m-d H:i:s")
+    ]);
     } else {
-      $update = app('App\User')->where('id', $id)->update(['status' => '1']);
+      $update = app('App\User')->where('id', $id)->update([
+        'status' => '1',        
+        'updated_at' => date("Y-m-d H:i:s")
+      ]);
     }
   }
 
