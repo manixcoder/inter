@@ -291,22 +291,21 @@ class StudentDashboardController extends Controller
       $destinationPath = public_path('/uploads/');
       $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
       $path =  $files->move($destinationPath, $profileImage);
-    }else{
-       $profileImage="placeholder.png";
+    } else {
+      $profileImage = "placeholder.png";
     }
-    
+
     $update = DB::table('experience')
-        ->insert([
-          'user_id' => $id,
-          'company_image' => $profileImage,
-          'company_name' => $request->company_name,
-          'profile' => $request->profile_type,
-          'duration_from' => $request->duration_from,
-          'duration_to' => $request->duration_to,
-          'location' => $request->location,
-        ]);
-        return redirect()->back()->with(array('status' => 'success', 'message' => 'add student experience successfully.'));
-    
+      ->insert([
+        'user_id' => $id,
+        'company_image' => $profileImage,
+        'company_name' => $request->company_name,
+        'profile' => $request->profile_type,
+        'duration_from' => $request->duration_from,
+        'duration_to' => $request->duration_to,
+        'location' => $request->location,
+      ]);
+    return redirect()->back()->with(array('status' => 'success', 'message' => 'add student experience successfully.'));
   }
   public function update_student_experience(Request $request)
   {
@@ -472,7 +471,7 @@ class StudentDashboardController extends Controller
           'post_image' => $profileImage,
           'date_time' => date('Y-m-d H:i:s'),
           'created_at' => date('Y-m-d H:i:s'),
-          'updated_at'=> date('Y-m-d H:i:s'),
+          'updated_at' => date('Y-m-d H:i:s'),
           'status' => 0,
         ]);
     } else {
@@ -483,7 +482,7 @@ class StudentDashboardController extends Controller
           'description' => $request->post_details,
           'date_time' => date('Y-m-d H:i:s'),
           'created_at' => date('Y-m-d H:i:s'),
-          'updated_at'=> date('Y-m-d H:i:s'),
+          'updated_at' => date('Y-m-d H:i:s'),
           'status' => 0,
         ]);
     }
@@ -521,16 +520,18 @@ class StudentDashboardController extends Controller
         ->select('jo.*', 'r.org_name', 'r.profile_image', 'r.org_image', 'r.users_role')
         ->get();
     } else {
-      $jobsData = DB::table('jobs')
-        ->where('status', 0)
-        ->where('location', 'like', '%' . $location . '%')
-        ->where('job_title', 'like', '%' . $job_title . '%')
-        ->orderBy('id', 'desc')
+      $jobsData = DB::table('jobs as jo')
+        ->join('users as r', 'jo.user_id', '=', 'r.id')
+        ->where('jo.status', 0)
+        ->where('jo.location', 'like', '%' . $location . '%')
+        ->where('jo.job_title', 'like', '%' . $job_title . '%')
+        ->orderBy('jo.id', 'desc')
+        ->select('jo.*', 'r.org_name', 'r.profile_image', 'r.org_image', 'r.users_role')
         ->get();
     }
     return view('fruntend.student.student-jobs')->with([
       'OrgData'       => $OrgData,
-      'jobsData'      => $jobsData,
+      'jobsData'      => $jobsData, 
       'locationData'  => $locationData,
       'titleData'     => $titleData
     ]);
@@ -539,7 +540,6 @@ class StudentDashboardController extends Controller
   {
     $userRole = Session::get('userRole');
     $uid      = Session::get('gorgID');
-    //$jobsData = DB::table('jobs')->where('id',  $id)->first();
     $jobsData = DB::table('jobs as jo')
       ->join('users as r', 'jo.user_id', '=', 'r.id')
       ->where('jo.id',  $id)
@@ -551,12 +551,42 @@ class StudentDashboardController extends Controller
       'appl' => $jobsData
     ]);
   }
-  public function compnayProfile(Request $request, $id)
+  public function companyProfile(Request $request)
   {
-    $OrgData  = DB::table('users')->where('id', $id)->first();
-    return view('fruntend.student.company-profile')->with([
+    //dd($request->all());
+    $comp_id = $request->comp_id;
+    $OrgData  = DB::table('users')->where('id', $comp_id)->first();
+    return view('fruntend.common_pages.company-about')->with([
       'OrgData' => $OrgData,
     ]);
+  }
+  public function companyPosts(Request $request)
+  {
+    $comp_id = $request->comp_id;
+    $OrgData  = DB::table('users')->where('id', $comp_id)->first();
+    return view('fruntend.common_pages.company_posts')->with([
+      'OrgData' => $OrgData,
+    ]);
+  }
+  public function companyListedJobs(Request $request)
+  {
+    $comp_id = $request->comp_id;
+    $OrgData  = DB::table('users')->where('id', $comp_id)->first();
+    return view('fruntend.common_pages.company-listed-jobs')->with([
+      'OrgData' => $OrgData,
+    ]);
+  }
+
+  // public function compnayProfile(Request $request, $id)
+  // {
+  //   $OrgData  = DB::table('users')->where('id', $id)->first();
+  //   return view('fruntend.common_pages.company-profile')->with([ 
+  //     'OrgData' => $OrgData,
+  //   ]);
+  // }
+  public function companyInfo(Request $request, $id)
+  {
+    return view('fruntend.student.company_profile.basic_info')->with(['comp_id' => $id]);
   }
   public function student_job_apply(Request $request)
   {
@@ -566,20 +596,20 @@ class StudentDashboardController extends Controller
       ->insert([
         'student_id' => $id,
         'job_id' => $request->job_id,
-        'created_at'=> date("Y-m-d H:i:s"),
-        'updated_at'=> date("Y-m-d H:i:s")
+        'created_at' => date("Y-m-d H:i:s"),
+        'updated_at' => date("Y-m-d H:i:s")
       ]);
-      //$users = User::where('id', $jobData->user_id)->get();
-      $users = User::where('id', '!=', Session::get('gorgID'))->get();
-      $notificationData = array(
-        'comment_user' => Auth::user()->id,
-        'post_title' => $jobData->job_title,
-        'notification_type' => 'applied for',
-        'comment' => $jobData->job_description
-      );
-      foreach ($users as $user) {
-        $user->notify(new JobsApplyNotification($notificationData));
-      } 
+    //$users = User::where('id', $jobData->user_id)->get();
+    $users = User::where('id', '!=', Session::get('gorgID'))->get();
+    $notificationData = array(
+      'comment_user' => Auth::user()->id,
+      'post_title' => $jobData->job_title,
+      'notification_type' => 'applied for',
+      'comment' => $jobData->job_description
+    );
+    foreach ($users as $user) {
+      $user->notify(new JobsApplyNotification($notificationData));
+    }
     return redirect()->back()->with(array('status' => 'success', 'message' => 'Job Applied Successfully'));;
   }
   public function upload_student_resume(Request $request)

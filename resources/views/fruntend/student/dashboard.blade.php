@@ -99,7 +99,7 @@
                 <li><a href="{{ url('student-profile-basic-info') }}">View Profile</a></li>
                 <li><a href="{{ url('student-posts') }}">My Posts</a></li>
                 <li><a href="{{ url('student-applications') }}">My Applications</a></li>
-                <li><a href="{{ URL::to('/message')}}">Messages</a></li>
+                <li><a href="{{ URL::to('/message')}}" target="_blank">Messages</a></li>
 
               </ul>
             </div>
@@ -208,6 +208,15 @@
               <li class="commentbyopne">
                 <a href="javascript:void(0);"><span><img src="{{ asset('public/assets/images/commentIcon.png')}}" alt="icon"></span> {{ $commentby ?? '' }} Comments</a>
               </li>
+
+              <li>
+                 <a href="{{ URL::to('/message')}}" target="_blank">
+                   <span>
+                     <img src="{{ asset('public/assets/images/messageIcon.png')}}" alt="icon">
+                    </span> 
+                    Message
+                  </a>
+               </li>
               <div class="commentBox-usersec">
                 <div class="commentBox-heading">Comments <span>({{ $commentby ?? '' }})</span><span class="closebtn"><i class="fa fa-times-circle" aria-hidden="true"></i></span></div>
                 <div class="commentBox-chats">
@@ -216,7 +225,9 @@
                   @php $commentbyuser = DB::table('users')->where('id', $comments->user_id)->first(); @endphp
                   <div class="commentBox-chats-wapper">
                     @if($userRole == 3)
-                    <span class="usericon"><img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->org_image ?? ''}}" alt="icon" /></span>
+                    <span class="usericon">
+                      <img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->org_image ?? ''}}" alt="icon" />
+                    </span>
                     @else
                     <span class="usericon"><img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->profile_image ?? ''}}" alt="icon" /></span>
                     @endif

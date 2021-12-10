@@ -72,14 +72,14 @@
       <div class="aboutCont_sec fw">
         <div class="lgcontainer">
           @php 
-            $aboutusdata = DB::table('about_us')->orderBy('id', 'Desc')->where('status',0)->get();
+            $aboutusdata = DB::table('about_us')->orderBy('id', 'ASC')->where('status',0)->get();
           @endphp
           @if(isset($aboutusdata))
             @foreach($aboutusdata as $value)
             <?php //dd($value);?>
               <div class="aboutCont_box">
                 <h3>{{ $value->heading }}</h3>
-                <p><?php echo $value->description ?></p>
+                <?php echo $value->description ?>
               </div>
             @endforeach
           @endif

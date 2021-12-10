@@ -71,7 +71,7 @@
       <div class="aboutCont_sec fw">
         <div class="lgcontainer">
           @php 
-            $termsofusedata = DB::table('term_of_use')->orderBy('id', 'Desc')->where('status',0)->get();
+            $termsofusedata = DB::table('term_of_use')->orderBy('id', 'ASC')->where('status',0)->get();
           @endphp
           @if(isset($termsofusedata))
             @foreach($termsofusedata as $value)

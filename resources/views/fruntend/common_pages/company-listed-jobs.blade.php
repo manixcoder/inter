@@ -19,6 +19,7 @@
             <?php
             // echo "<pre>";
             // print_r($OrgData);
+            // die;
             ?>
         </div>
     </header>
@@ -40,14 +41,29 @@
             </div>
             <div class="tabCompnay_profile text-center fw">
                 <ul class="profileTab" id="profileTab_link">
-                    <li class="active">
-                        <a href="#profileTab_link1">About</a>
+                    <li class="{{ request()->is('company-profile') ? 'active' : '' }}">
+                        <form method="post" action="{{ url('company-profile') }}">
+                            @csrf
+                            <input type="hidden" name="comp_id" value="{{ $OrgData->id }}">
+                            <button type="submit">About</button>
+                        </form>
+                        <!-- <a href="{{url('company-info/'.$OrgData->id)}}">About</a> -->
                     </li>
-                    <li>
-                        <a href="#profileTab_link2">Posts</a>
+                    <li class="{{ request()->is('company-posts') ? 'active' : '' }}">
+                        <form method="post" action="{{ url('company-posts') }}">
+                            @csrf
+                            <input type="hidden" name="comp_id" value="{{ $OrgData->id }}">
+                            <button type="submit">Posts</button>
+                        </form>
+                        <!-- <a href="{{url('company-info/'.$OrgData->id)}}">Posts</a> -->
                     </li>
-                    <li>
-                        <a href="#profileTab_link3">Listed Jobs</a>
+                    <li class="{{ request()->is('company-listed-jobs') ? 'active' : '' }}">
+                        <form method="post" action="{{ url('company-listed-jobs') }}">
+                            @csrf
+                            <input type="hidden" name="comp_id" value="{{ $OrgData->id }}">
+                            <button type="submit">Listed Jobs</button>
+                        </form>
+                        <!-- <a href="#profileTab_link3">Listed Jobs</a> -->
                     </li>
                     <!--li>
                         <a href="#profileTab_link4">Followers</a>
@@ -56,164 +72,6 @@
                         <a href="#profileTab_link5">People</a>
                     </li -->
                 </ul>
-                <div class="profileTab_contBox" id="profileTab_link1">
-                    <div class="comProInfo_cont fw">
-                        <div class="innerrow">
-                            <div class="col_grid9">
-                                <h4 class="font24Text clrBlack fontfmlybold">{{ $OrgData->org_name }}</h4>
-                                <p class="font20Text clrGray">{{ $OrgData->address }}</p>
-                                <p class="font24Text clrBlack">
-                                    <span class="clrGray">Posted by :</span>
-                                    <span>
-                                        {{ $OrgData->name }}
-                                        <span class="lightFontWht">
-                                            {{ $OrgData->designation }}
-                                        </span>
-                                    </span>
-                                </p>
-                                <p class="font24Text clrGray">
-                                    <span>Contact:</span><a href="mailto:{{ $OrgData->email }}"> {{ $OrgData->email }}</a>
-                                </p>
-                            </div>
-                            <!-- <div class="col_grid3">
-                                <div class="commentsApply mrtop0 fw">
-                                    <div class="commantsChat">
-                                        <img src="{{ asset('public/assets/images/messageIcon.png')}}" alt="icon">
-                                    </div>
-                                    <div class="applyBtn">
-                                        <a href="javascript:void(0);" class="input-btn open-modal" data-modal="#successfullyModal">Apply</a>
-                                    </div>
-                                </div>
-                            </div> -->
-                        </div>
-                    </div>
-                    <div class="qverview_sec fw">
-                        <h3 class="font36text clrBlack semiboldfont_fmly">Overview</h3>
-                        <p class="grytextPra">{{ $OrgData->about }}</p>
-                        <div class="address_Cont fw">
-                            <p class="font20Text"><a class="blueLink_text" href="{{ $OrgData->website }}">{{ $OrgData->website }}</a></p>
-                            <!-- <p class="font20Text clrBlack">Information Technology</p>
-                            <p class="font20Text clrBlack">2-10 employees</p>
-                            <p class="font20Text clrBlack">Noida, Uttar Pradesh</p>
-                            <p class="font20Text clrBlack">Privately Held</p> -->
-                            <p class="font20Text clrBlack"><span class="clrGray">Founded :</span>{{ $OrgData->founded }}</p>
-                        </div>
-                    </div>
-                    <div class="qverview_sec fw">
-                        <h3 class="font36text clrBlack semiboldfont_fmly ">Specialties</h3>
-                        <p class="grytextPra">{{ $OrgData->specialties }}</p>
-                    </div>
-                </div>
-                <div class="profileTab_contBox" id="profileTab_link2">
-                    <div class="small_contaner blogcontainer">
-                        <div class="fw profilePost_wapper">
-                            <h3 class="clrBlack font36text semiboldfont_fmly post-heding">Posts</h3>
-                            <?php
-                            $postData = DB::table('posts')->where('user_id', $OrgData->id)->get();
-
-                            foreach ($postData as $post) {
-                                $likeby = DB::table('post_like')->where('post_id', $post->id)->where('like_unlike', 0)->count();
-                                $commentby = DB::table('post_comment')->where('post_id', $post->id)->count();
-                                $loginby = DB::table('users')->where('id', $OrgData->id)->first();
-                            ?>
-                                <div class="content-group fw">
-
-                                    <div class="text-cont fw">
-                                        <div class="userCommnet_deta fw">
-                                            <span>
-                                                <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->profile_image }}" alt="icon">
-                                            </span>
-                                            <div class="userCommnet_Name">
-                                                <h4>{{ $OrgData->name ?? ''}}<span>{{ date('d M Y | H:i', strtotime($post->date_time)) }}</span></h4>
-                                            </div>
-                                        </div>
-                                        <p class="site-pra">
-                                            {{ $post->description ?? ''}}
-                                        </p>
-                                    </div>
-
-                                    <div class="img-cont fw">
-                                        <figure class="full-img">
-                                            <img src="{{ asset('public/assets/images/blogflow-card.png')}}" alt="img1" />
-                                        </figure>
-                                    </div>
-                                    <ul class="commntsMsgBox fw">
-                                        @if($likeby == null)
-                                        <li>
-                                            <a href="javascript:void(0);" onclick="editRecords({{ $post->id }})">
-                                                <span>
-                                                    <img src="{{ asset('public/assets/images/likedIcon.png')}}" alt="icon">
-                                                </span>
-                                                {{ $likeby ?? ''}}
-                                                Likes
-                                            </a>
-                                        </li>
-                                        @else
-                                        <li>
-                                            <a href="javascript:void(0);" onclick="editRecords({{ $post->id }})" style="color:#ba3143" ;><span><img src="{{ asset('public/assets/images/likedIcon.png')}}" alt="icon"></span> {{ $likeby ?? ''}} Likes</a>
-                                        </li>
-                                        @endif
-                                        <li class="commentbyopne">
-                                            <a href="javascript:void(0);">
-                                                <span>
-                                                    <img src="{{ asset('public/assets/images/commentIcon.png')}}" alt="icon">
-                                                </span>
-                                                {{ $commentby ?? '' }} Comments
-                                            </a>
-                                        </li>
-                                        <div class="commentBox-usersec">
-                                            <div class="commentBox-heading">Comments <span>({{ $commentby ?? '' }})</span><span class="closebtn"><i class="fa fa-times-circle" aria-hidden="true"></i></span></div>
-                                            <div class="commentBox-chats">
-                                                @if(isset($commentbydata))
-                                                @foreach($commentbydata as $comments)
-                                                @php $commentbyuser = DB::table('users')->where('id', $comments->user_id)->first(); @endphp
-                                                <div class="commentBox-chats-wapper">
-                                                    @if($userRole == 3)
-                                                    <span class="usericon">
-                                                        <img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->org_image ?? ''}}" alt="icon" />
-                                                    </span>
-                                                    @else
-                                                    <span class="usericon">
-                                                        <img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->profile_image ?? ''}}" alt="icon" /></span>
-                                                    @endif
-                                                    <div class="commentuser-rightuser">
-                                                        <h4>{{ $commentbyuser->name ?? ''}}</h4>
-                                                        <p>{{ $comments->comment ?? ''}}</p>
-                                                        <div class="comticon">
-                                                            <!--<span><i class="fa fa-thumbs-up" aria-hidden="true"></i> - 312</span><span><a href="#" class="reply">Reply</a></span>-->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                @endforeach
-                                                @endif
-
-                                                <form action="{{ URL::to('add-comment')}}" method="POST" id="FormValidation" enctype="multipart/form-data">
-                                                    @csrf
-                                                    <input type="hidden" name="post_id" id="postid" value="{{ $post->id ?? ''}}" class="form-control">
-
-                                                    <div class="comment-inputmsg">
-                                                        <input type="text" name="comment" id="commentdata" class="form-control" required="">
-                                                        <button type="submit" class="btn"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-                                                    </div>
-                                                </form>
-
-                                            </div>
-                                        </div>
-                                        <li>
-                                            <a href="{{ URL::to('/message')}}" target="_blank"><span><img src="{{ asset('public/assets/images/messageIcon.png')}}" alt="icon"></span> Message</a>
-                                        </li>
-                                        <!-- li>
-                                            <a href="#"><span><img src="{{ asset('public/assets/images/shareIcon.png')}}" alt="icon"></span> Share</a>
-                                        </li-->
-                                    </ul>
-                                </div>
-                            <?php
-                            }
-                            ?>
-
-                        </div>
-                    </div>
-                </div>
                 <div class="profileTab_contBox" id="profileTab_link3">
                     <div class="small_contaner">
                         <div class="fw profilePost_wapper listjob_wapper">
@@ -360,137 +218,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="profileTab_contBox" id="profileTab_link4">
-                    <div class="followers_sec fw">
-                        <div class="followers_topHeading fw">
-                            <h3 class="font36text semiboldfont_fmly">170 Followers <span class="pull-right"><a href="#" class="input-btn ">Follow</a></span></h3>
-                        </div>
-                        <div class="followers_shodeobox fw">
-                            <div class="innerrow">
-                                <div class="col_grid8 text-left">
-                                    <div class="img_box">
-                                        <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="icon">
-                                    </div>
-                                    <span class="font24Text clrBlack">Jaiks Doe</span>
-                                </div>
-                                <div class="col_grid4 text-right">
-                                    <div class="commentsApply mrtop0 fw">
-                                        <div class="commantsChat">
-                                            <img src="{{ asset('public/assets/images/messageIcon.png')}}" alt="icon">
-                                        </div>
-                                        <div class="applyBtn">
-                                            <a href="javascript:void(0);" class="input-btn open-modal" data-modal="#successfullyModal">Follow</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="followers_shodeobox fw">
-                            <div class="innerrow">
-                                <div class="col_grid8 text-left">
-                                    <div class="img_box">
-                                        <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="icon">
-                                    </div>
-                                    <span class="font24Text clrBlack">Jaiks Johnson</span>
-                                </div>
-                                <div class="col_grid4 text-right">
-                                    <div class="commentsApply mrtop0 fw">
-                                        <div class="commantsChat">
-                                            <img src="{{ asset('public/assets/images/messageIcon.png') }}" alt="icon">
-                                        </div>
-                                        <div class="applyBtn">
-                                            <a href="javascript:void(0);" class="input-btn open-modal" data-modal="#successfullyModal">Unfollow</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="followers_shodeobox fw">
-                            <div class="innerrow">
-                                <div class="col_grid8 text-left">
-                                    <div class="img_box">
-                                        <img src="{{ asset('public/assets/images/userimg-icon.png') }}" alt="icon">
-                                    </div>
-                                    <span class="font24Text clrBlack">Jaiks Doe</span>
-                                </div>
-                                <div class="col_grid4 text-right">
-                                    <div class="commentsApply mrtop0 fw">
-                                        <div class="commantsChat">
-                                            <img src="{{ asset('public/assets/images/messageIcon.png') }}" alt="icon">
-                                        </div>
-                                        <div class="applyBtn">
-                                            <a href="javascript:void(0);" class="input-btn open-modal" data-modal="#successfullyModal">Follow</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="profileTab_contBox" id="profileTab_link5">
-                    <div class="followers_sec fw">
-                        <div class="followers_shodeobox fw">
-                            <div class="innerrow">
-                                <div class="col_grid8 text-left">
-                                    <div class="img_box">
-                                        <img src="{{ asset('public/assets/images/userimg-icon.png') }}" alt="icon">
-                                    </div>
-                                    <span class="font24Text clrBlack">Jaiks Doe</span>
-                                </div>
-                                <div class="col_grid4 text-right">
-                                    <div class="commentsApply mrtop0 fw">
-                                        <div class="commantsChat">
-                                            <img src="{{ asset('public/assets/images/messageIcon.png') }}" alt="icon">
-                                        </div>
-                                        <div class="applyBtn">
-                                            <a href="javascript:void(0);" class="input-btn open-modal" data-modal="#successfullyModal">Follow</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="followers_shodeobox fw">
-                            <div class="innerrow">
-                                <div class="col_grid8 text-left">
-                                    <div class="img_box">
-                                        <img src="{{ asset('public/assets/images/userimg-icon.png') }}" alt="icon">
-                                    </div>
-                                    <span class="font24Text clrBlack">Jaiks Johnson</span>
-                                </div>
-                                <div class="col_grid4 text-right">
-                                    <div class="commentsApply mrtop0 fw">
-                                        <div class="commantsChat">
-                                            <img src="{{ asset('public/assets/images/messageIcon.png') }}" alt="icon">
-                                        </div>
-                                        <div class="applyBtn">
-                                            <a href="javascript:void(0);" class="input-btn open-modal" data-modal="#successfullyModal">Unfollow</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="followers_shodeobox fw">
-                            <div class="innerrow">
-                                <div class="col_grid8 text-left">
-                                    <div class="img_box">
-                                        <img src="{{ asset('public/assets/images/userimg-icon.png') }}" alt="icon">
-                                    </div>
-                                    <span class="font24Text clrBlack">Jaiks Doe</span>
-                                </div>
-                                <div class="col_grid4 text-right">
-                                    <div class="commentsApply mrtop0 fw">
-                                        <div class="commantsChat">
-                                            <img src="{{ asset('public/assets/images/messageIcon.png') }}" alt="icon">
-                                        </div>
-                                        <div class="applyBtn">
-                                            <a href="javascript:void(0);" class="input-btn open-modal" data-modal="#successfullyModal">Follow</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
+                
             </div>
         </div>
     </div>
@@ -508,6 +237,12 @@
         </div>
     </div>
     <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
+
+    <script>
+        $('#profileTab_link > li').click(function() {
+            $(this).addClass('active').siblings().removeClass('active')
+        })
+    </script>
     <script type="text/javascript">
         function editRecords(id) {
             $.ajaxSetup({
@@ -727,6 +462,7 @@
 
         });
     </script>
+
     <script>
         $('#profileTab_link li a:not(:first)').addClass('inactive');
         $('.profileTab_contBox').hide();

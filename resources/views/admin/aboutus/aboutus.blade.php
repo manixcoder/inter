@@ -11,7 +11,9 @@
                          <img src="{{ asset('public/assets/images/delete.svg')}}">
                    </a></i>
                 </h3>
-                <p><?php echo $value->description ?></p>
+                <?php 
+                echo $value->description 
+                ?>
             </div>
         @endforeach
    @endif  

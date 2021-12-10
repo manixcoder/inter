@@ -34,7 +34,9 @@
             </div>
             <div class="commentsApply fw">
               <div class="commantsChat">
+              <a href="{{ URL::to('/message')}}" target="_blank">
                 <img src="{{ URL::asset('/public/assets/images/messageIcon.png')}}" alt="icon" />
+                </a>
               </div>
               <div class="applyBtn">
                 <a href="javascript:void(0);" class="input-btn open-modal" data-modal="#successfullyModal">Apply</a>
@@ -83,7 +85,9 @@
                   <div class="col_grid4">
                     <div class="commentsApply fw">
                       <div class="commantsChat">
+                      <a href="{{ URL::to('/message')}}" target="_blank">
                         <img src="{{ URL::asset('/public/assets/images/messageIcon.png') }}" alt="icon">
+                      </a>
                       </div>
                       <div class="applyBtn">
                         <a href="{{ URL::to('student-selected',$studentDetails->id) }}/{{ $Data[0]->user_id }}" class="input-btn">Shortlist & Send Email</a>

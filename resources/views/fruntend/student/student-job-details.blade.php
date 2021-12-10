@@ -75,15 +75,24 @@
           </div>
           <div class="col_grid3">
             <div class="retextbtn_sec">
-              <a href="{{ url('compnay-profile') }}/{{ $OrgData->id }}" class="retextbtn">View Company Profile
+              <form method="post" action="{{ url('company-profile') }}">
+                @csrf 
+                <input type="hidden" name="comp_id" value="{{ $OrgData->id }}">
+                
+                <button type="submit" class="retextbtn" >View Company Profile</button>
+                <img src="{{ asset('public/assets/images/arrow_right_red.png')}}" alt="redarrow">
+              </form>
+              <!--a href="{{ url('company-profile') }}/{{ $OrgData->id }}" class="retextbtn">View Company Profile
                 <span>
                   <img src="{{ asset('public/assets/images/arrow_right_red.png')}}" alt="redarrow">
                 </span>
-              </a>
+              </a -->
             </div>
             <div class="commentsApply fw">
               <div class="commantsChat">
+                <a href="{{ URL::to('/message')}}" target="_blank"> 
                 <img src="{{ asset('public/assets/images/messageIcon.png')}}" alt="icon">
+</a>
               </div>
               <div class="applyBtn">
                 <?php

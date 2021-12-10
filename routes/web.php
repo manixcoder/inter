@@ -24,9 +24,26 @@ Route::get('recruiter-about', function () {
 Route::get('recruiter-posts', function () {
 	return view('fruntend.recruiter_profile_section.my_posts');
 });
-Route::get('recruiter-listings', function () {
-	return view('fruntend.recruiter_profile_section.my_listing');
+// Route::get('recruiter-listings', function () {
+// 	return view('fruntend.recruiter_profile_section.my_listing');
+// });
+
+
+// Route::get('basic/info/{id}', function () {
+// 	return view('fruntend.student.company_profile.basic_info');
+// });
+Route::get('company-info/{id}', 'StudentDashboardController@companyInfo');
+Route::get('recruiter-about/{id}', function () {
+	return view('fruntend.student.company_profile.about');
 });
+Route::get('recruiter-posts/{id}', function () {
+	return view('fruntend.student.company_profile.my_posts');
+});
+Route::get('recruiter-listings', function () {
+	return view('fruntend.student.company_profile.my_listing');
+});
+
+
 Route::get('recruiter-followers', function () {
 	return view('fruntend.recruiter_profile_section.my_followers');
 });
@@ -237,7 +254,10 @@ Route::any('delete_student_post/{id}', 'StudentDashboardController@delete_studen
 Route::get('student/jobs', 'StudentDashboardController@student_jobs');
 
 Route::any('student-job-details/{id}', 'StudentDashboardController@student_job_details');
-Route::any('compnay-profile/{id}', 'StudentDashboardController@compnayProfile');
+Route::any('company-profile', 'StudentDashboardController@companyProfile');
+Route::any('company-posts', 'StudentDashboardController@companyPosts');
+Route::any('company-listed-jobs', 'StudentDashboardController@companyListedJobs');
+//Route::any('company-profile/{id}', 'StudentDashboardController@compnayProfile');
 
 Route::post('student_job_apply', 'StudentDashboardController@student_job_apply');
 

@@ -159,8 +159,6 @@
                         <div class="form-group">
                           <label>Gender</label>
                           <select name="gender" class="form-control" id="selectbox1">
-
-
                             @if($OrgData->gender==0)
                             <option value="0">Male</option>
                             <option value="1">Female</option>
@@ -169,7 +167,6 @@
                             <option value="1">Female</option>
                             <option value="0">Male</option>
                             @endif
-
                           </select>
                         </div>
                       </div>
