@@ -49,7 +49,7 @@ $todaysdate = date('Y-m-d').' 00:00:00';
               <li class="{{ request()->is('student-dashboard') ? 'active' : '' }}">
                 <a href="{{url('student-dashboard')}}">Home </a>
               </li>
-              <li class="{{ request()->is('web/blog') ? 'active' : '' }}">
+              <li class="{{ request()->is('web/blog') ? 'active' : '' }} {{ request()->is('web/blog/detail') ? 'active' : '' }}">
                 <a href="{{url('web/blog')}}">Blogs </a>
               </li>
               <li class="{{ request()->is('student/jobs') ? 'active' : '' }}">
@@ -71,7 +71,7 @@ $todaysdate = date('Y-m-d').' 00:00:00';
               <li class="{{ request()->is('recruiter-dashboard') ? 'active' : '' }}">
                 <a href="{{ URL::to('recruiter-dashboard') }}" class="subcategory">Home </a>
               </li>
-              <li class="{{ request()->is('web/blog') ? 'active' : '' }}">
+              <li class="{{ request()->is('web/blog') ? 'active' : '' }} {{ request()->is('web/blog/detail') ? 'active' : '' }}">
                 <a href="{{URL::to('web/blog')}}" class="subcategory">Blogs </a>
               </li>
               <li class="{{ request()->is('web/post/jobs') ? 'active' : '' }}">

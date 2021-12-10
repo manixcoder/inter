@@ -121,7 +121,6 @@
                 </li>
               </ul>
             </ul>
-           
             <h5>Don't have an account ? <a href="{{URL::to('recruiter-register-step-one')}}" class="textbtn_green">Register now</a></h5>
           </div>
           <div class="footer_login fw">
@@ -132,7 +131,7 @@
     </div>
   </div>
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
-  <script src="{{ asset('public/assets/web_assets/js/commen-hd.js')}}"></script>  
+  <script src="{{ asset('public/assets/web_assets/js/commen-hd.js')}}"></script>
   <script type="text/javascript">
     setTimeout(function() {
       $(".alert").fadeOut(1500);

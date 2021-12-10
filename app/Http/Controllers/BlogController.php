@@ -25,7 +25,9 @@ class BlogController extends Controller
     $this->middleware('role'); 
   }
   
-  public function web_blog_detail($id){
+  public function web_blog_detail(Request $request){
+    //dd($request->all());
+    $id =  $request->blog_id;
     $Data = app('App\Blog')->where('id', $id)->first();
     return view('fruntend.common_pages.blog_detail')->with(['Data' => $Data]);
   }

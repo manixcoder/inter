@@ -18,7 +18,7 @@ class CreateBlogsTable extends Migration
             $table->integer('created_by');
             $table->string('blog_heading');
             $table->longText('description');
-            $table->integer('posted_date_and_time');
+            $table->timestamp('posted_date_and_time');
             $table->string('blog_image');
             $table->integer('feature_blog');
             $table->enum('status', ['1', '0'])->default(0)->comment = '0=Active, 1 =Inactive';

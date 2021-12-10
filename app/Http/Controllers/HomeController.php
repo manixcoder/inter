@@ -30,13 +30,29 @@ class HomeController extends Controller
 
   public function web_blog(Request $request)
   {
-    $Data = DB::table('blogs')->where('status', 0)->orderBy('id', 'desc')->get();
+    //dd($request->search);
+    if (isset($request->search)) {
+      $generatequery = "SELECT * FROM blogs WHERE blog_heading LIKE '%' '" . $request->search . "' '%' OR description LIKE  '%' '" . $request->search . "' '%' ";
+      $Data = DB::select($generatequery);
+    }else{
+      $Data = DB::table('blogs')->where('status', 0)->orderBy('id', 'desc')->get();
+    }
+    
     if ($Data != null) {
       return view('fruntend.common_pages.web_blog')->with('Data', $Data);
     } else {
       $msg = 'Please enter valid OTP.';
       return view('fruntend.common_pages.web_blog')->with('msg', $msg);
     }
+  }
+  public function recruiterListings(Request $request){
+    //dd($request->search);
+    if(isset($request->search)){
+      $searchdata= $request->search;
+    }else{
+      $searchdata= 'No';
+    }
+    return view('fruntend.recruiter_profile_section.my_listing')->with(['searchdata' => $searchdata, 'alert' => '']);
   }
 
   public function orgImageUpload(Request $request)
@@ -102,10 +118,10 @@ class HomeController extends Controller
     $password = $request->input('password');
     $rolecheck = DB::table('users')->where('email', $email)->first();
     if ($rolecheck == null) {
-      echo "email not register";
-      die;
+      // echo "email not register";
+      // die;
       return redirect()->back()->with(array(
-        'error_msg' => 'Password does not match.',
+        'error_msg' => 'Email not registered',
         'email' => $email,
       ));
     } else {
@@ -162,6 +178,11 @@ class HomeController extends Controller
             ));
           }
         }
+      }else{
+        return redirect()->back()->with(array(
+          'error_msg' => 'Invalid credentials. Please try again.',
+          'email' => $email,
+        ));
       }
     }
   }

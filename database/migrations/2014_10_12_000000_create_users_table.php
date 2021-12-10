@@ -26,9 +26,9 @@ class CreateUsersTable extends Migration
             $table->string('gender')->nullable();
             $table->string('dob')->nullable();
             $table->string('designation')->nullable();
-            $table->string('requirter_overview')->nullable();
+            $table->longText('requirter_overview')->nullable();
             $table->string('address')->nullable();
-            $table->string('about')->nullable();
+            $table->longText('about')->nullable();
             $table->string('create_by')->nullable();
             $table->string('country_id')->nullable();
             $table->string('status')->nullable();

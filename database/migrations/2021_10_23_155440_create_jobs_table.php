@@ -20,7 +20,7 @@ class CreateJobsTable extends Migration
             $table->string('company_name');
             $table->string('logo');
             $table->string('attachment');
-            $table->string('job_title');
+            $table->longText('job_title');
             $table->string('location');
             $table->string('applicant');
             $table->string('create_on');

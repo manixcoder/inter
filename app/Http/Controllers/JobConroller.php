@@ -25,7 +25,7 @@ class JobConroller extends Controller
   public function __construct()
   {
     $this->middleware('auth');
-    $this->middleware('role'); 
+    $this->middleware('role');
   }
 
   public function job_details($id)

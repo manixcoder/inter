@@ -17,10 +17,10 @@ class CreatePostsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->longText('heading');
-            $table->string('description');
+            $table->longText('description');
             $table->string('post_image');
             $table->enum('status', ['1', '0'])->default(0)->comment = '0=Active, 1=Inactive';
-            $table->integer('date_time');
+            $table->dateTime('date_time');
             $table->timestamps();
         });
     }

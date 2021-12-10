@@ -3,7 +3,7 @@
  <div class="body_wht-inners ">
    <div class="small_contaner blogcontainer">
      <div class="findblog_search blogView_search fw">
-       <form action="{{ url('blogsearchweb') }}" method="POST" id="FormValidation" enctype="multipart/form-data">
+       <form action="{{ url('web/blog') }}" method="POST" id="FormValidation" enctype="multipart/form-data">
          @csrf
          <div class="from-group">
            <div class="input-icon">
@@ -29,9 +29,14 @@
          </h3>
          <p class="site-pra addReadMore showlesscontent">
            {{ strip_tags($value->description) ?? ''}} ..
-           <a href="{{URL::to('web/blog/detail/')}}/{{ $value->id }}" class="read_more_btn">
+           <form action="{{URL::to('web/blog/detail')}}" method="post" enctype="multipart/form-data">
+             @csrf
+             <input type="hidden" name="blog_id" value="{{ $value->id }}">
+             <input type="submit" value="READ MORE">
+           </form>
+           <!--a href="{{URL::to('web/blog/detail/')}}/{{ $value->id }}" class="read_more_btn">
              READ MORE
-           </a>
+           </a-->
          </p>
        </div>
        <div class="img-cont fw">

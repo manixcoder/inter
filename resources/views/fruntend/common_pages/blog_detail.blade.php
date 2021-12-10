@@ -72,9 +72,14 @@
                  <div class="viewdetail_pra fw">
                    <p class="site-pra">
                      <?php echo $value->description ?>
-                     <a href="{{URL::to('web/blog/detail/')}}/{{ $value->id }}" class="read_more_btn">
+                   <form action="{{URL::to('web/blog/detail')}}" method="post" enctype="multipart/form-data">
+                     @csrf
+                     <input type="hidden" name="blog_id" value="{{ $value->id }}">
+                     <input type="submit" class="read_more_btn" value="READ MORE">
+                   </form>
+                   <!-- a href="{{URL::to('web/blog/detail/')}}/{{ $value->id }}" class="read_more_btn">
                        READ MORE
-                     </a>
+                     </a-->
                    </p>
                  </div>
                  <div class="img-cont fw">
