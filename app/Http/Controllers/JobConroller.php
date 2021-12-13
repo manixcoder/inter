@@ -24,6 +24,7 @@ class JobConroller extends Controller
 {
   public function __construct()
   {
+    date_default_timezone_set("Asia/Kolkata");
     $this->middleware('auth');
     $this->middleware('role');
   }
@@ -108,10 +109,10 @@ class JobConroller extends Controller
     foreach ($users as $user) {
       $user->notify(new PostJobsNotification($notificationData));
     }
-    
-    if($insertData){
+
+    if ($insertData) {
       return redirect('/recruiter-listings')->with(array('status' => 'success', 'message' => 'Job created successfully!'));
-    }else{
+    } else {
       return back()->with(array('status' => 'error', 'message' =>  'Something want wrong !'));
     }
   }
@@ -123,7 +124,7 @@ class JobConroller extends Controller
       ->orderBy('jo.id', 'Desc')
       ->select('jo.*', 'us.profile_image', 'us.org_image')
       ->paginate(10);
-      //->get();
+    //->get();
     //$Data = app('App\Jobs')->orderBy('id', 'Desc')->get();
     $DataCount = app('App\Jobs')->count();
 
@@ -143,7 +144,7 @@ class JobConroller extends Controller
     $DataCount = DB::table('jobs as jo')
       ->join('users as us', 'jo.user_id', '=', 'us.id')
       ->whereDate('jo.created_at', Carbon::today())->count();
-   // dd($Data);
+    // dd($Data);
     $data['content'] = 'admin.jobs.listedjobs';
     return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount' => $DataCount]);
   }
@@ -153,9 +154,15 @@ class JobConroller extends Controller
     $jobsdata = app('App\Jobs')->where('id', $id)->first();
 
     if ($jobsdata->status == 1) {
-      $update = app('App\Jobs')->where('id', $id)->update(['status' => '0']);
+      $update = app('App\Jobs')->where('id', $id)->update([
+        'status' => '0',
+        'updated_at' => date("Y-m-d H:i:s")
+      ]);
     } else {
-      $update = app('App\Jobs')->where('id', $id)->update(['status' => '1']);
+      $update = app('App\Jobs')->where('id', $id)->update([
+        'status' => '1',
+        'updated_at' => date("Y-m-d H:i:s")
+      ]);
     }
   }
 
@@ -174,8 +181,8 @@ class JobConroller extends Controller
 
     $data['content'] = 'admin.jobs.job_details';
     return view('layouts.content', compact('data'))->with([
-      'jobDetail' => $jobDetail, 
-      'job_created_by' => $job_created_by, 
+      'jobDetail' => $jobDetail,
+      'job_created_by' => $job_created_by,
       'appliedjobs' => $appliedjobs
     ]);
   }

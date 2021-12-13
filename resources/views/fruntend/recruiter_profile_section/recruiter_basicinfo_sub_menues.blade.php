@@ -14,34 +14,29 @@
         <div class="boxDetailbg fw">
           <figure>
           @if($recruiterInfo->profile_image !='')
-            <img id="output" src="{{ asset('public/uploads')}}/{{ $recruiterInfo->profile_image }}" alt="jobs" />
+            <img  src="{{ asset('public/uploads')}}/{{ $recruiterInfo->profile_image }}" alt="jobs" />
             @else
-            <img src="{{ asset('public/uploads/company_profileBG.png')}}" alt="jobs" />
+            <img id="img_profile" src="{{ asset('public/uploads/company_profileBG.png')}}" alt="jobs" />
             @endif
           </figure>
         </div>
         <div class="compnayProfile_user fw">
           <div class="userBox_img">
              @if($recruiterInfo->org_image !='')
-            <img id="img_prv" src="{{ URL::asset('/public/uploads/') }}/{{ $recruiterInfo->org_image ?? ''}}" alt="icon_logo" />
+            <img  src="{{ URL::asset('/public/uploads/') }}/{{ $recruiterInfo->org_image ?? ''}}" alt="icon_logo" />
             @else
-            <img src="{{ asset('public/uploads/no-image.png')}}" alt="jobs" />
+            <img id="routput" src="{{ asset('public/uploads/no-image.png')}}" alt="jobs" />
             @endif
           </div>
         </div> 
         <div class="form-group">
           <label>Profile Image</label>
-            <input type="file" name="org_image" id="org_image">
+            <input type="file" name="profile_image" id="profile_image">
         </div>
-        <!-- input 
-        name="profile_image" 
-        type="file" 
-        accept="image/*" 
-        onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])"
-        -->
+        
         <div class="form-group">
               <label>Banner Image</label>
-              <input type="file" name="profile_image" id="profile_image">
+              <input type="file" name="org_image" id="org_image">
             </div>
         
         
@@ -85,7 +80,7 @@
           //---image preview
           var reader=new FileReader();
           reader.onload=function(ev){
-            $('#img_prv').attr('src',ev.target.result).css('width','150px').css('height','150px');
+            $('#img_profile').attr('src',ev.target.result).css('width','150px').css('height','150px');
           }
           reader.readAsDataURL(this.files[0]);
           /// preview end
@@ -121,7 +116,7 @@
           //---image preview
           var reader=new FileReader();
           reader.onload=function(ev){
-            $('#output').attr('src',ev.target.result).css('width','100%');
+            $('#routput').attr('src',ev.target.result).css('width','100%');
           }
           reader.readAsDataURL(this.files[0]);
           /// preview end

@@ -21,18 +21,25 @@ use User;
 
 class StudentregisterController extends Controller
 {
+	public function __construct()
+	{
+		date_default_timezone_set("Asia/Kolkata");
+	}
 	/*public function __construct(){
-    $this->middleware('auth');
-    $this->middleware('role');
-  }*/
-
-
-
+		$this->middleware('auth');
+		$this->middleware('role');
+	}*/
 	/* student register controllers */
 	public function student_register_step_one(Request $request)
 	{
 		if ($request->setep_one == 'setep_one') {
-			$studentRegisterOne = app('App\User')->insertGetId(['name' => $request->name, 'users_role' => 2,'profile_image'=>'no-image.png','created_at'=>date("Y-m-d H:i:s"),'updated_at'=>date("Y-m-d H:i:s")]);
+			$studentRegisterOne = app('App\User')->insertGetId([
+				'name' => $request->name,
+				'users_role' => 2,
+				'profile_image' => 'no-image.png',
+				'created_at' => date("Y-m-d H:i:s"),
+				'updated_at' => date("Y-m-d H:i:s")
+			]);
 			return view('fruntend.student.student_register.student_register_step_two')->with([
 				'insertid' => $studentRegisterOne
 			]);
@@ -40,7 +47,8 @@ class StudentregisterController extends Controller
 			$phoneCount = DB::table('users')->where('phone', $request->phone)->count();
 			if ($phoneCount == 0) {
 				$studentRegisterOne = app('App\User')->where('id', $request->student_id)->update([
-					'phone' => $request->phone
+					'phone' => $request->phone,
+					'updated_at' => date("Y-m-d H:i:s")
 				]);
 				return view('fruntend.student.student_register.student_register_step_three')->with([
 					'insertid' => $request->student_id
@@ -53,13 +61,19 @@ class StudentregisterController extends Controller
 			$emailCount = DB::table('users')->where('email', $request->email)->count();
 
 			if ($emailCount == 0) {
-				$studentRegisterOne = app('App\User')->where('id', $request->student_id)->update(['email' => $request->email]);
+				$studentRegisterOne = app('App\User')->where('id', $request->student_id)->update([
+					'email' => $request->email,
+					'updated_at' => date("Y-m-d H:i:s")
+				]);
 				return view('fruntend.student.student_register.student_register_step_four')->with(['insertid' => $request->student_id]);
 			} else {
 				return view('fruntend.student.student_register.student_register_step_three')->with(['insertid' => $request->student_id, 'error_msg' => 'Sorry, Your email already exist.',]);
 			}
 		} elseif ($request->setep_four == 'setep_four') {
-			$studentRegisterOne = app('App\User')->where('id', $request->student_id)->update(['password' => Hash::make($request->confirmPassword)]);
+			$studentRegisterOne = app('App\User')->where('id', $request->student_id)->update([
+				'password' => Hash::make($request->confirmPassword),
+				'updated_at' => date("Y-m-d H:i:s")
+			]);
 			return view('fruntend.student.student_register.student_register_step_five')->with(['insertid' => $request->student_id]);
 		} elseif ($request->setep_five == 'setep_five') {
 			$data = app('App\User')->where('id', $request->student_id)->first();

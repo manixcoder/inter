@@ -19,7 +19,9 @@
     <div class="login_wapper">
       <div class="login_contbox">
         <div class="logo_img fw">
-          <a href="{{URL::to('/')}}"><img src="{{ asset('public/assets/images/logo.svg')}}" alt="logo"></a>
+          <a href="{{URL::to('/')}}">
+            <img src="{{ asset('public/assets/images/logo.svg')}}" alt="logo">
+          </a>
         </div>
         <form action="{{URL::to('web/forgot/password')}}" method="post" class="welcome_cont fw">
           {{csrf_field()}}

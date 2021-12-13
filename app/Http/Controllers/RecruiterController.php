@@ -22,6 +22,7 @@ class RecruiterController extends Controller
 {
   public function __construct()
   {
+    date_default_timezone_set("Asia/Kolkata");
     $this->middleware('auth');
     $this->middleware('role');
   }
@@ -59,9 +60,15 @@ class RecruiterController extends Controller
     $jobsdata = app('App\User')->where('id', $id)->first();
 
     if ($jobsdata->status == 1) {
-      $update = app('App\User')->where('id', $id)->update(['status' => '0']);
+      $update = app('App\User')->where('id', $id)->update([
+        'status' => '0',
+        'updated_at' => date("Y-m-d H:i:s")
+      ]);
     } else {
-      $update = app('App\User')->where('id', $id)->update(['status' => '1']);
+      $update = app('App\User')->where('id', $id)->update([
+        'status' => '1',
+        'updated_at' => date("Y-m-d H:i:s")
+      ]);
     }
   }
 
@@ -100,7 +107,7 @@ class RecruiterController extends Controller
 
       $data = array(
         'org_image' => $image,
-        'profile_image'=>'company_profileBG.png',
+        'profile_image' => 'company_profileBG.png',
         'email' => $request->email,
         'name' => $request->name,
         'org_name' => $request->org_name,
@@ -113,7 +120,7 @@ class RecruiterController extends Controller
         'updated_at' => date("Y-m-d H:i:s")
       );
 
-      $insertData = app('App\User')->insert($data); 
+      $insertData = app('App\User')->insert($data);
     }
 
     return redirect('recruiter-list');

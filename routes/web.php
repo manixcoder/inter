@@ -24,9 +24,28 @@ Route::get('recruiter-about', function () {
 Route::get('recruiter-posts', function () {
 	return view('fruntend.recruiter_profile_section.my_posts');
 });
-Route::get('recruiter-listings', function () {
-	return view('fruntend.recruiter_profile_section.my_listing');
+// Route::get('recruiter-listings', function () {
+// 	return view('fruntend.recruiter_profile_section.my_listing');
+// });
+Route::any('recruiter-listings', 'HomeController@recruiterListings');
+// Route::get('recruiter-listings', function () {
+// 	return view('fruntend.student.company_profile.my_listing');
+// });
+
+
+// Route::get('basic/info/{id}', function () {
+// 	return view('fruntend.student.company_profile.basic_info');
+// });
+Route::get('company-info/{id}', 'StudentDashboardController@companyInfo');
+Route::get('recruiter-about/{id}', function () {
+	return view('fruntend.student.company_profile.about');
 });
+Route::get('recruiter-posts/{id}', function () {
+	return view('fruntend.student.company_profile.my_posts');
+});
+
+
+
 Route::get('recruiter-followers', function () {
 	return view('fruntend.recruiter_profile_section.my_followers');
 });
@@ -179,6 +198,7 @@ Route::get('home', 'DashboardController@index')->name('home');
 Route::get('dashboard', 'DashboardController@dashboard');
 Route::get('notification', 'DashboardController@notification');
 Route::any('web/blog', 'HomeController@web_blog');
+Route::any('web/blog/detail', 'BlogController@web_blog_detail');
 Route::any('org-image-upload', 'HomeController@orgImageUpload');
 Route::any('profile-image-upload', 'HomeController@profileImageUpload');
 
@@ -233,11 +253,15 @@ Route::post('update_student_accomplishment', 'StudentDashboardController@update_
 Route::post('add_post', 'StudentDashboardController@add_post');
 
 Route::any('delete_student_post/{id}', 'StudentDashboardController@delete_student_post');
+Route::any('delete-student-resume/{id}','StudentDashboardController@deleteStudentResume');
 
 Route::get('student/jobs', 'StudentDashboardController@student_jobs');
 
 Route::any('student-job-details/{id}', 'StudentDashboardController@student_job_details');
-Route::any('compnay-profile/{id}', 'StudentDashboardController@compnayProfile');
+Route::any('company-profile', 'StudentDashboardController@companyProfile');
+Route::any('company-posts', 'StudentDashboardController@companyPosts');
+Route::any('company-listed-jobs', 'StudentDashboardController@companyListedJobs');
+//Route::any('company-profile/{id}', 'StudentDashboardController@compnayProfile');
 
 Route::post('student_job_apply', 'StudentDashboardController@student_job_apply');
 
@@ -300,7 +324,8 @@ Route::get('blog-list', 'BlogController@index');
 Route::any('blog-change/{id}', 'BlogController@status_update');
 Route::any('blog-delete/{id}', 'BlogController@delete');
 Route::any('blog-detail/{id}', 'BlogController@blog_detail');
-Route::any('web/blog/detail/{id}', 'BlogController@web_blog_detail');
+// Route::any('web/blog/detail/{id}', 'BlogController@web_blog_detail');
+
 Route::any('add-blog', 'BlogController@create');
 
 /* Student */

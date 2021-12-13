@@ -21,48 +21,50 @@ use User;
 
 class AdminController extends Controller
 {
-  /*public function __construct(){
+	public function __construct()
+	{
+		date_default_timezone_set("Asia/Kolkata");
+	}
+	/*public function __construct(){
     $this->middleware('auth');
     $this->middleware('role');
   }*/
 
-  
-    public function admin_logged_in(Request $request) {
-        $email = $request->input('email');
-	    $password = $request->input('password');
-	    $email_count = DB::table('users')->where('email', $email)->where('users_role', 1)->count();
 
-    	if ($email_count == 1) {
-    		$get_pass = DB::table('users')->where('email', $email)->get();
-    		foreach($get_pass as $data) {
-    			$db_password = $data->password;
-            }
+	public function admin_logged_in(Request $request)
+	{
+		$email = $request->input('email');
+		$password = $request->input('password');
+		$email_count = DB::table('users')->where('email', $email)->where('users_role', 1)->count();
 
-    		if (Hash::check($password, $db_password)) {
-    			if (Auth::attempt(['email' => $email, 'password' => $password])) {
-             
-        			return redirect('dashboard')->with(array(
-        				'success_msg' => 'You have loggedin.',
-                    ));
-                }
-    			else {
-    				return redirect()->back()->with(array(
-			                'error_msg' => 'Sorry, Your account deactivate by admin.',
-			                 'email' => $email,
-    		         ));
-    			}
-    		}
-    	    else {
-        		return redirect()->back()->with(array(
-        			'error_msg' => 'Password does not match.',
-        			'email' => $email,
-        		));
-    		}
-		}
-	    else {
-    		return redirect()->back()->with(array(
-    			'error_msg' => 'Sorry! Email not registered.'
-    		));
+		if ($email_count == 1) {
+			$get_pass = DB::table('users')->where('email', $email)->get();
+			foreach ($get_pass as $data) {
+				$db_password = $data->password;
+			}
+
+			if (Hash::check($password, $db_password)) {
+				if (Auth::attempt(['email' => $email, 'password' => $password])) {
+
+					return redirect('dashboard')->with(array(
+						'success_msg' => 'You have loggedin.',
+					));
+				} else {
+					return redirect()->back()->with(array(
+						'error_msg' => 'Sorry, Your account deactivate by admin.',
+						'email' => $email,
+					));
+				}
+			} else {
+				return redirect()->back()->with(array(
+					'error_msg' => 'Password does not match.',
+					'email' => $email,
+				));
+			}
+		} else {
+			return redirect()->back()->with(array(
+				'error_msg' => 'Sorry! Email not registered.'
+			));
 		}
 	}
 }

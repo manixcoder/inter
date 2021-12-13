@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost/payroll/'),
+    'url' => env('APP_URL', 'http://localhost/internify'),
 
     'asset_url' => env('ASSET_URL', null),
 

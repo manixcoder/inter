@@ -10,9 +10,13 @@ use Laravel\Socialite\Facades\Socialite;
 
 class SocialAuthLinkedinController extends Controller
 {
+    public function __construct()
+    {
+        date_default_timezone_set("Asia/Kolkata");
+    }
     public function redirect()
     {
-       // dd("Hello Here");
+        // dd("Hello Here");
         return Socialite::driver('linkedin')->redirect();
     }
 
@@ -20,23 +24,21 @@ class SocialAuthLinkedinController extends Controller
     {
         try {
             $linkdinUser = Socialite::driver('linkedin')->user();
-            dd($linkdinUser);
-            $existUser = User::where('email',$linkdinUser->email)->first();
-            if($existUser) {
+            // dd($linkdinUser);
+            $existUser = User::where('email', $linkdinUser->email)->first();
+            if ($existUser) {
                 Auth::loginUsingId($existUser->id);
-            }
-            else {
+            } else {
                 $user = new User;
                 $user->name = $linkdinUser->name;
                 $user->email = $linkdinUser->email;
                 $user->linkedin_id = $linkdinUser->id;
-                $user->password = md5(rand(1,10000));
+                $user->password = md5(rand(1, 10000));
                 $user->save();
                 Auth::loginUsingId($user->id);
             }
             return redirect()->to('/home');
-        } 
-        catch (Exception $e) {
+        } catch (Exception $e) {
             return 'error';
         }
     }

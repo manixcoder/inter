@@ -49,13 +49,13 @@ $todaysdate = date('Y-m-d').' 00:00:00';
               <li class="{{ request()->is('student-dashboard') ? 'active' : '' }}">
                 <a href="{{url('student-dashboard')}}">Home </a>
               </li>
-              <li class="{{ request()->is('web/blog') ? 'active' : '' }}">
+              <li class="{{ request()->is('web/blog') ? 'active' : '' }} {{ request()->is('web/blog/detail') ? 'active' : '' }}">
                 <a href="{{url('web/blog')}}">Blogs </a>
               </li>
               <li class="{{ request()->is('student/jobs') ? 'active' : '' }}">
                 <a href="{{url('student/jobs')}}">Jobs </a>
               </li>
-              <li class="{{ request()->is('notifications') ? 'active' : '' }}">
+              <li class="{{ request()->is('notification') ? 'active' : '' }}">
                 <a href="{{url('notification')}}">Notifications </a>
               </li>
               <li class="{{ request()->is('contact_us') ? 'active' : '' }}">
@@ -67,14 +67,18 @@ $todaysdate = date('Y-m-d').' 00:00:00';
               <li class="{{ request()->is('recruiter-dashboard') ? 'active' : '' }}">
                 <a href="{{ URL::to('recruiter-dashboard') }}" class="subcategory">Home </a>
               </li>
-              <li class="{{ request()->is('web/blog') ? 'active' : '' }}">
+              <li class="{{ request()->is('web/blog') ? 'active' : '' }} {{ request()->is('web/blog/detail') ? 'active' : '' }}">
                 <a href="{{URL::to('web/blog')}}" class="subcategory">Blogs </a>
               </li>
               <li class="{{ request()->is('web/post/jobs') ? 'active' : '' }}">
                 <a href="{{URL::to('web/post/jobs')}}" class="subcategory">Post a Job </a>
               </li>
               <li class="{{ request()->is('notification') ? 'active' : '' }}">
-                <a href="{{URL::to('notification')}}" class="subcategory">Notifications </a>
+                <a href="{{URL::to('notification')}}" class="subcategory">Notifications
+                @if(auth()->user()->unreadNotifications->count() > 0)
+                  <span class="badge badge-light">{{ auth()->user()->unreadNotifications->count() }}</span>
+                @endif                  
+              </a>
               </li>
               <li class="{{ request()->is('contact_us') ? 'active' : '' }}">
                 <a href="{{URL::to('contact_us')}}" class="subcategory">Contact Us </a>

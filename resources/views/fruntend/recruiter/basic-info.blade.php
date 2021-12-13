@@ -51,6 +51,7 @@
         <div class="innerrow">
           <div class="col_grid9">
             <div class="profile_publicimg">
+              23423
               <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="img" />
             </div>
             <div class="profile_publicDetail">
@@ -620,7 +621,7 @@
                   <a href="#"><span><img src="{{ asset('public/assets/images/commentIcon.png')}}" alt="icon"></span> 05 Comments</a>
                 </li>
                 <li>
-                  <a href="#"><span><img src="{{ asset('public/assets/images/messageIcon.png')}}" alt="icon"></span> Message</a>
+                <a href="{{ URL::to('/message')}}" target="_blank"><span><img src="{{ asset('public/assets/images/messageIcon.png')}}" alt="icon"></span> Message</a>
                 </li>
                 <li>
                   <a href="#"><span><img src="{{ asset('public/assets/images/shareIcon.png')}}" alt="icon"></span> Share</a>
@@ -663,7 +664,7 @@
                   <a href="#"><span><img src="{{ asset('public/assets/images/commentIcon.png')}}" alt="icon"></span> 05 Comments</a>
                 </li>
                 <li>
-                  <a href="#"><span><img src="{{ asset('public/assets/images/messageIcon.png')}}" alt="icon"></span> Message</a>
+                <a href="{{ URL::to('/message')}}" target="_blank"><span><img src="{{ asset('public/assets/images/messageIcon.png')}}" alt="icon"></span> Message</a>
                 </li>
                 <li>
                   <a href="#"><span><img src="{{ asset('public/assets/images/shareIcon.png')}}" alt="icon"></span> Share</a>

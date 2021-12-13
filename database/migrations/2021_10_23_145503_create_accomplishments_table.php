@@ -19,7 +19,7 @@ class CreateAccomplishmentsTable extends Migration
             $table->string('course_name');
             $table->string('awards');
             $table->string('test_scores');
-            $table->string('publications');
+            $table->longText('publications');
             $table->enum('status', ['1', '0'])->default(0)->comment = '0=Active, 1=Inactive';
             $table->timestamps();
         });

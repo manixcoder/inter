@@ -1,11 +1,9 @@
 var QBconfig = {
     credentials: {
-        appId:'93753',
-        authKey:'Su2Ov2wWdeHaEst',
-        authSecret:'sUsry4AVa-A4Fd9',
-        accountKey:'1p19eXiQ6tgDtQ6UYYqL',
-        apiDomain:'https://api.quickblox.com',
-        chatDomain:'chat.quickblox.com'
+        appId: '',
+        authKey: '',
+        authSecret: '',
+        accountKey: ''
     },
     appConfig: {
         chatProtocol: {

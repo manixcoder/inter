@@ -42,7 +42,7 @@
        </div>
        <div class="viewdetail_pra fw">
          <p class="site-pra">
-           {{ $Data->description ?? ''}}
+           <?php echo  $Data->description ?>
          </p>
        </div>
      </div>
@@ -71,10 +71,15 @@
                  </h3>
                  <div class="viewdetail_pra fw">
                    <p class="site-pra">
-                     {{ $value->description ?? ''}}
-                     <a href="{{URL::to('web/blog/detail/')}}/{{ $value->id }}" class="read_more_btn">
+                     <?php echo $value->description ?>
+                   <form action="{{URL::to('web/blog/detail')}}" method="post" enctype="multipart/form-data">
+                     @csrf
+                     <input type="hidden" name="blog_id" value="{{ $value->id }}">
+                     <input type="submit" class="read_more_btn" value="READ MORE">
+                   </form>
+                   <!-- a href="{{URL::to('web/blog/detail/')}}/{{ $value->id }}" class="read_more_btn">
                        READ MORE
-                     </a>
+                     </a-->
                    </p>
                  </div>
                  <div class="img-cont fw">
@@ -84,7 +89,7 @@
                  </div>
                  <div class="admin-date-box fw">
                    <span class="gary-small-text text-left col_grid6">Posted on :<span>
-                       {{date('d M Y | H:i'  , strtotime($value->posted_date_and_time))}}
+                       {{date('d M Y | H:i'  , strtotime($value->created_at))}}
                      </span>
                    </span>
                    <span class="gary-small-text text-right col_grid6">Posted by :<span>

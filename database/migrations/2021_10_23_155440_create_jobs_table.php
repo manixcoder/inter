@@ -20,13 +20,13 @@ class CreateJobsTable extends Migration
             $table->string('company_name');
             $table->string('logo');
             $table->string('attachment');
-            $table->string('job_title');
+            $table->longText('job_title');
             $table->string('location');
             $table->string('applicant');
             $table->string('create_on');
             $table->string('official_email');
-            $table->string('offer');
-            $table->string('description');
+            $table->longText('offer');
+            $table->longText('job_description');
             $table->enum('status', ['1', '0'])->default(0)->comment = '0=Active, 1=Inactive';
             $table->timestamps();
         });

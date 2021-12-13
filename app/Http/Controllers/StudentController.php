@@ -18,92 +18,97 @@ use User;
 use Hash;
 use Carbon\Carbon;
 
-class StudentController extends Controller 
+class StudentController extends Controller
 {
-  public function __construct(){
+  public function __construct()
+  {
+    date_default_timezone_set("Asia/Kolkata");
     $this->middleware('auth');
     $this->middleware('role');
   }
 
-  public function index() {
+  public function index()
+  {
     $Data = app('App\User')->where('users_role', 2)->orderBy('id', 'Desc')->get();
     $DataCount = app('App\User')->where('users_role', 2)->count();
-
     $data['content'] = 'admin.student.student_list';
-    return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount'=>$DataCount]);
+    return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount' => $DataCount]);
   }
 
-  public function today_student_list() {
-    $todaysdate = date('Y-m-d').' 00:00:00';
+  public function today_student_list()
+  {
+    $todaysdate = date('Y-m-d') . ' 00:00:00';
 
     $Data = DB::table('users')->Where('users_role', 2)->where('created_at', '>=', $todaysdate)->paginate(10);
-    
+
     $DataCount = DB::table('users')->Where('users_role', 2)->where('created_at', '>=', $todaysdate)->count();
 
     $data['content'] = 'admin.student.student_list';
-    return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount'=>$DataCount]);
+    return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount' => $DataCount]);
   }
 
-  public function status_update($id) {   
+  public function status_update($id)
+  {
     $studentdata = app('App\User')->where('id', $id)->first();
 
-    if($studentdata->status == 1)
-    {
-      $update = app('App\User')->where('id', $id)->update(['status'=>'0']);
-    }else{
-      $update = app('App\User')->where('id', $id)->update(['status'=>'1']);
-    }    
-  } 
+    if ($studentdata->status == 1) {
+      $update = app('App\User')->where('id', $id)->update(['status' => '0']);
+    } else {
+      $update = app('App\User')->where('id', $id)->update(['status' => '1']);
+    }
+  }
 
-  public function delete($id) {
+  public function delete($id)
+  {
     $delete = app('App\User')->where('id', $id)->delete();
     return back();
-  } 
+  }
 
-  public function create(Request $request) {
+  public function create(Request $request)
+  {
     $emailcheck = app('App\User')->where('email', $request->email)->first();
     $phonecheck = app('App\User')->where('phone', $request->phone)->first();
 
-    if ($emailcheck == true) {  
+    if ($emailcheck == true) {
       return back()->with('error', 'Email is already registered.!');
-    }
-    elseif($phonecheck == true){
-        return back()->with('error', 'Phone is already registered.!');
-    }else{
-        
-        if($files = $request->image){
-          $destinationPath = public_path('/uploads/');
-          $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
-          $path =  $files->move($destinationPath, $profileImage);
-          $profile_image = $insert['photo'] = "$profileImage";
-        }else{
-           $profile_image = 'placeholder.png';
-        }
-        
-        // if($request->image!=''){
-        //     $imagecheck = $image;
-        // }else{
-        //     $imagecheck = 'no-image.png';
-        // }
-      $data = array(   
-        'profile_image' => $profile_image,      
-        'name' => $request->name,      
-        'email' => $request->email,    
-        'phone' => $request->phone,       
-        'password' => Hash::make($request->password),       
-        'status' => 0,       
-        'users_role' => 2,       
+    } elseif ($phonecheck == true) {
+      return back()->with('error', 'Phone is already registered.!');
+    } else {
+
+      if ($files = $request->image) {
+        $destinationPath = public_path('/uploads/');
+        $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
+        $path =  $files->move($destinationPath, $profileImage);
+        $profile_image = $insert['photo'] = "$profileImage";
+      } else {
+        $profile_image = 'placeholder.png';
+      }
+
+      // if($request->image!=''){
+      //     $imagecheck = $image;
+      // }else{
+      //     $imagecheck = 'no-image.png';
+      // }
+      $data = array(
+        'profile_image' => $profile_image,
+        'name' => $request->name,
+        'email' => $request->email,
+        'phone' => $request->phone,
+        'password' => Hash::make($request->password),
+        'status' => 0,
+        'users_role' => 2,
         'create_by' => Session::get('gorgID'),
-        'created_at'=> date("Y-m-d H:i:s"),
-        'updated_at'=> date("Y-m-d H:i:s")      
+        'created_at' => date("Y-m-d H:i:s"),
+        'updated_at' => date("Y-m-d H:i:s")
       );
 
       $insertData = app('App\User')->insert($data);
-      return redirect('student-list')->with(['Success'=>'Data insert successfully!']);
-    }        
+      return redirect('student-list')->with(['Success' => 'Data insert successfully!']);
+    }
   }
 
-  public function student_detail($id) {
+  public function student_detail($id)
+  {
     //dd($id);
     $studentDetail = app('App\User')->where('id', $id)->first();
     //dd($studentDetail);
@@ -115,14 +120,13 @@ class StudentController extends Controller
 
     $data['content'] = 'admin.student.student_details';
     return view('layouts.content', compact('data'))
-    ->with([
-      'studentDetail' => $studentDetail, 
-      'education' => $education, 
-      'experience'=>$experience, 
-      'certificate'=>$certificate, 
-      'intrest'=>$intrest, 
-      'accomplishments'=>$accomplishments
-    ]);
+      ->with([
+        'studentDetail' => $studentDetail,
+        'education' => $education,
+        'experience' => $experience,
+        'certificate' => $certificate,
+        'intrest' => $intrest,
+        'accomplishments' => $accomplishments
+      ]);
   }
-  
 }

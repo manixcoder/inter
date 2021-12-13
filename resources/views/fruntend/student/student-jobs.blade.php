@@ -80,46 +80,68 @@
       </div>
 
       @if(Session::has('status'))
-          @if(Session::has('status') == 'success')
-          <div class="popupWapper">
-            <div class="modal cPassword_update_popup" id="cPassword_update">
-              <div class="close fw">
-                <a class="btn close-modal" data-modal="#cPassword_update" href="#"><img src="{{ asset('public/assets/images/images/close.png' )}}" alt="icon"></a>
-              </div>
-              <div class="content fw">
-                <div class="password_update_sec fw">
-                  <figure class="fw">
-                    <img src="{{ asset('public/assets/images/images/succcessfull.png') }}" alt="icon">
-                  </figure>
-                  <h3>{{ Session::get('message') }}</h3>
-                </div>
-              </div>
+      @if(Session::has('status') == 'success')
+      <div class="popupWapper">
+        <div class="modal cPassword_update_popup" id="cPassword_update">
+          <div class="close fw">
+            <a class="btn close-modal" data-modal="#cPassword_update" href="#">
+              <img src="{{ asset('public/assets/images/images/close.png' )}}" alt="icon">
+            </a>
+          </div>
+          <div class="content fw">
+            <div class="password_update_sec fw">
+              <figure class="fw">
+                <img src="{{ asset('public/assets/images/images/succcessfull.png') }}" alt="icon">
+              </figure>
+              <h3>{{ Session::get('message') }}</h3>
             </div>
           </div>
-          @endif
-        @endif
+        </div>
+      </div>
+      @endif
+      @endif
       <div class="unlock_sec jobSearch_sec">
         <h4>Find internships that inspire</h4>
         <form method="get" action="{{url('student/jobs')}}">
           <div class="innerrow">
             <div class="col_grid5 rightmap_icon">
               <div class="form_group">
-                <select name="location" class="form-contorl" id="selectbox2" required>
+                <!--select name="location" class="form-contorl" id="selectbox2" required>
                   <option value="">Select Location</option>
                   @foreach($locationData as $ld)
-                  <option value="<?php echo $ld->location ?>"><?php echo $ld->location ?></option>
+                  <option value="<?php // echo $ld->location 
+                                  ?>"><?php // echo $ld->location 
+                                                                  ?></option>
                   @endforeach
 
+                </select-->
+                <select name="location" class="form-contorl" id="location" required>
+                  <option value="">Select Location</option>
+                  <option value="Mumbai">Mumbai</option>
+                  <option value="Delhi">Delhi</option>
+                  <option value="Bangalore">Bangalore</option>
+                  <option value="Pune">Pune</option>
+                  <option value="Mohali">Mohali</option>
+                  <option value="Chandigarh">Chandigarh</option>
+                  <option value="Hydrabad">Hydrabad</option>
                 </select>
               </div>
             </div>
             <div class="col_grid4">
               <div class="form_group">
-                <select name="job_title" class="form-contorl" id="selectbox1" required>
+                <!--select name="job_title" class="form-contorl" id="selectbox1" required>
                   <option value="">Select Job Title</option>
                   @foreach($titleData as $td)
-                  <option value="<?php echo $td->job_title ?>"><?php echo $td->job_title ?></option>
+                  <option value="<?php // echo $td->job_title 
+                                  ?>"><?php // echo $td->job_title 
+                                                                  ?></option>
                   @endforeach
+                </select-->
+                <select name="job_title" class="form-contorl" id="job_title" required>
+                  <option value="">Select Job Title</option>
+                  <option value="Sales & Marketing Executive">Sales & Marketing Executive</option>
+                  <option value="Front-end Developer">Front-end Developer</option>
+                  <option value="Financial Analyst">Financial Analyst</option>
                 </select>
               </div>
             </div>
@@ -139,8 +161,10 @@
           <div class="compnayBoxImg">
             @if($appl->users_role =='3')
             <img src="{{ asset('public/uploads/'.$appl->org_image)}}" alt="images">
-            @else
+            @elseif($appl->users_role =='2')
             <img src="{{ asset('public/uploads/'.$appl->profile_image)}}" alt="images">
+            @else
+            <img src="{{ asset('public/uploads/placeholder.png')}}" alt="images">
             @endif
           </div>
           <div class="compnay">
@@ -171,9 +195,9 @@
           <div class="innerrow">
             <div class="col_grid9">
               <ul>
-              @foreach(unserialize($appl->offer) as $offer)
-              <li>{{ $offer }}</li>
-              @endforeach
+                @foreach(unserialize($appl->offer) as $offer)
+                <li>{{ $offer }}</li>
+                @endforeach
 
               </ul>
             </div>
@@ -563,9 +587,22 @@
             </figure>
 
             <span class="fw"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> {{$res->image}}</span>
-            @endif
             <div class="innerrow">
-
+              <div class="col_grid6">
+                <a href="{{ asset('public/uploads/'.$res->image) }}" download class="download_btn">
+                  <img src="{{ asset('public/assets/images/download.png')}}" alt="download">
+                  Download
+                </a>
+              </div>
+              <div class="col_grid6">
+                <a href="{{ url('delete-student-resume/'.$res->id) }}" class="download_btn">
+                  <img src="{{ asset('public/assets/images/delete.png')}}" alt="download">
+                  Delete Resume
+                </a>
+              </div>
+            </div>
+            @endif
+            <div class="innerrow">              
             </div>
           </div>
           <div class="col_grid6 text-center">
@@ -574,7 +611,7 @@
             @endif
             <div class="custome_uplaodresume">
               <div class="inputgroup">
-                <input type="file" name="image" class="uploadbtn" required>
+                <input type="file" name="image" class="uploadbtn" accept="application/pdf" required>
                 <span>Update Resume</span>
               </div>
             </div>

@@ -67,7 +67,7 @@
                                     <span>
                                         {{ $OrgData->name }}
                                         <span class="lightFontWht">
-                                        {{ $OrgData->designation }}
+                                            {{ $OrgData->designation }}
                                         </span>
                                     </span>
                                 </p>
@@ -140,7 +140,13 @@
                                     <ul class="commntsMsgBox fw">
                                         @if($likeby == null)
                                         <li>
-                                            <a href="javascript:void(0);" onclick="editRecords({{ $post->id }})"><span><img src="{{ asset('public/assets/images/likedIcon.png')}}" alt="icon"></span> {{ $likeby ?? ''}} Likes</a>
+                                            <a href="javascript:void(0);" onclick="editRecords({{ $post->id }})">
+                                                <span>
+                                                    <img src="{{ asset('public/assets/images/likedIcon.png')}}" alt="icon">
+                                                </span>
+                                                {{ $likeby ?? ''}}
+                                                Likes
+                                            </a>
                                         </li>
                                         @else
                                         <li>
@@ -163,9 +169,12 @@
                                                 @php $commentbyuser = DB::table('users')->where('id', $comments->user_id)->first(); @endphp
                                                 <div class="commentBox-chats-wapper">
                                                     @if($userRole == 3)
-                                                    <span class="usericon"><img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->org_image ?? ''}}" alt="icon" /></span>
+                                                    <span class="usericon">
+                                                        <img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->org_image ?? ''}}" alt="icon" />
+                                                    </span>
                                                     @else
-                                                    <span class="usericon"><img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->profile_image ?? ''}}" alt="icon" /></span>
+                                                    <span class="usericon">
+                                                        <img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->profile_image ?? ''}}" alt="icon" /></span>
                                                     @endif
                                                     <div class="commentuser-rightuser">
                                                         <h4>{{ $commentbyuser->name ?? ''}}</h4>
@@ -191,7 +200,7 @@
                                             </div>
                                         </div>
                                         <li>
-                                            <a href="#"><span><img src="{{ asset('public/assets/images/messageIcon.png')}}" alt="icon"></span> Message</a>
+                                            <a href="{{ URL::to('/message')}}" target="_blank"><span><img src="{{ asset('public/assets/images/messageIcon.png')}}" alt="icon"></span> Message</a>
                                         </li>
                                         <!-- li>
                                             <a href="#"><span><img src="{{ asset('public/assets/images/shareIcon.png')}}" alt="icon"></span> Share</a>

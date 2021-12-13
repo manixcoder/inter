@@ -21,7 +21,7 @@ class CreateMyApplicationsTable extends Migration
             $table->string('user_profile');
             $table->integer('city_id');
             $table->integer('applied_date');
-            $table->string('description');
+            $table->longText('description');
             $table->enum('status', ['1', '0'])->default(0)->comment = '0=Active, 1=Inactive';
             $table->timestamps();
         });

@@ -19,45 +19,51 @@ use Hash;
 use Auth;
 use Anouncement;
 
-class AnnouncementController extends Controller {
-  public function __construct(){
+class AnnouncementController extends Controller
+{
+  public function __construct()
+  {
+    date_default_timezone_set("Asia/Kolkata");
     $this->middleware('auth');
     $this->middleware('role');
   }
 
-  public function index() {
-    $Data = app('App\Announcement')->orderBy('id','Desc')->get();
+  public function index()
+  {
+    $Data = app('App\Announcement')->orderBy('id', 'Desc')->get();
     $data['content'] = 'admin.announcement.announcement';
     return view('layouts.content', compact('data'))->with(['Data' => $Data]);
   }
 
-  public function delete($id){
+  public function delete($id)
+  {
     $delete = app('App\Announcement')->where('id', $id)->delete();
     return back();
-  } 
+  }
 
-  public function create(Request $request) { 
-    $data = array(      
-      'title' => $request->title,      
-      'description' => $request->description,         
-      'aim' => $request->aim,         
-      'status' => 0,        
-      'user_id' => Session::get('gorgID'),       
+  public function create(Request $request)
+  {
+    $data = array(
+      'title' => $request->title,
+      'description' => $request->description,
+      'aim' => $request->aim,
+      'status' => 0,
+      'user_id' => Session::get('gorgID'),
     );
 
     if ($request->edit_id) {
       $insertData = app('App\Announcement')->where('id', $request->edit_id)->update($data);
-    }else{
+    } else {
       $insertData = app('App\Announcement')->insert($data);
-    } 
-    
-    return redirect('announcement-list');    
+    }
+
+    return redirect('announcement-list');
   }
 
-  public function edit($id) {
-    $announcementData = app('App\Announcement')->where('id', base64_decode($id))->first();    
+  public function edit($id)
+  {
+    $announcementData = app('App\Announcement')->where('id', base64_decode($id))->first();
     $data['content'] = 'admin.announcement.edit_announcement';
     return view('layouts.content', compact('data'))->with(['announcementData' => $announcementData]);
   }
-  
 }

@@ -125,7 +125,7 @@
               @php
               $userRole = Session::get('userRole');
               $id = Session::get('gorgID');
-              
+
 
 
               $applications=DB::table('job_applied as ja')
@@ -164,7 +164,7 @@
                     </div>
                     <div class="col_grid3">
                       <div class="commentsApply commMr0 fw">
-                        <a href="javascript:void(0);" class="">
+                        <a href="{{ URL::to('/message')}}" class="" target="_blank">
                           <div class="commantsChat">
                             <img src="{{ asset('public/assets/images/messageIcon.png')}}" alt="icon">
                           </div>
@@ -175,17 +175,10 @@
                 </div>
               </div>
               @endforeach
-
-
-
             </div>
           </div>
         </div>
       </div>
-
-
-
-
     </div>
   </div>
   </div>

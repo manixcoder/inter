@@ -1,6 +1,7 @@
 @include('fruntend.common_pages.web_header')  
 @include('fruntend.recruiter_profile_section.recruiter_basicinfo_sub_menues') 
 @php 
+
     $userRole = Session::get('userRole');
     $id = Session::get('gorgID');
     $recruiterInfo = DB::table('users')->where('id', $id)->first();

@@ -3858,8 +3858,11 @@ display: none;
 .intercandidates_box:last-child {
     margin-bottom: 60px;
 }
-.mylisting_recuriter .findblog_search, .checkbox_notify {
+/* .mylisting_recuriter .findblog_search, .checkbox_notify {
     display: none;
+} */
+.mylisting_recuriter .findblog_search, .checkbox_notify {
+    display: block;
 }
 .mylisting_recuriter .posted_heading {
     margin-top: 60px;

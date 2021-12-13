@@ -17,7 +17,7 @@ class CreatePrivacyPolicyTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->string('heading');
-            $table->string('description');
+            $table->longText('description');
             $table->enum('status', ['1', '0'])->default(0)->comment = '0=Active, 1=Inactive';
             $table->timestamps();
         });
