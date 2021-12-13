@@ -115,10 +115,10 @@ Route::get('verification_otp', function () {
 Route::get('recruiter-lending', function () {
 	return view('fruntend.recruiter_landing');
 });
-
-Route::any('blogsearch', 'HomeController@blogsearch');
+Route::any('blogsearch', 'SearchController@blogsearch');
+//Route::any('blogsearch', 'HomeController@blogsearch');
 Route::any('blogsearchweb', 'HomeController@blogsearchweb');
-Route::get('blog', 'HomeController@web_blog_data');
+Route::get('blog', 'SearchController@web_blog_data');
 
 Route::any('recruider_register_step_one', 'HomeController@recruider_register_step_one');
 

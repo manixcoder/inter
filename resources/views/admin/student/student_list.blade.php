@@ -7,7 +7,7 @@
 	<div class="row">
 
 		<div class="col-md-12 listtable-sec">
-			<table class="table liststudent_table text-left" id="liststudent_table">
+			<table class="table listjob_table text-left" id="liststudent_table">
 				<thead>
 					<tr>
 						<th class="company_th">
@@ -116,7 +116,15 @@
 	}
 </script>
 <script>
-	$(document).ready(function() {
-		$('#liststudent_table').DataTable();
-	});
+	// $(document).ready(function() {
+	// 	$('#liststudent_table').DataTable({
+	// 		"lengthChange": true,
+	// 		"dom": '<"top"i>rt<"bottom"flp><"clear">',
+	// 		"lengthMenu": [
+	// 			[10, 25, 50, 100, 500, 1000],
+	// 			[10, 25, 50, 100, 500, "Max"]
+	// 		],
+	// 		"pageLength": 10,
+	// 	});
+	// });
 </script>

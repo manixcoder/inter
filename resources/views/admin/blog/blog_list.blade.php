@@ -11,6 +11,9 @@
 					<tr>
 						<th>
 							Blog ID
+							<span class="serach-input">
+								<input type="text" name="searchbox" class="serachbox">
+							</span>
 						</th>
 						<th class="headlineTh">
 							Headline
@@ -107,7 +110,15 @@
 	}
 </script>
 <script>
-	$(document).ready(function() {
-		$('#listblog_table').DataTable();
-	});
+	// $(document).ready(function() {
+	// 	$('#listblog_table').DataTable({
+	// 		"lengthChange": true,
+	// 		"dom": '<"top"i>rt<"bottom"flp><"clear">',
+	// 		"lengthMenu": [
+	// 			[10, 25, 50, 100, 500, 1000],
+	// 			[10, 25, 50, 100, 500, "Max"]
+	// 		],
+	// 		"pageLength": 10,
+	// 	});
+	// });
 </script>
