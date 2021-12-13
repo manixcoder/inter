@@ -62,9 +62,6 @@
 
             Read more: http: //mrbool.com/how-to-validate-password-strength-using-jquery/26760#ixzz764uN7seU
   </script>
-
-
-
-</body>
+  </body>
 
 </html>
