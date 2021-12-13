@@ -25,7 +25,13 @@
                  <li ><a href="{{ URL::to('/') }}">Home</a></li>
                 <li><a href="{{ URL::to('blog') }}">Blogs</a></li>
               </div>
-               <div class="center_sec text-center col_grid4 menu_logo"><a href="{{ URL::to('/') }}"><img src="{{ asset('public/assets/images/header-logo.svg')}}" alt="logo" /><img src="{{ asset('public/assets/images/logo.svg')}}" alt="wht-logo" class="wth-logo-hide" /></a></li></div>
+               <div class="center_sec text-center col_grid4 menu_logo">
+                 <a href="{{ URL::to('/') }}">
+                   <img src="{{ asset('public/assets/images/header-logo.svg')}}" alt="logo" />
+                   <img src="{{ asset('public/assets/images/logo.svg')}}" alt="wht-logo" class="wth-logo-hide" />
+                  </a>
+                </li>
+              </div>
               <div class="right_sec col_grid4 text-right menu_link">
                 <li><a href="{{ URL::to('web-login') }}">Login</a></li>
                 <li><a href="{{ URL::to('contactus') }}">Contact us</a></li>

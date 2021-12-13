@@ -18,46 +18,53 @@ use DB;
 use Hash;
 use Auth;
 
-class PrivacyPolicyController extends Controller {
-  public function __construct(){
+class PrivacyPolicyController extends Controller
+{
+  public function __construct()
+  {
+    date_default_timezone_set("Asia/Kolkata");
     $this->middleware('auth');
     $this->middleware('role');
   }
 
-  public function index() {
+  public function index()
+  {
     $Data = app('App\Privacy_policy')->paginate(10);
 
     $data['content'] = 'admin.privacy_policy.privacypolicy';
     return view('layouts.content', compact('data'))->with(['Data' => $Data]);
   }
-  
-  public function edit($id) {
+
+  public function edit($id)
+  {
     $editData = app('App\Privacy_policy')->where('id', base64_decode($id))->first();
 
     $data['content'] = 'admin.privacy_policy.add_privacypolicy';
     return view('layouts.content', compact('data'))->with(['editData' => $editData]);
   }
 
-  public function create(Request $request) {    
-    $data = array(      
-      'heading' => $request->heading,      
-      'description' => $request->description,          
-      'status' => 0,        
-      'user_id' => Session::get('gorgID'), 
+  public function create(Request $request)
+  {
+    $data = array(
+      'heading' => $request->heading,
+      'description' => $request->description,
+      'status' => 0,
+      'user_id' => Session::get('gorgID'),
       'created_at' => date("Y-m-d H:i:s"),
-      'updated_at' => date("Y-m-d H:i:s")      
+      'updated_at' => date("Y-m-d H:i:s")
     );
 
     if ($request->edit_id) {
-     $insertData = app('App\Privacy_policy')->where('id', $request->edit_id)->update($data);
-    }else{
+      $insertData = app('App\Privacy_policy')->where('id', $request->edit_id)->update($data);
+    } else {
       $insertData = app('App\Privacy_policy')->insert($data);
-    }    
-    return redirect('privacypolicy-list');    
-  } 
-  
-  public function delete($id) {
+    }
+    return redirect('privacypolicy-list');
+  }
+
+  public function delete($id)
+  {
     $delete = app('App\Privacy_policy')->where('id', $id)->delete();
     return back();
-  } 
+  }
 }

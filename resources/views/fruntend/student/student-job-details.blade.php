@@ -41,15 +41,15 @@
     </div>
     @endif
 
-<?php 
-// echo "<pre>";
-// print_r($appl);
-// die;
-?>
+    <?php
+    // echo "<pre>";
+    // print_r($appl);
+    // die;
+    ?>
     <div class="lgcontainer">
       <div class="boxDetailbg fw">
         <figure>
-        @if($appl->logo !='')
+          @if($appl->logo !='')
           <img src="{{ asset('public/uploads')}}/{{ $appl->logo }}" alt="jobs">
           @else
           <img src="{{ asset('public/uploads/placeholder.png')}}" alt="newtechlogo">
@@ -76,10 +76,10 @@
           <div class="col_grid3">
             <div class="retextbtn_sec">
               <form method="post" action="{{ url('company-profile') }}">
-                @csrf 
+                @csrf
                 <input type="hidden" name="comp_id" value="{{ $OrgData->id }}">
-                
-                <button type="submit" class="retextbtn" >View Company Profile</button>
+
+                <button type="submit" class="retextbtn">View Company Profile</button>
                 <img src="{{ asset('public/assets/images/arrow_right_red.png')}}" alt="redarrow">
               </form>
               <!--a href="{{ url('company-profile') }}/{{ $OrgData->id }}" class="retextbtn">View Company Profile
@@ -90,9 +90,9 @@
             </div>
             <div class="commentsApply fw">
               <div class="commantsChat">
-                <a href="{{ URL::to('/message')}}" target="_blank"> 
-                <img src="{{ asset('public/assets/images/messageIcon.png')}}" alt="icon">
-</a>
+                <a href="{{ URL::to('/message')}}" target="_blank">
+                  <img src="{{ asset('public/assets/images/messageIcon.png')}}" alt="icon">
+                </a>
               </div>
               <div class="applyBtn">
                 <?php
@@ -112,9 +112,9 @@
               </div>
             </div>
           </div>
-          <div class="col_grid12 extraleft_pad mrtop_extra45 contact_profileinfo">
+          <!--div class="col_grid12 extraleft_pad mrtop_extra45 contact_profileinfo">
             <div class="innerrow">
-              
+
               <div class="col_grid6 text-right checkbox_notify">
                 <div class="custominputBox">
                   <input type="checkbox" class="inputCheck">
@@ -123,7 +123,7 @@
                 <span>Notify me for similar jobs</span>
               </div>
             </div>
-          </div>
+          </div-->
         </div>
       </div>
       <div class="jobDescriptions_sec fw">
@@ -140,12 +140,12 @@
       </div>
       @if($appl->attachment !='')
       <div class="jobDescriptions_sec fw">
-      <h3 class="borderBox_heading">Attachment</h3>
-      <a href="{{ URL::asset('/public/uploads/') }}/{{ $appl->attachment ?? ''}}" download>
-                            <img src="{{ URL::asset('/public/assets/images/fileupload_sec.png') }}" alt="icon">
-                            
-                            <img src="{{ URL::asset('/public/assets/images/download.png') }}" alt="icon">
-                          </a>
+        <h3 class="borderBox_heading">Attachment</h3>
+        <a href="{{ URL::asset('/public/uploads/') }}/{{ $appl->attachment ?? ''}}" download>
+          <img src="{{ URL::asset('/public/assets/images/fileupload_sec.png') }}" alt="icon">
+
+          <img src="{{ URL::asset('/public/assets/images/download.png') }}" alt="icon">
+        </a>
       </div>
       @endif
       <div class="fw similarBox_sec blog_intersted_box">
@@ -179,8 +179,8 @@
                     </div>
                     <div class="col_grid8">
                       <p><span>{{$job->location}}</span>
-                      <!--span class="dots">6 Months Internship</span -->
-                    </p>
+                        <!--span class="dots">6 Months Internship</span -->
+                      </p>
                     </div>
                     <div class="col_grid4">
                       <a href="{{url('student-job-details/'.$job->id)}}" class="input-btn redBGmanage_btn">View Job</a>
@@ -190,8 +190,6 @@
               </div>
             </div>
             @endforeach
-
-
           </div>
         </div>
       </div>

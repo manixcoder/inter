@@ -26,6 +26,7 @@ class PostController extends Controller
 {
   public function __construct()
   {
+    date_default_timezone_set("Asia/Kolkata");
     $this->middleware('auth');
     $this->middleware('role');
   }
@@ -95,7 +96,7 @@ class PostController extends Controller
           'post_title' => "Like Post",
           'notification_type' => 'Liked your post',
           'comment' => $postData->heading
-          
+
         );
       } else {
         $data = array('like_unlike' => 0,);

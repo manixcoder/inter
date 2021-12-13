@@ -58,7 +58,7 @@
       // if ($accomplishments) {
       //   $count = $count + 5;
       // }
-      
+
       ?>
 
     </div>
@@ -70,7 +70,7 @@
           <div class="profile_leftsidebar fw">
             <div class="user_namesec fw">
               <figure>
-                <?php 
+                <?php
                 // echo "<pre>";
                 // print_r($OrgData);
                 // die;
@@ -156,8 +156,8 @@
             <div class="text-cont fw">
               <div class="userCommnet_deta fw">
                 <span>
-                    @if($UsrData->users_role ==='3')
-                   
+                  @if($UsrData->users_role ==='3')
+
                   <img src="{{ URL::asset('/public/uploads') }}/{{ $UsrData->org_image ?? ''}}" alt="img">
                   @elseif($UsrData->users_role ==='2')
                   <img src="{{ URL::asset('/public/uploads') }}/{{ $UsrData->profile_image ?? ''}}" alt="img">
@@ -168,18 +168,18 @@
                 <div class="userCommnet_Name">
                   <h4>
                     @if(!empty($UsrData->name)) {{ $UsrData->name }} @endif
-                    <span>{!! date('d M Y H:i:s', strtotime($post->date_time)) !!}</span> 
+                    <span>{!! date('d M Y H:i:s', strtotime($post->date_time)) !!}</span>
                     @if($users->id != $post->user_id)
                     @else
                     <span class="delete_postbtn">
-                          <a href="{{ url('delete_student_post/'.$post->id) }}"><i>
-                            <img src="{{ asset('public/assets/images/delete.png')}}" alt="delete-icon" /></i>
-                            Delete Post
-                          </a>
-                        </span>
-                        @endif
-                        </h4>
-                    </div>
+                      <a href="{{ url('delete_student_post/'.$post->id) }}"><i>
+                          <img src="{{ asset('public/assets/images/delete.png')}}" alt="delete-icon" /></i>
+                        Delete Post
+                      </a>
+                    </span>
+                    @endif
+                  </h4>
+                </div>
               </div>
               <h3 class="font57text clrBlack semiboldfont_fmly">{{$post->heading}}</h3>
               <p class="site-pra">
@@ -198,11 +198,11 @@
               </li>
               @else
               <li>
-                <a href="javascript:void(0);" onclick="editRecords({{ $post->id }})" style="color:#ba3143";>
-                <span>
-                  <img src="{{ asset('public/assets/images/likedIcon.png')}}" alt="icon">
-                </span> {{ $likeby ?? ''}} Likes
-              </a>
+                <a href="javascript:void(0);" onclick="editRecords({{ $post->id }})" style="color:#ba3143" ;>
+                  <span>
+                    <img src="{{ asset('public/assets/images/likedIcon.png')}}" alt="icon">
+                  </span> {{ $likeby ?? ''}} Likes
+                </a>
               </li>
               @endif
               <li class="commentbyopne">
@@ -210,26 +210,35 @@
               </li>
 
               <li>
-                 <a href="{{ URL::to('/message')}}" target="_blank">
-                   <span>
-                     <img src="{{ asset('public/assets/images/messageIcon.png')}}" alt="icon">
-                    </span> 
-                    Message
-                  </a>
-               </li>
+                <a href="{{ URL::to('/message')}}" target="_blank">
+                  <span>
+                    <img src="{{ asset('public/assets/images/messageIcon.png')}}" alt="icon">
+                  </span>
+                  Message
+                </a>
+              </li>
               <div class="commentBox-usersec">
-                <div class="commentBox-heading">Comments <span>({{ $commentby ?? '' }})</span><span class="closebtn"><i class="fa fa-times-circle" aria-hidden="true"></i></span></div>
+                <div class="commentBox-heading">Comments
+                  <span>
+                    ({{ $commentby ?? '' }})
+                  </span>
+                  <span class="closebtn">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                  </span>
+                </div>
                 <div class="commentBox-chats">
                   @if(isset($commentbydata))
                   @foreach($commentbydata as $comments)
                   @php $commentbyuser = DB::table('users')->where('id', $comments->user_id)->first(); @endphp
                   <div class="commentBox-chats-wapper">
-                    @if($userRole == 3)
+                    @if($commentbyuser->profile_image !='')
                     <span class="usericon">
-                      <img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->org_image ?? ''}}" alt="icon" />
+                      <img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->profile_image ?? ''}}" alt="icon" />
                     </span>
                     @else
-                    <span class="usericon"><img src="{{ URL::asset('/public/uploads/') }}/{{ $commentbyuser->profile_image ?? ''}}" alt="icon" /></span>
+                    <span class="usericon">
+                      <img src="{{ URL::asset('/public/uploads/placeholder.png') }}" alt="icon" />
+                    </span>
                     @endif
                     <div class="commentuser-rightuser">
                       <h4>{{ $commentbyuser->name ?? ''}}</h4>
@@ -252,9 +261,9 @@
                     </div>
                   </form>
 
-                </div> 
+                </div>
               </div>
-              
+
               <!--li class="shareclickon">
                 <a href="javascript:void(0);"><span><img src="{{ asset('public/assets/images/shareIcon.png')}}" alt="icon"></span> Share</a>
               </li-->
@@ -589,8 +598,6 @@
     $('.close-modal').click(function() {
       location.reload();
     });
-
-    
   </script>
 </body>
 

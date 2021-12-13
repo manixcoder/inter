@@ -17,7 +17,9 @@
     <div class="login_wapper">
       <div class="login_contbox digitcode_sec reset_password">
         <div class="logo_img fw">
-          <a href="{{URL::to('/')}}"><img src="{{ asset('public/assets/images/logo.svg') }}" alt="logo"></a>
+          <a href="{{URL::to('/')}}">
+            <img src="{{ asset('public/assets/images/logo.svg') }}" alt="logo">
+          </a>
         </div>
         <form class="welcome_cont fw" action="{{ url('student_register_step_one') }}" method="POST" enctype="multipart/form-data">
           @csrf

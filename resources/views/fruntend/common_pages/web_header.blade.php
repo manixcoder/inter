@@ -56,11 +56,7 @@ $todaysdate = date('Y-m-d').' 00:00:00';
                 <a href="{{url('student/jobs')}}">Jobs </a>
               </li>
               <li class="{{ request()->is('notification') ? 'active' : '' }}">
-                <a href="{{url('notification')}}">Notifications 
-                  @if(auth()->user()->unreadNotifications->count() > 0)
-                  <span class="badge badge-light">{{ auth()->user()->unreadNotifications->count() }}</span> 
-                  @endif
-                </a>
+                <a href="{{url('notification')}}">Notifications </a>
               </li>
               <li class="{{ request()->is('contact_us') ? 'active' : '' }}">
                 <a href="{{url('contact_us')}}">Contact Us </a>

@@ -28,6 +28,7 @@ class StudentDashboardController extends Controller
 {
   public function __construct()
   {
+    date_default_timezone_set("Asia/Kolkata");
     $this->middleware('auth');
     $this->middleware('role');
   }
@@ -531,7 +532,41 @@ class StudentDashboardController extends Controller
     }
     return view('fruntend.student.student-jobs')->with([
       'OrgData'       => $OrgData,
-      'jobsData'      => $jobsData, 
+      'jobsData'      => $jobsData,
+      'locationData'  => $locationData,
+      'titleData'     => $titleData
+    ]);
+  }
+  public function deleteStudentResume(Request $request, $id)
+  {
+    $res = DB::table('student_resume')->where('id', $id)->delete();
+    $userRole = Session::get('userRole');
+    $id = Session::get('gorgID');
+    $OrgData = DB::table('users')->where('id', $id)->first();
+    $locationData = DB::table('jobs')->select('location')->groupBy('location')->get();
+    $titleData = DB::table('jobs')->select('job_title')->groupBy('job_title')->get();
+    $job_title = $request->job_title;
+    $location = $request->location;
+    if (empty($job_title) and empty($location)) {
+      $jobsData = DB::table('jobs as jo')
+        ->join('users as r', 'jo.user_id', '=', 'r.id')
+        ->where('jo.status', '=', 0)
+        ->orderBy('jo.id', 'desc')
+        ->select('jo.*', 'r.org_name', 'r.profile_image', 'r.org_image', 'r.users_role')
+        ->get();
+    } else {
+      $jobsData = DB::table('jobs as jo')
+        ->join('users as r', 'jo.user_id', '=', 'r.id')
+        ->where('jo.status', 0)
+        ->where('jo.location', 'like', '%' . $location . '%')
+        ->where('jo.job_title', 'like', '%' . $job_title . '%')
+        ->orderBy('jo.id', 'desc')
+        ->select('jo.*', 'r.org_name', 'r.profile_image', 'r.org_image', 'r.users_role')
+        ->get();
+    }
+    return view('fruntend.student.student-jobs')->with([
+      'OrgData'       => $OrgData,
+      'jobsData'      => $jobsData,
       'locationData'  => $locationData,
       'titleData'     => $titleData
     ]);

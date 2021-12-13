@@ -253,6 +253,7 @@ Route::post('update_student_accomplishment', 'StudentDashboardController@update_
 Route::post('add_post', 'StudentDashboardController@add_post');
 
 Route::any('delete_student_post/{id}', 'StudentDashboardController@delete_student_post');
+Route::any('delete-student-resume/{id}','StudentDashboardController@deleteStudentResume');
 
 Route::get('student/jobs', 'StudentDashboardController@student_jobs');
 

@@ -50,20 +50,6 @@ $recruiterInfo = DB::table('users')->where('id', $id)->first();
               <span style="display:none; color: red;" class="emailvalidation1">Please Enter email address.!</span>
             </div>
           </div>
-
-          <!-- <div class="col_grid6 ">
-            <div class="form-group">
-              <label>Profile Image</label>
-               <input type="file" name="org_image" >              
-            </div>
-          </div> -->
-
-          <!-- <div class="col_grid6 ">
-            <div class="form-group">
-              <label>Banner Image</label>
-               <input type="file" name="profile_image" >              
-            </div>
-          </div> -->
           <div class="confirmApply postjob_btn col_grid12 fw">
             <button type="submit" class="input-btn text-left" id='btnValidate' data-modal="#createNewPostrecuriter">
               Edit Info

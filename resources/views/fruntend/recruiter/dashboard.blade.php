@@ -4,28 +4,28 @@
   $count = 30;
   $userid = Session::get('gorgID');
   $loginby = DB::table('users')->where('id', $userid)->first();
-  $education = DB::table('education')->where('user_id', $userid)->first();
-  $certificate = DB::table('certificates')->where('user_id', $userid)->first();
-  $myfavorite = DB::table('my_favorite_industries')->where('user_id', $userid)->first();
-  $businesses = DB::table('business_functions')->where('user_id', $userid)->first();
-  $hobbies = DB::table('hobbies_and_interests')->where('user_id', $userid)->first();
-  $accomplishments = DB::table('accomplishments')->where('user_id', $userid)->first();
-  if ($loginby->address != '') {
+  // $education = DB::table('education')->where('user_id', $userid)->first();
+  // $certificate = DB::table('certificates')->where('user_id', $userid)->first();
+  // $myfavorite = DB::table('my_favorite_industries')->where('user_id', $userid)->first();
+  // $businesses = DB::table('business_functions')->where('user_id', $userid)->first();
+  // $hobbies = DB::table('hobbies_and_interests')->where('user_id', $userid)->first();
+  // $accomplishments = DB::table('accomplishments')->where('user_id', $userid)->first();
+  if ($loginby->website != '') {
     $count = $count + 10;
   }
-  if ($loginby->about != '') {
-    $count = $count + 5;
-  }
-  if ($education) {
+  if ($loginby->requirter_overview != '') {
     $count = $count + 10;
   }
-  if ($certificate) {
+  if ($loginby->company_size != '') {
+    $count = $count + 10;
+  }
+  if ($loginby->headquarters != '') {
     $count = $count + 20;
   }
-  if ($myfavorite) {
-    $count = $count + 5;
+  if ($loginby->specialties != '') {
+    $count = $count + 10;
   }
-  if ($businesses) {
+  if ($loginby->address != '') {
     $count = $count + 10;
   }
   // if ($hobbies) {
@@ -64,7 +64,6 @@
          </div>
        </div>
        <div class="col_grid8">
-
          <!-- div class="findblog_search blogView_search fw">
            <form action="{{ URL::to('search/filter/recruiter/posts')}}" method="POST" id="signup-form" enctype="multipart/form-data">
              @csrf
@@ -89,7 +88,6 @@
            @foreach($posts as $value)
            @php
            $userid = Session::get('gorgID');
-
            $loginby = app('App\user')->where('id', $userid)->first();
            $createdby = app('App\user')->where('id', $value->user_id)->first();
            $likeby = DB::table('post_like')->where('post_id', $value->id)->where('like_unlike', 0)->count();
@@ -101,17 +99,22 @@
              <div class="text-cont fw">
                <div class="userCommnet_deta fw">
                  <span>
-                   @if($createdby->users_role ==='1')
-                   <img src="{{ URL::asset('/public/uploads/') }}/{{ $createdby->org_image ?? ''}}" alt="icon">
-                   @endif
-                   @if($createdby->users_role ==='3')
-                   <img src="{{ URL::asset('/public/uploads/') }}/{{ $createdby->org_image ?? ''}}" alt="icon">
-                   @else
+                   @if($createdby->profile_image ==='1')
                    <img src="{{ URL::asset('/public/uploads/') }}/{{ $createdby->profile_image ?? ''}}" alt="icon">
                    @endif
-                  </span>
+                   @if($createdby->profile_image !='')
+                   <img src="{{ URL::asset('/public/uploads/') }}/{{ $createdby->profile_image ?? ''}}" alt="icon">
+                   @else
+                   <img src="{{ URL::asset('/public/uploads/no-image.png') }}" alt="icon">
+                   @endif
+                 </span>
                  <div class="userCommnet_Name">
-                   <h4>{{ $createdby->name ?? ''}}<span>{{date('d M Y | H:i', strtotime($value->date_time))}}</span></h4>
+                   <h4>
+                     {{ $createdby->name ?? ''}}
+                     <span>
+                       {{date('d M Y | H:i', strtotime($value->date_time))}}
+                     </span>
+                   </h4>
                  </div>
                </div>
                <h1>{{ $value->heading ?? ''}}</h1>
@@ -133,28 +136,43 @@
              <ul class="commntsMsgBox fw">
                @if($likeby == null)
                <li>
-                 <a href="javascript:void(0);" onclick="editRecords({{ $value->id }})"><span><img src="{{ asset('public/assets/images/likedIcon.png')}}" alt="icon"></span> {{ $likeby ?? ''}} Likes</a>
+                 <a href="javascript:void(0);" onclick="editRecords({{ $value->id }})">
+                   <span>
+                     <img src="{{ asset('public/assets/images/likedIcon.png')}}" alt="icon">
+                   </span>
+                   {{ $likeby ?? ''}}
+                   Likes
+                 </a>
                </li>
                @else
                <li>
-                 <a href="javascript:void(0);" onclick="editRecords({{ $value->id }})" style="color:#ba3143" ;><span><img src="{{ asset('public/assets/images/likedIcon.png')}}" alt="icon"></span> {{ $likeby ?? ''}} Likes</a>
+                 <a href="javascript:void(0);" onclick="editRecords({{ $value->id }})" style="color:#ba3143" ;>
+                   <span>
+                     <img src="{{ asset('public/assets/images/likedIcon.png')}}" alt="icon">
+                   </span>
+                   {{ $likeby ?? ''}}
+                   Likes</a>
                </li>
                @endif
-
-
                <li class="commentbyopne">
-                 <a href="javascript:void(0);"><span><img src="{{ asset('public/assets/images/commentIcon.png')}}" alt="icon"></span> {{ $commentby ?? '' }} Comments</a>
+                 <a href="javascript:void(0);">
+                   <span>
+                     <img src="{{ asset('public/assets/images/commentIcon.png')}}" alt="icon">
+                   </span>
+                   {{ $commentby ?? '' }}
+                   Comments
+                 </a>
                </li>
 
                <div class="commentBox-usersec">
                  <div class="commentBox-heading">
-                   Comments 
-                   <span>({{ $commentby ?? '' }})                     
+                   Comments
+                   <span>({{ $commentby ?? '' }})
                    </span>
                    <span class="closebtn">
                      <i class="fa fa-times-circle" aria-hidden="true"></i>
-                    </span>
-                  </div>
+                   </span>
+                 </div>
                  <div class="commentBox-chats">
                    @if(isset($commentbydata))
                    @foreach($commentbydata as $comments)
@@ -179,13 +197,13 @@
                    <form action="{{ URL::to('add-comment')}}" method="POST" id="FormValidation" enctype="multipart/form-data">
                      @csrf
                      <input type="hidden" name="post_id" id="postid" value="{{ $value->id ?? ''}} " class="form-control">
-
                      <div class="comment-inputmsg">
                        <input type="text" name="comment" id="commentdata" class="form-control" required="">
-                       <button type="submit" class="btn"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                       <button type="submit" class="btn">
+                         <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                       </button>
                      </div>
                    </form>
-
                  </div>
                </div>
 
@@ -216,9 +234,9 @@
                  <a href="{{ URL::to('/message')}}" target="_blank">
                    <span>
                      <img src="{{ URL::asset('/public/assets/images/messageIcon.png') }}" alt="icon">
-                    </span> 
-                    Message
-                  </a>
+                   </span>
+                   Message
+                 </a>
                </li>
              </ul>
            </div>
@@ -240,7 +258,6 @@
    <div class='content fw'>
      <h3 class="modal_heading">Create a New Post</h3>
      <div class="form_sec fw ">
-
        <form action="{{ URL::to('add-post')}}" method="POST" id="FormValidation" enctype="multipart/form-data">
          @csrf
          <div class="innerrow">
@@ -254,8 +271,10 @@
              </div>
              <div class="uplaodCheckBtn">
                <!-- <a href="#" >Post</a> -->
-
-               <button type="submit" class="input-btn"> <span><img src="{{ asset('public/assets/images/loginCheck_icon.png')}}" alt="icon" /></span> Post</button>
+               <button type="submit" class="input-btn"> <span><img src="{{ asset('public/assets/images/loginCheck_icon.png')}}" alt="icon" />
+                 </span>
+                 Post
+               </button>
              </div>
            </div>
            <div class="col_grid12 ">
@@ -274,8 +293,6 @@
    </div>
  </div>
  <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
-
-
  <script type="text/javascript">
    function editRecords(id) {
      $.ajaxSetup({

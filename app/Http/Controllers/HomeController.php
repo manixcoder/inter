@@ -23,6 +23,10 @@ use File;
 
 class HomeController extends Controller
 {
+  public function __construct()
+  {
+    date_default_timezone_set("Asia/Kolkata");
+  }
   /*public function __construct(){
     $this->middleware('auth');
     $this->middleware('role');
@@ -34,10 +38,10 @@ class HomeController extends Controller
     if (isset($request->search)) {
       $generatequery = "SELECT * FROM blogs WHERE blog_heading LIKE '%' '" . $request->search . "' '%' OR description LIKE  '%' '" . $request->search . "' '%' ";
       $Data = DB::select($generatequery);
-    }else{
+    } else {
       $Data = DB::table('blogs')->where('status', 0)->orderBy('id', 'desc')->get();
     }
-    
+
     if ($Data != null) {
       return view('fruntend.common_pages.web_blog')->with('Data', $Data);
     } else {
@@ -45,29 +49,32 @@ class HomeController extends Controller
       return view('fruntend.common_pages.web_blog')->with('msg', $msg);
     }
   }
-  public function recruiterListings(Request $request){
+  public function recruiterListings(Request $request)
+  {
     //dd($request->search);
-    if(isset($request->search)){
-      $searchdata= $request->search;
-    }else{
-      $searchdata= 'No';
+    if (isset($request->search)) {
+      $searchdata = $request->search;
+    } else {
+      $searchdata = 'No';
     }
     return view('fruntend.recruiter_profile_section.my_listing')->with(['searchdata' => $searchdata, 'alert' => '']);
   }
 
   public function orgImageUpload(Request $request)
   {
+    //  dd($request->all());
 
     if ($request->ajax()) {
       $id = Session::get('gorgID');
       if ($files = $request->file('file')) {
         $files = $request->file('file');
         $destinationPath = public_path('/uploads/');
-        $org_image = date('YmdHis') . "-" . $files->getClientOriginalName();
-        $path =  $files->move($destinationPath, $org_image);
+        $profile_image = date('YmdHis') . "-" . $files->getClientOriginalName();
+        $path =  $files->move($destinationPath, $profile_image);
         $update = DB::table('users')->where('id', $id)
           ->update([
-            'org_image' => $org_image,
+            'profile_image' => $profile_image,
+
           ]);
       }
       return response()->json([
@@ -83,11 +90,11 @@ class HomeController extends Controller
       if ($request->file('file')) {
         $files = $request->file('file');
         $destinationPath = public_path('/uploads/');
-        $profile_image = date('YmdHis') . "-" . $files->getClientOriginalName();
-        $path =  $files->move($destinationPath, $profile_image);
+        $org_image = date('YmdHis') . "-" . $files->getClientOriginalName();
+        $path =  $files->move($destinationPath, $org_image);
         $update = DB::table('users')->where('id', $id)
           ->update([
-            'profile_image' => $profile_image,
+            'org_image' => $org_image,
           ]);
       }
       return response()->json([
@@ -100,6 +107,7 @@ class HomeController extends Controller
 
   public function add_contactus(Request $request)
   {
+    // dd($request->all());
     $data = array(
       'first_name' => $request->first_name,
       'last_name' => $request->last_name,
@@ -118,8 +126,6 @@ class HomeController extends Controller
     $password = $request->input('password');
     $rolecheck = DB::table('users')->where('email', $email)->first();
     if ($rolecheck == null) {
-      // echo "email not register";
-      // die;
       return redirect()->back()->with(array(
         'error_msg' => 'Email not registered',
         'email' => $email,
@@ -178,7 +184,7 @@ class HomeController extends Controller
             ));
           }
         }
-      }else{
+      } else {
         return redirect()->back()->with(array(
           'error_msg' => 'Invalid credentials. Please try again.',
           'email' => $email,
@@ -355,8 +361,16 @@ class HomeController extends Controller
   {
 
     if ($request->setep_one == 'setep_one') {
-      $recruiterRegisterOne = app('App\User')->insertGetId(['name' => $request->name, 'users_role' => 3,'created_at'=>date("Y-m-d H:i:s"),'updated_at'=>date("Y-m-d H:i:s")]);
-      return view('fruntend.recruiter_register.recruiter_register_step_two')->with(['insertid' => $recruiterRegisterOne]);
+      $usersdata = DB::table('users')->where('name', $request->name)->orderBy('id', 'Desc')->get();
+      $userscheck = app('App\User')->where('name', $request->name)->first();
+      if ($userscheck == true) {
+        // $message = 'Name already taken.!';
+        // return view('fruntend.recruiter_register.recruiter_register_step_one')->with(['message' => $message]);
+        return view('fruntend.recruiter_register.recruiter_register_step_one')->with(['error' => 'name alredy exist', 'insertid' => $userscheck->id]);
+      } else {
+        $recruiterRegisterOne = app('App\User')->insertGetId(['name' => $request->name, 'users_role' => 3, 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")]);
+        return view('fruntend.recruiter_register.recruiter_register_step_two')->with(['insertid' => $recruiterRegisterOne]);
+      }
     } elseif ($request->setep_two == 'setep_two') {
       $phonecheck = app('App\User')->where('phone', $request->phone)->first();
       if ($phonecheck == true) {
@@ -374,10 +388,10 @@ class HomeController extends Controller
         $path =  $files->move($destinationPath, $profileImage);
         $image = $insert['photo'] = "$profileImage";
       }
-      $recruiterRegisterOne = app('App\User')->where('id', $request->recruiterid)->update(['org_image' => $image]);
+      $recruiterRegisterOne = app('App\User')->where('id', $request->recruiterid)->update(['profile_image' => $image]);
       return view('fruntend.recruiter_register.recruiter_register_step_five')->with(['insertid' => $request->recruiterid]);
     } elseif ($request->setep_five == 'setep_five') {
-      $recruiterRegisterOne = app('App\User')->where('id', $request->recruiterid)->update(['org_name' => $request->org_name]);
+      $recruiterRegisterOne = app('App\User')->where('id', $request->recruiterid)->update(['profile_image' => $request->org_name]);
       return view('fruntend.recruiter_register.recruiter_register_step_six')->with(['insertid' => $request->recruiterid]);
     } elseif ($request->setep_six == 'setep_six') {
 

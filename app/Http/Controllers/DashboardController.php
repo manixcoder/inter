@@ -26,6 +26,7 @@ class DashboardController extends Controller
 {
   public function __construct()
   {
+    date_default_timezone_set("Asia/Kolkata");
     $this->middleware('auth');
     $this->middleware('role');
   }
@@ -35,11 +36,11 @@ class DashboardController extends Controller
     $id = Session::get('gorgID');
     $user = User::find($id);
     //dd($user);
-  //   foreach ($user->notifications as $notification) {
-  //     dd($notification);
-  // }
-    
-   // $notification = DB::table('notifications')->where('notifiable_id', $id)->orderBy('id', 'DESC')->get();
+    //   foreach ($user->notifications as $notification) {
+    //     dd($notification);
+    // }
+
+    // $notification = DB::table('notifications')->where('notifiable_id', $id)->orderBy('id', 'DESC')->get();
 
     /* dd($id);*/
 
@@ -117,7 +118,7 @@ class DashboardController extends Controller
     $todaysdate = date('Y-m-d') . ' 00:00:00';
 
     if ($userRole == '1') {
-      
+
       $newStudents = DB::table('users')->Where('users_role', 2)->whereDate('created_at', Carbon::today())->count();
       $newRecruiters = DB::table('users')->where('users_role', 3)->whereDate('created_at', Carbon::today())->count();
       $todayJobs = DB::table('jobs')->whereDate('created_at', Carbon::today())->count();

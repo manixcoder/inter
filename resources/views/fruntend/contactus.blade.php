@@ -29,7 +29,13 @@
               <li><a href="{{ URL::to('/') }}">Home</a></li>
               <li><a href="{{ URL::to('blog') }}">Blogs</a></li>
             </div>
-            <div class="center_sec text-center col_grid4 menu_logo"><a href="{{ URL::to('/') }}"><img src="{{ asset('public/assets/images/header-logo.svg')}}" alt="logo" /><img src="{{ asset('public/assets/images/logo.svg')}}" alt="wht-logo" class="wth-logo-hide" /></a></li>
+            <div class="center_sec text-center col_grid4 menu_logo">
+              <li>
+                <a href="{{ URL::to('/') }}">
+                  <img src="{{ asset('public/assets/images/header-logo.svg')}}" alt="logo" />
+                  <img src="{{ asset('public/assets/images/logo.svg')}}" alt="wht-logo" class="wth-logo-hide" />
+                </a>
+              </li>
             </div>
             <div class="right_sec col_grid4 text-right menu_link">
               <li><a href="{{ URL::to('web-login') }}">Login</a></li>
@@ -127,10 +133,11 @@
                     <span style="display:none; color: red;" class="emailvalidation">Enter valid email address.!</span>
                     <span style="display:none; color: red;" class="emailvalidation1">Please Enter email address.!</span>
                   </div>
+                  <label>Write Message <span id="remainingC">(0/500)</span></label>
                   <div class="form-group col_grid12 write-message">
-                    <label>Write Message <span id="remainingC">(0/500)</span></label>
+                    
                     <textarea class="form-control" name="message" id="message" placeholder="Please provide any relevant details or expiation" required="" maxlength="500"></textarea>
-                    <span style="display:none; color: red;" class="validate_msg">Please enter message.</span>
+                    <!-- <span style="display:none; color: red;" class="validate_msg">Please enter message.</span> -->
                   </div>
                   <div class="form-group col_grid12 text-center">
                     <button type="submit" id="btnValidate" class="btn btn-default">
@@ -250,20 +257,20 @@
   </script>
 
   <script type="text/javascript">
-    $(document).ready(function(e) {
-      $('#btnValidate').click(function() {
-        var spass = $('#message').val();
-        if ($.trim(spass).length == 0) {
-          $('.validate_msg').show();
-          setTimeout(function() {
-            $('.validate_msg').hide();
-          }, 3000);
-          return false;
-        } else {
-          return true;
-        }
-      });
-    });
+    // $(document).ready(function(e) {
+    //   $('#btnValidate').click(function() {
+    //     var spass = $('#message').val();
+    //     if ($.trim(spass).length == 0) {
+    //       $('.validate_msg').show();
+    //       setTimeout(function() {
+    //         $('.validate_msg').hide();
+    //       }, 3000);
+    //       return false;
+    //     } else {
+    //       return true;
+    //     }
+    //   });
+    // });
   </script>
 
 

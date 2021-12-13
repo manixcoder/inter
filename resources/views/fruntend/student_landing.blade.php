@@ -27,7 +27,13 @@
               <li class="active"><a href="{{ URL::to('/') }}">Home</a></li>
               <li><a href="{{ URL::to('blog') }}">Blogs</a></li>
             </div>
-            <div class="center_sec text-center col_grid4 menu_logo"><a href="{{ URL::to('/') }}"><img src="{{ asset('public/assets/images/header-logo.svg')}}" alt="logo" /><img src="{{ asset('public/assets/images/logo.svg')}}" alt="wht-logo" class="wth-logo-hide" /></a></li>
+            <div class="center_sec text-center col_grid4 menu_logo">
+              <li>
+                <a href="{{ URL::to('/') }}">
+                  <img src="{{ asset('public/assets/images/header-logo.svg')}}" alt="logo" />
+                  <img src="{{ asset('public/assets/images/logo.svg')}}" alt="wht-logo" class="wth-logo-hide" />
+                </a>
+              </li>
             </div>
             <div class="right_sec col_grid4 text-right menu_link">
               <li><a href="{{ URL::to('student-login') }}">Login</a></li>
@@ -106,7 +112,7 @@
                       </select-->
 
                       <select name="location" class="form-contorl" id="selectbox2">
-                      <option value="">Select Location</option>                        
+                        <option value="">Select Location</option>
                         <option value="Mumbai">Mumbai</option>
                         <option value="Delhi">Delhi</option>
                         <option value="Bangalore">Bangalore</option>
@@ -122,12 +128,14 @@
                       <!-- select name="job_title" class="form-contorl" id="selectbox1">
                         <option value="">Select Job Title</option>
                         @foreach($titleData as $td)
-                        <option value="<?php // echo $td->job_title ?>"><?php // echo $td->job_title ?></option>
+                        <option value="<?php // echo $td->job_title 
+                                        ?>"><?php // echo $td->job_title 
+                                                                        ?></option>
                         @endforeach
                       </select-->
 
                       <select name="job_title" class="form-contorl" id="selectbox2">
-                        <option value="">Select Job Title</option>                        
+                        <option value="">Select Job Title</option>
                         <option value="Sales & Marketing Executive">Sales & Marketing Executive</option>
                         <option value="Front-end Developer">Front-end Developer</option>
                         <option value="Financial Analyst">Financial Analyst</option>
@@ -235,10 +243,10 @@
   <footer class="fw">
     <div class="lgcontainer">
       <ul class="footer_menu col_grid7 text-left">
-      <li><a href="{{ URL::to('aboutus')}}">About Us</a></li>
-          <li><a href="{{ URL::to('contactus')}}">Contact Us</a></li>
-          <li><a href="{{ URL::to('termsofuse')}}">Terms of Use</a></li>
-          <li><a href="{{ URL::to('privacypolicy')}}">Privacy Policy</a></li>
+        <li><a href="{{ URL::to('aboutus')}}">About Us</a></li>
+        <li><a href="{{ URL::to('contactus')}}">Contact Us</a></li>
+        <li><a href="{{ URL::to('termsofuse')}}">Terms of Use</a></li>
+        <li><a href="{{ URL::to('privacypolicy')}}">Privacy Policy</a></li>
       </ul>
       <ul class="social_icon col_grid5 text-right">
         <li>

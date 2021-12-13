@@ -51,6 +51,7 @@
         <div class="innerrow">
           <div class="col_grid9">
             <div class="profile_publicimg">
+              23423
               <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="img" />
             </div>
             <div class="profile_publicDetail">

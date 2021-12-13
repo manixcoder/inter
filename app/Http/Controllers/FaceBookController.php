@@ -10,6 +10,10 @@ use Laravel\Socialite\Facades\Socialite;
 
 class FaceBookController extends Controller
 {
+    public function __construct()
+    {
+        date_default_timezone_set("Asia/Kolkata");
+    }
     /**
      * Login Using Facebook
      */
@@ -29,8 +33,8 @@ class FaceBookController extends Controller
             ], [
                 'name' => $user->getName(),
                 'email' => $user->getEmail(),
-                'profile_image'=>'no-image.png',
-                'users_role'=>'2',
+                'profile_image' => 'no-image.png',
+                'users_role' => '2',
                 'password' => Hash::make($user->getName() . '@' . $user->getId())
             ]);
 

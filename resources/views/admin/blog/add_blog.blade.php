@@ -11,7 +11,7 @@
                         <input type="file" name="image" onchange="loadFile(event)" class="form_control" required="">
                      </div>
                      <div class="upload_text">
-                        <img src="{{ URL::asset('/public/assets/images/upload_img.svg') }}" id="output" alt="upload_img">
+                        <img src="{{ URL::asset('/public/assets/images/upload_img.svg') }}" id="boutput" alt="upload_img">
                         <span class="uplod_text">Attach Image</span>
                      </div>
                   </div>
@@ -51,7 +51,7 @@
 </div>
 <script>
       var loadFile = function(event) {
-        var output = document.getElementById('output');
+        var output = document.getElementById('boutput');
         output.src = URL.createObjectURL(event.target.files[0]);
         output.onload = function() {
           URL.revokeObjectURL(output.src) // free memory
