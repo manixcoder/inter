@@ -110,15 +110,15 @@
 	}
 </script>
 <script>
-	// $(document).ready(function() {
-	// 	$('#listblog_table').DataTable({
-	// 		"lengthChange": true,
-	// 		"dom": '<"top"i>rt<"bottom"flp><"clear">',
-	// 		"lengthMenu": [
-	// 			[10, 25, 50, 100, 500, 1000],
-	// 			[10, 25, 50, 100, 500, "Max"]
-	// 		],
-	// 		"pageLength": 10,
-	// 	});
-	// });
+	$(document).ready(function() {
+		$('#listblog_table').DataTable({
+			"lengthChange": true,
+			"dom": '<"top"i>rt<"bottom"flp><"clear">',
+			"lengthMenu": [
+				[10, 25, 50, 100, 500, 1000],
+				[10, 25, 50, 100, 500, "Max"]
+			],
+			"pageLength": 10,
+		});
+	});
 </script>

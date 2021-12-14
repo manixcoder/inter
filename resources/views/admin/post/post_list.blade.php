@@ -4,14 +4,12 @@
 
         @if(isset($Data))
             @foreach($Data as $postsdata) 
-            
-                @php 
-                    $likeby = DB::table('post_like')->where('post_id', $postsdata->id)->where('like_unlike', 0)->count(); 
-                    $commentby = DB::table('post_comment')->where('post_id', $postsdata->id)->count(); 
-                @endphp
-            
-                <div class="content-group fw">
-                  <div class="text-cont fw">
+            @php
+            $likeby = DB::table('post_like')->where('post_id', $postsdata->id)->where('like_unlike', 0)->count(); 
+            $commentby = DB::table('post_comment')->where('post_id', $postsdata->id)->count(); 
+            @endphp
+            <div class="content-group fw">
+               <div class="text-cont fw">
                      <div class="userCommnet_deta fw">
                         @php $userdetail = DB::table('users')->where('id', $postsdata->user_id)->first(); @endphp
                         <span>
