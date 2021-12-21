@@ -58,7 +58,7 @@ class DashboardController extends Controller
     $data['content'] = 'admin.contactus_queryes';
     return view('layouts.content', compact('data'))->with([
       'Data' => $Data,
-      'DataCount' => $DataCount
+      'DataCount' => $DataCount 
     ]);
   }
 
@@ -70,9 +70,10 @@ class DashboardController extends Controller
   public function search_header(Request $request)
   {
     if ($request->serch_in == 'Jobs') {
-      $generatequery = "SELECT * FROM jobs WHERE location LIKE '%' '" . $request->search_text . "' '%' OR job_title LIKE  '%' '" . $request->search_text . "' '%' OR company_name LIKE  '%' '" . $request->search_text . "' '%' OR applicant LIKE  '%' '" . $request->search_text . "' '%'  OR create_on LIKE  '%' '" . $request->search_text . "' '%' OR company_name LIKE  '%' '" . $request->search_text . "' '%' ";
+      $generatequery = "SELECT j.*,u.profile_image,u.org_image FROM jobs j JOIN users u ON j.user_id=u.id WHERE j.location LIKE '%' '" . $request->search_text . "' '%' OR j.job_title LIKE  '%' '" . $request->search_text . "' '%' OR j.company_name LIKE  '%' '" . $request->search_text . "' '%' OR applicant LIKE  '%' '" . $request->search_text . "' '%'  OR j.create_on LIKE  '%' '" . $request->search_text . "' '%' OR j.company_name LIKE  '%' '" . $request->search_text . "' '%' ";
       $query = DB::select($generatequery);
       $Data = new Paginator($query, 10);
+      //dd($Data);
       $DataCount = count($Data);
       if ($DataCount > 0) {
         $data['content'] = 'admin.jobs.listedjobs';

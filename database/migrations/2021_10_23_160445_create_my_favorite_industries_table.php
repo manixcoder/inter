@@ -15,8 +15,8 @@ class CreateMyFavoriteIndustriesTable extends Migration
     {
         Schema::create('my_favorite_industries', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
-            $table->string('industries_name');
+            $table->integer('user_id')->nullable();
+            $table->string('industries_name')->nullable();
             $table->enum('status', ['1', '0'])->default(0)->comment = '0=Active, 1=Inactive';
             $table->timestamps();
         });

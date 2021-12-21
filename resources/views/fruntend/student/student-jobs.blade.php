@@ -15,8 +15,6 @@
 <body class="lightwht_bg">
   <header class="header_sec flow2_header fw">
     <div class="lgcontainer">
-
-
       @include('fruntend.student.inc.top-menu')
       <?php
       $userRole = Session::get('userRole');
@@ -29,9 +27,6 @@
       $businesses = DB::table('business_functions')->where('user_id', $userid)->first();
       $hobbies = DB::table('hobbies_and_interests')->where('user_id', $userid)->first();
       $accomplishments = DB::table('accomplishments')->where('user_id', $userid)->first();
-      // echo "<pre>";
-      // print_r($education);
-      // die;
       if ($loginby->address != '') {
         $count = $count + 10;
       }

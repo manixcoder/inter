@@ -15,8 +15,8 @@ class CreateStudentResumeTable extends Migration
     {
         Schema::create('student_resume', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('student_id');
-            $table->string('image');
+            $table->integer('student_id')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

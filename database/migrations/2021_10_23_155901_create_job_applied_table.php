@@ -15,8 +15,8 @@ class CreateJobAppliedTable extends Migration
     {
         Schema::create('job_applied', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('student_id');
-            $table->integer('job_id');
+            $table->integer('student_id')->nullable();
+            $table->integer('job_id')->nullable();
             $table->timestamps();
         });
     }

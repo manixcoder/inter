@@ -42,7 +42,7 @@ class RecruiterwebController extends Controller
       return redirect('dashboard')->with('status', 'Profile updated!');
     }
   }
-  public function Dashboard(Request $request)
+  public function dashboard(Request $request)
   {
     $userRole = Session::get('userRole');
     $id = Session::get('gorgID');
@@ -62,14 +62,19 @@ class RecruiterwebController extends Controller
     } else {
       DB::table('followers')->insert([
         'user_id' => $id,
-        'follow_id' => $by_id
+        'follow_id' => $by_id,
+        'created_at' => date("Y-m-d H:i:s"),
+        'updated_at' => date("Y-m-d H:i:s")
       ]);
       return redirect('recruiter-people')->with('status', 'Follow successfully!');
     }
   }
   public function unfollow(Request $request, $id, $by_id)
   {
-    $check_follow = DB::table('followers')->where('user_id', $id)->where('follow_id', $by_id)->first();
+    $check_follow = DB::table('followers')
+    ->where('user_id', $id)
+    ->where('follow_id', $by_id)
+    ->first();
     if ($check_follow) {
       DB::table('followers')->delete($check_follow->id);
       return redirect('recruiter-people')->with('status', 'Unfollow successfully !');

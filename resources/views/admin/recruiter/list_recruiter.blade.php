@@ -4,7 +4,15 @@
 		<span class="add_student_btn">
 			<a href="{{ URL::to('redirect-recruiter')}}">Add New Recruiter</a>
 		</span>
+
+
 	</h3>
+	@if(Session::has('status'))
+	<div class="alert alert-{{ Session::get('status') }}">
+		<i class="fa fa-building-o" aria-hidden="true"></i> {{ Session::get('message') }}
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+	</div>
+	@endif
 	<div class="row">
 		<div class="col-md-12 listtable-sec">
 			<table class="table listjob_table text-left" id="listrecruiter_table">
@@ -18,6 +26,12 @@
 						</th>
 						<th>
 							Company Logo/Name
+							<span class="serach-input">
+								<input type="text" name="searchbox" class="serachbox">
+							</span>
+						</th>
+						<th>
+							RecruiterName
 							<span class="serach-input">
 								<input type="text" name="searchbox" class="serachbox">
 							</span>
@@ -53,7 +67,7 @@
 					<tr>
 						<td>#{{ $i }}</td>
 						<td><i class="user_img"><img src="{{ URL::asset('/public/uploads/') }}/{{ $value->org_image }}" alt="usericon"></i> {{ $value->org_name }}</td>
-						<!--<td>{{ $value->name }}</td>-->
+						<td>{{ $value->name }}</td>
 						<td>{{ $value->email }}</td>
 						<td>{{ $value->phone }}</td>
 						<td>
@@ -69,9 +83,12 @@
 						</td>
 						<td>
 							<span class="edit_icon">
-								<a href="{{ URL::to('recruiter-detail',base64_encode($value->id)) }}">
+								<a href="{{ URL::to('recruiter-detail',$value->id ) }}">
 									<img src="{{ asset('public/assets/images/view.svg')}}" alt="icon">
 								</a>
+							</span>
+							<span class="edit_icon">
+								<a href="{{ URL::to('/message')}}" target="_blank"><img src="{{ URL::asset('/public/assets/images/chat_2.svg') }}" alt="chat"></a>
 							</span>
 							<span class="edit_icon">
 								<a href="{{ URL::to('recruiter-delete',$value->id) }}" onclick="return confirm('Are you sure you want to delete this item?');">
@@ -122,13 +139,13 @@
 <script>
 	$(document).ready(function() {
 		$('#listrecruiter_table').DataTable({
-			"lengthChange": true,
-			"dom": '<"top"i>rt<"bottom"flp><"clear">',
-			"lengthMenu": [
-				[10, 25, 50, 100, 500, 1000],
-				[10, 25, 50, 100, 500, "Max"]
-			],
-			"pageLength": 10,
+			columnDefs: [{
+				orderable: false,
+				targets: 0
+			}],
+			order: [
+				[1, 'asc']
+			]
 		});
 	});
 </script>

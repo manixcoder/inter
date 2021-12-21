@@ -15,10 +15,10 @@ class CreateTermOfUseTable extends Migration
     {
         Schema::create('term_of_use', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
-            $table->string('heading');
-            $table->longText('description');
-            $table->string('status');
+            $table->integer('user_id')->nullable();
+            $table->string('heading')->nullable();
+            $table->longText('description')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

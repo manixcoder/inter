@@ -26,7 +26,6 @@ class StudentController extends Controller
     $this->middleware('auth');
     $this->middleware('role');
   }
-
   public function index()
   {
     $Data = app('App\User')->where('users_role', 2)->orderBy('id', 'Desc')->get();
@@ -34,15 +33,11 @@ class StudentController extends Controller
     $data['content'] = 'admin.student.student_list';
     return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount' => $DataCount]);
   }
-
   public function today_student_list()
   {
     $todaysdate = date('Y-m-d') . ' 00:00:00';
-
     $Data = DB::table('users')->Where('users_role', 2)->where('created_at', '>=', $todaysdate)->paginate(10);
-
     $DataCount = DB::table('users')->Where('users_role', 2)->where('created_at', '>=', $todaysdate)->count();
-
     $data['content'] = 'admin.student.student_list';
     return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount' => $DataCount]);
   }
@@ -50,7 +45,6 @@ class StudentController extends Controller
   public function status_update($id)
   {
     $studentdata = app('App\User')->where('id', $id)->first();
-
     if ($studentdata->status == 1) {
       $update = app('App\User')->where('id', $id)->update(['status' => '0']);
     } else {
@@ -61,7 +55,11 @@ class StudentController extends Controller
   public function delete($id)
   {
     $delete = app('App\User')->where('id', $id)->delete();
-    return back();
+    return redirect('student-list')->with(array('status' => 'success', 'message' => 'Deleted Successfully !'));
+    // $Data = app('App\User')->where('users_role', 2)->orderBy('id', 'Desc')->get();
+    // $DataCount = app('App\User')->where('users_role', 2)->count();
+    // $data['content'] = 'admin.student.student_list';
+    // return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount' => $DataCount]);
   }
 
   public function create(Request $request)
@@ -109,9 +107,7 @@ class StudentController extends Controller
 
   public function student_detail($id)
   {
-    //dd($id);
     $studentDetail = app('App\User')->where('id', $id)->first();
-    //dd($studentDetail);
     $education =  DB::table('education')->where('user_id', $studentDetail->id)->orderBy('id', 'DESC')->first();
     $experience =  DB::table('experience')->where('user_id', $studentDetail->id)->orderBy('id', 'DESC')->first();
     $certificate =  DB::table('certificates')->where('user_id', $studentDetail->id)->orderBy('id', 'DESC')->first();

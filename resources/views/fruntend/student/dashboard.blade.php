@@ -28,12 +28,6 @@
       $hobbies = DB::table('hobbies_and_interests')->where('user_id', $userid)->first();
       $accomplishments = DB::table('accomplishments')->where('user_id', $userid)->first();
       $OrgData = DB::table('users')->where('id', $userid)->first();
-      // echo "<pre>";
-      // print_r($OrgData->profile_image);
-      // die;
-      // echo "<pre>";
-      // print_r($education);
-      // die;
       if ($loginby->address != '') {
         $count = $count + 10;
       }
@@ -52,12 +46,12 @@
       if ($businesses) {
         $count = $count + 10;
       }
-      // if ($hobbies) {
-      //   $count = $count + 10;
-      // }
-      // if ($accomplishments) {
-      //   $count = $count + 5;
-      // }
+      if ($hobbies) {
+        $count = $count + 10;
+      }
+      if ($accomplishments) {
+        $count = $count + 5;
+      }
 
       ?>
 
@@ -85,7 +79,7 @@
                 @endif
               </figure>
               <h5>{{$OrgData->name}}</h5>
-              <a href="mailto:<?php echo $OrgData->email ?>">{{$OrgData->email}}</a>
+              <a href="mailto:<?php echo $OrgData->email ?>">{{ $OrgData->email }}</a>
             </div>
             <div class="progressbar_sec fw">
               <div class="progressbar_cont fw">
@@ -129,21 +123,23 @@
           $userRole = Session::get('userRole');
           $id = Session::get('gorgID');
           $users = DB::table('users')->where('id', $id)->first();
+          //dd($users->profile_image);
           if(empty($SearchData))
           {
-          $posts = DB::table('posts')->orderBy('id', 'DESC')->get();
+            $posts = DB::table('posts')->orderBy('id', 'DESC')->get();
           }else{
           $generatequery = "SELECT * FROM posts WHERE heading LIKE '%' '".$SearchData."' '%' OR description LIKE '%' '".$SearchData."' '%' OR date_time LIKE '%' '".$SearchData."' '%' ";
           $posts = DB::select($generatequery);
 
           }
+          // dd($posts);
           @endphp
 
           @foreach($posts as $post)
 
           @php
           $UsrData = DB::table('users')->where('id', $post->user_id)->first();
-          //dd($UsrData);
+          dd($UsrData);
           $userid = Session::get('gorgID');
           $loginby = app('App\user')->where('id', $userid)->first();
           $createdby = app('App\user')->where('id', $post->user_id)->first();
@@ -156,11 +152,8 @@
             <div class="text-cont fw">
               <div class="userCommnet_deta fw">
                 <span>
-                  @if($UsrData->users_role ==='3')
-
-                  <img src="{{ URL::asset('/public/uploads') }}/{{ $UsrData->org_image ?? ''}}" alt="img">
-                  @elseif($UsrData->users_role ==='2')
-                  <img src="{{ URL::asset('/public/uploads') }}/{{ $UsrData->profile_image ?? ''}}" alt="img">
+                  @if($users->profile_image !="")
+                  <img src="{{ URL::asset('/public/uploads') }}/{{ $users->profile_image ?? ''}}" alt="img">
                   @else
                   <img src="{{ URL::asset('/public/uploads/placeholder.png') }}" alt="img">
                   @endif
@@ -168,7 +161,7 @@
                 <div class="userCommnet_Name">
                   <h4>
                     @if(!empty($UsrData->name)) {{ $UsrData->name }} @endif
-                    <span>{!! date('d M Y H:i:s', strtotime($post->date_time)) !!}</span>
+                    <span>{!! date('d M Y H:i:s', strtotime($post->created_at)) !!}</span>
                     @if($users->id != $post->user_id)
                     @else
                     <span class="delete_postbtn">
@@ -194,7 +187,13 @@
             <ul class="commntsMsgBox fw">
               @if($likeby == null)
               <li>
-                <a href="javascript:void(0);" onclick="editRecords({{ $post->id }})"><span><img src="{{ asset('public/assets/images/likedIcon.png')}}" alt="icon"></span> {{ $likeby ?? ''}} Likes</a>
+                <a href="javascript:void(0);" onclick="editRecords({{ $post->id }})">
+                <span>
+                  <img src="{{ asset('public/assets/images/likedIcon.png')}}" alt="icon">
+                </span> 
+                {{ $likeby ?? ''}} 
+                Likes
+              </a>
               </li>
               @else
               <li>

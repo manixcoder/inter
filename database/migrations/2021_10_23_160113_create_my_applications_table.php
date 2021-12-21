@@ -15,13 +15,13 @@ class CreateMyApplicationsTable extends Migration
     {
         Schema::create('my_applications', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
-            $table->string('logo');
-            $table->string('application_name');
-            $table->string('user_profile');
-            $table->integer('city_id');
-            $table->integer('applied_date');
-            $table->longText('description');
+            $table->integer('user_id')->nullable();
+            $table->string('logo')->nullable();
+            $table->string('application_name')->nullable();
+            $table->string('user_profile')->nullable();
+            $table->integer('city_id')->nullable();
+            $table->integer('applied_date')->nullable();
+            $table->longText('description')->nullable();
             $table->enum('status', ['1', '0'])->default(0)->comment = '0=Active, 1=Inactive';
             $table->timestamps();
         });

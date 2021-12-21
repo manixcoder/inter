@@ -46,24 +46,24 @@
 					<?php $i = 1; ?>
 					@foreach($Data as $value)
 					@php
-					$old_date_timestamp = strtotime($value->posted_date_and_time);
-					$new_date = date('d-M-Y', $old_date_timestamp);
+					$old_date_timestamp = strtotime($value->created_at);
+					$new_date = date('d-M-Y',strtotime($value->created_at));
 					@endphp
 					<tr>
-						<td>#{{ $i }}</td>
+						<td>{{ $i }}</td>
 						<td>{{$value->blog_heading}}</td>
 						<td>{{ strip_tags($value->description) }}</td>
-						<td>{{$new_date}}</td>
+						<td>{{ $new_date }}</td>
 						<td><i class="box_img"><img src="{{ URL::asset('/public/uploads/') }}/{{ $value->blog_image }}" alt="usericon"></i></td>
 						<td>
+							<span class="edit_icon">
+								<a href="{{ URL::to('edit-blog/'.$value->id)}}">
+									<img src="{{ asset('public/assets/images/edit.svg')}}" alt="edit">
+								</a>
+							</span> 
 							<!-- <span class="edit_icon">
-												<a href="#">
-													<img src="{{ asset('public/assets/images/view.svg')}}" alt="icon">
-												</a>
-											</span> -->
-							<!--	<span class="edit_icon">
-												<img src="{{ asset('public/assets/images/chat_2.svg')}}" alt="icon">
-											</span>-->
+								<img src="{{ asset('public/assets/images/chat_2.svg')}}" alt="icon">
+							</span> -->
 							<span class="edit_icon">
 								<a href="{{ URL::to('blog-delete',$value->id) }}" onclick="return confirm('Are you sure you want to delete this item?');">
 									<img src="{{ asset('public/assets/images/delete.svg')}}" alt="icon">
@@ -112,13 +112,13 @@
 <script>
 	$(document).ready(function() {
 		$('#listblog_table').DataTable({
-			"lengthChange": true,
-			"dom": '<"top"i>rt<"bottom"flp><"clear">',
-			"lengthMenu": [
-				[10, 25, 50, 100, 500, 1000],
-				[10, 25, 50, 100, 500, "Max"]
-			],
-			"pageLength": 10,
+			columnDefs: [{
+				orderable: false,
+				targets: 0
+			}],
+			order: [
+				[1, 'asc']
+			]
 		});
 	});
 </script>

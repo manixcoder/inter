@@ -15,10 +15,10 @@ class CreateAnnouncementTable extends Migration
     {
         Schema::create('announcement', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
-            $table->string('title');
-            $table->longText('description');
-            $table->string('aim');
+            $table->integer('user_id')->nullable();
+            $table->string('title')->nullable();
+            $table->longText('description')->nullable();
+            $table->string('aim')->nullable();
             $table->enum('status', ['1', '0'])->default(0)->comment = '0=Active, 1 =Inactive';
             $table->timestamps();
         });

@@ -1,15 +1,22 @@
 <div class="content dashboard-pg">
+  <?php 
+  // dd($studentDetail);
+  ?>
             <h3 class="heading"><span class="red_text"> Students > </span>  #{{ $studentDetail->id ?? ''}} </h3>
                     <div class=" jobsdetails_sec fw">
                       <div class="jobsdetails_leftcont">
                         <h4 class="greentext">Personal Details</h4>
                         <div class="personalUser_cont">
                           <div class="userIcon">
+                            @if($studentDetail->profile_image !='')
                             <img src="{{ URL::asset('/public/uploads/') }}/{{ $studentDetail->profile_image ?? ''}}" />
+                            @else
+                            <img src="{{ URL::asset('/public/uploads/placeholder.png') }}" />
+                            @endif
                           </div>
                           <div class="userdetail_cont">
-                           <!--  <a href="#"><i><img src="{{ URL::asset('/public/assets/images/chat_2.svg') }}" alt="chat"></i></a> -->
-                           <!--  <a href="#"><i><img src="{{ URL::asset('/public/assets/images/delete.svg') }}" alt="chat"></i></a> -->
+                           <a href="{{ URL::to('/message')}}"><i><img src="{{ URL::asset('/public/assets/images/chat_2.svg') }}" alt="chat"></i></a>
+                           <a href="{{ URL::to('student-delete',$studentDetail->id) }}"><i><img src="{{ URL::asset('/public/assets/images/delete.svg') }}" alt="chat"></i></a>
                           </div>
                         </div>
                         <ul class="jobsdetails_text">

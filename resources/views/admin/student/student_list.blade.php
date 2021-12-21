@@ -60,7 +60,11 @@
 						<td>{{$value->phone }}</td>
 						<td>
 							<i class="user_img">
+								@if($value->profile_image !='')
 								<img src="{{ URL::asset('/public/uploads/') }}/{{ $value->profile_image }}" alt="usericon">
+								@else
+								<img src="{{ URL::asset('/public/uploads/placeholder.png') }}" alt="usericon">
+								@endif
 							</i>
 							{{ $value->org_name }}
 						</td>
@@ -79,11 +83,12 @@
 							<a href="{{ URL::to('student-detail',$value->id) }}">
 								<img src="{{ asset('public/assets/images/view.svg')}}" alt="icon">
 							</a>
-							<!-- 
-								<span class="edit_icon">
-										<img src="{{ asset('public/assets/images/chat_2.svg')}}" alt="icon">
-									</span> 
-								-->
+							<span class="edit_icon">
+								<a href="{{ URL::to('/message')}}" target="_blank">
+									<img src="{{ asset('public/assets/images/chat_2.svg')}}" alt="icon">
+								</a>
+							</span>
+
 							<span class="edit_icon">
 								<a href="{{ URL::to('student-delete',$value->id) }}" onclick="return confirm('Are you sure you want to delete this item?');">
 									<img src="{{ asset('public/assets/images/delete.svg')}}" alt="icon">
@@ -118,13 +123,13 @@
 <script>
 	$(document).ready(function() {
 		$('#liststudent_table').DataTable({
-			"lengthChange": true,
-			"dom": '<"top"i>rt<"bottom"flp><"clear">',
-			"lengthMenu": [
-				[10, 25, 50, 100, 500, 1000],
-				[10, 25, 50, 100, 500, "Max"]
-			],
-			"pageLength": 10,
+			columnDefs: [{
+				orderable: false,
+				targets: 0
+			}],
+			order: [
+				[1, 'asc']
+			]
 		});
 	});
 </script>

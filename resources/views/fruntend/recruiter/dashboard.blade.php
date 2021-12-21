@@ -42,7 +42,12 @@
          <div class="profile_leftsidebar fw">
            <div class="user_namesec fw">
              <figure>
-               <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->org_image ?? ''}}" alt="profile">
+             @if(Auth::user()->profile_image !='')
+                   <img src="{{ URL::asset('/public/uploads/') }}/{{ Auth::user()->profile_image ?? ''}}" alt="profile">
+                   @else
+                   <img src="{{ URL::asset('/public/uploads/no-image.png') }}" alt="profile">
+                   @endif
+               <!-- <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->org_image ?? ''}}" alt="profile"> -->
              </figure>
              <h5>{{ $OrgData->name ?? ''}}</h5>
              <a href="mailto:jaiks4384@gmail.com">{{ $OrgData->email ?? ''}}</a>
@@ -99,9 +104,7 @@
              <div class="text-cont fw">
                <div class="userCommnet_deta fw">
                  <span>
-                   @if($createdby->profile_image ==='1')
-                   <img src="{{ URL::asset('/public/uploads/') }}/{{ $createdby->profile_image ?? ''}}" alt="icon">
-                   @endif
+                  
                    @if($createdby->profile_image !='')
                    <img src="{{ URL::asset('/public/uploads/') }}/{{ $createdby->profile_image ?? ''}}" alt="icon">
                    @else
@@ -112,7 +115,7 @@
                    <h4>
                      {{ $createdby->name ?? ''}}
                      <span>
-                       {{date('d M Y | H:i', strtotime($value->date_time))}}
+                       {{date('d M Y | H:i', strtotime($value->created_at))}}
                      </span>
                    </h4>
                  </div>

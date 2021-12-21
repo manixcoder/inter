@@ -113,7 +113,9 @@ class HomeController extends Controller
       'last_name' => $request->last_name,
       'email' => $request->email,
       'mobile' => $request->mobile,
-      'message' => $request->message
+      'message' => $request->message,
+      'created_at' => date("Y-m-d H:i:s"),
+      'updated_at' => date("Y-m-d H:i:s")
     );
 
     $insertData = DB::table('contact_us')->insert($data);
@@ -357,20 +359,26 @@ class HomeController extends Controller
   /* Blog web page controllers End */
 
   /* Recruiter register controllers */
-  public function recruider_register_step_one(Request $request)
+  public function recruider_register_step_one(Request $request) 
   {
 
     if ($request->setep_one == 'setep_one') {
-      $usersdata = DB::table('users')->where('name', $request->name)->orderBy('id', 'Desc')->get();
-      $userscheck = app('App\User')->where('name', $request->name)->first();
-      if ($userscheck == true) {
-        // $message = 'Name already taken.!';
-        // return view('fruntend.recruiter_register.recruiter_register_step_one')->with(['message' => $message]);
-        return view('fruntend.recruiter_register.recruiter_register_step_one')->with(['error' => 'name alredy exist', 'insertid' => $userscheck->id]);
-      } else {
-        $recruiterRegisterOne = app('App\User')->insertGetId(['name' => $request->name, 'users_role' => 3, 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")]);
+      DB::table('users')->where('name','=', '')->orWhere('email', '=', '')->delete();
+      // $usersdata = DB::table('users')->where('name', $request->name)->orderBy('id', 'Desc')->get();
+      // $userscheck = app('App\User')->where('name', $request->name)->first();
+      // if ($userscheck == true) {
+      //   // $message = 'Name already taken.!';
+      //   // return view('fruntend.recruiter_register.recruiter_register_step_one')->with(['message' => $message]);
+      //   return view('fruntend.recruiter_register.recruiter_register_step_one')->with(['error' => 'name alredy exist', 'insertid' => $userscheck->id]);
+      // } else {
+        $recruiterRegisterOne = app('App\User')->insertGetId([
+          'name' => $request->name, 
+          'users_role' => 3, 
+          'created_at' => date("Y-m-d H:i:s"), 
+          'updated_at' => date("Y-m-d H:i:s")
+        ]);
         return view('fruntend.recruiter_register.recruiter_register_step_two')->with(['insertid' => $recruiterRegisterOne]);
-      }
+      //}
     } elseif ($request->setep_two == 'setep_two') {
       $phonecheck = app('App\User')->where('phone', $request->phone)->first();
       if ($phonecheck == true) {
@@ -388,10 +396,10 @@ class HomeController extends Controller
         $path =  $files->move($destinationPath, $profileImage);
         $image = $insert['photo'] = "$profileImage";
       }
-      $recruiterRegisterOne = app('App\User')->where('id', $request->recruiterid)->update(['profile_image' => $image]);
+      $recruiterRegisterOne = app('App\User')->where('id', $request->recruiterid)->update(['org_image'=>$image,'profile_image' => $image]);
       return view('fruntend.recruiter_register.recruiter_register_step_five')->with(['insertid' => $request->recruiterid]);
     } elseif ($request->setep_five == 'setep_five') {
-      $recruiterRegisterOne = app('App\User')->where('id', $request->recruiterid)->update(['profile_image' => $request->org_name]);
+      $recruiterRegisterOne = app('App\User')->where('id', $request->recruiterid)->update(['org_name' => $request->org_name]);
       return view('fruntend.recruiter_register.recruiter_register_step_six')->with(['insertid' => $request->recruiterid]);
     } elseif ($request->setep_six == 'setep_six') {
 

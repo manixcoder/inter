@@ -15,9 +15,9 @@ class CreateAboutUsTable extends Migration
     {
         Schema::create('about_us', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
-            $table->string('heading');
-            $table->longText('description');
+            $table->integer('user_id')->nullable();
+            $table->string('heading')->nullable();
+            $table->longText('description')->nullable();
             $table->enum('status', ['1', '0'])->default(0)->comment = '0=Active, 1=Inactive';
             $table->timestamps();
         });

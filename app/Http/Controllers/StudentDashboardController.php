@@ -108,24 +108,14 @@ class StudentDashboardController extends Controller
     $studentData = DB::table('users')->where('id', $id)->first();
     // dd($recuratorData);
     $to = $studentData->email;
-    $subject = "HTML email";
+    $subject = "Rejection Mail";
     $message = "
     <html>
         <head>
-        <title>HTML email</title>
         </head>
         <body>
-        <p>This email contains HTML Tags!</p>
-        <table>
-        <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        </tr>
-        <tr>
-        <td>John</td>
-        <td>Doe</td>
-        </tr>
-        </table>
+        <p> Hi ".$studentData->name." </p>     
+        <p> Your aplication is rejected form ". $recuratorData->org_name ." </p>     
         </body>
         </html>";
 
@@ -147,25 +137,16 @@ class StudentDashboardController extends Controller
     $studentData = DB::table('users')->where('id', $id)->first();
     // dd($recuratorData);
     $to = $studentData->email;
-    $subject = "HTML email";
-    $message = "<html>
-                  <head>
-                  <title>HTML email</title>
-                  </head>
-                  <body>
-                  <p>This email contains HTML Tags!</p>
-                  <table>
-                  <tr>
-                  <th>Firstname</th>
-                  <th>Lastname</th>
-                  </tr>
-                  <tr>
-                  <td>John</td>
-                  <td>Doe</td>
-                  </tr>
-                  </table>
-                  </body>
-                  </html>";
+    $subject = "Selection mail";
+    $message = "
+    <html>
+    <head>
+    </head>
+    <body>
+    <p> Hi ".$studentData->name." </p> 
+    <p> Your aplication is rejected form ". $recuratorData->org_name ." </p> 
+    </body>
+    </html>";
 
     // Always set content-type when sending HTML email
     $headers = "MIME-Version: 1.0" . "\r\n";
@@ -173,7 +154,7 @@ class StudentDashboardController extends Controller
 
     // More headers
     $headers .= 'From: ' . $recuratorData->email . "\r\n";
-    $headers .= 'Cc: pathakmanish86@gmail.com' . "\r\n";
+    //$headers .= 'Cc: pathakmanish86@gmail.com' . "\r\n";
 
     mail($to, $subject, $message, $headers);
     return redirect()->back()->with(array('status' => 'success', 'message' => 'Mail send successfully for selection or shortlist.'));
@@ -661,6 +642,8 @@ class StudentDashboardController extends Controller
         ->insert([
           'student_id' => $id,
           'image' => $profileImage,
+          'created_at' => date("Y-m-d H:i:s"),
+          'updated_at' => date("Y-m-d H:i:s"),
         ]);
       return redirect()->back()->with(array('status' => 'success', 'message' => 'Resume Added'));
       return redirect()->back()->with(['success_msg' => "Resume Added"]);
@@ -668,6 +651,7 @@ class StudentDashboardController extends Controller
       $update = DB::table('student_resume')->where('student_id', $id)
         ->update([
           'image' => $profileImage,
+          'updated_at' => date("Y-m-d H:i:s"),
         ]);
       return redirect()->back()->with(array('status' => 'success', 'message' => 'Resume Updated'));
       return redirect()->back()->with(['success_msg' => "Resume Updated"]);

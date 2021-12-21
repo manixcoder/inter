@@ -15,11 +15,11 @@ class CreateAccomplishmentsTable extends Migration
     {
         Schema::create('accomplishments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
-            $table->string('course_name');
-            $table->string('awards');
-            $table->string('test_scores');
-            $table->longText('publications');
+            $table->integer('user_id')->nullable();
+            $table->string('course_name')->nullable();
+            $table->string('awards')->nullable();
+            $table->string('test_scores')->nullable();
+            $table->longText('publications')->nullable();
             $table->enum('status', ['1', '0'])->default(0)->comment = '0=Active, 1=Inactive';
             $table->timestamps();
         });

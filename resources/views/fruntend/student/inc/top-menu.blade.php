@@ -32,11 +32,10 @@
               <div class="login_user">
                 <a class="user_dropdown" href="#">
                   <i>
-                    
-                  @if(Auth::user()->users_role == 2)
+                    @if(Auth::user()->profile_image !='')
                       <img src="{{ URL::asset('/public/uploads/') }}/{{ Auth::user()->profile_image ?? ''}}" alt="img">
                     @else
-                      <img src="{{ URL::asset('/public/uploads/') }}/{{ Auth::user()->org_image }}" alt="img">
+                      <img src="{{ URL::asset('/public/uploads/userimg-icon.png') }}" alt="img">
                     @endif
                 
                 </i>

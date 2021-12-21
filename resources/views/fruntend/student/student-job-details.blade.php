@@ -60,10 +60,10 @@
         <div class="innerrow">
           <div class="col_grid9">
             <div class="jobsDetailComp_img">
-              @if($appl->users_role =='3')
-              <img src="{{ asset('public/uploads')}}/{{ $appl->org_image }}" alt="newtechlogo">
-              @else
+              @if($appl->profile_image !='')
               <img src="{{ asset('public/uploads')}}/{{ $appl->profile_image }}" alt="newtechlogo">
+              @else
+              <img src="{{ asset('public/uploads/placeholder.png')}}" alt="newtechlogo">
               @endif
             </div>
             <div class="jobsDetailComp_cont">
@@ -99,6 +99,7 @@
                 $userRole   = Session::get('userRole');
                 $userid     = Session::get('gorgID');
                 $jobCount   = DB::table('job_applied')->where('student_id', $userid)->where('job_id', $appl->id)->count();
+                $orgData = DB::table('users')->where('id', $appl->user_id)->first();
                 ?>
                 @if($jobCount==0)
                 <form method="post" action="{{ url('student_job_apply') }}">
@@ -112,9 +113,16 @@
               </div>
             </div>
           </div>
-          <!--div class="col_grid12 extraleft_pad mrtop_extra45 contact_profileinfo">
+          <div class="col_grid12 extraleft_pad mrtop_extra45 contact_profileinfo">
             <div class="innerrow">
-
+              <div class="col_grid6 contactmail">
+                <span>
+                  Contact:
+                  <a href="mailto:{{ $orgData->email }}" class="lightblue_text">
+                    {{ $orgData->email }}
+                  </a>
+                </span>
+              </div>
               <div class="col_grid6 text-right checkbox_notify">
                 <div class="custominputBox">
                   <input type="checkbox" class="inputCheck">
@@ -123,7 +131,7 @@
                 <span>Notify me for similar jobs</span>
               </div>
             </div>
-          </div-->
+          </div>
         </div>
       </div>
       <div class="jobDescriptions_sec fw">
@@ -245,10 +253,6 @@
       </div>
     </div>
   </div>
-
-
-
-
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
   <script>
     $(document).ready(function() {

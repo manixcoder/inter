@@ -169,7 +169,7 @@ class JobConroller extends Controller
   public function delete($id)
   {
     $delete = app('App\Jobs')->where('id', $id)->delete();
-
+    return redirect('joblist')->with(array('status' => 'success', 'message' => 'Deleted Successfully !'));
     return back();
   }
 

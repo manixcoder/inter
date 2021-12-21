@@ -15,18 +15,18 @@ class CreateJobsTable extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
-            $table->string('salary');
-            $table->string('company_name');
-            $table->string('logo');
-            $table->string('attachment');
-            $table->longText('job_title');
-            $table->string('location');
-            $table->string('applicant');
-            $table->string('create_on');
-            $table->string('official_email');
-            $table->longText('offer');
-            $table->longText('job_description');
+            $table->integer('user_id')->nullable();
+            $table->string('salary')->nullable();
+            $table->string('company_name')->nullable();
+            $table->string('logo')->nullable();
+            $table->string('attachment')->nullable();
+            $table->longText('job_title')->nullable();
+            $table->string('location')->nullable();
+            $table->string('applicant')->nullable();
+            $table->string('create_on')->nullable();
+            $table->string('official_email')->nullable();
+            $table->longText('offer')->nullable();
+            $table->longText('job_description')->nullable();
             $table->enum('status', ['1', '0'])->default(0)->comment = '0=Active, 1=Inactive';
             $table->timestamps();
         });

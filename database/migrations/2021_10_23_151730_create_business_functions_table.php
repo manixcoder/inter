@@ -15,8 +15,8 @@ class CreateBusinessFunctionsTable extends Migration
     {
         Schema::create('business_functions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
-            $table->longText('business_functions_name');
+            $table->integer('user_id')->nullable();
+            $table->longText('business_functions_name')->nullable();
             $table->enum('status', ['1', '0'])->default(0)->comment = '0=Active, 1=Inactive';
             $table->timestamps();
         });

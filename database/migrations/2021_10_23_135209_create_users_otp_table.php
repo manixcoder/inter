@@ -15,9 +15,9 @@ class CreateUsersOtpTable extends Migration
     {
         Schema::create('users_otp', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('phone');
-            $table->integer('otp');
-            $table->string('email');
+            $table->string('phone')->nullable();
+            $table->integer('otp')->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }

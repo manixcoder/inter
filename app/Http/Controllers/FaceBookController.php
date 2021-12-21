@@ -33,7 +33,7 @@ class FaceBookController extends Controller
             ], [
                 'name' => $user->getName(),
                 'email' => $user->getEmail(),
-                'profile_image' => 'no-image.png',
+                'profile_image' => 'placeholder.png',
                 'users_role' => '2',
                 'password' => Hash::make($user->getName() . '@' . $user->getId())
             ]);
