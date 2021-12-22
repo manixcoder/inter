@@ -74,6 +74,7 @@ Route::get('web/post/jobs', function () {
 Route::get('recruiter-register-step-one', function () {
 	return view('fruntend.recruiter_register.recruiter_register_step_one');
 });
+Route::any('recruider_register_step_one', 'HomeController@recruider_register_step_one');
 
 Route::get('termsofuse', function () {
 	return view('fruntend.termsofuse');
@@ -115,12 +116,12 @@ Route::get('verification_otp', function () {
 Route::get('recruiter-lending', function () {
 	return view('fruntend.recruiter_landing');
 });
-
-Route::any('blogsearch', 'HomeController@blogsearch');
+Route::any('blogsearch', 'SearchController@blogsearch');
+//Route::any('blogsearch', 'HomeController@blogsearch');
 Route::any('blogsearchweb', 'HomeController@blogsearchweb');
-Route::get('blog', 'HomeController@web_blog_data');
+Route::get('blog', 'SearchController@web_blog_data');
 
-Route::any('recruider_register_step_one', 'HomeController@recruider_register_step_one');
+
 
 /* After web login pages */
 
@@ -312,6 +313,7 @@ Route::any('recruiter-delete/{id}', 'RecruiterController@delete');
 Route::any('redirect-recruiter', 'RecruiterController@redirect_recruiter');
 Route::any('add-recruiter', 'RecruiterController@create');
 Route::any('recruiter-detail/{id}', 'RecruiterController@recruiter_detail');
+Route::any('recruiter-delails-delete/{id}', 'RecruiterController@recruiterDelailsDelete');
 Route::get('today-recruiter-list', 'RecruiterController@today_recruiter_list');
 Route::any('search/filter/recruiter/posts', 'RecruiterwebController@search_filter_recruiter_posts');
 
@@ -327,6 +329,8 @@ Route::any('blog-detail/{id}', 'BlogController@blog_detail');
 // Route::any('web/blog/detail/{id}', 'BlogController@web_blog_detail');
 
 Route::any('add-blog', 'BlogController@create');
+Route::any('edit-blog/{id}', 'BlogController@edit_blog');
+Route::any('update-blog', 'BlogController@updateBlog');
 
 /* Student */
 Route::get('addstudent_redirect', function () {

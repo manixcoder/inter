@@ -111,9 +111,9 @@
                   </a> -->
                 </li>
                 <li>
-                  <a href="{{ route('google.login') }}" class="login_icon">
+                  <!-- <a href="{{ route('google.login') }}" class="login_icon">
                     <img src="{{ asset('public/assets/images/login_google.png')}}" alt="icon">
-                  </a> 
+                  </a>  -->
 
                   <!-- <a href="https://open.spotify.com/user/64p2h14btruk2aydbijnajk9o" class="login_icon">
                     <img src="{{ asset('public/assets/images/login_google.png')}}" alt="icon">

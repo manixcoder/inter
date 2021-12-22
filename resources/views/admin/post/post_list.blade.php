@@ -4,43 +4,30 @@
 
         @if(isset($Data))
             @foreach($Data as $postsdata) 
-            
-                @php 
-                    $likeby = DB::table('post_like')->where('post_id', $postsdata->id)->where('like_unlike', 0)->count(); 
-                    $commentby = DB::table('post_comment')->where('post_id', $postsdata->id)->count(); 
-                @endphp
-            
-                <div class="content-group fw">
-                  <div class="text-cont fw">
+            @php
+            $likeby = DB::table('post_like')->where('post_id', $postsdata->id)->where('like_unlike', 0)->count(); 
+            $commentby = DB::table('post_comment')->where('post_id', $postsdata->id)->count(); 
+            @endphp
+            <div class="content-group fw">
+               <div class="text-cont fw">
                      <div class="userCommnet_deta fw">
                         @php $userdetail = DB::table('users')->where('id', $postsdata->user_id)->first(); @endphp
                         <span>
-                           @if($userdetail->users_role ==='1')
-                           <img src="{{ URL::asset('/public/uploads/') }}/{{ $userdetail->org_image ?? ''}}" alt="icon">
-                           @elseif($userdetail->users_role ==='2')
-                           <img src="{{ URL::asset('/public/uploads/') }}/{{ $userdetail->profile_image ?? ''}}" alt="icon">
-                           @elseif($userdetail->users_role ==='3')
-                           <img src="{{ URL::asset('/public/uploads/') }}/{{ $userdetail->org_image ?? ''}}" alt="icon">
+                           @if($userdetail->profile_image !='')
+                           <img src="{{ URL::asset('/public/uploads/') }}/{{ $userdetail->profile_image ?? ''}}" alt="icon">                           
                            @else
-                           <img src="{{ URL::asset('/public/uploads/') }}/{{ $userdetail->profile_image ?? ''}}" alt="icon">
+                           <img src="{{ URL::asset('/public/uploads/placeholder.png') }}" alt="icon">
                            @endif
                            
                         </span>
                         <div class="userCommnet_Name">
-                          <h4>{{ $userdetail->name ?? ''}} <span>{{ date('d M Y | H:i:s', strtotime($postsdata->date_time))}}</span> </h4>
+                          <h4>{{ $userdetail->name ?? ''}} <span>{{ date('d M Y | H:i:s', strtotime($postsdata->created_at))}}</span> </h4>
                         </div>
                       </div>
                       <h3 class="siteheading">{{ $postsdata->heading ?? ''}}</h3>
                       <p class="site-pra">
-                          @php
-                          $clear = strip_tags($postsdata->description);
-                          $clear = html_entity_decode($clear);
-                          $clear = urldecode($clear);
-                          $clear = preg_replace('/[^A-Za-z0-9]/', ' ', $clear);
-                          $clear = preg_replace('/ +/', ' ', $clear);
-                          $clear = trim($clear);
-                          @endphp
-                        {{ $clear ?? ''}}
+                          
+                        <?php echo $postsdata->description; ?>
                       </p>
                   </div>
                   <div class="img-cont fw">

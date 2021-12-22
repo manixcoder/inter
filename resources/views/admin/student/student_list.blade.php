@@ -7,7 +7,7 @@
 	<div class="row">
 
 		<div class="col-md-12 listtable-sec">
-			<table class="table liststudent_table text-left" id="liststudent_table">
+			<table class="table listjob_table text-left" id="liststudent_table">
 				<thead>
 					<tr>
 						<th class="company_th">
@@ -60,7 +60,11 @@
 						<td>{{$value->phone }}</td>
 						<td>
 							<i class="user_img">
+								@if($value->profile_image !='')
 								<img src="{{ URL::asset('/public/uploads/') }}/{{ $value->profile_image }}" alt="usericon">
+								@else
+								<img src="{{ URL::asset('/public/uploads/placeholder.png') }}" alt="usericon">
+								@endif
 							</i>
 							{{ $value->org_name }}
 						</td>
@@ -79,11 +83,12 @@
 							<a href="{{ URL::to('student-detail',$value->id) }}">
 								<img src="{{ asset('public/assets/images/view.svg')}}" alt="icon">
 							</a>
-							<!-- 
-								<span class="edit_icon">
-										<img src="{{ asset('public/assets/images/chat_2.svg')}}" alt="icon">
-									</span> 
-								-->
+							<span class="edit_icon">
+								<a href="{{ URL::to('/message')}}" target="_blank">
+									<img src="{{ asset('public/assets/images/chat_2.svg')}}" alt="icon">
+								</a>
+							</span>
+
 							<span class="edit_icon">
 								<a href="{{ URL::to('student-delete',$value->id) }}" onclick="return confirm('Are you sure you want to delete this item?');">
 									<img src="{{ asset('public/assets/images/delete.svg')}}" alt="icon">
@@ -117,6 +122,14 @@
 </script>
 <script>
 	$(document).ready(function() {
-		$('#liststudent_table').DataTable();
+		$('#liststudent_table').DataTable({
+			columnDefs: [{
+				orderable: false,
+				targets: 0
+			}],
+			order: [
+				[1, 'asc']
+			]
+		});
 	});
 </script>

@@ -27,7 +27,6 @@
       }
       $userRole = Session::get('userRole');
       $count = 30;
-
       $loginby = DB::table('users')->where('id', $userid)->first();
       $education = DB::table('education')->where('user_id', $userid)->first();
       $certificate = DB::table('certificates')->where('user_id', $userid)->first();
@@ -36,8 +35,6 @@
       $hobbies = DB::table('hobbies_and_interests')->where('user_id', $userid)->first();
       $accomplishments = DB::table('accomplishments')->where('user_id', $userid)->first();
       $OrgData = DB::table('users')->where('id', $userid)->first();
-
-
       if ($loginby->address != '') {
         $count = $count + 10;
       }
@@ -325,7 +322,7 @@
                     <div class="userBox">
                       @if($exp->company_image !='')
                       <img src="{{ asset('public/uploads/'.$exp->company_image)}}" alt="icon" />
-                      
+
                       @else
                       <img src="{{ asset('public/uploads/placeholder.png')}}" alt="icon" />
                       @endif

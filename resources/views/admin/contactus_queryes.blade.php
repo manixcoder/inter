@@ -5,7 +5,7 @@
     <div class="row">
     	
       	<div class="col-md-12 listtable-sec">
-			<table class="table listjob_table text-left" id="example">
+			<table class="table listjob_table text-left" id="ContactTable">
 				<thead>
 					<tr>
 						<th>
@@ -14,20 +14,28 @@
 						</th>
 						<th class="company_th">
 							Name
-							
+							<span class="serach-input">
+								<input type="text" name="searchbox" class="serachbox">
+							</span>							
 						</th>
 						<th>
 							Email Address
-						
+						<span class="serach-input">
+								<input type="text" name="searchbox" class="serachbox">
+							</span>
 						</th>
 						<th>
 							Mobile Number
-							
+							<span class="serach-input">
+								<input type="text" name="searchbox" class="serachbox">
+							</span>
 						</th>
 						
 						<th>
 							Message
-						
+						<span class="serach-input">
+								<input type="text" name="searchbox" class="serachbox">
+							</span>
 						</th>
 						<th>
 							Date/Time
@@ -77,4 +85,17 @@
 	        }
 	    });
 	}
+</script>
+<script>
+	$(document).ready(function() {
+		$('#ContactTable').DataTable({
+			columnDefs: [{
+				orderable: false,
+				targets: 0
+			}],
+			order: [
+				[1, 'asc']
+			]
+		});
+	});
 </script>

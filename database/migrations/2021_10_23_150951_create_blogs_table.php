@@ -15,12 +15,12 @@ class CreateBlogsTable extends Migration
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('created_by');
-            $table->string('blog_heading');
-            $table->longText('description');
-            $table->timestamp('posted_date_and_time');
-            $table->string('blog_image');
-            $table->integer('feature_blog');
+            $table->integer('created_by')->nullable();
+            $table->string('blog_heading')->nullable();
+            $table->longText('description')->nullable();
+            $table->timestamp('posted_date_and_time')->nullable();
+            $table->string('blog_image')->nullable();
+            $table->integer('feature_blog')->nullable();
             $table->enum('status', ['1', '0'])->default(0)->comment = '0=Active, 1 =Inactive';
             $table->timestamps();
         });

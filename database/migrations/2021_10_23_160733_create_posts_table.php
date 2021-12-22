@@ -15,10 +15,10 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
-            $table->longText('heading');
-            $table->longText('description');
-            $table->string('post_image');
+            $table->integer('user_id')->nullable();
+            $table->longText('heading')->nullable();
+            $table->longText('description')->nullable();
+            $table->string('post_image')->nullable();
             $table->enum('status', ['1', '0'])->default(0)->comment = '0=Active, 1=Inactive';
             $table->dateTime('date_time');
             $table->timestamps();

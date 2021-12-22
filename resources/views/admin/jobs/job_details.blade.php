@@ -52,10 +52,17 @@
                   <li>Designation <b>{{ $job_created_by->designation ?? ''}}</b></li>
                   <li>View Details 
                      <b>
-                       <!--  <i><a href=""><img src="{{ URL::asset('/public/assets/images/chat_2.svg') }}" alt="chat"></a></i> -->
-                        
-                        <i><a href="{{ URL::to('recruiter-detail', base64_encode($job_created_by->id)) }}"><img src="{{ asset('public/assets/images/view.svg')}}" alt="chat"></a></i>
-                        <!-- <i><a href="#"><img src="{{ asset('public/assets/images/delete.svg')}}" alt="chat"></a></i> -->
+                        <i>
+                           <a href="{{ URL::to('/message')}}" target="_blank"><img src="{{ URL::asset('/public/assets/images/chat_2.svg') }}" alt="chat"></a>
+                        </i>                         
+                        <i>
+                           <a href="{{ URL::to('recruiter-detail', base64_encode($job_created_by->id)) }}"><img src="{{ asset('public/assets/images/view.svg')}}" alt="chat"></a>
+                        </i>
+                         <i>
+                           <a href="{{ URL::to('job-delete',$jobDetail->id) }}" onclick="return confirm('Are you sure you want to delete this item?');">
+                           <img src="{{ asset('public/assets/images/delete.svg')}}" alt="delete">
+                        </a>
+                     </i>
                      </b>
                   </li>
                </ul>

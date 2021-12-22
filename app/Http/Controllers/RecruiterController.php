@@ -20,20 +20,28 @@ use Hash;
 
 class RecruiterController extends Controller
 {
+
+
   public function __construct()
   {
     date_default_timezone_set("Asia/Kolkata");
     $this->middleware('auth');
     $this->middleware('role');
   }
-
+  /**
+   * Display a listing of the resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
   public function index()
   {
     $Data = app('App\User')->where('users_role', 3)->orderBy('id', 'Desc')->get();
     $DataCount = app('App\User')->where('users_role', 3)->count();
-
     $data['content'] = 'admin.recruiter.list_recruiter';
-    return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount' => $DataCount]);
+    return view('layouts.content', compact('data'))->with([
+      'Data' => $Data,
+      'DataCount' => $DataCount
+    ]);
   }
 
   public function today_recruiter_list()
@@ -41,7 +49,6 @@ class RecruiterController extends Controller
     $todaysdate = date('Y-m-d') . ' 00:00:00';
     $Data = DB::table('users')->Where('users_role', 3)->where('created_at', '>=', $todaysdate)->paginate(10);
     $DataCount = DB::table('users')->Where('users_role', 3)->where('created_at', '>=', $todaysdate)->count();
-
     $data['content'] = 'admin.recruiter.list_recruiter';
     return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount' => $DataCount]);
   }
@@ -50,7 +57,6 @@ class RecruiterController extends Controller
     $todaysdate = date('Y-m-d') . ' 00:00:00';
     $Data = DB::table('users')->Where('users_role', 3)->where('created_at', '>=', $todaysdate)->paginate(10);
     $DataCount = DB::table('users')->Where('users_role', 3)->where('created_at', '>=', $todaysdate)->count();
-
     $data['content'] = 'fruntend.recruiter_profile_section.my_posts';
     return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount' => $DataCount]);
   }
@@ -75,8 +81,21 @@ class RecruiterController extends Controller
   public function delete($id)
   {
     $delete = app('App\User')->where('id', $id)->delete();
-    $deleteRelatedJobs = app('App\Jobs')->where('user_id', $id)->delete();
-    return back();
+    $jobsData = DB::table('jobs')->where('user_id', $id)->get();
+    foreach ($jobsData as $job) {
+      $job_applied = DB::table('job_applied')->where('job_id', $job->id)->delete();
+    }
+    $jobs = DB::table('jobs')->where('user_id', $id)->delete();
+    $postsData = DB::table('posts')->where('user_id', $id)->get();
+    foreach ($postsData as $post) {
+      $post_comment = DB::table('post_comment')->where('post_id', $post->id)->delete();
+      $post_like = DB::table('post_like')->where('post_id', $post->id)->delete();
+    }
+    $posts = DB::table('posts')->where('user_id', $id)->delete();
+    $post_comment = DB::table('post_comment')->where('user_id', $id)->delete();
+    $post_like = DB::table('post_like')->where('user_id', $id)->delete();
+    $notifications = DB::table('notifications')->Where('notifiable_id', $id)->delete();
+    return redirect('recruiter-list');
   }
 
   public function redirect_recruiter()
@@ -125,13 +144,43 @@ class RecruiterController extends Controller
 
     return redirect('recruiter-list');
   }
+  public function recruiterDelailsDelete($id)
+  {
+    $delete = app('App\User')->where('id', $id)->delete();
+    $jobsData = DB::table('jobs')->where('user_id', $id)->get();
+    foreach ($jobsData as $job) {
+      $job_applied = DB::table('job_applied')->where('job_id', $job->id)->delete();
+    }
+    $jobs = DB::table('jobs')->where('user_id', $id)->delete();
+    $postsData = DB::table('posts')->where('user_id', $id)->get();
+    foreach ($postsData as $post) {
+      $post_comment = DB::table('post_comment')->where('post_id', $post->id)->delete();
+      $post_like = DB::table('post_like')->where('post_id', $post->id)->delete();
+    }
+    $posts = DB::table('posts')->where('user_id', $id)->delete();
+    $post_comment = DB::table('post_comment')->where('user_id', $id)->delete();
+    $post_like = DB::table('post_like')->where('user_id', $id)->delete();
+    $notifications = DB::table('notifications')->Where('notifiable_id', $id)->delete();
+    return redirect('recruiter-list')->with(array('status' => 'success', 'message' => 'Deleted Successfully!'));
+
+    // $Data = app('App\User')->where('users_role', 3)->orderBy('id', 'Desc')->get();
+    // $DataCount = app('App\User')->where('users_role', 3)->count();
+    // $data['content'] = 'admin.recruiter.list_recruiter';
+    // return view('layouts.content', compact('data'))->with([
+    //   'Data' => $Data,
+    //   'DataCount' => $DataCount
+    // ]);
+  }
 
   public function recruiter_detail($id)
   {
-    $recruiterDetail = app('App\User')->where('id', base64_decode($id))->first();
+    $recruiterDetail = app('App\User')->where('id', $id)->first();
     $totalListedJobs =  DB::table('jobs')->where('user_id', $recruiterDetail->id)->orderBy('id', 'DESC')->get();
 
     $data['content'] = 'admin.recruiter.recruiter_detail';
-    return view('layouts.content', compact('data'))->with(['recruiterDetail' => $recruiterDetail, 'totalListedJobs' => $totalListedJobs]);
+    return view('layouts.content', compact('data'))->with([
+      'recruiterDetail' => $recruiterDetail,
+      'totalListedJobs' => $totalListedJobs
+    ]);
   }
 }

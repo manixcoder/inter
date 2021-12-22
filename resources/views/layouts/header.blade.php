@@ -64,7 +64,11 @@
         </form>
       </div>
       <ul>
-        <!--  <li><i class="fa fa-comments"></i></li> -->
+        <li>
+        <a href="{{ URL::to('/message')}}" target="_blank">
+          <i class="fa fa-comments"></i>
+          </a>
+        </li>
         <li>
           <div class="login_part">
             <div class="dropdown">
@@ -88,6 +92,6 @@
   <div class="main_contant">
     @if (session('status'))
     <div style="text-align:center; color: red;" class="alert alert-danger" role="alert">
-      Data not found.!
+    {{ Session::get('message') }}
     </div>
     @endif

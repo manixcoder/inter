@@ -15,8 +15,8 @@ class CreateHobbiesAndInterestsTable extends Migration
     {
         Schema::create('hobbies_and_interests', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
-            $table->longText('hobbies_name');
+            $table->integer('user_id')->nullable();
+            $table->longText('hobbies_name')->nullable();
             $table->timestamps();
         });
     }

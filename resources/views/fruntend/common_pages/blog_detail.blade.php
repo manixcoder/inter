@@ -25,7 +25,7 @@
          </h3>
          <div class="admin-date-box fw">
            <span class="gary-small-text text-left col_grid6">Posted on :<span>
-               {{date('d M Y | H:i'  , strtotime($Data->posted_date_and_time))}}
+               {{date('d M Y | H:i'  , strtotime($Data->created_at))}}
              </span>
            </span>
            <span class="gary-small-text text-right col_grid6">Posted by :<span>

@@ -16,10 +16,10 @@ class CreateEducationTable extends Migration
         Schema::create('education', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id');
-            $table->string('school_name');
-            $table->string('name_of_technology');
-            $table->string('percentage');
-            $table->string('year');
+            $table->string('school_name')->nullable();
+            $table->string('name_of_technology')->nullable();
+            $table->string('percentage')->nullable();
+            $table->string('year')->nullable();
             $table->enum('status', ['1', '0'])->default(0)->comment = '0=Active, 1=Inactive';
             $table->timestamps();
         });

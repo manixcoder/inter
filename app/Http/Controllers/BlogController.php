@@ -67,17 +67,49 @@ class BlogController extends Controller
     $data = array(
       'blog_image' => $image,
       'blog_heading' => $request->blog_heading,
-      /*'feature_blog' => $request->feature_blog, */
       'description' => $request->description,
       'status' => 0,
       'created_by' => Session::get('gorgID'),
-      'posted_date_and_time' => now(),
+      'posted_date_and_time' => date("Y-m-d H:i:s"),
       'created_at' => date("Y-m-d H:i:s"),
       'updated_at' => date("Y-m-d H:i:s")
     );
 
     $insertData = app('App\Blog')->insert($data);
     return redirect('blog-list');
+  }
+  public function edit_blog(Request $request, $id)
+  {
+    $blogData = app('App\Blog')->where('id', $id)->orderBy('id', 'DESC')->first();
+    $data['content'] = 'admin.blog.edit_blog';
+    return view('layouts.content', compact('data'))->with(['blogData' => $blogData]);
+  }
+  public function updateBlog(Request $request)
+  {
+   // dd($request->all());
+    $blogData = app('App\Blog')->where('id', $request->blog_id)->orderBy('id', 'DESC')->first();
+    if ($files = $request->image) {
+      $destinationPath = public_path('/uploads/');
+      $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
+      $path =  $files->move($destinationPath, $profileImage);
+      $image = $insert['photo'] = "$profileImage";
+    }else{
+      $image =$blogData->blog_image;
+    }
+    $blogData = app('App\Blog')->where('id', $request->blog_id)->update([
+      'blog_image' => $image,
+      'blog_heading' => $request->blog_heading,
+      'description' => $request->description,
+      'status' => 0,
+      'created_by' => Session::get('gorgID'),
+      'updated_at' => date("Y-m-d H:i:s")
+    ]);
+    $Data = app('App\Blog')->orderBy('id', 'DESC')->get();
+    $DataCount = app('App\Blog')->count();
+
+    $data['content'] = 'admin.blog.blog_list';
+    return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount' => $DataCount]);
+
   }
 
   public function blog_detail($id)

@@ -54,7 +54,10 @@ class StudentregisterController extends Controller
 					'insertid' => $request->student_id
 				]);
 			} else {
-				return view('fruntend.student.student_register.student_register_step_two')->with(['insertid' => $request->student_id, 'error_msg' => 'Sorry, Your phone already exist.',]);
+				return view('fruntend.student.student_register.student_register_step_two')->with([
+					'insertid' => $request->student_id,
+					'error_msg' => 'Sorry, Your phone already exist.'
+				]);
 			}
 		} elseif ($request->setep_three == 'setep_three') {
 
@@ -65,16 +68,23 @@ class StudentregisterController extends Controller
 					'email' => $request->email,
 					'updated_at' => date("Y-m-d H:i:s")
 				]);
-				return view('fruntend.student.student_register.student_register_step_four')->with(['insertid' => $request->student_id]);
+				return view('fruntend.student.student_register.student_register_step_four')->with([
+					'insertid' => $request->student_id
+				]);
 			} else {
-				return view('fruntend.student.student_register.student_register_step_three')->with(['insertid' => $request->student_id, 'error_msg' => 'Sorry, Your email already exist.',]);
+				return view('fruntend.student.student_register.student_register_step_three')->with([
+					'insertid' => $request->student_id,
+					'error_msg' => 'Sorry, Your email already exist.'
+				]);
 			}
 		} elseif ($request->setep_four == 'setep_four') {
 			$studentRegisterOne = app('App\User')->where('id', $request->student_id)->update([
 				'password' => Hash::make($request->confirmPassword),
 				'updated_at' => date("Y-m-d H:i:s")
 			]);
-			return view('fruntend.student.student_register.student_register_step_five')->with(['insertid' => $request->student_id]);
+			return view('fruntend.student.student_register.student_register_step_five')->with([
+				'insertid' => $request->student_id
+			]);
 		} elseif ($request->setep_five == 'setep_five') {
 			$data = app('App\User')->where('id', $request->student_id)->first();
 
