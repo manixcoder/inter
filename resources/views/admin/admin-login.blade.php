@@ -14,8 +14,8 @@
    <body class="login_page">
       @include('layouts.alert')            
       <div class="container">
-         <div class="logo">                                                                                               
-            <a href="#"><img src="{{ asset('public/assets/images/login_logo.png')}}" alt="login_logo"></a>
+         <div class="logo">                                                                                                
+            <a href="{{ URL::to('') }}"><img src="{{ asset('public/assets/images/login_logo.png')}}" alt="login_logo"></a>
          </div>
          <div class="login-item">
             <form action="{{ URL::to('admin_logged_in') }}" method="post" class="test form-login">
