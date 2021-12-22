@@ -25,8 +25,8 @@ class FaceBookController extends Controller
     public function callbackFromFacebook()
     {
         try {
-            $user = Socialite::driver('facebook')->user();
-            // dd($user);
+            $user = Socialite::driver('facebook')->stateless()->user();
+            //dd($user);
 
             $saveUser = User::updateOrCreate([
                 'facebook_id' => $user->getId(),

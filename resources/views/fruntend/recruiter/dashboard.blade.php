@@ -4,12 +4,6 @@
   $count = 30;
   $userid = Session::get('gorgID');
   $loginby = DB::table('users')->where('id', $userid)->first();
-  // $education = DB::table('education')->where('user_id', $userid)->first();
-  // $certificate = DB::table('certificates')->where('user_id', $userid)->first();
-  // $myfavorite = DB::table('my_favorite_industries')->where('user_id', $userid)->first();
-  // $businesses = DB::table('business_functions')->where('user_id', $userid)->first();
-  // $hobbies = DB::table('hobbies_and_interests')->where('user_id', $userid)->first();
-  // $accomplishments = DB::table('accomplishments')->where('user_id', $userid)->first();
   if ($loginby->website != '') {
     $count = $count + 10;
   }

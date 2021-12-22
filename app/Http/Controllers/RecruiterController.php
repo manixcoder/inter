@@ -81,6 +81,20 @@ class RecruiterController extends Controller
   public function delete($id)
   {
     $delete = app('App\User')->where('id', $id)->delete();
+    $jobsData = DB::table('jobs')->where('user_id', $id)->get();
+    foreach ($jobsData as $job) {
+      $job_applied = DB::table('job_applied')->where('job_id', $job->id)->delete();
+    }
+    $jobs = DB::table('jobs')->where('user_id', $id)->delete();
+    $postsData = DB::table('posts')->where('user_id', $id)->get();
+    foreach ($postsData as $post) {
+      $post_comment = DB::table('post_comment')->where('post_id', $post->id)->delete();
+      $post_like = DB::table('post_like')->where('post_id', $post->id)->delete();
+    }
+    $posts = DB::table('posts')->where('user_id', $id)->delete();
+    $post_comment = DB::table('post_comment')->where('user_id', $id)->delete();
+    $post_like = DB::table('post_like')->where('user_id', $id)->delete();
+    $notifications = DB::table('notifications')->Where('notifiable_id', $id)->delete();
     return redirect('recruiter-list');
   }
 
@@ -132,7 +146,21 @@ class RecruiterController extends Controller
   }
   public function recruiterDelailsDelete($id)
   {
-    $Data = app('App\User')->where('id', $id)->delete();
+    $delete = app('App\User')->where('id', $id)->delete();
+    $jobsData = DB::table('jobs')->where('user_id', $id)->get();
+    foreach ($jobsData as $job) {
+      $job_applied = DB::table('job_applied')->where('job_id', $job->id)->delete();
+    }
+    $jobs = DB::table('jobs')->where('user_id', $id)->delete();
+    $postsData = DB::table('posts')->where('user_id', $id)->get();
+    foreach ($postsData as $post) {
+      $post_comment = DB::table('post_comment')->where('post_id', $post->id)->delete();
+      $post_like = DB::table('post_like')->where('post_id', $post->id)->delete();
+    }
+    $posts = DB::table('posts')->where('user_id', $id)->delete();
+    $post_comment = DB::table('post_comment')->where('user_id', $id)->delete();
+    $post_like = DB::table('post_like')->where('user_id', $id)->delete();
+    $notifications = DB::table('notifications')->Where('notifiable_id', $id)->delete();
     return redirect('recruiter-list')->with(array('status' => 'success', 'message' => 'Deleted Successfully!'));
 
     // $Data = app('App\User')->where('users_role', 3)->orderBy('id', 'Desc')->get();

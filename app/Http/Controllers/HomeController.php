@@ -396,7 +396,7 @@ class HomeController extends Controller
         $path =  $files->move($destinationPath, $profileImage);
         $image = $insert['photo'] = "$profileImage";
       }
-      $recruiterRegisterOne = app('App\User')->where('id', $request->recruiterid)->update(['org_image'=>$image,'profile_image' => $image]);
+      $recruiterRegisterOne = app('App\User')->where('id', $request->recruiterid)->update(['org_image'=>'company_profileBG.png','profile_image' => $image]);
       return view('fruntend.recruiter_register.recruiter_register_step_five')->with(['insertid' => $request->recruiterid]);
     } elseif ($request->setep_five == 'setep_five') {
       $recruiterRegisterOne = app('App\User')->where('id', $request->recruiterid)->update(['org_name' => $request->org_name]);

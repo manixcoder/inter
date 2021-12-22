@@ -114,8 +114,8 @@ class StudentDashboardController extends Controller
         <head>
         </head>
         <body>
-        <p> Hi ".$studentData->name." </p>     
-        <p> Your aplication is rejected form ". $recuratorData->org_name ." </p>     
+        <p> Hi " . $studentData->name . " </p>     
+        <p> Your aplication is rejected form " . $recuratorData->org_name . " </p>     
         </body>
         </html>";
 
@@ -143,8 +143,8 @@ class StudentDashboardController extends Controller
     <head>
     </head>
     <body>
-    <p> Hi ".$studentData->name." </p> 
-    <p> Your aplication is rejected form ". $recuratorData->org_name ." </p> 
+    <p> Hi " . $studentData->name . " </p> 
+    <p> Your aplication is rejected form " . $recuratorData->org_name . " </p> 
     </body>
     </html>";
 
@@ -230,6 +230,8 @@ class StudentDashboardController extends Controller
         'percentage' => $request->percentage,
         'year' => $request->year,
         'status' => 0,
+        'created_at' => date("Y-m-d H:i:s"),
+        'updated_at' => date("Y-m-d H:i:s")
       ]);
     return redirect()->back();
   }
@@ -371,6 +373,8 @@ class StudentDashboardController extends Controller
         'user_id' => $id,
         'industries_name' => $request->industry_name,
         'status' => 0,
+        'created_at' => date("Y-m-d H:i:s"),
+        'updated_at' => date("Y-m-d H:i:s")
       ]);
     return redirect()->back();
   }
@@ -387,6 +391,8 @@ class StudentDashboardController extends Controller
         'user_id' => $id,
         'business_functions_name' => $request->business_function_name,
         'status' => 0,
+        'created_at' => date("Y-m-d H:i:s"),
+        'updated_at' => date("Y-m-d H:i:s")
       ]);
     return redirect()->back();
   }
@@ -402,6 +408,8 @@ class StudentDashboardController extends Controller
       ->insert([
         'user_id' => $id,
         'hobbies_name' => $request->hobby_name,
+        'created_at' => date("Y-m-d H:i:s"),
+        'updated_at' => date("Y-m-d H:i:s")
       ]);
     return redirect()->back();
   }
@@ -421,6 +429,8 @@ class StudentDashboardController extends Controller
         'test_scores' => $request->test_scores,
         'publications' => $request->publications,
         'status' => 0,
+        'created_at' => date("Y-m-d H:i:s"),
+        'updated_at' => date("Y-m-d H:i:s")
       ]);
     return redirect()->back();
   }
@@ -433,6 +443,8 @@ class StudentDashboardController extends Controller
         'test_scores' => $request->test_scores,
         'publications' => $request->publications,
         'status' => 0,
+        'created_at' => date("Y-m-d H:i:s"),
+        'updated_at' => date("Y-m-d H:i:s")
       ]);
     return redirect()->back();
   }

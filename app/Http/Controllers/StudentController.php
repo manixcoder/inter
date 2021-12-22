@@ -55,11 +55,25 @@ class StudentController extends Controller
   public function delete($id)
   {
     $delete = app('App\User')->where('id', $id)->delete();
+    $postsData = DB::table('posts')->where('user_id', $id)->get();
+    foreach ($postsData as $post) {
+      $post_comment = DB::table('post_comment')->where('post_id', $post->id)->delete();
+      $post_like = DB::table('post_like')->where('post_id', $post->id)->delete();
+    }
+    $post = DB::table('posts')->Where('user_id', $id)->delete();
+    $post_comment = DB::table('post_comment')->Where('user_id', $id)->delete();
+    $post_like = DB::table('post_like')->Where('user_id', $id)->delete();
+    $education = DB::table('education')->Where('user_id', $id)->delete();
+    $experience = DB::table('experience')->Where('user_id', $id)->delete();
+    $announcement = DB::table('announcement')->Where('user_id', $id)->delete();
+    $accomplishments = DB::table('accomplishments')->Where('user_id', $id)->delete();
+    $hobbies_and_interests = DB::table('hobbies_and_interests')->Where('user_id', $id)->delete();
+    $certificates = DB::table('certificates')->Where('user_id', $id)->delete();
+    $applied = DB::table('job_applied')->Where('student_id', $id)->delete();
+    $industries = DB::table('my_favorite_industries')->Where('user_id', $id)->delete();
+    $student_resume = DB::table('student_resume')->Where('student_id', $id)->delete();
+    $notifications = DB::table('notifications')->Where('notifiable_id', $id)->delete();
     return redirect('student-list')->with(array('status' => 'success', 'message' => 'Deleted Successfully !'));
-    // $Data = app('App\User')->where('users_role', 2)->orderBy('id', 'Desc')->get();
-    // $DataCount = app('App\User')->where('users_role', 2)->count();
-    // $data['content'] = 'admin.student.student_list';
-    // return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount' => $DataCount]);
   }
 
   public function create(Request $request)
@@ -81,12 +95,6 @@ class StudentController extends Controller
       } else {
         $profile_image = 'placeholder.png';
       }
-
-      // if($request->image!=''){
-      //     $imagecheck = $image;
-      // }else{
-      //     $imagecheck = 'no-image.png';
-      // }
       $data = array(
         'profile_image' => $profile_image,
         'name' => $request->name,
@@ -99,7 +107,6 @@ class StudentController extends Controller
         'created_at' => date("Y-m-d H:i:s"),
         'updated_at' => date("Y-m-d H:i:s")
       );
-
       $insertData = app('App\User')->insert($data);
       return redirect('student-list')->with(['Success' => 'Data insert successfully!']);
     }
@@ -107,12 +114,12 @@ class StudentController extends Controller
 
   public function student_detail($id)
   {
-    $studentDetail = app('App\User')->where('id', $id)->first();
-    $education =  DB::table('education')->where('user_id', $studentDetail->id)->orderBy('id', 'DESC')->first();
-    $experience =  DB::table('experience')->where('user_id', $studentDetail->id)->orderBy('id', 'DESC')->first();
-    $certificate =  DB::table('certificates')->where('user_id', $studentDetail->id)->orderBy('id', 'DESC')->first();
-    $intrest =  DB::table('hobbies_and_interests')->where('user_id', $studentDetail->id)->orderBy('id', 'DESC')->first();
-    $accomplishments =  DB::table('accomplishments')->where('user_id', $studentDetail->id)->orderBy('id', 'DESC')->first();
+    $studentDetail    = app('App\User')->where('id', $id)->first();
+    $education        =  DB::table('education')->where('user_id', $studentDetail->id)->orderBy('id', 'DESC')->first();
+    $experience       =  DB::table('experience')->where('user_id', $studentDetail->id)->orderBy('id', 'DESC')->first();
+    $certificate      =  DB::table('certificates')->where('user_id', $studentDetail->id)->orderBy('id', 'DESC')->first();
+    $intrest          =  DB::table('hobbies_and_interests')->where('user_id', $studentDetail->id)->orderBy('id', 'DESC')->first();
+    $accomplishments  =  DB::table('accomplishments')->where('user_id', $studentDetail->id)->orderBy('id', 'DESC')->first();
 
     $data['content'] = 'admin.student.student_details';
     return view('layouts.content', compact('data'))

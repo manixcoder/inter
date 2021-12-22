@@ -139,7 +139,7 @@
 
           @php
           $UsrData = DB::table('users')->where('id', $post->user_id)->first();
-          dd($UsrData);
+         // dd($UsrData);
           $userid = Session::get('gorgID');
           $loginby = app('App\user')->where('id', $userid)->first();
           $createdby = app('App\user')->where('id', $post->user_id)->first();
