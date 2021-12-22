@@ -15,7 +15,7 @@
   <body class="login_page registered_page">                                         
     <div class="container">
       <div class="logo">                                                                                               
-        <a href="#"><img src="{{ asset('public/assets/images/login_logo.png')}}" alt="login_logo"></a>
+        <a href="{{ URL::to('/') }}"><img src="{{ asset('public/assets/images/login_logo.png')}}" alt="login_logo"></a>
       </div>                                          
 
       <div class="login-item">                                            
