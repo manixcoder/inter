@@ -46,7 +46,7 @@
                     <div class="jobsdetails_leftcont jobsdetails_rightcont">
                       <h4 class="greentext">About Me</h4>
                       <ul class="jobsdetails_text">
-                      <li>{{$studentDetail->about }}</li>
+                      <li><?php echo $studentDetail->about ?></li>
                       </ul>
                       <div class="std-wapper">
                         <div class="offer_textcant">

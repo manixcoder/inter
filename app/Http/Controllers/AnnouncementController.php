@@ -11,7 +11,10 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
+use App\Notifications\AnnouncementNotification;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Mail\Mailer;
+use App\User;
 use Session;
 use Response;
 use DB;
@@ -43,6 +46,7 @@ class AnnouncementController extends Controller
 
   public function create(Request $request)
   {
+    //dd($request->all());
     $data = array(
       'title' => $request->title,
       'description' => $request->description,
@@ -58,6 +62,42 @@ class AnnouncementController extends Controller
     } else {
       $insertData = app('App\Announcement')->insert($data);
     }
+    if ($request->aim == 'Both') {
+      $users = User::where('id', '!=', Session::get('gorgID'))->get();
+      $notificationData = array(
+        'comment_user' => Auth::user()->id,
+        'post_title' => $request->title,
+        'notification_type' => 'Announcement by Admin',
+        'comment' => strip_tags($request->description)
+      );
+      foreach ($users as $user) {
+        $user->notify(new AnnouncementNotification($notificationData));
+      }
+    } elseif ($request->aim == 'Recruiters') {
+
+      $users = User::where('id', '!=', Session::get('gorgID'))->where('users_role', '!=', 2)->get();
+      $notificationData = array(
+        'comment_user' => Auth::user()->id,
+        'post_title' => $request->title,
+        'notification_type' => 'Announcement by Admin',
+        'comment' => strip_tags($request->description)
+      );
+      foreach ($users as $user) {
+        $user->notify(new AnnouncementNotification($notificationData));
+      }
+    } else {
+      $users = User::where('id', '!=', Session::get('gorgID'))->where('users_role', '!=', 3)->get();
+      $notificationData = array(
+        'comment_user' => Auth::user()->id,
+        'post_title' => $request->title,
+        'notification_type' => 'Announcement by Admin',
+        'comment' => strip_tags($request->description)
+      );
+      foreach ($users as $user) {
+        $user->notify(new AnnouncementNotification($notificationData));
+      }
+    }
+
 
     return redirect('announcement-list');
   }

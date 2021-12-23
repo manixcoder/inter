@@ -118,7 +118,6 @@
 		});
 	});
 </script>
-
 <!-- Table Search -->
 <script type="text/javascript">
 	$(document).ready(function() {

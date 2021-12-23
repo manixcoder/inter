@@ -288,6 +288,8 @@ class StudentDashboardController extends Controller
         'duration_from' => $request->duration_from,
         'duration_to' => $request->duration_to,
         'location' => $request->location,
+        'created_at' => date("Y-m-d H:i:s"),
+        'updated_at' => date("Y-m-d H:i:s")
       ]);
     return redirect()->back()->with(array('status' => 'success', 'message' => 'add student experience successfully.'));
   }
@@ -313,6 +315,7 @@ class StudentDashboardController extends Controller
         'duration_from' => $request->duration_from,
         'duration_to' => $request->duration_to,
         'location' => $request->location,
+        'updated_at' => date("Y-m-d H:i:s")
       ]);
     /*if ($files = $request->image) {
       $update = DB::table('experience')->where('id', $request->id)
@@ -349,6 +352,8 @@ class StudentDashboardController extends Controller
         'certificate_by' => $request->certificate_by,
         'year_of_completion' => $request->year_of_completion,
         'status' => 0,
+        'created_at' => date("Y-m-d H:i:s"),
+        'updated_at' => date("Y-m-d H:i:s")
       ]);
     return redirect()->back();
   }
@@ -361,6 +366,7 @@ class StudentDashboardController extends Controller
         'certificate_by' => $request->certificate_by,
         'year_of_completion' => $request->year_of_completion,
         'status' => 0,
+        'updated_at' => date("Y-m-d H:i:s")
       ]);
 
     return redirect()->back();

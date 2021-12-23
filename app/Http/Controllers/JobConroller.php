@@ -72,7 +72,7 @@ class JobConroller extends Controller
       $path =  $files->move($destinationPath, $acttachPhoto);
       $attachment = $insert['attachment'] = "$acttachPhoto";
     } else {
-      $attachment = 'placeholder.png';
+      $attachment = '';
     }
 
     // if(isset($attachment)){

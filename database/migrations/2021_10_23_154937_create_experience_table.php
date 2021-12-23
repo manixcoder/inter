@@ -18,8 +18,8 @@ class CreateExperienceTable extends Migration
             $table->integer('user_id')->nullable();
             $table->string('company_name')->nullable();
             $table->string('profile')->nullable();
-            $table->integer('duration_from')->nullable();
-            $table->integer('duration_to')->nullable();
+            $table->date('duration_from')->nullable();
+            $table->date('duration_to')->nullable();
             $table->string('location')->nullable();
             $table->string('company_image')->nullable();
             $table->timestamps();

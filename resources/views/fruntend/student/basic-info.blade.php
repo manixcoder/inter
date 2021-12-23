@@ -178,7 +178,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> 
         <div class="fw aboutusBg smaeHeading">
           <div class="fw aboutusBg_sec">
 
@@ -1051,6 +1051,11 @@
   </script>
 
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
+  <script src="http://code.jquery.com/jquery-1.5.js"></script>
+  <script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+  <script type="text/javascript">
+		CKEDITOR.replace('about');
+	</script>
   <script>
     $(document).ready(function() {
       $(".clicktobtm").click(function() {
