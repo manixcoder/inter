@@ -21,7 +21,6 @@ class PostCommentNotification extends Notification
        // dd($notifiable);
         $this->notificationData = $notifiable;
     }
-
     /**
      * Get the notification's delivery channels.
      *
@@ -32,7 +31,6 @@ class PostCommentNotification extends Notification
     {
         return ['database'];
     }
-
     /**
      * Get the mail representation of the notification.
      *
@@ -46,7 +44,6 @@ class PostCommentNotification extends Notification
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
     }
-
     /**
      * Get the array representation of the notification.
      *

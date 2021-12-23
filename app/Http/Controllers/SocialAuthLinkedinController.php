@@ -20,7 +20,7 @@ class SocialAuthLinkedinController extends Controller
         return Socialite::driver('linkedin')->redirect();
     }
 
-    public function callbackFromlinkedin()
+    public function callbackFromLinkedin()
     {
         try {
             $linkdinUser = Socialite::driver('linkedin')->stateless()->user();

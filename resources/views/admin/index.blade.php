@@ -173,11 +173,9 @@
                                     <li><a href="mail-read.html">View Mail</a></li>
                                 </ul>
                             </li>
-
                             <li>
                                 <a href="calendar.html" class="waves-effect"><i class="md md-event"></i><span> Calendar </span></a>
                             </li>
-
                             <li class="has_sub">
                                 <a href="#" class="waves-effect"><i class="md md-palette"></i> <span> Elements </span> <span class="pull-right"><i class="md md-add"></i></span></a>
                                 <ul class="list-unstyled">

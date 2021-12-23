@@ -52,9 +52,9 @@
 				<tbody id="tabledata">
 					@if(isset($Data))
 					<?php $i = 1; ?>
-					@foreach($Data as $value)
+					@foreach($Data as $key=> $value)
 					<tr>
-						<td>#{{ $i }}</td>
+						<td>#{{ $key+1 }}</td>
 						<td>{{$value->name }}</td>
 						<td>{{$value->email }}</td>
 						<td>{{$value->phone }}</td>
@@ -105,6 +105,18 @@
 		</div>
 	</div>
 </div>
+<!-- Table Search -->
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".serachbox").on("change", function() {
+			
+			var value = $(this).val().toLowerCase();
+			$("#tabledata tr").filter(function() {
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
+		});
+	});
+</script>
 <script type="text/javascript">
 	function statuschange(id) {
 		$.ajaxSetup({
@@ -122,14 +134,8 @@
 </script>
 <script>
 	$(document).ready(function() {
-		$('#liststudent_table').DataTable({
-			columnDefs: [{
-				orderable: false,
-				targets: 0
-			}],
-			order: [
-				[1, 'asc']
-			]
-		});
+		$('#liststudent_table').DataTable(
+			{order:[]}
+		);
 	});
 </script>

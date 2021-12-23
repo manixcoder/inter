@@ -39,7 +39,7 @@
 		              <tr>
 		                   <td>#{{$value->id }}</td>
 		                   <td>{{$value->title }}</td>
-		                   <td>{{$value->description }}</td>
+		                   <td><?php echo $value->description ?></td>
 		                   <td>{{$value->aim }}</td>
 		                   <td>{{ date('d M Y', strtotime($value->created_at))}}</td>
 		                   <td>

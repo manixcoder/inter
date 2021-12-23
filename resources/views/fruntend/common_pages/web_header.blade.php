@@ -1,6 +1,8 @@
 @php
-$userRole = Session::get('userRole');
-$id = Session::get('gorgID');
+$userRole = Auth::user()->users_role;
+//$userRole = Session::get('userRole');
+//$id = Session::get('gorgID');
+$id = Auth::user()->id;
 $OrgData = DB::table('users')->where('id', $id)->first();
 //dd($OrgData);
 $todaysdate = date('Y-m-d').' 00:00:00';
@@ -41,10 +43,8 @@ $todaysdate = date('Y-m-d').' 00:00:00';
               <span></span>
               <span></span>
             </div>
-            <?php 
-            $userRole = Session::get('userRole');
-            ?>
-            @if($userRole == 2)
+            
+            @if(Auth::user()->users_role == 2)
             <ul class="menu_right">
               <li class="{{ request()->is('student-dashboard') ? 'active' : '' }}">
                 <a href="{{url('student-dashboard')}}">Home </a>
@@ -89,19 +89,19 @@ $todaysdate = date('Y-m-d').' 00:00:00';
               <a class="user_dropdown" href="#">
                 <i>
 
-                  @if($OrgData->users_role ==='2')
-                  <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->profile_image }}" alt="img">
+                  @if(Auth::user()->users_role === '2')
+                  <img src="{{ URL::asset('/public/uploads/') }}/{{ Auth::user()->profile_image }}" alt="img">
                   @else
-                  <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->org_image }}" alt="img">
+                  <img src="{{ URL::asset('/public/uploads/') }}/{{ Auth::user()->org_image }}" alt="img">
                   @endif
                 </i>
-                <span>{{ $OrgData->name ?? ''}} <img src="{{ asset('public/assets/images/user-downarrow.png')}}" alt="img"></span>
+                <span>{{ Auth::user()->name ?? ''}} <img src="{{ asset('public/assets/images/user-downarrow.png')}}" alt="img"></span>
               </a>
-              @if($userRole == 2)
+              @if(Auth::user()->users_role == 2)
               <ul class="userdrop_down">
                 <li class="{{ request()->is('student-dashboard') ? 'active' : '' }}">
-                  <a href="{{url('student-dashboard')}}" class="username">{{$OrgData->name}}
-                    <span>{{$OrgData->email}}</span></a>
+                  <a href="{{url('student-dashboard')}}" class="username">{{ Auth::user()->name}}
+                    <span>{{ Auth::user()->email}}</span></a>
                 </li>
                 <li class="{{ request()->is('student_setting') ? 'active' : '' }}">
                   <a href="{{url('student_setting')}}">Settings</a>
@@ -119,8 +119,8 @@ $todaysdate = date('Y-m-d').' 00:00:00';
               @else
               <ul class="userdrop_down">
                 <li class="{{ request()->is('recruiter/basic/info') ? 'active' : '' }}">
-                  <a href="{{URL::to('recruiter/basic/info')}}" class="username">{{$OrgData->name ?? ''}}
-                    <span>{{ $OrgData->email ?? ''}}</span></a>
+                  <a href="{{URL::to('recruiter/basic/info')}}" class="username">{{Auth::user()->name}}
+                    <span>{{ Auth::user()->email}}</span></a>
                 </li>
                 <li class="{{ request()->is('student_setting') ? 'active' : '' }}">
                   <a href="{{url('student_setting')}}">Settings</a>

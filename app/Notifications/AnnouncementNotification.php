@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class PostJobsNotification extends Notification
+class AnnouncementNotification extends Notification
 {
     use Queueable;
 
@@ -21,6 +21,7 @@ class PostJobsNotification extends Notification
        // dd($notifiable);
         $this->notificationData = $notifiable;
     }
+
     /**
      * Get the notification's delivery channels.
      *
@@ -31,6 +32,7 @@ class PostJobsNotification extends Notification
     {
         return ['database'];
     }
+
     /**
      * Get the mail representation of the notification.
      *
@@ -44,6 +46,7 @@ class PostJobsNotification extends Notification
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
     }
+
     /**
      * Get the array representation of the notification.
      *
