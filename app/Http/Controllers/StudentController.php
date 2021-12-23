@@ -28,7 +28,7 @@ class StudentController extends Controller
   }
   public function index()
   {
-    $Data = app('App\User')->where('users_role', 2)->orderBy('id', 'Desc')->get();
+    $Data = app('App\User')->where('users_role', 2)->orderBy('id', 'asc')->get();
     $DataCount = app('App\User')->where('users_role', 2)->count();
     $data['content'] = 'admin.student.student_list';
     return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount' => $DataCount]);
@@ -86,7 +86,6 @@ class StudentController extends Controller
     } elseif ($phonecheck == true) {
       return back()->with('error', 'Phone is already registered.!');
     } else {
-
       if ($files = $request->image) {
         $destinationPath = public_path('/uploads/');
         $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
@@ -114,7 +113,7 @@ class StudentController extends Controller
 
   public function student_detail($id)
   {
-    $studentDetail    = app('App\User')->where('id', $id)->first();
+    $studentDetail    =  app('App\User')->where('id', $id)->first();
     $education        =  DB::table('education')->where('user_id', $studentDetail->id)->orderBy('id', 'DESC')->first();
     $experience       =  DB::table('experience')->where('user_id', $studentDetail->id)->orderBy('id', 'DESC')->first();
     $certificate      =  DB::table('certificates')->where('user_id', $studentDetail->id)->orderBy('id', 'DESC')->first();

@@ -37,7 +37,6 @@ class JobConroller extends Controller
 
   public function job_profile($id)
   {
-
     $jobApplied = DB::table('job_applied as ja')
       ->join('users as r', 'ja.student_id', '=', 'r.id')
       ->where('ja.job_id', $id)
@@ -53,7 +52,6 @@ class JobConroller extends Controller
   public function company_details($id)
   {
     $Data = app('App\Jobs')->where('id', $id)->first();
-
     return view('fruntend.recruiter.job_detail_recruiter')->with(['Data' => $Data]);
   }
 
@@ -121,7 +119,7 @@ class JobConroller extends Controller
   {
     $Data = DB::table('jobs as jo')
       ->join('users as us', 'jo.user_id', '=', 'us.id')
-      ->orderBy('jo.id', 'Desc')
+      ->orderBy('jo.id', 'ASC')
       ->select('jo.*', 'us.profile_image', 'us.org_image')
       ->paginate(10);
     //->get();
@@ -131,7 +129,6 @@ class JobConroller extends Controller
     $data['content'] = 'admin.jobs.listedjobs';
     return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount' => $DataCount]);
   }
-
   public function today_job_list()
   {
     $todaysdate = date('Y-m-d') . ' 00:00:00';
@@ -143,7 +140,8 @@ class JobConroller extends Controller
       ->paginate(10);
     $DataCount = DB::table('jobs as jo')
       ->join('users as us', 'jo.user_id', '=', 'us.id')
-      ->whereDate('jo.created_at', Carbon::today())->count();
+      ->whereDate('jo.created_at', Carbon::today())
+      ->count();
     // dd($Data);
     $data['content'] = 'admin.jobs.listedjobs';
     return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount' => $DataCount]);
@@ -152,7 +150,6 @@ class JobConroller extends Controller
   public function status_update($id)
   {
     $jobsdata = app('App\Jobs')->where('id', $id)->first();
-
     if ($jobsdata->status == 1) {
       $update = app('App\Jobs')->where('id', $id)->update([
         'status' => '0',
@@ -168,6 +165,10 @@ class JobConroller extends Controller
 
   public function delete($id)
   {
+    $jobsData = DB::table('jobs')->where('id', $id)->get();
+    foreach ($jobsData as $job) {
+      $job_applied = DB::table('job_applied')->where('job_id', $job->id)->delete();
+    }
     $delete = app('App\Jobs')->where('id', $id)->delete();
     return redirect('joblist')->with(array('status' => 'success', 'message' => 'Deleted Successfully !'));
     return back();
@@ -181,9 +182,9 @@ class JobConroller extends Controller
 
     $data['content'] = 'admin.jobs.job_details';
     return view('layouts.content', compact('data'))->with([
-      'jobDetail' => $jobDetail,
-      'job_created_by' => $job_created_by,
-      'appliedjobs' => $appliedjobs
+      'jobDetail'       => $jobDetail,
+      'job_created_by'  => $job_created_by,
+      'appliedjobs'     => $appliedjobs
     ]);
   }
 

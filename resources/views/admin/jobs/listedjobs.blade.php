@@ -3,7 +3,7 @@
 	<div class="row">
 		<h3 class="heading">Listed Jobs ({{ $DataCount}} )</h3>
 		<div class="col-md-12 listtable-sec">
-			<table class="table listjob_table text-left" id="listjob_table">
+			<table class="table listjob_table text-left" id="listjobs_table">
 				<thead>
 					<tr>
 						<th class="jobid">
@@ -36,13 +36,11 @@
 								<input type="text" name="searchbox" class="serachbox">
 							</span>
 						</th>
-
 						<th class="createdon-list">
 							Created on
 							<span class="serach-input">
 								<input type="text" name="searchbox" class="serachbox">
 							</span>
-
 						</th>
 						<th class="status">
 							Status
@@ -54,13 +52,13 @@
 				</thead>
 				<tbody id="tabledata">
 					@if(isset($Data))
-					@foreach($Data as $value)
-					@php 
+					@foreach($Data as $key=> $value)
+					@php
 					$orgname = DB::table('users')->where('id', $value->user_id)->first();
-					$appliedjobs = DB::table('job_applied')->where('job_id', $value->id)->get(); 
+					$appliedjobs = DB::table('job_applied')->where('job_id', $value->id)->get();
 					@endphp
 					<tr>
-						<td>#{{ $value->id }}</td>
+						<td>#{{ $key+1 }}</td>
 						<td>
 							<i class="user_img">
 								<img src="{{ URL::asset('/public/uploads/') }}/{{ $value->org_image }}" alt="usericon">
@@ -68,7 +66,6 @@
 						</td>
 						<td>{{ $value->job_title }}</td>
 						<td>{{ $value->location }}</td>
-
 						<td>{{ count($appliedjobs) }} Applicants</td>
 						<td>{{ date('d M Y', strtotime($value->created_at)) }}</td>
 						<td>
@@ -88,13 +85,11 @@
 									<img src="{{ asset('public/assets/images/view.svg')}}" alt="icon">
 								</a>
 							</span>
-							
-								<span class="edit_icon">
-									<a href="{{ URL::to('/message')}}" target="_blank">
+							<span class="edit_icon">
+								<a href="{{ URL::to('/message')}}" target="_blank">
 									<img src="{{ asset('public/assets/images/chat_2.svg')}}" alt="icon">
 								</a>
-								</span> 
-							
+							</span>
 							<span class="edit_icon">
 								<a href="{{ URL::to('job-delete',$value->id) }}" onclick="return confirm('Are you sure you want to delete this item?');">
 									<img src="{{ asset('public/assets/images/delete.svg')}}" alt="icon">
@@ -154,13 +149,9 @@
 </script>
 <script>
 	$(document).ready(function() {
-		$('#listjob_table').DataTable({
-			columnDefs: [{
-				orderable: false,
-				targets: 0
-			}],
+		$('#listjobs_table').DataTable({
 			order: [
-				[1, 'asc']
+				[2, "asc"]
 			]
 		});
 	});

@@ -56,17 +56,22 @@
 						</th>
 					</tr>
 				</thead>
-				<tbody id="tabledata">
+				<tbody id="recruitertabledata">
 					@if(isset($Data))
 					<?php $i = 1; ?>
-					@foreach($Data as $value)
+					@foreach($Data as $key=> $value)
 					@php
 					$old_date_timestamp = strtotime($value->created_at);
 					$new_date = date('d-M-Y', $old_date_timestamp);
 					@endphp
 					<tr>
-						<td>#{{ $i }}</td>
-						<td><i class="user_img"><img src="{{ URL::asset('/public/uploads/') }}/{{ $value->org_image }}" alt="usericon"></i> {{ $value->org_name }}</td>
+						<td>#{{ $key+1 }}</td>
+						<td>
+							<i class="user_img">
+								<img src="{{ URL::asset('/public/uploads/') }}/{{ $value->org_image }}" alt="usericon">
+							</i>
+							{{ $value->org_name }}
+						</td>
 						<td>{{ $value->name }}</td>
 						<td>{{ $value->email }}</td>
 						<td>{{ $value->phone }}</td>
@@ -111,9 +116,9 @@
 <!-- Table Search -->
 <script type="text/javascript">
 	$(document).ready(function() {
-		$(".serachbox").on("keyup", function() {
+		$(".serachbox").on("change", function() {
 			var value = $(this).val().toLowerCase();
-			$("#tabledata tr").filter(function() {
+			$("#recruitertabledata tr").filter(function() {
 				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 			});
 		});
@@ -136,15 +141,12 @@
 		});
 	}
 </script>
+
 <script>
 	$(document).ready(function() {
 		$('#listrecruiter_table').DataTable({
-			columnDefs: [{
-				orderable: false,
-				targets: 0
-			}],
 			order: [
-				[1, 'asc']
+				[2, "asc"]
 			]
 		});
 	});
