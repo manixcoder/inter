@@ -405,8 +405,8 @@ Route::prefix('facebook')->name('facebook.')->group( function(){
     Route::get('callback', 'FaceBookController@callbackFromFacebook')->name('callback');
 });
 Route::prefix('linkedin')->name('linkedin.')->group( function(){
-Route::get('/auth', 'SocialAuthLinkedinController@redirect')->name('login');
-Route::get('/callback', 'SocialAuthLinkedinController@callback')->name('callback');
+Route::get('/auth', 'SocialAuthLinkedinController@loginUsinglinkedin')->name('login');
+Route::get('/callback', 'SocialAuthLinkedinController@callbackFromLinkedin')->name('callback');
 });
 
 Route::prefix('google')->name('google.')->group( function(){
