@@ -1,12 +1,8 @@
-@php
-$userRole = Auth::user()->users_role;
-//$userRole = Session::get('userRole');
-//$id = Session::get('gorgID');
-$id = Auth::user()->id;
-$OrgData = DB::table('users')->where('id', $id)->first();
-//dd($OrgData);
-$todaysdate = date('Y-m-d').' 00:00:00';
-@endphp
+@if (!Auth::guest())
+
+@else
+@endif
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,6 +23,16 @@ $todaysdate = date('Y-m-d').' 00:00:00';
 </head>
 
 <body class="lightwht_bg">
+@if (!Auth::guest())
+@php
+$userRole = Auth::user()->users_role;
+//$userRole = Session::get('userRole');
+//$id = Session::get('gorgID');
+$id = Auth::user()->id;
+$OrgData = DB::table('users')->where('id', $id)->first();
+//dd($OrgData);
+$todaysdate = date('Y-m-d').' 00:00:00';
+@endphp
   <header class="header_sec flow2_header fw">
     <div class="lgcontainer">
       <div class="innerrow">
@@ -43,7 +49,7 @@ $todaysdate = date('Y-m-d').' 00:00:00';
               <span></span>
               <span></span>
             </div>
-            
+           
             @if(Auth::user()->users_role == 2)
             <ul class="menu_right">
               <li class="{{ request()->is('student-dashboard') ? 'active' : '' }}">
@@ -75,10 +81,10 @@ $todaysdate = date('Y-m-d').' 00:00:00';
               </li>
               <li class="{{ request()->is('notification') ? 'active' : '' }}">
                 <a href="{{URL::to('notification')}}" class="subcategory">Notifications
-                @if(auth()->user()->unreadNotifications->count() > 0)
+                  @if(auth()->user()->unreadNotifications->count() > 0)
                   <span class="badge badge-light">{{ auth()->user()->unreadNotifications->count() }}</span>
-                @endif                  
-              </a>
+                  @endif
+                </a>
               </li>
               <li class="{{ request()->is('contact_us') ? 'active' : '' }}">
                 <a href="{{URL::to('contact_us')}}" class="subcategory">Contact Us </a>
@@ -88,7 +94,6 @@ $todaysdate = date('Y-m-d').' 00:00:00';
             <div class="login_user">
               <a class="user_dropdown" href="#">
                 <i>
-
                   @if(Auth::user()->users_role === '2')
                   <img src="{{ URL::asset('/public/uploads/') }}/{{ Auth::user()->profile_image }}" alt="img">
                   @else
@@ -133,9 +138,43 @@ $todaysdate = date('Y-m-d').' 00:00:00';
                 </li>
               </ul>
               @endif
+             
             </div>
           </div>
         </div>
       </div>
     </div>
   </header>
+  @else
+  <header class="header_sec blog_header mobileHidesec fw">
+    <div class="lgcontainer">
+      <div class="innerrow">
+        <div class="col_grid12">
+          <ul class="nav-menu fw">
+            <div class="togglebtn">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="left_sec col_grid4 text-left menu_link">
+              <li><a href="http://localhost/internify">Home</a></li>
+              <li class="active"><a href="http://localhost/internify/blog">Blogs</a></li>
+            </div>
+            <div class="center_sec text-center col_grid4 menu_logo">
+              <a href="http://localhost/internify">
+                <img src="http://localhost/internify/public/assets/images/header-logo.svg" alt="logo">
+                <img src="http://localhost/internify/public/assets/images/logo.svg" alt="wht-logo" class="wth-logo-hide">
+              </a>
+              
+            </div>
+            <div class="right_sec col_grid4 text-right menu_link">
+              <li><a href="http://localhost/internify/web-login">Login</a></li>
+              <li><a href="http://localhost/internify/contactus">Contact us</a></li>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+              @endif

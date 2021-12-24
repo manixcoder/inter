@@ -10,7 +10,6 @@
 					<tr>
 						<th>
 							ID
-							
 						</th>
 						<th class="company_th">
 							Name
@@ -54,7 +53,7 @@
 								<td>{{$value->first_name }} {{$value->last_name }}</td>
 								<td>{{$value->email }}</td>
 								<td>{{$value->mobile }}</td>										
-								<td>{{$value->message }}</td>
+								<td><?php echo $value->message ?></td>
 								<td>{{ date('d-M-Y / H:m', strtotime($value->created_at)) }}</td>
 								<td>
 									<span class="edit_icon">

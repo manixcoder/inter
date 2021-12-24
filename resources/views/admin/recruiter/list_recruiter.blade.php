@@ -4,15 +4,8 @@
 		<span class="add_student_btn">
 			<a href="{{ URL::to('redirect-recruiter')}}">Add New Recruiter</a>
 		</span>
-
-
 	</h3>
-	@if(Session::has('status'))
-	<div class="alert alert-{{ Session::get('status') }}">
-		<i class="fa fa-building-o" aria-hidden="true"></i> {{ Session::get('message') }}
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-	</div>
-	@endif
+	
 	<div class="row">
 		<div class="col-md-12 listtable-sec">
 			<table class="table listjob_table text-left" id="listrecruiter_table">
@@ -144,10 +137,16 @@
 
 <script>
 	$(document).ready(function() {
-		$('#listrecruiter_table').DataTable({
+		$('#listrecruiter_table').DataTable(
+			{
+			columnDefs: [{
+				orderable: false,
+				targets: 0
+			}],
 			order: [
-				[2, "asc"]
+				[1, 'asc']
 			]
-		});
+		}
+		);
 	});
 </script>

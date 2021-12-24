@@ -190,7 +190,7 @@ Route::any('forgot_password', 'HomeController@forgot_password');
 Route::any('web/forgot/password', 'HomeController@web_forgot_password');
 Route::any('web/otp/verify', 'HomeController@web_otp_verify');
 Route::any('web_password_update', 'HomeController@web_password_update');
-Route::any('add_contactus', 'HomeController@add_contactus');
+Route::any('add_contactus', 'SearchController@add_contactus');
 Route::any('otp_verify', 'HomeController@otp_verify');
 Route::any('password_update', 'HomeController@password_update');
 Route::get('user-profile', 'HomeController@UserProfile');

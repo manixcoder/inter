@@ -105,22 +105,22 @@ class HomeController extends Controller
   }
 
 
-  public function add_contactus(Request $request)
-  {
-    // dd($request->all());
-    $data = array(
-      'first_name' => $request->first_name,
-      'last_name' => $request->last_name,
-      'email' => $request->email,
-      'mobile' => $request->mobile,
-      'message' => $request->message,
-      'created_at' => date("Y-m-d H:i:s"),
-      'updated_at' => date("Y-m-d H:i:s")
-    );
+  // public function add_contactus(Request $request)
+  // {
+  //   // dd($request->all());
+  //   $data = array(
+  //     'first_name' => $request->first_name,
+  //     'last_name' => $request->last_name,
+  //     'email' => $request->email,
+  //     'mobile' => $request->mobile,
+  //     'message' => $request->message,
+  //     'created_at' => date("Y-m-d H:i:s"),
+  //     'updated_at' => date("Y-m-d H:i:s")
+  //   );
 
-    $insertData = DB::table('contact_us')->insert($data);
-    return view('fruntend.common_pages.contactus')->with('alert', 'your enquiry has been submitted successfully We will contact you soon.');
-  }
+  //   $insertData = DB::table('contact_us')->insert($data);
+  //   return view('fruntend.common_pages.contactus')->with('alert', 'your enquiry has been submitted successfully We will contact you soon.');
+  // }
 
   public function web_login(Request $request)
   {

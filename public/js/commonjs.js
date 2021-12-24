@@ -13,15 +13,25 @@
 	        }
 	    });
 	}
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$(".serachbox").on("change", function() {
+			var value = $(this).val().toLowerCase();
+			$("#tabledata tr").filter(function() {
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
+		});
+	});
+</script>
 
 /* ----- Table Search filter ----- */
-	$(document).ready(function(){
-	  $(".serachbox").on("keyup", function() {
-	    var value = $(this).val().toLowerCase();
-	    $("#tabledata tr").filter(function() {
-	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-	    });
-	  });  
+	// $(document).ready(function(){
+	//   $(".serachbox").on("keyup", function() {
+	//     var value = $(this).val().toLowerCase();
+	//     $("#tabledata tr").filter(function() {
+	//       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	//     });
+	//   });  
        
-	});
+	// });
      

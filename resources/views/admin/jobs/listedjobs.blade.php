@@ -149,9 +149,11 @@
 <script>
 	$(document).ready(function() {
 		$('#listjobs_table').DataTable({
-			order: [
-				[2, "asc"]
-			]
+           
+            lengthMenu: [10, 50, 100],
+            order: [
+                [1, 'desc']
+            ]
 		});
 	});
 </script>

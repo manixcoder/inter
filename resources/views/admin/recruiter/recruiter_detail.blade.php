@@ -22,11 +22,11 @@
          </div>
          <ul class="jobsdetails_text">
             <li>Recruiter ID <b>#{{ $recruiterDetail->id ?? ''}}</b></li>
-            <li>Recruiter Name <b>{{ $recruiterDetail->name ?? ''}}</b></li>
+            <li>Recruiter Name <b>{{ $recruiterDetail->name ?? ''}}</b></li> 
             <li>Email Address <b>{{ $recruiterDetail->email ?? ''}}</b></li>
             <li>Mobile Number <b>{{ $recruiterDetail->phone ?? ''}}</b></li>
             <li>Company Name <b>{{ $recruiterDetail->org_name ?? ''}}</b></li>
-            <li>Last Login<b>{{ date('d-M-Y | H:i', strtotime($recruiterDetail->last_login ?? ''))}}</b></li>
+            <li>Last Login<b>@if($recruiterDetail->last_login !=''){{ date('d-M-Y | H:i', strtotime($recruiterDetail->last_login ?? ''))}}@endif</b></li>
             <li>
                Status
                <b>
