@@ -137,16 +137,6 @@
 
 <script>
 	$(document).ready(function() {
-		$('#listrecruiter_table').DataTable(
-			{
-			columnDefs: [{
-				orderable: false,
-				targets: 0
-			}],
-			order: [
-				[1, 'asc']
-			]
-		}
-		);
+		$('#listrecruiter_table').DataTable({order:[]});
 	});
 </script>

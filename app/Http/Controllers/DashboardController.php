@@ -53,7 +53,8 @@ class DashboardController extends Controller
   }
   public function contactus_queryes()
   {
-    $Data = DB::table('contact_us')->orderBy('id', 'Desc')->get();
+    $Data = DB::table('contact_us')->orderBy('id', 'DESC')->get();
+    //dd($Data);
     $DataCount = count($Data);
     $data['content'] = 'admin.contactus_queryes';
     return view('layouts.content', compact('data'))->with([

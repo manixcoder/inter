@@ -148,12 +148,6 @@
 </script>
 <script>
 	$(document).ready(function() {
-		$('#listjobs_table').DataTable({
-           
-            lengthMenu: [10, 50, 100],
-            order: [
-                [1, 'desc']
-            ]
-		});
+		$('#listjobs_table').DataTable({order:[]});
 	});
 </script>

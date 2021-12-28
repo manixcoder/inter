@@ -108,9 +108,9 @@
                   </thead>
                   <tbody>
                      @if(isset($totalListedJobs))
-                     @foreach($totalListedJobs as $value)
+                     @foreach($totalListedJobs as $key=> $value)
                      <tr>
-                        <td>#{{ $value->id ?? ''}}</td>
+                        <td>#{{ $key+1 }}</td>
                         <td>{{ $value->job_title ?? ''}}</td>
                         <td>{{ $value->location ?? ''}}</td>
                         <td>{{date('d M Y', strtotime($value->created_at ?? ''))}}</td>

@@ -17,8 +17,7 @@ class SocialAuthLinkedinController extends Controller
     public function loginUsinglinkedin()
     {
         //dd("Hello Here");
-       // return Socialite::driver('linkedin')->scopes(['r_emailaddress', 'r_liteprofile', 'w_member_social'])->redirect();
-        return Socialite::driver('linkedin')->scopes(['r_liteprofile', 'r_emailaddress'])->redirect();
+        return Socialite::driver('linkedin')->scopes(['r_emailaddress', 'r_liteprofile'])->redirect();
     }
 
     public function callbackFromLinkedin()

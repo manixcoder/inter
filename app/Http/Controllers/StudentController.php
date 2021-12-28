@@ -28,7 +28,7 @@ class StudentController extends Controller
   }
   public function index()
   {
-    $Data = app('App\User')->where('users_role', 2)->orderBy('id', 'asc')->get();
+    $Data = app('App\User')->where('users_role', 2)->orderBy('id', 'DESC')->get();
     $DataCount = app('App\User')->where('users_role', 2)->count();
     $data['content'] = 'admin.student.student_list';
     return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount' => $DataCount]);

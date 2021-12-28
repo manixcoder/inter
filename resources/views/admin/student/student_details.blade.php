@@ -28,7 +28,7 @@
         <li>Mobile Number <b>{{ $studentDetail->phone ?? ''}}</b></li>
         <li>Date of Birth <b>{{ $studentDetail->dob ?? ''}}</b></li>
         <li>Gender <b>@if($studentDetail->gender == 0) Male @else Female @endif</b></li>
-        <li>Last Login<b>{{date('d-M-Y | H:i', strtotime($studentDetail->last_login ?? ''))}}</b></li>
+        <li>Last Login<b>@if($studentDetail->last_login){{date('d-M-Y | H:i', strtotime($studentDetail->last_login ?? ''))}} @endif</b></li>
         <li>Status
           <b>
             <select name="status" onchange="statuschange({{$studentDetail->id ?? ''}})">

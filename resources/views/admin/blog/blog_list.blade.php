@@ -115,10 +115,6 @@
 </script>
 <script>
 	$(document).ready(function() {
-		$('#listblog_table').DataTable({
-			order: [
-				[2, "asc"]
-			]
-		});
+		$('#listblog_table').DataTable({order:[]});
 	});
 </script>

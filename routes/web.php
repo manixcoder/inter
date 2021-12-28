@@ -12,6 +12,7 @@ Route::get('clear-cache', function () {
 	echo "DONE";
 });
 
+
 /* All web link Start... */ 
 /* Recruiter basic info */
 Route::get('basic/info', function () {
@@ -27,7 +28,14 @@ Route::get('recruiter-posts', function () {
 // 	return view('fruntend.recruiter_profile_section.my_listing');
 // });
 Route::any('recruiter-listings', 'HomeController@recruiterListings');
+// Route::get('recruiter-listings', function () {
+// 	return view('fruntend.student.company_profile.my_listing');
+// });
 
+
+// Route::get('basic/info/{id}', function () {
+// 	return view('fruntend.student.company_profile.basic_info');
+// });
 Route::get('company-info/{id}', 'StudentDashboardController@companyInfo');
 Route::get('recruiter-about/{id}', function () {
 	return view('fruntend.student.company_profile.about');
@@ -35,12 +43,16 @@ Route::get('recruiter-about/{id}', function () {
 Route::get('recruiter-posts/{id}', function () {
 	return view('fruntend.student.company_profile.my_posts');
 });
+
+
+
 Route::get('recruiter-followers', function () {
 	return view('fruntend.recruiter_profile_section.my_followers');
 });
 Route::get('recruiter-people', function () {
 	return view('fruntend.recruiter_profile_section.people');
 });
+
 Route::get('recruiter-follow/{id}/{by_id}', 'RecruiterwebController@follow');
 Route::get('recruiter-unfollow/{id}/{by_id}', 'RecruiterwebController@unfollow');
 /* Recruiter basic info End */
@@ -49,6 +61,7 @@ Route::get('/', function () {
 	$data['web_content'] = 'fruntend.homepage';
 	return view('weblayout.web_content', compact('data'));
 });
+
 Route::get('aboutus', function () {
 	return view('fruntend.aboutus');
 });
@@ -62,34 +75,44 @@ Route::get('recruiter-register-step-one', function () {
 	return view('fruntend.recruiter_register.recruiter_register_step_one');
 });
 Route::any('recruider_register_step_one', 'HomeController@recruider_register_step_one');
+
 Route::get('termsofuse', function () {
 	return view('fruntend.termsofuse');
 });
+
 Route::get('privacypolicy', function () {
 	return view('fruntend.privacypolicy');
 });
+
 Route::get('contactus', function () {
 	return view('fruntend.contactus');
 });
+
 Route::get('web-login', function () {
 	return view('fruntend.web_login');
 });
+
 Route::get('update-site', function () {
 	$data['content'] = 'errors.comming-soon';
 	return view('layouts.content', compact('data'));
 });
+
 Route::get('/admin-login', function () {
 	return view('admin.admin-login');
 });
+
 Route::get('forgot-password', function () {
 	return view('admin.forgot_password');
 });
+
 Route::get('web-forgot-password', function () {
 	return view('fruntend.common_pages.forgotpassword');
 });
+
 Route::get('verification_otp', function () {
 	return view('admin.verification_code');
 });
+
 Route::get('recruiter-lending', function () {
 	return view('fruntend.recruiter_landing');
 });
@@ -97,29 +120,41 @@ Route::any('blogsearch', 'SearchController@blogsearch');
 //Route::any('blogsearch', 'HomeController@blogsearch');
 Route::any('blogsearchweb', 'HomeController@blogsearchweb');
 Route::get('blog', 'SearchController@web_blog_data');
+
+
+
 /* After web login pages */
 
 Route::get('about_us', function () {
 	return view('fruntend.common_pages.aboutus');
 });
+
 Route::get('contact_us', function () {
 	return view('fruntend.common_pages.contactus');
 });
+
 Route::get('termsof_use', function () {
 	return view('fruntend.common_pages.termsofuse');
 });
+
 Route::get('privacy_policy', function () {
 	return view('fruntend.common_pages.privacypolicy');
 });
+
 Route::get('recruiter/basic/info', function () {
 	return view('fruntend.recruiter.recruiter_basicinfo');
 });
+
+
+
 Route::get('recruiter/myposts', function () {
 	return view('fruntend.recruiter.recruiter_myposts');
 });
+
 Route::get('recruiter/mylisting', function () {
 	return view('fruntend.recruiter.recruiter_mylisting');
 });
+
 Route::any('edit/recruiter/profile', 'RecruiterwebController@edit_recruiter_profile');
 Route::any('edit/recruiter/about', 'RecruiterwebController@edit_recruiter_about');
 /* After web login pages End */
@@ -130,20 +165,26 @@ Route::any('edit/recruiter/about', 'RecruiterwebController@edit_recruiter_about'
 Route::get('student-register-step-one', function () {
 	return view('fruntend.student.student_register.student_register_step_one');
 });
+
 Route::any('student_register_step_one', 'StudentregisterController@student_register_step_one');
+
 Route::get('student-login', function () {
 	return view('fruntend.student.student_login.login');
 });
+
 Route::get('student-landing-page', function () {
 	return view('fruntend.student_landing');
 });
+
 Route::any('recruiter-dashboard', 'RecruiterwebController@dashboard');
 Route::any('student_logged_in', 'StudentregisterController@student_logged_in');
 Route::any('student-jobs', 'StudentregisterController@student_job_search');
 
+
 /*################################# Student Routes By Ritik End Here ##############################*/
 
 /* All web link end */
+
 Auth::routes();
 Route::any('forgot_password', 'HomeController@forgot_password');
 Route::any('web/forgot/password', 'HomeController@web_forgot_password');
@@ -162,49 +203,83 @@ Route::any('web/blog/detail', 'BlogController@web_blog_detail');
 Route::any('org-image-upload', 'HomeController@orgImageUpload');
 Route::any('profile-image-upload', 'HomeController@profileImageUpload');
 
+
+
 /*################################ Student Routes By Ritik Start Here #############################*/
 
 Route::any('student-dashboard', 'StudentDashboardController@dashboard');
+
 //Here 
 Route::get('student-profile-basic-info', 'StudentDashboardController@basic_info');
 Route::any('student-profiles/{id}', 'StudentDashboardController@studentProfiles');
 Route::any('student-reject/{id}/{r_id}', 'StudentDashboardController@studentReject');
 Route::any('student-selected/{id}/{r_id}', 'StudentDashboardController@studentSelected');
 Route::get('student-posts', 'StudentDashboardController@student_posts');
+
 Route::get('student-applications', 'StudentDashboardController@student_applications');
+
 Route::post('update_student_personal_details', 'StudentDashboardController@update_student_personal_details');
+
 Route::post('add_student_education', 'StudentDashboardController@add_student_education');
+
+
+
 Route::post('update_student_education', 'StudentDashboardController@update_student_education');
+
 Route::post('add_student_experience', 'StudentDashboardController@add_student_experience');
 Route::any('student-image-upload', 'StudentDashboardController@studentImageUpload');
+
 Route::post('update_student_experience', 'StudentDashboardController@update_student_experience');
+
 Route::post('add_student_certificate', 'StudentDashboardController@add_student_certificate');
+
 Route::post('update_student_certificate', 'StudentDashboardController@update_student_certificate');
+
 Route::post('add_student_industry', 'StudentDashboardController@add_student_industry');
+
 Route::any('delete_student_industry/{id}', 'StudentDashboardController@delete_student_industry');
+
 Route::post('add_student_business', 'StudentDashboardController@add_student_business');
+
 Route::any('delete_student_business/{id}', 'StudentDashboardController@delete_student_business');
+
 Route::post('add_student_hobby', 'StudentDashboardController@add_student_hobby');
+
 Route::any('delete_student_hobby/{id}', 'StudentDashboardController@delete_student_hobby');
+
 Route::post('add_student_accomplishment', 'StudentDashboardController@add_student_accomplishment');
+
 Route::post('update_student_accomplishment', 'StudentDashboardController@update_student_accomplishment');
+
 Route::post('add_post', 'StudentDashboardController@add_post');
+
 Route::any('delete_student_post/{id}', 'StudentDashboardController@delete_student_post');
 Route::any('delete-student-resume/{id}','StudentDashboardController@deleteStudentResume');
+
 Route::get('student/jobs', 'StudentDashboardController@student_jobs');
+
 Route::any('student-job-details/{id}', 'StudentDashboardController@student_job_details');
 Route::any('company-profile', 'StudentDashboardController@companyProfile');
 Route::any('company-posts', 'StudentDashboardController@companyPosts');
 Route::any('company-listed-jobs', 'StudentDashboardController@companyListedJobs');
 //Route::any('company-profile/{id}', 'StudentDashboardController@compnayProfile');
+
 Route::post('student_job_apply', 'StudentDashboardController@student_job_apply');
+
 Route::post('upload_student_resume', 'StudentDashboardController@upload_student_resume');
+
 Route::get('student_setting', 'StudentDashboardController@student_setting');
+
 Route::post('change-student-email', 'StudentDashboardController@change_student_email');
+
 Route::post('change-student-phone', 'StudentDashboardController@change_student_phone');
+
 Route::get('student_change_password', 'StudentDashboardController@student_change_password');
+
 Route::post('student-password-update', 'StudentDashboardController@student_password_update');
+
 Route::any('user-logout', 'StudentDashboardController@user_logout');
+
 Route::post('update_student_about', 'StudentDashboardController@update_student_about');
 
 /*################################# Student Routes By Ritik End Here ##############################*/
@@ -331,7 +406,7 @@ Route::prefix('facebook')->name('facebook.')->group( function(){
 });
 Route::prefix('linkedin')->name('linkedin.')->group( function(){
 Route::get('/auth', 'SocialAuthLinkedinController@loginUsinglinkedin')->name('login');
-Route::get('/callback', 'SocialAuthLinkedinController@callbackFromLinkedin')->name('callback');
+Route::get('/callback??code=AQSfhINqUoPebdgo6Y4k53tryJs4hdxbRW2mQgWF-VLJITliV7wz06frm33bt3OA27J5FFlxmlP8ZpN-payRz13g01THkzaoc9bZURtYFnTGvW6MyZSSahygCYmYn56DTmVF3jBnq1NlBHzQidQDqVLcveGfkBCWGLQtfJ0MlQMVmj5kw9AZpp96O6A3iXOznbgEWVS2uTwiSu8c1-0', 'SocialAuthLinkedinController@callbackFromLinkedin')->name('callback');
 });
 
 Route::prefix('google')->name('google.')->group( function(){

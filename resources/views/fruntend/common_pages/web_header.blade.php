@@ -92,12 +92,12 @@ $todaysdate = date('Y-m-d').' 00:00:00';
             </ul>
             @endif
             <div class="login_user">
-              <a class="user_dropdown" href="#">
+              <a class="user_dropdown" href="#" >
                 <i>
-                  @if(Auth::user()->users_role === '2')
+                  @if(Auth::user()->profile_image)
                   <img src="{{ URL::asset('/public/uploads/') }}/{{ Auth::user()->profile_image }}" alt="img">
                   @else
-                  <img src="{{ URL::asset('/public/uploads/') }}/{{ Auth::user()->org_image }}" alt="img">
+                  <img src="{{ URL::asset('/public/uploads/') }}" alt="img">
                   @endif
                 </i>
                 <span>{{ Auth::user()->name ?? ''}} <img src="{{ asset('public/assets/images/user-downarrow.png')}}" alt="img"></span>
