@@ -49,14 +49,14 @@
                         </form>
                         <!-- <a href="{{url('company-info/'.$OrgData->id)}}">About</a> -->
                     </li>
-                    <li class="{{ request()->is('company-posts') ? 'active' : '' }}">
+                    <!-- <li class="{{ request()->is('company-posts') ? 'active' : '' }}">
                         <form method="post" action="{{ url('company-posts') }}">
                             @csrf
                             <input type="hidden" name="comp_id" value="{{ $OrgData->id }}">
                             <button type="submit" >Posts</button>
                         </form>
-                        <!-- <a href="{{url('company-info/'.$OrgData->id)}}">Posts</a> -->
-                    </li>
+                       
+                    </li> -->
                     <li class="{{ request()->is('company-listed-jobs') ? 'active' : '' }}">
                         <form method="post" action="{{ url('company-listed-jobs') }}">
                             @csrf

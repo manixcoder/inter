@@ -49,14 +49,13 @@
                         </form>
                         <!-- <a href="{{url('company-info/'.$OrgData->id)}}">About</a> -->
                     </li>
-                    <li class="{{ request()->is('company-posts') ? 'active' : '' }}">
+                    <!-- <li class="{{ request()->is('company-posts') ? 'active' : '' }}">
                         <form method="post" action="{{ url('company-posts') }}">
                             @csrf
                             <input type="hidden" name="comp_id" value="{{ $OrgData->id }}">
                             <button type="submit">Posts</button>
                         </form>
-                        <!-- <a href="{{url('company-info/'.$OrgData->id)}}">Posts</a> -->
-                    </li>
+                    </li> -->
                     <li class="{{ request()->is('company-listed-jobs') ? 'active' : '' }}">
                         <form method="post" action="{{ url('company-listed-jobs') }}">
                             @csrf
@@ -280,8 +279,8 @@
         }
     </script>
     <script>
-        $(' .menu_right li').click(function() {
-            $(' .menu_right li').removeClass('active');
+        $('.menu_right li').click(function() {
+            $('.menu_right li').removeClass('active');
             $(this).addClass('active');
         });
 
@@ -290,7 +289,7 @@
                 $(this).removeClass('opencomments-active').addClass('opencomments-active');
             });
             $('.closebtn').on('click', function() {
-                $(' .commentbyopne').removeClass('opencomments-active');
+                $('.commentbyopne').removeClass('opencomments-active');
             });
         });
         $(document).ready(function() {
@@ -298,7 +297,7 @@
                 $(this).removeClass('shareclickon-active').addClass('shareclickon-active');
             });
             $('.shareclosebtn').on('click', function() {
-                $(' .shareclickon').removeClass('shareclickon-active');
+                $('.shareclickon').removeClass('shareclickon-active');
             });
         });
 

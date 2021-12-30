@@ -57,6 +57,9 @@ class JobConroller extends Controller
 
   public function create(Request $request)
   {
+  //   $this->validate($request, [
+  //     'quantity'=> 'required',
+  // ]);
     // dd($request->offer);
     if ($files = $request->logo) {
       $destinationPath = public_path('/uploads/');

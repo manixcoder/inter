@@ -43,9 +43,9 @@
                     <li class="active">
                         <a href="#profileTab_link1">About</a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="#profileTab_link2">Posts</a>
-                    </li>
+                    </li> -->
                     <li>
                         <a href="#profileTab_link3">Listed Jobs</a>
                     </li>

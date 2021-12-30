@@ -49,9 +49,9 @@
             <li class="{{ request()->is('recruiter-about') ? 'active' : '' }}">
               <a href="{{ URL::to('recruiter-about') }}">About</a>
             </li>
-            <li class="{{ request()->is('recruiter-posts') ? 'active' : '' }}">
+            <!-- <li class="{{ request()->is('recruiter-posts') ? 'active' : '' }}">
               <a href="{{ URL::to('recruiter-posts')}}">My Posts</a>
-            </li>
+            </li> -->
             <li class="{{ request()->is('recruiter-listings') ? 'active' : '' }}">
               <a href="{{ URL::to('recruiter-listings')}}">My Listings</a>
             </li>
@@ -73,10 +73,10 @@
     var filedata=this.files[0];
     var imgtype=filedata.type;
     var match=['image/jpeg','image/jpg'];
-    if(!(imgtype==match[0])||(imgtype==match[1])){
-        $('#mgs_ta').html('<p style="color:red">Plz select a valid type image..only jpg jpeg allowed</p>');
-        }else{
-          $('#mgs_ta').empty();
+    // if(!(imgtype==match[0])||(imgtype==match[1])){
+    //     $('#mgs_ta').html('<p style="color:red">Plz select a valid type image..only jpg jpeg allowed</p>');
+    //     }else{
+         // $('#mgs_ta').empty();
           //---image preview
           var reader=new FileReader();
           reader.onload=function(ev){
@@ -100,7 +100,7 @@
               console.log("success");
             }
             });
-          }
+          //}
       });
 
 
@@ -109,9 +109,9 @@
         var filedata=this.files[0];
         var imgtype=filedata.type;
         var match=['image/jpeg','image/jpg'];
-        if(!(imgtype==match[0])||(imgtype==match[1])){
-          $('#mgs_ta').html('<p style="color:red">Plz select a valid type image..only jpg jpeg allowed</p>');
-          }else{
+        // if(!(imgtype==match[0])||(imgtype==match[1])){
+        //   $('#mgs_ta').html('<p style="color:red">Plz select a valid type image..only jpg jpeg allowed</p>');
+        //   }else{
           $('#mgs_ta').empty();
           //---image preview
           var reader=new FileReader();
@@ -136,6 +136,6 @@
               console.log("success");
             }
             });
-          }
+         // }
       });
 </script>

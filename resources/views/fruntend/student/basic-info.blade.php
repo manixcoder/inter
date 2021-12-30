@@ -316,12 +316,7 @@
         @endforeach
         <div class="fw educationSec aboutusBg smaeHeading paddTop0">
           <div class="fw aboutusBg_sec">
-            @if(Session::has('status'))
-            <div class="alert alert-{{ Session::has('status') }}">
-              <i class="fa fa-building-o" aria-hidden="true"></i> {{ Session::get('message') }}
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-            </div>
-            @endif
+            
             <div class="lgcontainer">
               <h3 href="javascript:void(0);" data-modal="#experience_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
                 Experience
@@ -386,19 +381,19 @@
                           </div>
                           <div class="col_grid6 ">
                             <div class="form-group">
-                              <label>Profile Type</label>
+                              <label>Job Type</label>
                               <input type="text" name="profile_type" value="{{$exp->profile}}" maxlength="200" class="form-control" required />
                             </div>
                           </div>
                           <div class="col_grid6 ">
                             <div class="form-group">
-                              <label>Duration From</label>
+                              <label> From</label>
                               <input type="date" name="duration_from" value="{{ $exp->duration_from }}" class="form-control" required />
                             </div>
                           </div>
                           <div class="col_grid6 ">
                             <div class="form-group">
-                              <label>Duration To</label>
+                              <label>To</label>
                               <input type="date" name="duration_to" value="{{ $exp->duration_to }}" maxlength="200" class="form-control" required />
                             </div>
                           </div>
@@ -410,7 +405,7 @@
                           </div>
                           <div class="col_grid6 file-popupinput">
                             <div class="form-group">
-                              <label>Company Image</label>
+                              <label>Company logo</label>
                               <input type="file" name="company_image" class="form-control" />
                             </div>
                           </div>
@@ -814,7 +809,7 @@
             </div>
             <div class="col_grid6 file-popupinput">
               <div class="form-group">
-                <label>Company Image</label>
+                <label>Company Logo</label>
                 <input type="file" name="company_image" class="form-control" />
               </div>
             </div>
@@ -1060,9 +1055,9 @@
       var filedata = this.files[0];
       var imgtype = filedata.type;
       var match = ['image/jpeg', 'image/jpg', 'image/png'];
-      if (!(imgtype == match[0]) || (imgtype == match[1])) {
-        $('#mgs_ta').html('<p style="color:red">Plz select a valid type image..only jpg jpeg allowed</p>');
-      } else {
+      // if (!(imgtype == match[0]) || (imgtype == match[1])) {
+      //   $('#mgs_ta').html('<p style="color:red">Plz select a valid type image..only jpg jpeg allowed</p>');
+      // } else {
         $('#mgs_ta').empty();
         //---image preview
         var reader = new FileReader();
@@ -1089,7 +1084,7 @@
             console.log("success");
           }
         });
-      }
+      //}
     });
 
 

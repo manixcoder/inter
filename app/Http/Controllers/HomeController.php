@@ -73,8 +73,7 @@ class HomeController extends Controller
         $path =  $files->move($destinationPath, $profile_image);
         $update = DB::table('users')->where('id', $id)
           ->update([
-            'profile_image' => $profile_image,
-
+            'org_image' => $profile_image,
           ]);
       }
       return response()->json([
@@ -94,7 +93,7 @@ class HomeController extends Controller
         $path =  $files->move($destinationPath, $org_image);
         $update = DB::table('users')->where('id', $id)
           ->update([
-            'org_image' => $org_image,
+            'profile_image' => $org_image,
           ]);
       }
       return response()->json([

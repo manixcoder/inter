@@ -24,18 +24,12 @@ Route::get('recruiter-about', function () {
 Route::get('recruiter-posts', function () {
 	return view('fruntend.recruiter_profile_section.my_posts');
 });
-// Route::get('recruiter-listings', function () {
-// 	return view('fruntend.recruiter_profile_section.my_listing');
-// });
+
 Route::any('recruiter-listings', 'HomeController@recruiterListings');
-// Route::get('recruiter-listings', function () {
-// 	return view('fruntend.student.company_profile.my_listing');
-// });
 
 
-// Route::get('basic/info/{id}', function () {
-// 	return view('fruntend.student.company_profile.basic_info');
-// });
+
+
 Route::get('company-info/{id}', 'StudentDashboardController@companyInfo');
 Route::get('recruiter-about/{id}', function () {
 	return view('fruntend.student.company_profile.about');

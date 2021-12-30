@@ -46,7 +46,7 @@ class RecruiterwebController extends Controller
   {
     $userRole = Session::get('userRole');
     $id = Session::get('gorgID');
-    $OrgData = DB::table('users')->where('id', $id)->first();
+    $OrgData = DB::table('users')->where('id', $id)->first(); 
     $todaysdate = date('Y-m-d') . ' 00:00:00';
     $posts = app('App\Posts')->orderBy('id', 'DESC')->get();
     return view('fruntend.recruiter.dashboard')->with([
