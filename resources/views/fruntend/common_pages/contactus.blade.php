@@ -84,7 +84,6 @@
  </div>
  <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
  <script src="{{ asset('public/assets/web_assets/js/commen-hd.js')}}"></script>
- <script src="http://code.jquery.com/jquery-1.5.js"></script>
  <script type="text/javascript">
     CKEDITOR.replace('message');
   </script>

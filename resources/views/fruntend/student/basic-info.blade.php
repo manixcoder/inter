@@ -89,7 +89,7 @@
               <h4 class="clrwht font36text  semiboldfont_fmly">{{$OrgData->phone}}</h4>
               <div class="progressbar_sec whtprogressBar fw">
                 <div class="progressbar_cont fw">
-                  <span></span>
+                  <span style="width: <?php echo $count; ?>%;"></span>
                 </div>
                 <?php echo $count; ?>% profile completed
               </div>
@@ -178,7 +178,7 @@
               </div>
             </div>
           </div>
-        </div> 
+        </div>
         <div class="fw aboutusBg smaeHeading">
           <div class="fw aboutusBg_sec">
 
@@ -198,15 +198,20 @@
                 </div>
               </div>
             </form>
-
-
           </div>
         </div>
         <div class="fw educationSec aboutusBg smaeHeading">
           <div class="fw aboutusBg_sec">
             <div class="lgcontainer">
-              <h3 href="javascript:void(0);" data-modal="#education_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">Education <span class="pull-right font20Text"><i><img src="{{ asset('public/assets/images/add.png')}}" alt="img" /></i>Add</span></h3>
-
+              <h3 href="javascript:void(0);" data-modal="#education_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
+                Education
+                <span class="pull-right font20Text">
+                  <i>
+                    <img src="{{ asset('public/assets/images/add.png')}}" alt="img" />
+                  </i>
+                  Add
+                </span>
+              </h3>
               <form class="form_sec fw">
                 <div class="innerrow">
                   @foreach($edData as $ed)
@@ -223,7 +228,7 @@
                       <div class="innerrow">
                         <div class="col_grid4">
                           <div class="form-group">
-                            <label>Technology</label>
+                            <label>Course</label>
                             <input type="text" value="{{$ed->name_of_technology}}" placeholder="Name of Technology" maxlength="200" class="form-control" readonly>
                           </div>
                         </div>
@@ -240,7 +245,18 @@
                           </div>
                         </div>
                         <div class="smaeHeading rightedit_sec">
-                          <a class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#education_update_detail_{{$ed->id}}"><i><img src="{{ asset('public/assets/images/edit.png')}}" alt="img" /></i>Edit</a>
+                          <a class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#education_update_detail_{{$ed->id}}">
+                            <i>
+                              <img src="{{ asset('public/assets/images/edit.png')}}" alt="img" />
+                            </i>
+                            Edit
+                          </a>
+                          <a class="pull-right font20Text" href="{{ url('delete-course') }}/{{$ed->id}}">
+                            <i>
+                              <img src="{{ asset('public/assets/images/edit.png')}}" alt="img" />
+                            </i>
+                            Delete
+                          </a>
 
                         </div>
                       </div>
@@ -273,8 +289,8 @@
                   </div>
                   <div class="col_grid6 ">
                     <div class="form-group">
-                      <label>Technology</label>
-                      <input type="text" name="technology" value="{{$ed->name_of_technology}}" maxlength="200" placeholder="technology" class="form-control" required />
+                      <label>Course</label>
+                      <input type="text" name="technology" value="{{$ed->name_of_technology}}" maxlength="200" placeholder="Enter Course" class="form-control" required />
                     </div>
                   </div>
                   <div class="col_grid6 ">
@@ -307,7 +323,8 @@
             </div>
             @endif
             <div class="lgcontainer">
-              <h3 href="javascript:void(0);" data-modal="#experience_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">Experience
+              <h3 href="javascript:void(0);" data-modal="#experience_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
+                Experience
                 <span class="pull-right font20Text">
                   <i>
                     <img src="{{ asset('public/assets/images/add.png')}}" alt="img" /></i>
@@ -336,9 +353,18 @@
                     </div>
                   </div>
                   <div class="col_grid3">
-                    <span class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#experience_update_detail_{{$exp->id}}"><i>
+                    <span class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#experience_update_detail_{{$exp->id}}">
+                      <i>
                         <img src="{{ asset('public/assets/images/edit.png')}}" alt="img">
-                      </i>Edit</span>
+                      </i>
+                      Edit
+                    </span>
+                    <a class="pull-right font20Text" href="{{ url('delete-experience') }}/{{$exp->id}}">
+                      <i>
+                        <img src="{{ asset('public/assets/images/edit.png')}}" alt="img" />
+                      </i>
+                      Delete
+                    </a>
                   </div>
                 </div>
                 <div class='modal personal_DtlPop' id='experience_update_detail_{{$exp->id}}'>
@@ -414,7 +440,15 @@
         <div class="fw educationSec aboutusBg smaeHeading paddTop0">
           <div class="fw aboutusBg_sec form_sec">
             <div class="lgcontainer">
-              <h3 data-modal="#certificate_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">Certificates <span class="pull-right font20Text"><i><img src="{{ asset('public/assets/images/add.png')}}" alt="img" /></i>Add</span></h3>
+              <h3 data-modal="#certificate_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
+                Certificates
+                <span class="pull-right font20Text">
+                  <i>
+                    <img src="{{ asset('public/assets/images/add.png')}}" alt="img" />
+                  </i>
+                  Add
+                </span>
+              </h3>
               <div class="innerrow certificatesSec">
 
                 @foreach($certData as $cert)
@@ -442,7 +476,20 @@
                     </div>
                   </div>
                   <div class="smaeHeading rightedit_sec">
-                    <h3><span class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#certificate_update_detail_{{$cert->id}}"><i><img src="{{ asset('public/assets/images/add.png')}}" alt="img" /></i>Edit</span></h3>
+                    <h3>
+                      <span class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#certificate_update_detail_{{$cert->id}}">
+                        <i>
+                          <img src="{{ asset('public/assets/images/add.png')}}" alt="img" />
+                        </i>
+                        Edit
+                      </span>
+                      <a class="pull-right font20Text" href="{{ url('delete-certificate') }}/{{$cert->id}}">
+                        <i>
+                          <img src="{{ asset('public/assets/images/add.png')}}" alt="img" />
+                        </i>
+                        Delete
+                      </a>
+                    </h3>
                   </div>
                 </div>
                 <div class='modal personal_DtlPop' id='certificate_update_detail_{{$cert->id}}'>
@@ -491,7 +538,15 @@
         <div class="fw educationSec aboutusBg smaeHeading paddTop0">
           <div class="fw aboutusBg_sec form_sec">
             <div class="lgcontainer">
-              <h3 data-modal="#industry_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">My Favourite Industries <span class="pull-right font20Text"><i><img src="{{ asset('public/assets/images/add.png')}}" alt="img" /></i>Add</span></h3>
+              <h3 data-modal="#industry_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
+                My Favourite Industries
+                <span class="pull-right font20Text">
+                  <i>
+                    <img src="{{ asset('public/assets/images/add.png')}}" alt="img" />
+                  </i>
+                  Add
+                </span>
+              </h3>
               <ul class="favouriteIndus_sec fw">
                 @foreach($indusData as $indus)
                 <li>
@@ -548,7 +603,7 @@
                 <div class="coursesBox fw">
                   <div class="innerrow">
                     <div class="col_grid9 text-left">
-                      <h3>{{ $i }}</h3>
+                      <h3>{{ $key+1 }}. {{$accom->accomplishment_type}}</h3>
                       <h3>{{$accom->course_name}}</h3>
                       <p>{{$accom->awards}}</p>
                       <p>{{$accom->test_scores}}</p>
@@ -569,6 +624,17 @@
                       <h3 class="modal_heading">Add Accomplishment</h3>
                       <div class="form_sec fw ">
                         <div class="innerrow">
+                          <div class="col_grid6">
+                            <div class="form-group">
+                              <label>Accomplishment Type</label>
+                              <select name="accomplishment_type" id="accomplishment_type" class="form-control" required>
+                                <option value="Course" {{ ( $accom->accomplishment_type == 'Course') ? 'selected' : '' }}>Course</option>
+                                <option value="Awards" {{ ( $accom->accomplishment_type == 'Awards') ? 'selected' : '' }}>Awards</option>
+                                <option value="Test Scores" {{ ( $accom->accomplishment_type == 'Test Scores') ? 'selected' : '' }}>Test Scores</option>
+                                <option value="Publications" {{ ( $accom->accomplishment_type == 'Publications') ? 'selected' : '' }}>Publications</option>
+                              </select>
+                            </div>
+                          </div>
                           <div class="col_grid6">
                             <div class="form-group">
                               <label>Course Name</label>
@@ -659,7 +725,9 @@
 
   <div class='modal personal_DtlPop' id='education_add_detail'>
     <div class="close fw">
-      <a class='btn close-modal' data-modal="#education_add_detail" href="#"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></a>
+      <a class='btn close-modal' data-modal="#education_add_detail" href="#">
+        <img src="{{ asset('public/assets/images/close.png')}}" alt="icon">
+      </a>
     </div>
     <form class="form_sec fw col_grid12" action="{{ url('add_student_education') }}" method="POST" enctype="multipart/form-data">
       @csrf
@@ -670,13 +738,13 @@
             <div class="col_grid6">
               <div class="form-group">
                 <label>School Name</label>
-                <input type="text" name="school_name" placeholder="BSc in Cyber Security" maxlength="200" class="form-control" required />
+                <input type="text" name="school_name" placeholder="Enter School Name" maxlength="200" class="form-control" required />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
-                <label>Technology</label>
-                <input type="text" name="technology" placeholder="technology" class="form-control" maxlength="200" required />
+                <label>Course</label>
+                <input type="text" name="technology" placeholder="Enter Course name" class="form-control" maxlength="200" required />
               </div>
             </div>
             <div class="col_grid6 ">
@@ -717,24 +785,24 @@
             <div class="col_grid6">
               <div class="form-group">
                 <label>Company Name</label>
-                <input type="text" name="company_name" placeholder="ARK Newtech Private Limited" maxlength="200" class="form-control" required />
+                <input type="text" name="company_name" placeholder="Enter Company Name" maxlength="200" class="form-control" required />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
-                <label>Profile Type</label>
-                <input type="text" name="profile_type" placeholder="Backend Developer" maxlength="200" class="form-control" required />
+                <label>Job Type</label>
+                <input type="text" name="profile_type" placeholder="Enter Job Type" maxlength="200" class="form-control" required />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
-                <label>Duration From</label>
+                <label>From</label>
                 <input type="date" name="duration_from" placeholder="Ex. 2021-08-02" class="form-control" required />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
-                <label>Duration To</label>
+                <label>To</label>
                 <input type="date" name="duration_to" placeholder="Ex. 2023-08-02" class="form-control" required />
               </div>
             </div>
@@ -774,19 +842,19 @@
             <div class="col_grid6">
               <div class="form-group">
                 <label>Certificate Name</label>
-                <input type="text" name="certificate_name" maxlength="200" class="form-control" required />
+                <input type="text" name="certificate_name" maxlength="200" placeholder="Enter Certificate Name" class="form-control" required />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Certificate By</label>
-                <input type="text" name="certificate_by" maxlength="200" class="form-control" required />
+                <input type="text" name="certificate_by" maxlength="200" placeholder="Enter Certificate By" class="form-control" required />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Year of Completetion</label>
-                <input type="text" name="year_of_completion" onblur="yearValidation(this.value,event)" id="year2" maxlength="200" class="form-control" required />
+                <input type="text" name="year_of_completion" onblur="yearValidation(this.value,event)" id="year2" placeholder="Year EX 1990" maxlength="200" class="form-control" required />
               </div>
             </div>
 
@@ -814,7 +882,7 @@
             <div class="col_grid12">
               <div class="form-group">
                 <label>Industry Name</label>
-                <input type="text" name="industry_name" maxlength="200" class="form-control" required />
+                <input type="text" name="industry_name" placeholder="Industry Name" maxlength="200" class="form-control" required />
               </div>
             </div>
 
@@ -843,7 +911,7 @@
             <div class="col_grid12">
               <div class="form-group">
                 <label>Business Function Name</label>
-                <input type="text" name="business_function_name" maxlength="200" class="form-control" required />
+                <input type="text" name="business_function_name" placeholder="Business Function Name" maxlength="200" class="form-control" required />
               </div>
             </div>
 
@@ -872,7 +940,7 @@
             <div class="col_grid12">
               <div class="form-group">
                 <label>Hobby Name</label>
-                <input type="text" name="hobby_name" maxlength="200" class="form-control" required />
+                <input type="text" name="hobby_name" maxlength="200" placeholder="Hobby Name" class="form-control" required />
               </div>
             </div>
 
@@ -898,6 +966,17 @@
         <h3 class="modal_heading">Add Accomplishment</h3>
         <div class="form_sec fw ">
           <div class="innerrow">
+            <div class="col_grid6">
+              <div class="form-group">
+                <label>Accomplishment Type</label>
+                <select name="accomplishment_type" id="accomplishment_type" class="form-control" required>
+                  <option value="Course">Course</option>
+                  <option value="Awards">Awards</option>
+                  <option value="Test Scores">Test Scores</option>
+                  <option value="Publications">Publications</option>
+                </select>
+              </div>
+            </div>
             <div class="col_grid6">
               <div class="form-group">
                 <label>Course Name</label>
@@ -980,7 +1059,7 @@
       console.log("here inside");
       var filedata = this.files[0];
       var imgtype = filedata.type;
-      var match = ['image/jpeg', 'image/jpg'];
+      var match = ['image/jpeg', 'image/jpg', 'image/png'];
       if (!(imgtype == match[0]) || (imgtype == match[1])) {
         $('#mgs_ta').html('<p style="color:red">Plz select a valid type image..only jpg jpeg allowed</p>');
       } else {
@@ -1051,11 +1130,10 @@
   </script>
 
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
-  <script src="http://code.jquery.com/jquery-1.5.js"></script>
   <script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
   <script type="text/javascript">
-		CKEDITOR.replace('about');
-	</script>
+    CKEDITOR.replace('about');
+  </script>
   <script>
     $(document).ready(function() {
       $(".clicktobtm").click(function() {

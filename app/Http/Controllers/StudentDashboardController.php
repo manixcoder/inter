@@ -49,6 +49,14 @@ class StudentDashboardController extends Controller
       'userRole' => $userRole
     ]);
   }
+  public function deleteCourse($id){
+    DB::table('education')->where('id', $id)->delete();
+    return redirect()->back();
+  }
+  public function deleteExperience($id){
+    DB::table('experience')->where('id', $id)->delete();
+    return redirect()->back();
+  }
   public function basic_info(Request $request)
   {
     $userRole   = Session::get('userRole');
@@ -430,6 +438,7 @@ class StudentDashboardController extends Controller
     $update = DB::table('accomplishments')
       ->insert([
         'user_id' => $id,
+        'accomplishment_type'=>$request->accomplishment_type,
         'course_name' => $request->course_name,
         'awards' => $request->award,
         'test_scores' => $request->test_scores,
@@ -444,6 +453,7 @@ class StudentDashboardController extends Controller
   {
     $update = DB::table('accomplishments')->where('id', $request->id)
       ->update([
+        'accomplishment_type'=>$request->accomplishment_type,
         'course_name' => $request->course_name,
         'awards' => $request->award,
         'test_scores' => $request->test_scores,

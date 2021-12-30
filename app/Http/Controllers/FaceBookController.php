@@ -41,7 +41,7 @@ class FaceBookController extends Controller
             $imageName = uniqid() . '.png';
             $file = "public/uploads/" . $imageName;
             $success = file_put_contents($file, $data);
-            //dd($success);
+            // dd($success);
             /* image generation end */
             $saveUser = User::updateOrCreate([
                 'facebook_id' => $user->getId(),

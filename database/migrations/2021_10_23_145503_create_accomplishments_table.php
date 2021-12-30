@@ -16,6 +16,7 @@ class CreateAccomplishmentsTable extends Migration
         Schema::create('accomplishments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id')->nullable();
+            $table->string('accomplishment_type')->nullable();
             $table->string('course_name')->nullable();
             $table->string('awards')->nullable();
             $table->string('test_scores')->nullable();

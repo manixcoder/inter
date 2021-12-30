@@ -106,7 +106,7 @@
                       <!--select name="location" class="form-contorl" id="selectbox2">
                         <option value="">Select Location</option>
                         @foreach($locationData as $ld)
-                        <option value="<?php echo $ld->location ?>"><?php echo $ld->location ?></option>
+                        <option value="<?php // echo $ld->location ?>"><?php // echo $ld->location ?></option>
                         @endforeach
 
                       </select-->

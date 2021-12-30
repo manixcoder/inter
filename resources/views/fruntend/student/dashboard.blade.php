@@ -83,7 +83,7 @@
             </div>
             <div class="progressbar_sec fw">
               <div class="progressbar_cont fw">
-                <span></span>
+                <span style="width: <?php echo $count; ?>%;"></span>
               </div>
 
               <?php echo $count; ?>% profile completed
@@ -117,7 +117,7 @@
 
 
           <div class="createPost_Sec fw">
-            <a href="javascript:void(0);" class="open-modal createBtn" data-modal="#createHomePostrecuriter">Hi! Create your post</a>
+            <!--a href="javascript:void(0);" class="open-modal createBtn" data-modal="#createHomePostrecuriter">Hi! Create your post</a -->
           </div>
           @php
           $userRole = Session::get('userRole');

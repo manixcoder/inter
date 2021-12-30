@@ -103,13 +103,9 @@
                   </a> -->
                 </li>
                 <li>
-                  <!-- <a href="{{ route('linkedin.login') }}" class="login_icon">
-                    <img src="{{ asset('public/assets/images/login_linkedin.png')}}" alt="icon">
-                  </a> -->
                   <a href="{{ route('linkedin.login') }}" class="login_icon">
                     <img src="{{ asset('public/assets/images/login_linkedin.png')}}" alt="icon">
                   </a>
-                 
                   <!-- <a href="https://www.linkedin.com/company/the-internify/ " class="login_icon">
                     <img src="{{ asset('public/assets/images/login_linkedin.png')}}" alt="icon">
                   </a> -->

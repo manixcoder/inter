@@ -208,6 +208,8 @@ Route::any('profile-image-upload', 'HomeController@profileImageUpload');
 /*################################ Student Routes By Ritik Start Here #############################*/
 
 Route::any('student-dashboard', 'StudentDashboardController@dashboard');
+Route::any('delete-course/{id}', 'StudentDashboardController@deleteCourse');
+Route::any('delete-experience/{id}', 'StudentDashboardController@deleteExperience');
 
 //Here 
 Route::get('student-profile-basic-info', 'StudentDashboardController@basic_info');
@@ -406,7 +408,7 @@ Route::prefix('facebook')->name('facebook.')->group( function(){
 });
 Route::prefix('linkedin')->name('linkedin.')->group( function(){
 Route::get('/auth', 'SocialAuthLinkedinController@loginUsinglinkedin')->name('login');
-Route::get('/callback??code=AQSfhINqUoPebdgo6Y4k53tryJs4hdxbRW2mQgWF-VLJITliV7wz06frm33bt3OA27J5FFlxmlP8ZpN-payRz13g01THkzaoc9bZURtYFnTGvW6MyZSSahygCYmYn56DTmVF3jBnq1NlBHzQidQDqVLcveGfkBCWGLQtfJ0MlQMVmj5kw9AZpp96O6A3iXOznbgEWVS2uTwiSu8c1-0', 'SocialAuthLinkedinController@callbackFromLinkedin')->name('callback');
+Route::get('/callback', 'SocialAuthLinkedinController@callbackFromLinkedin')->name('callback');
 });
 
 Route::prefix('google')->name('google.')->group( function(){
