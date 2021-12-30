@@ -10,7 +10,9 @@
 					<tr>
 						<th>
 							ID
-							
+							<span class="serach-input">
+								<input type="text" name="searchbox" class="serachbox">
+							</span>	
 						</th>
 						<th class="company_th">
 							Name
@@ -48,13 +50,13 @@
 				</thead>
 				<tbody id="tabledata">
 					@if(isset($Data))
-						@foreach($Data as $value)
+						@foreach($Data as $key=> $value)
 							<tr>
-								<td>#{{$value->id }}</td>
+								<td>#{{ $key+1 }}</td>
 								<td>{{$value->first_name }} {{$value->last_name }}</td>
 								<td>{{$value->email }}</td>
 								<td>{{$value->mobile }}</td>										
-								<td>{{$value->message }}</td>
+								<td><?php echo $value->message ?></td>
 								<td>{{ date('d-M-Y / H:m', strtotime($value->created_at)) }}</td>
 								<td>
 									<span class="edit_icon">
@@ -88,14 +90,6 @@
 </script>
 <script>
 	$(document).ready(function() {
-		$('#ContactTable').DataTable({
-			columnDefs: [{
-				orderable: false,
-				targets: 0
-			}],
-			order: [
-				[1, 'asc']
-			]
-		});
+		$('#ContactTable').DataTable({order:[]});
 	});
 </script>

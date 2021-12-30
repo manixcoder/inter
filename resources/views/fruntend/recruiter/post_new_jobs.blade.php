@@ -1,7 +1,7 @@
   @include('fruntend.common_pages.web_header')
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  
+
 
   <style>
     /* Popup box BEGIN */
@@ -77,7 +77,7 @@
           <h3>Post A New Job</h3>
         </div>
         <div class="form_sec fw">
-         
+
           @if(Session::has('status'))
           <div class="hover_bkgr_fricc resumeUpload_popup successfullyModalPopup">
             <div class='content fw'>
@@ -88,14 +88,14 @@
               <!--p>Recruiter will contact you through <br />your email or mobile number.</p -->
             </div>
           </div>
-          <?php 
-         // sleep(10);
+          <?php
+          // sleep(10);
           ?>
           <!-- <script type="text/javascript">
             window.location = "{{ URL::to('/recruiter-listings') }}";//here double curly bracket
             </script> -->
-         
-          
+
+
           @endif
 
           <form action="{{ URL::to('add-job')}}" method="POST" id="FormValidation" name="postJob" enctype="multipart/form-data">
@@ -103,7 +103,7 @@
             <div class="innerrow">
               <div class="col_grid12 upload_box_sec">
                 <div class="uploadBox">
-                  <input type="file" name="logo" onchange="loadFile(event)" accept="image/png, image/gif, image/jpeg">
+                  <input type="file" name="logo" onchange="loadFile(event)" accept="image/png, image/gif, image/jpeg" required>
                   <div class="file_cont">
                     <img src="{{ asset('public/assets/images/attach_img.png')}}" id="output" alt="icon" class="jobpostnew-file" />
                     <h4 class="font24Text clrBlack">Attach any organization or work culture photo (It's optional)</h4>
@@ -113,18 +113,19 @@
               <div class="col_grid12 ">
                 <div class="form-group newform-control">
                   <label>Write Job Title</label>
-                  <select name="job_title" class="form-contorl" id="job_title" required>
+                  <!--select name="job_title" class="form-contorl" id="job_title" required>
                         <option value="">Select Job Title</option>                        
                         <option value="Sales & Marketing Executive">Sales & Marketing Executive</option>
                         <option value="Front-end Developer">Front-end Developer</option>
                         <option value="Financial Analyst">Financial Analyst</option>
-                      </select>
+                      </select -->
+                  <input type="text" name="job_title" class="form-contorl" id="job_title" required>
                 </div>
               </div>
               <div class="col_grid6 ">
                 <div class="form-group newform-control">
                   <label>Job Location</label>
-                  <select name="location" class="form-contorl" id="location"  required>
+                  <!-- <select name="location" class="form-contorl" id="location"  required>
                         <option value="">Select Location</option>                        
                         <option value="Mumbai">Mumbai</option>
                         <option value="Delhi">Delhi</option>
@@ -133,11 +134,12 @@
                         <option value="Mohali">Mohali</option>
                         <option value="Chandigarh">Chandigarh</option>
                         <option value="Hydrabad">Hydrabad</option>
-                      </select>
+                      </select> -->
+                  <input type="text" name="location" class="form-contorl" id="location" required>
                 </div>
               </div>
 
-              
+
 
               <div class="col_grid6 ">
                 <div class="form-group newform-control">
@@ -157,43 +159,43 @@
                 </div>
               </div>
 
-              
+
 
               <div class="col_grid12 ">
                 <div class="form-group newoffer">
                   <label>Job Offers</label>
-                  <input  type="text" name="offer[]" placeholder="Job Offer" class="form-control" required="" maxlength="100">
+                  <input type="text" name="offer[]" placeholder="Job Offer" class="form-control" maxlength="100"  required>
                   <div id="offer_add" style="margin-top: 10px;display: inline-block;width: 100%;"></div>
                 </div>
               </div>
               <div class="col_grid12 ">
-              <div id="moreoffer">
-                      <span class="pull-right font20Text" id="add_more">
-                        <i>
-                          <img src="{{ asset('public/assets/images/add.png') }}" alt="img">
-                        </i>
-                        Add More Offer Point
-                      </span>
-                    </div>
-              </div>
-              <div class="col_grid12 ">
-              
-                <div class="form-group">
-                <label>Job Description</label>
+                <div id="moreoffer">
+                  <span class="pull-right font20Text" id="add_more">
+                    <i>
+                      <img src="{{ asset('public/assets/images/add.png') }}" alt="img">
+                    </i>
+                    Add More Offer Point
+                  </span>
                 </div>
               </div>
               <div class="col_grid12 ">
-              
+
                 <div class="form-group">
-           
-                  
+                  <label>Job Description</label>
+                </div>
+              </div>
+              <div class="col_grid12 ">
+
+                <div class="form-group">
+
+
                   <textarea class="form-control" name="job_description" id='job_description'></textarea>
                 </div>
               </div>
 
               <div class="col_grid12 upload_box_sec jobUpload_sec">
                 <div class="uploadBox">
-                  <input type="file" name="acttachPhoto"  accept=".pdf,.docx"/>
+                  <input type="file" name="acttachPhoto" accept=".pdf,.docx" />
                   <div class="file_cont fileupload2">
                     <img src="{{ asset('public/assets/images/upload_file.png')}}" id="output2" alt="icon" />
                     <h4 class="font24Text clrBlack">Drag and drop or upload a file (It's optional)</h4>
@@ -214,9 +216,9 @@
     </div>
   </div>
 
- 
 
-  
+
+
 
 
 
@@ -225,62 +227,62 @@
   <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
   <script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
   <script type="text/javascript">
-		CKEDITOR.replace('job_description');
-	</script>
+    CKEDITOR.replace('job_description');
+  </script>
 
 
-<script>
-  $(function() {
-  // Initialize form validation on the registration form.
-  // It has the name attribute "registration"
-  $("form[name='postJob']").validate({
-    // Specify validation rules
-    rules: {
-      // The key name on the left side is the name attribute
-      // of an input field. Validation rules are defined
-      // on the right side
-      job_title: "required",
-      location: "required",
-      job_description:"required",
-      email: {
-        required: true,
-        // Specify that email should be validated
-        // by the built-in "email" rule
-        email: true
-      },
-      password: {
-        required: true,
-        minlength: 5
-      }
-    },
-    // Specify validation error messages
-    messages: {
-      job_title: "Please enter your job title",
-      location: "Please enter your location",
-      job_description:"Please enter your job description",
-      password: {
-        required: "Please provide a password",
-        minlength: "Your password must be at least 5 characters long"
-      },
-      email: "Please enter a valid email address"
-    },
-    // Make sure the form is submitted to the destination defined
-    // in the "action" attribute of the form when valid
-    submitHandler: function(form) {
-      form.submit();
-    }
-  });
-});
-</script>
   <script>
-$(document).ready(function(){
-  
+    $(function() {
+      // Initialize form validation on the registration form.
+      // It has the name attribute "registration"
+      $("form[name='postJob']").validate({
+        // Specify validation rules
+        rules: {
+          // The key name on the left side is the name attribute
+          // of an input field. Validation rules are defined
+          // on the right side
+          job_title: "required",
+          location: "required",
+          job_description: "required",
+          email: {
+            required: true,
+            // Specify that email should be validated
+            // by the built-in "email" rule
+            email: true
+          },
+          password: {
+            required: true,
+            minlength: 5
+          }
+        },
+        // Specify validation error messages
+        messages: {
+          job_title: "Please enter your job title",
+          location: "Please enter your location",
+          job_description: "Please enter your job description",
+          password: {
+            required: "Please provide a password",
+            minlength: "Your password must be at least 5 characters long"
+          },
+          email: "Please enter a valid email address"
+        },
+        // Make sure the form is submitted to the destination defined
+        // in the "action" attribute of the form when valid
+        submitHandler: function(form) {
+          form.submit();
+        }
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function() {
 
-  $("#add_more").click(function(){
-    $("#offer_add").append('<input  type="text" name="offer[]" style="margin-top: 10px;display: inline-block;width: 100%;" placeholder="Job Offer" class="form-control" required="" maxlength="100">');
-  });
-});
-</script>
+
+      $("#add_more").click(function() {
+        $("#offer_add").append('<input  type="text" name="offer[]" style="margin-top: 10px;display: inline-block;width: 100%;" placeholder="Job Offer" class="form-control" required="" maxlength="100">');
+      });
+    });
+  </script>
 
   <script>
     /* Script for success popup */

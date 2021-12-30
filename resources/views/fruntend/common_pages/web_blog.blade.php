@@ -28,7 +28,7 @@
            {{ $value->blog_heading ?? ''}}
          </h3>
          <p class="site-pra addReadMore showlesscontent">
-           {{ strip_tags($value->description) ?? ''}} ..
+           <?php echo $value->description ?>
            <form action="{{URL::to('web/blog/detail')}}" method="post" enctype="multipart/form-data">
              @csrf
              <input type="hidden" name="blog_id" value="{{ $value->id }}">
@@ -47,7 +47,7 @@
        <div class="admin-date-box fw">
          <span class="gary-small-text text-left col_grid6">Posted on :
            <span>
-             {{date('d M Y | H:i'  , strtotime($value->posted_date_and_time))}}
+             {{date('d M Y | H:i'  , strtotime($value->created_at))}}
            </span>
          </span>
          <span class="gary-small-text text-right col_grid6">Posted by :

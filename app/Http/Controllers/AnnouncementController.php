@@ -33,7 +33,7 @@ class AnnouncementController extends Controller
 
   public function index()
   {
-    $Data = app('App\Announcement')->orderBy('id', 'Desc')->get();
+    $Data = app('App\Announcement')->orderBy('id', 'DESC')->get();
     $data['content'] = 'admin.announcement.announcement';
     return view('layouts.content', compact('data'))->with(['Data' => $Data]);
   }
@@ -46,7 +46,6 @@ class AnnouncementController extends Controller
 
   public function create(Request $request)
   {
-    //dd($request->all());
     $data = array(
       'title' => $request->title,
       'description' => $request->description,

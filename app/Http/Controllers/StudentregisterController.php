@@ -168,7 +168,11 @@ class StudentregisterController extends Controller
 		} else {
 			$jobsData = DB::table('jobs')->where('status', 0)->where('location', 'like', '%' . $location . '%')->where('job_title', 'like', '%' . $job_title . '%')->get();
 		}
-
-		return view('fruntend.student_job_search')->with(['job_title' => $job_title, 'location' => $location, 'OrgData' => $OrgData, 'jobsData' => $jobsData, 'locationData' => $locationData, 'titleData' => $titleData]);
+		if (Auth::check()) {
+			return view('fruntend.student_job_search')->with(['job_title' => $job_title, 'location' => $location, 'OrgData' => $OrgData, 'jobsData' => $jobsData, 'locationData' => $locationData, 'titleData' => $titleData]);
+		}else{
+			return redirect('/student-login')->with(array('success_msg'=>'correct Updated.'));
+		}
+		
 	}
 }

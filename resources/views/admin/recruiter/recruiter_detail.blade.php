@@ -22,11 +22,11 @@
          </div>
          <ul class="jobsdetails_text">
             <li>Recruiter ID <b>#{{ $recruiterDetail->id ?? ''}}</b></li>
-            <li>Recruiter Name <b>{{ $recruiterDetail->name ?? ''}}</b></li>
+            <li>Recruiter Name <b>{{ $recruiterDetail->name ?? ''}}</b></li> 
             <li>Email Address <b>{{ $recruiterDetail->email ?? ''}}</b></li>
             <li>Mobile Number <b>{{ $recruiterDetail->phone ?? ''}}</b></li>
             <li>Company Name <b>{{ $recruiterDetail->org_name ?? ''}}</b></li>
-            <li>Last Login<b>{{ date('d-M-Y | H:i', strtotime($recruiterDetail->last_login ?? ''))}}</b></li>
+            <li>Last Login<b>@if($recruiterDetail->last_login !=''){{ date('d-M-Y | H:i', strtotime($recruiterDetail->last_login ?? ''))}}@endif</b></li>
             <li>
                Status
                <b>
@@ -108,9 +108,9 @@
                   </thead>
                   <tbody>
                      @if(isset($totalListedJobs))
-                     @foreach($totalListedJobs as $value)
+                     @foreach($totalListedJobs as $key=> $value)
                      <tr>
-                        <td>#{{ $value->id ?? ''}}</td>
+                        <td>#{{ $key+1 }}</td>
                         <td>{{ $value->job_title ?? ''}}</td>
                         <td>{{ $value->location ?? ''}}</td>
                         <td>{{date('d M Y', strtotime($value->created_at ?? ''))}}</td>

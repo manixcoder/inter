@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Mail\Mailer;
 use Session;
 use Response;
+use Auth;
 use DB;
 use Hash;
-
 use Carbon;
 use File;
 
@@ -48,6 +48,30 @@ class SearchController extends Controller
         } else {
             return view('fruntend.blog')->with(['notfound' => $notfound]);
         }
+    }
+
+    public function add_contactus(Request $request)
+    {
+        $data = array(
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'mobile' => $request->mobile,
+            'message' => $request->message,
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s")
+        );
+
+        $insertData = DB::table('contact_us')->insert($data);
+        if (!Auth::guest()) {
+            return redirect('contact_us')->with(array('status' => 'success', 'message' => 'Your inquiry has been submitted successfully We will contact you soon !'));
+        } else {
+            return redirect('contactus')->with(array('status' => 'success', 'message' => 'Your inquiry has been submitted successfully We will contact you soon !'));
+        }
+
+
+        // return view('fruntend.common_pages.contactus')
+        //     ->with('alert', 'your enquiry has been submitted successfully We will contact you soon.');
     }
 
     /* Recruiter register controllers End */

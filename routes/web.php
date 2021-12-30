@@ -24,18 +24,12 @@ Route::get('recruiter-about', function () {
 Route::get('recruiter-posts', function () {
 	return view('fruntend.recruiter_profile_section.my_posts');
 });
-// Route::get('recruiter-listings', function () {
-// 	return view('fruntend.recruiter_profile_section.my_listing');
-// });
+
 Route::any('recruiter-listings', 'HomeController@recruiterListings');
-// Route::get('recruiter-listings', function () {
-// 	return view('fruntend.student.company_profile.my_listing');
-// });
 
 
-// Route::get('basic/info/{id}', function () {
-// 	return view('fruntend.student.company_profile.basic_info');
-// });
+
+
 Route::get('company-info/{id}', 'StudentDashboardController@companyInfo');
 Route::get('recruiter-about/{id}', function () {
 	return view('fruntend.student.company_profile.about');
@@ -190,7 +184,7 @@ Route::any('forgot_password', 'HomeController@forgot_password');
 Route::any('web/forgot/password', 'HomeController@web_forgot_password');
 Route::any('web/otp/verify', 'HomeController@web_otp_verify');
 Route::any('web_password_update', 'HomeController@web_password_update');
-Route::any('add_contactus', 'HomeController@add_contactus');
+Route::any('add_contactus', 'SearchController@add_contactus');
 Route::any('otp_verify', 'HomeController@otp_verify');
 Route::any('password_update', 'HomeController@password_update');
 Route::get('user-profile', 'HomeController@UserProfile');
@@ -208,6 +202,8 @@ Route::any('profile-image-upload', 'HomeController@profileImageUpload');
 /*################################ Student Routes By Ritik Start Here #############################*/
 
 Route::any('student-dashboard', 'StudentDashboardController@dashboard');
+Route::any('delete-course/{id}', 'StudentDashboardController@deleteCourse');
+Route::any('delete-experience/{id}', 'StudentDashboardController@deleteExperience');
 
 //Here 
 Route::get('student-profile-basic-info', 'StudentDashboardController@basic_info');
@@ -405,8 +401,8 @@ Route::prefix('facebook')->name('facebook.')->group( function(){
     Route::get('callback', 'FaceBookController@callbackFromFacebook')->name('callback');
 });
 Route::prefix('linkedin')->name('linkedin.')->group( function(){
-Route::get('/auth', 'SocialAuthLinkedinController@redirect')->name('login');
-Route::get('/callback', 'SocialAuthLinkedinController@callback')->name('callback');
+Route::get('/auth', 'SocialAuthLinkedinController@loginUsinglinkedin')->name('login');
+Route::get('/callback', 'SocialAuthLinkedinController@callbackFromLinkedin')->name('callback');
 });
 
 Route::prefix('google')->name('google.')->group( function(){

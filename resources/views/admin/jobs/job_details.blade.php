@@ -55,9 +55,9 @@
                         <i>
                            <a href="{{ URL::to('/message')}}" target="_blank"><img src="{{ URL::asset('/public/assets/images/chat_2.svg') }}" alt="chat"></a>
                         </i>                         
-                        <i>
+                       <!--  <i>
                            <a href="{{ URL::to('recruiter-detail', base64_encode($job_created_by->id)) }}"><img src="{{ asset('public/assets/images/view.svg')}}" alt="chat"></a>
-                        </i>
+                        </i> -->
                          <i>
                            <a href="{{ URL::to('job-delete',$jobDetail->id) }}" onclick="return confirm('Are you sure you want to delete this item?');">
                            <img src="{{ asset('public/assets/images/delete.svg')}}" alt="delete">
@@ -84,13 +84,13 @@
                      </thead>
                      <tbody>
                         @if(isset($appliedjobs))
-                           @foreach($appliedjobs as $value)
+                           @foreach($appliedjobs as $key=> $value)
                               @php 
                               $student_name = DB::table('users')->where('id', $value->student_id)->first(); 
                               
                               @endphp
                               <tr>
-                                 <td>#{{ $value->id ?? ''}}</td>
+                                 <td>#{{ $key+1 }}</td>
                                  <td>{{$student_name->name ?? '' }}</td>
                                  <td>{{$student_name->email ?? ''}}</td>
                                  <td>{{$student_name->phone ?? ''}}</td>

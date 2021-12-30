@@ -148,10 +148,6 @@
 </script>
 <script>
 	$(document).ready(function() {
-		$('#listjobs_table').DataTable({
-			order: [
-				[2, "asc"]
-			]
-		});
+		$('#listjobs_table').DataTable({order:[]});
 	});
 </script>

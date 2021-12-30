@@ -35,7 +35,7 @@ class RecruiterController extends Controller
    */
   public function index()
   {
-    $Data = app('App\User')->where('users_role', 3)->orderBy('id', 'asc')->get();
+    $Data = app('App\User')->where('users_role', 3)->orderBy('id', 'DESC')->get();
     $DataCount = app('App\User')->where('users_role', 3)->count();
     $data['content'] = 'admin.recruiter.list_recruiter';
     return view('layouts.content', compact('data'))->with([

@@ -106,6 +106,12 @@
                 <li><a href="https://www.linkedin.com/company/the-internify/ "><img src="{{ asset('public/assets/images/c_linkedin.png')}}" alt="icon"></a></li>
               </ul>
             </div>
+            @if(Session::has('status'))
+                    <div class="alert alert-{{ Session::get('status') }}">
+                        <i class="fa fa-building-o" aria-hidden="true"></i> {{ Session::get('message') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                    </div>
+                    @endif
             <div class="col_grid7">
               <div class="adressMap_sec pull-right">
                 <form class="fw" action="{{ url('add_contactus') }}" method="POST" enctype="multipart/form-data">
@@ -183,7 +189,6 @@
 
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
   <script src="{{ asset('public/assets/web_assets/js/commen-hd.js')}}"></script>
-  <script src="http://code.jquery.com/jquery-1.5.js"></script>
   <script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
   <script type="text/javascript">
     CKEDITOR.replace('message');

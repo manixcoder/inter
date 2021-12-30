@@ -43,19 +43,19 @@
                    @endif
                <!-- <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->org_image ?? ''}}" alt="profile"> -->
              </figure>
-             <h5>{{ $OrgData->name ?? ''}}</h5>
-             <a href="mailto:jaiks4384@gmail.com">{{ $OrgData->email ?? ''}}</a>
+             <h5>{{ Auth::user()->name ?? ''}}</h5>
+             <a href="mailto:jaiks4384@gmail.com">{{ Auth::user()->email ?? ''}}</a>
            </div>
            <div class="progressbar_sec fw">
              <div class="progressbar_cont fw">
-               <span></span>
+               <span style="width:  <?php echo $count; ?>% ;"></span>
              </div>
              <?php echo $count; ?>% profile completed
            </div>
            <div class="userTablink fw">
              <ul class="userTablink_cont fw">
                <li><a href="{{ url('basic/info') }}">View Profile</a></li>
-               <li><a href="{{ URL::to('recruiter-posts')}}">My Posts</a></li>
+               <!-- li><a href="{{ URL::to('recruiter-posts')}}">My Posts</a></li -->
                <li><a href="{{ URL::to('recruiter-listings')}}">My Listing</a></li>
                <li><a href="{{ URL::to('/message')}}" target="_blank">Messages</a></li>
              </ul>
@@ -78,7 +78,7 @@
            </form>
          </div -->
          <div class="createPost_Sec fw">
-           <a href="javascript:void(0);" class="open-modal createBtn" data-modal="#createHomePostrecuriter">Hi! Create your post</a>
+           <!--a href="javascript:void(0);" class="open-modal createBtn" data-modal="#createHomePostrecuriter">Hi! Create your post</a !-->
          </div>
 
          <div id="refresh">

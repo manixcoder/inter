@@ -73,8 +73,7 @@ class HomeController extends Controller
         $path =  $files->move($destinationPath, $profile_image);
         $update = DB::table('users')->where('id', $id)
           ->update([
-            'profile_image' => $profile_image,
-
+            'org_image' => $profile_image,
           ]);
       }
       return response()->json([
@@ -94,7 +93,7 @@ class HomeController extends Controller
         $path =  $files->move($destinationPath, $org_image);
         $update = DB::table('users')->where('id', $id)
           ->update([
-            'org_image' => $org_image,
+            'profile_image' => $org_image,
           ]);
       }
       return response()->json([
@@ -105,22 +104,22 @@ class HomeController extends Controller
   }
 
 
-  public function add_contactus(Request $request)
-  {
-    // dd($request->all());
-    $data = array(
-      'first_name' => $request->first_name,
-      'last_name' => $request->last_name,
-      'email' => $request->email,
-      'mobile' => $request->mobile,
-      'message' => $request->message,
-      'created_at' => date("Y-m-d H:i:s"),
-      'updated_at' => date("Y-m-d H:i:s")
-    );
+  // public function add_contactus(Request $request)
+  // {
+  //   // dd($request->all());
+  //   $data = array(
+  //     'first_name' => $request->first_name,
+  //     'last_name' => $request->last_name,
+  //     'email' => $request->email,
+  //     'mobile' => $request->mobile,
+  //     'message' => $request->message,
+  //     'created_at' => date("Y-m-d H:i:s"),
+  //     'updated_at' => date("Y-m-d H:i:s")
+  //   );
 
-    $insertData = DB::table('contact_us')->insert($data);
-    return view('fruntend.common_pages.contactus')->with('alert', 'your enquiry has been submitted successfully We will contact you soon.');
-  }
+  //   $insertData = DB::table('contact_us')->insert($data);
+  //   return view('fruntend.common_pages.contactus')->with('alert', 'your enquiry has been submitted successfully We will contact you soon.');
+  // }
 
   public function web_login(Request $request)
   {

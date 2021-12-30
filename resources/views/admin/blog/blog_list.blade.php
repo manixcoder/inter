@@ -52,7 +52,7 @@
 					<tr>
 						<td>#{{ $key+1 }}</td>
 						<td>{{$value->blog_heading}}</td>
-						<td>{{ strip_tags($value->description) }}</td>
+						<td><?php echo $value->description ?></td>
 						<td>{{ $new_date }}</td>
 						<td>
 							<i class="box_img">
@@ -115,10 +115,6 @@
 </script>
 <script>
 	$(document).ready(function() {
-		$('#listblog_table').DataTable({
-			order: [
-				[2, "asc"]
-			]
-		});
+		$('#listblog_table').DataTable({order:[]});
 	});
 </script>

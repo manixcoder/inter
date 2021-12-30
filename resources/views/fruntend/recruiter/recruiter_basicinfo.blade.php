@@ -43,9 +43,9 @@
           <li>
             <a href="#profileTab_link1">About</a>
           </li>
-          <li>
+          <!-- <li>
             <a href="#profileTab_link2">My Posts</a>
-          </li>
+          </li> -->
           <li>
             <a href="#profileTab_link3">My Listings</a>
           </li>
@@ -159,20 +159,20 @@
                   <span style="display:none; color: red;" class="val_headquarters">Please enter headquarters.</span>
                 </div>
               </div>
-              <div class="col_grid12 ">
+              <!-- <div class="col_grid12 ">
                 <div class="form-group">
                   <label>Address</label>
                   <input type="text" name="address" id="address" placeholder="" class="form-control" value="{{ $recruiterInfo->address ?? ''}}" maxlength="200">
                   <span style="display:none; color: red;" class="val_address">Please enter address.</span>
                 </div>
-              </div>
-              <div class="col_grid6 ">
+              </div> -->
+              <!-- <div class="col_grid6 ">
                 <div class="form-group">
                   <label>Type</label>
                   <input type="text" name="type" id="type" placeholder="" class="form-control" value="{{ $recruiterInfo->type ?? ''}}" maxlength="100">
                   <span style="display:none; color: red;" class="val_type">Please enter type.</span>
                 </div>
-              </div>
+              </div> -->
               <div class="col_grid6 ">
                 <div class="form-group">
                   <label>Founded</label>

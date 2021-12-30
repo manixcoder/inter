@@ -33,9 +33,9 @@
             <li class="active">
               <a href="#profileTab_link1">About</a>
             </li>
-            <li>
+            <!-- <li>
               <a href="#profileTab_link2">My Posts</a>
-            </li>
+            </li> -->
             <li>
               <a href="#profileTab_link3">My Listings</a>
             </li>

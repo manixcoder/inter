@@ -17,14 +17,14 @@ class SocialAuthLinkedinController extends Controller
     public function loginUsinglinkedin()
     {
         //dd("Hello Here");
-        return Socialite::driver('linkedin')->redirect();
+        return Socialite::driver('linkedin')->scopes(['r_emailaddress', 'r_liteprofile', 'w_member_social'])->redirect();
     }
 
     public function callbackFromLinkedin()
     {
         try {
             $linkdinUser = Socialite::driver('linkedin')->stateless()->user();
-           // dd($linkdinUser);
+            dd($linkdinUser);
             $existUser = User::where('email', $linkdinUser->email)->first();
             if ($existUser) {
                 Auth::loginUsingId($existUser->id);
@@ -37,14 +37,15 @@ class SocialAuthLinkedinController extends Controller
                 $user->users_role = '2';
                 $user->save();
                 Auth::loginUsingId($user->id);
-            if (Auth::user()->users_role === '3') {
-                return redirect('/recruiter-dashboard');
-            } elseif (Auth::user()->users_role === '2') {
-                return redirect('/student-dashboard');
-            }
+                if (Auth::user()->users_role === '3') {
+                    return redirect('/recruiter-dashboard');
+                } elseif (Auth::user()->users_role === '2') {
+                    return redirect('/student-dashboard');
+                }
             }
             return redirect()->to('/web-login');
         } catch (Exception $e) {
+            return redirect()->to('/web-login');
             return 'error';
         }
     }

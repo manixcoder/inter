@@ -57,6 +57,9 @@ class JobConroller extends Controller
 
   public function create(Request $request)
   {
+  //   $this->validate($request, [
+  //     'quantity'=> 'required',
+  // ]);
     // dd($request->offer);
     if ($files = $request->logo) {
       $destinationPath = public_path('/uploads/');
@@ -119,10 +122,10 @@ class JobConroller extends Controller
   {
     $Data = DB::table('jobs as jo')
       ->join('users as us', 'jo.user_id', '=', 'us.id')
-      ->orderBy('jo.id', 'ASC')
+      ->orderBy('jo.id', 'DESC')
       ->select('jo.*', 'us.profile_image', 'us.org_image')
-      ->paginate(10);
-    //->get();
+     // ->paginate(10);
+    ->get();
     //$Data = app('App\Jobs')->orderBy('id', 'Desc')->get();
     $DataCount = app('App\Jobs')->count();
 

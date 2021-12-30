@@ -40,7 +40,10 @@ class BlogController extends Controller
     $DataCount = app('App\Blog')->count();
 
     $data['content'] = 'admin.blog.blog_list';
-    return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount' => $DataCount]);
+    return view('layouts.content', compact('data'))->with([
+      'Data' => $Data, 
+      'DataCount' => $DataCount
+    ]);
   }
 
   public function delete($id)

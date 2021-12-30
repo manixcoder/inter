@@ -27,15 +27,17 @@
                <li><a href="https://www.linkedin.com/company/the-internify/ "><img src="{{ asset('public/assets/images/c_linkedin.png')}}" alt="icon"></a></li>
              </ul>
            </div>
-
-
-           @if (isset($alert))
+           @if(Session::has('status'))
+                    <div class="alert alert-{{ Session::get('status') }}">
+                        <i class="fa fa-building-o" aria-hidden="true"></i> {{ Session::get('message') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                    </div>
+                    @endif
+           @if (isset($message))
            <div class="alert alert-success" style="color:white">
-             <p>{{$alert ?? ''}}</p>
+             <p>{{$message ?? ''}}</p>
            </div>
            @endif
-
-
            <div class="col_grid7">
              <div class="adressMap_sec pull-right">
                <form class="fw" action="{{ url('add_contactus') }}" method="POST" enctype="multipart/form-data">
@@ -82,7 +84,6 @@
  </div>
  <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
  <script src="{{ asset('public/assets/web_assets/js/commen-hd.js')}}"></script>
- <script src="http://code.jquery.com/jquery-1.5.js"></script>
  <script type="text/javascript">
     CKEDITOR.replace('message');
   </script>
