@@ -108,9 +108,9 @@
           <li>
             <a href="{{url('student-profile-basic-info')}}" class="active">My Details</a>
           </li>
-          <li>
+          <!-- <li>
             <a href="{{url('student-posts')}}">My Posts</a>
-          </li>
+          </li> -->
           <li>
             <a href="{{url('student-applications')}}">My Applications</a>
           </li>
@@ -219,7 +219,7 @@
                   <div class="col_grid12 ">
                     <div class="form-group">
                       <label>School Name</label>
-                      <input type="text" value="{{$ed->school_name}}" placeholder="School Name" maxlength="200" class="form-control" readonly>
+                      <input type="text" value="{{$ed->school_name}}"  maxlength="200" class="form-control" readonly>
                     </div>
                   </div>
 
@@ -283,7 +283,7 @@
                   <div class="col_grid6">
                     <div class="form-group">
                       <label>School Name</label>
-                      <input type="text" name="school_name" value="{{$ed->school_name}}" placeholder="BSc in Cyber Security" class="form-control" required />
+                      <input type="text" name="school_name" value="{{$ed->school_name}}"  class="form-control" required />
                       <input type="hidden" name="id" value="{{$ed->id}}" />
                     </div>
                   </div>
@@ -387,7 +387,7 @@
                           </div>
                           <div class="col_grid6 ">
                             <div class="form-group">
-                              <label> From</label>
+                              <label>From</label>
                               <input type="date" name="duration_from" value="{{ $exp->duration_from }}" class="form-control" required />
                             </div>
                           </div>
@@ -733,19 +733,19 @@
             <div class="col_grid6">
               <div class="form-group">
                 <label>School Name</label>
-                <input type="text" name="school_name" placeholder="Enter School Name" maxlength="200" class="form-control" required />
+                <input type="text" name="school_name"  maxlength="200" class="form-control" required />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Course</label>
-                <input type="text" name="technology" placeholder="Enter Course name" class="form-control" maxlength="200" required />
+                <input type="text" name="technology"  class="form-control" maxlength="200" required />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Percentage</label>
-                <input type="text" name="percentage" placeholder="percentage" class="form-control" maxlength="200" required />
+                <input type="text" name="percentage"  class="form-control" maxlength="200" required />
               </div>
             </div>
             <div class="col_grid6 ">
@@ -780,13 +780,13 @@
             <div class="col_grid6">
               <div class="form-group">
                 <label>Company Name</label>
-                <input type="text" name="company_name" placeholder="Enter Company Name" maxlength="200" class="form-control" required />
+                <input type="text" name="company_name"  maxlength="200" class="form-control" required />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Job Type</label>
-                <input type="text" name="profile_type" placeholder="Enter Job Type" maxlength="200" class="form-control" required />
+                <input type="text" name="profile_type"  maxlength="200" class="form-control" required />
               </div>
             </div>
             <div class="col_grid6 ">

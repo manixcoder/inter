@@ -110,9 +110,9 @@
           <li>
             <a href="{{url('student-profile-basic-info')}}">My Details</a>
           </li>
-          <li>
+          <!-- <li>
             <a href="{{url('student-posts')}}">My Posts</a>
-          </li>
+          </li> -->
           <li>
             <a href="{{url('student-applications')}}" class="active">My Applications</a>
           </li>

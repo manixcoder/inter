@@ -43,7 +43,7 @@ class StudentDashboardController extends Controller
     } else {
       $SearchData = '';
     }
-    return view('fruntend.student.dashboard')->with([
+    return view('fruntend.student.dashboard')->with([ 
       'OrgData' => $OrgData,
       'SearchData' => $SearchData,
       'userRole' => $userRole

@@ -86,9 +86,9 @@
           <li>
             <a href="#profileTab_Details1">My Details</a>
           </li>
-          <li>
+          <!-- <li>
             <a href="#profileTab_Posts2">My Posts</a>
-          </li>
+          </li> -->
           <li>
             <a href="#profileTab_Applications3">My Applications</a>
           </li>

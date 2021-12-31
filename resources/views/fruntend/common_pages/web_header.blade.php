@@ -23,16 +23,16 @@
 </head>
 
 <body class="lightwht_bg">
-@if (!Auth::guest())
-@php
-$userRole = Auth::user()->users_role;
-//$userRole = Session::get('userRole');
-//$id = Session::get('gorgID');
-$id = Auth::user()->id;
-$OrgData = DB::table('users')->where('id', $id)->first();
-//dd($OrgData);
-$todaysdate = date('Y-m-d').' 00:00:00';
-@endphp
+  @if (!Auth::guest())
+  @php
+  $userRole = Auth::user()->users_role;
+  //$userRole = Session::get('userRole');
+  //$id = Session::get('gorgID');
+  $id = Auth::user()->id;
+  $OrgData = DB::table('users')->where('id', $id)->first();
+  //dd($OrgData);
+  $todaysdate = date('Y-m-d').' 00:00:00';
+  @endphp
   <header class="header_sec flow2_header fw">
     <div class="lgcontainer">
       <div class="innerrow">
@@ -49,7 +49,7 @@ $todaysdate = date('Y-m-d').' 00:00:00';
               <span></span>
               <span></span>
             </div>
-           
+
             @if(Auth::user()->users_role == 2)
             <ul class="menu_right">
               <li class="{{ request()->is('student-dashboard') ? 'active' : '' }}">
@@ -92,7 +92,7 @@ $todaysdate = date('Y-m-d').' 00:00:00';
             </ul>
             @endif
             <div class="login_user">
-              <a class="user_dropdown" href="#" >
+              <a class="user_dropdown" href="#">
                 <i>
                   @if(Auth::user()->profile_image)
                   <img src="{{ URL::asset('/public/uploads/') }}/{{ Auth::user()->profile_image }}" alt="img">
@@ -105,14 +105,22 @@ $todaysdate = date('Y-m-d').' 00:00:00';
               @if(Auth::user()->users_role == 2)
               <ul class="userdrop_down">
                 <li class="{{ request()->is('student-dashboard') ? 'active' : '' }}">
-                  <a href="{{url('student-dashboard')}}" class="username">{{ Auth::user()->name}}
-                    <span>{{ Auth::user()->email}}</span></a>
+                  <a href="{{url('student-dashboard')}}" class="username">
+                    {{ Auth::user()->name}}
+                    <span>
+                      {{ Auth::user()->email}}
+                    </span>
+                  </a>
                 </li>
                 <li class="{{ request()->is('student_setting') ? 'active' : '' }}">
-                  <a href="{{url('student_setting')}}">Settings</a>
+                  <a href="{{url('student_setting')}}">
+                    Settings
+                  </a>
                 </li>
                 <li class="{{ request()->is('student_change_password') ? 'active' : '' }}">
-                  <a href="{{url('student_change_password')}}">Change Password</a>
+                  <a href="{{url('student_change_password')}}">
+                    Change Password
+                  </a>
                 </li>
                 <li>
                   <a href="{{ url('/logout') }}" onClick="event.preventDefault();  document.getElementById('logout-form').submit();">Logout</a>
@@ -138,7 +146,7 @@ $todaysdate = date('Y-m-d').' 00:00:00';
                 </li>
               </ul>
               @endif
-             
+
             </div>
           </div>
         </div>
@@ -165,7 +173,7 @@ $todaysdate = date('Y-m-d').' 00:00:00';
                 <img src="http://localhost/internify/public/assets/images/header-logo.svg" alt="logo">
                 <img src="http://localhost/internify/public/assets/images/logo.svg" alt="wht-logo" class="wth-logo-hide">
               </a>
-              
+
             </div>
             <div class="right_sec col_grid4 text-right menu_link">
               <li><a href="http://localhost/internify/web-login">Login</a></li>
@@ -177,4 +185,4 @@ $todaysdate = date('Y-m-d').' 00:00:00';
     </div>
   </header>
 
-              @endif
+  @endif

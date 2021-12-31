@@ -91,7 +91,7 @@
             <div class="userTablink fw">
               <ul class="userTablink_cont fw">
                 <li><a href="{{ url('student-profile-basic-info') }}">View Profile</a></li>
-                <li><a href="{{ url('student-posts') }}">My Posts</a></li>
+                <!-- <li><a href="{{ url('student-posts') }}">My Posts</a></li> -->
                 <li><a href="{{ url('student-applications') }}">My Applications</a></li>
                 <li><a href="{{ URL::to('/message')}}" target="_blank">Messages</a></li>
 

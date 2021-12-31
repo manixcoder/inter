@@ -33,6 +33,12 @@ class StudentregisterController extends Controller
 	public function student_register_step_one(Request $request)
 	{
 		if ($request->setep_one == 'setep_one') {
+			$userInComp = DB::table('users')->where('email', '')->get();
+			if ($userInComp) {
+				foreach ($userInComp as $user) {
+					DB::table('users')->where('id', $user->id)->delete();
+				}
+			}
 			$studentRegisterOne = app('App\User')->insertGetId([
 				'name' => $request->name,
 				'users_role' => 2,
@@ -170,9 +176,8 @@ class StudentregisterController extends Controller
 		}
 		if (Auth::check()) {
 			return view('fruntend.student_job_search')->with(['job_title' => $job_title, 'location' => $location, 'OrgData' => $OrgData, 'jobsData' => $jobsData, 'locationData' => $locationData, 'titleData' => $titleData]);
-		}else{
-			return redirect('/student-login')->with(array('success_msg'=>'correct Updated.'));
+		} else {
+			return redirect('/student-login')->with(array('success_msg' => 'correct Updated.'));
 		}
-		
 	}
 }

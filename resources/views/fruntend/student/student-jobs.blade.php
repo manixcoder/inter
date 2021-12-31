@@ -101,16 +101,15 @@
           <div class="innerrow">
             <div class="col_grid5 rightmap_icon">
               <div class="form_group">
-                <!--select name="location" class="form-contorl" id="selectbox2" required>
+                <select name="location" class="form-contorl" id="selectbox2" required>
                   <option value="">Select Location</option>
                   @foreach($locationData as $ld)
-                  <option value="<?php // echo $ld->location 
-                                  ?>"><?php // echo $ld->location 
-                                                                  ?></option>
+                  <option value="<?php  echo $ld->location; ?>">
+                                  <?php  echo $ld->location; ?></option>
                   @endforeach
 
-                </select-->
-                <select name="location" class="form-contorl" id="location" required>
+                </select>
+                <!-- <select name="location" class="form-contorl" id="location" required>
                   <option value="">Select Location</option>
                   <option value="Mumbai">Mumbai</option>
                   <option value="Delhi">Delhi</option>
@@ -119,25 +118,23 @@
                   <option value="Mohali">Mohali</option>
                   <option value="Chandigarh">Chandigarh</option>
                   <option value="Hydrabad">Hydrabad</option>
-                </select>
+                </select> -->
               </div>
             </div>
             <div class="col_grid4">
               <div class="form_group">
-                <!--select name="job_title" class="form-contorl" id="selectbox1" required>
+                <select name="job_title" class="form-contorl" id="selectbox1" required>
                   <option value="">Select Job Title</option>
                   @foreach($titleData as $td)
-                  <option value="<?php // echo $td->job_title 
-                                  ?>"><?php // echo $td->job_title 
-                                                                  ?></option>
+                  <option value="<?php echo $td->job_title; ?>"><?php  echo $td->job_title;?></option>
                   @endforeach
-                </select-->
-                <select name="job_title" class="form-contorl" id="job_title" required>
+                </select>
+                <!-- select name="job_title" class="form-contorl" id="job_title" required>
                   <option value="">Select Job Title</option>
                   <option value="Sales & Marketing Executive">Sales & Marketing Executive</option>
                   <option value="Front-end Developer">Front-end Developer</option>
                   <option value="Financial Analyst">Financial Analyst</option>
-                </select>
+                </select -->
               </div>
             </div>
             <div class="col_grid3  ">

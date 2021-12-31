@@ -45,7 +45,7 @@
       <div class="lgcontainer">
         <div class="innerrow">
           <div class="col_grid3">
-            <a href="./flow2_home.html" class="logo-flow2">
+            <a href="{{ URL::to('/') }}" class="logo-flow2">
               <img src="{{ asset('public/assets/images/logo.svg')}}" alt="logo-img" />
               <img class="hidelogo_header" src="{{ asset('public/assets/images/header-logo.svg')}}" alt="logo-img" />
             </a>

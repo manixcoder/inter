@@ -8981,3 +8981,35 @@ small.shareclosebtn img {
 .newPostJob_pg .form-group.newform-control select.s-hidden[name="currency"] {
     display: none;
 }
+
+
+
+
+
+.personal_DtlPop 
+ .select {
+    float: left;
+    width: 100%;
+    position: relative;
+}
+.personal_DtlPop .select .styledSelect {
+    position: absolute;
+    width: 100%;
+    text-align: left;
+    top: 0;
+    left: 0;
+    z-index: 99;
+}
+.personal_DtlPop .select  ul.options {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    text-align: left;
+    padding-top: 66px;
+    z-index: 9;
+}
+.personal_DtlPop .select ul li {
+    padding: 15px;
+    background: #f5f5f5;
+    border: 1px solid #eee;
+}

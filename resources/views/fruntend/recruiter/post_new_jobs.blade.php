@@ -119,7 +119,7 @@
                         <option value="Front-end Developer">Front-end Developer</option>
                         <option value="Financial Analyst">Financial Analyst</option>
                       </select -->
-                  <input type="text" name="job_title" class="form-contorl" id="job_title" required>
+                  <input type="text" name="job_title" class="form-control" id="job_title" required>
                 </div>
               </div>
               <div class="col_grid6 ">
@@ -135,7 +135,7 @@
                         <option value="Chandigarh">Chandigarh</option>
                         <option value="Hydrabad">Hydrabad</option>
                       </select> -->
-                  <input type="text" name="location" class="form-contorl" id="location" required>
+                  <input type="text" name="location" class="form-control" id="location" required>
                 </div>
               </div>
 
@@ -174,7 +174,7 @@
                     <i>
                       <img src="{{ asset('public/assets/images/add.png') }}" alt="img">
                     </i>
-                    Add More Offer Point
+                    Add More Offer
                   </span>
                 </div>
               </div>

@@ -50,8 +50,8 @@
     <div class="lgcontainer">
       <div class="innerrow">
         <div class="col_grid3">
-          <a href="./home-pg.html" class="logo-flow2">
-            <img src="images/logo.svg" alt="logo-img" />
+          <a href="{{ URL::to('/') }}" class="logo-flow2">
+            <img src="{{ asset('public/assets/images/logo.svg') }}" alt="logo-img" />
             <img class="hidelogo_header" src="{{ asset('public/assets/images/header-logo.svg')}}" alt="logo-img" />
           </a>
         </div>
@@ -107,11 +107,11 @@
               </ul>
             </div>
             @if(Session::has('status'))
-                    <div class="alert alert-{{ Session::get('status') }}">
-                        <i class="fa fa-building-o" aria-hidden="true"></i> {{ Session::get('message') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-                    </div>
-                    @endif
+            <div class="alert alert-{{ Session::get('status') }}">
+              <i class="fa fa-building-o" aria-hidden="true"></i> {{ Session::get('message') }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+            @endif
             <div class="col_grid7">
               <div class="adressMap_sec pull-right">
                 <form class="fw" action="{{ url('add_contactus') }}" method="POST" enctype="multipart/form-data">
@@ -141,7 +141,7 @@
                   </div>
                   <label>Write Message <span id="remainingC">(0/500)</span></label>
                   <div class="form-group col_grid12 write-message">
-                    
+
                     <textarea class="form-control" name="message" id="message" placeholder="Please provide any relevant details or expiation" required="" maxlength="500"></textarea>
                     <!-- <span style="display:none; color: red;" class="validate_msg">Please enter message.</span> -->
                   </div>

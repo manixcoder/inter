@@ -362,14 +362,8 @@ class HomeController extends Controller
   {
 
     if ($request->setep_one == 'setep_one') {
-      DB::table('users')->where('name','=', '')->orWhere('email', '=', '')->delete();
-      // $usersdata = DB::table('users')->where('name', $request->name)->orderBy('id', 'Desc')->get();
-      // $userscheck = app('App\User')->where('name', $request->name)->first();
-      // if ($userscheck == true) {
-      //   // $message = 'Name already taken.!';
-      //   // return view('fruntend.recruiter_register.recruiter_register_step_one')->with(['message' => $message]);
-      //   return view('fruntend.recruiter_register.recruiter_register_step_one')->with(['error' => 'name alredy exist', 'insertid' => $userscheck->id]);
-      // } else {
+      
+      
         $recruiterRegisterOne = app('App\User')->insertGetId([
           'name' => $request->name, 
           'users_role' => 3, 
