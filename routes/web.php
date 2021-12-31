@@ -208,8 +208,8 @@ Route::any('delete-experience/{id}', 'StudentDashboardController@deleteExperienc
 //Here 
 Route::get('student-profile-basic-info', 'StudentDashboardController@basic_info');
 Route::any('student-profiles/{id}', 'StudentDashboardController@studentProfiles');
-Route::any('student-reject/{id}/{r_id}', 'StudentDashboardController@studentReject');
-Route::any('student-selected/{id}/{r_id}', 'StudentDashboardController@studentSelected');
+Route::any('student-reject/{id}/{r_id}/{j_id}', 'StudentDashboardController@studentReject');
+Route::any('student-selected/{id}/{r_id}/{j_id}', 'StudentDashboardController@studentSelected');
 Route::get('student-posts', 'StudentDashboardController@student_posts');
 
 Route::get('student-applications', 'StudentDashboardController@student_applications');

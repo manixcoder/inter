@@ -112,13 +112,17 @@ class StudentDashboardController extends Controller
     ]);
   }
 
-  public function studentReject(Request $request, $id, $r_id)
+  public function studentReject(Request $request, $id, $r_id, $j_id)
   {
     $recuratorData = DB::table('users')->where('id', $r_id)->first();
     $studentData = DB::table('users')->where('id', $id)->first();
+    $jobData = DB::table('jobs')->where('id', $j_id)->first();
+    $updateData = DB::table('job_applied')->where('job_id', $j_id)->where('student_id',$id)->update([
+      'status'=>'3'
+    ]);
     // dd($recuratorData);
     $to = $studentData->email;
-    $INSERTJOBNAMEHERE = '';
+    $INSERTJOBNAMEHERE = $jobData->job_title;
     $subject = "Rejection Mail";
 
     $message = "
@@ -127,7 +131,10 @@ class StudentDashboardController extends Controller
           <body>
             <p> Dear " . $studentData->name . " </p>
             <p>I hope this email finds you well.</p> 
-            <p>Thank you for taking the time to apply to our " . $INSERTJOBNAMEHERE . " position. We wanted to let you know that we have chosen to move forward with a different candidate for our position.</p> 
+            <p>
+            Thank you for taking the time to apply to our " . $INSERTJOBNAMEHERE . " position. 
+            We wanted to let you know that we have chosen to move forward with a different candidate for our position.
+            </p> 
             <p>Our team was impressed by your outstanding accomplishments and we think you could be a good fit for other future openings and we will reach out again if we find a good match.</p>
             <p>We wish you all the best in your job search and future professional endeavours.</p>
             <p> Best,<br> " . $recuratorData->org_name . " </p>     
@@ -153,14 +160,18 @@ class StudentDashboardController extends Controller
     return redirect()->back()->with(array('status' => 'success', 'message' => 'Rejected successfully.'));
   }
 
-  public function studentSelected(Request $request, $id, $r_id)
+  public function studentSelected(Request $request, $id, $r_id, $j_id)
   {
     $recuratorData = DB::table('users')->where('id', $r_id)->first();
     $studentData = DB::table('users')->where('id', $id)->first();
+    $jobData = DB::table('jobs')->where('id', $j_id)->first();
+    $updateData = DB::table('job_applied')->where('job_id', $j_id)->where('student_id',$id)->update([
+      'status'=>'2'
+    ]);
     // dd($recuratorData);
     $to = $studentData->email;
-    $INSERTJOBNAMEHERE = '';
-    $INSERTCOMPANYNAME = '';
+    $INSERTJOBNAMEHERE = $jobData->job_title;
+    $INSERTCOMPANYNAME = $recuratorData->org_name;
     $subject = "Selection mail";
     $message = "
     <html>
@@ -169,7 +180,7 @@ class StudentDashboardController extends Controller
     <body>
     <p> Dear " . $studentData->name . " </p>
     <p>I hope this email finds you well.</p> 
-    <p>We are delighted to inform you that we have shortlisted your application for our " . $INSERTJOBNAMEHERE . "position. Your remarkable track record and outstanding achievements have amazed our team and we’d like to hop on a quick call with you to discuss your possible future with us at " . $INSERTCOMPANYNAME . ".</p>
+    <p>We are delighted to inform you that we have shortlisted your application for our " . $INSERTJOBNAMEHERE . "position. Your remarkable track record and outstanding achievements have amazed our team and we’d like to hope on a quick call with you to discuss your possible future with us at " . $INSERTCOMPANYNAME . ".</p>
     <p>We hope you can consider.</p>
     <p>Thank you for your cooperation.</p>
     <p>Best,
