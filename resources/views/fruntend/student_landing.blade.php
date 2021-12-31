@@ -131,7 +131,6 @@
                         <option value="<?php  echo $td->job_title; ?>"><?php  echo $td->job_title; ?></option>
                         @endforeach
                       </select>
-
                       <!-- select name="job_title" class="form-contorl" id="selectbox2">
                         <option value="">Select Job Title</option>
                         <option value="Sales & Marketing Executive">Sales & Marketing Executive</option>

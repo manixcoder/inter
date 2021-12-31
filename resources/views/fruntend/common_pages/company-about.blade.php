@@ -16,11 +16,7 @@
     <header class="header_sec flow2_header fw">
         <div class="lgcontainer">
             @include('fruntend.student.inc.top-menu')
-            <?php
-            // echo "<pre>";
-            // print_r($OrgData);
-            // die;
-            ?>
+
         </div>
     </header>
     <div class="body_wht-inners ">
@@ -76,8 +72,12 @@
                     <div class="comProInfo_cont fw">
                         <div class="innerrow">
                             <div class="col_grid9">
-                                <h4 class="font24Text clrBlack fontfmlybold">{{ $OrgData->org_name }}</h4>
-                                <p class="font20Text clrGray">{{ $OrgData->address }}</p>
+                                <h4 class="font24Text clrBlack fontfmlybold">
+                                    {{ $OrgData->org_name }}
+                                </h4>
+                                <p class="font20Text clrGray">
+                                    {{ $OrgData->address }}
+                                </p>
                                 <p class="font24Text clrBlack">
                                     <span class="clrGray">Posted by :</span>
                                     <span>
@@ -106,8 +106,12 @@
                         </div>
                     </div>
                     <div class="qverview_sec fw">
-                        <h3 class="font36text clrBlack semiboldfont_fmly">Overview</h3>
-                        <p class="grytextPra">{{ $OrgData->about }}</p>
+                        <h3 class="font36text clrBlack semiboldfont_fmly">
+                            Overview
+                        </h3>
+                        <p class="grytextPra">
+                            {{ $OrgData->requirter_overview }}
+                        </p>
                         <div class="address_Cont fw">
                             <p class="font20Text">
                                 <a class="blueLink_text" href="{{ $OrgData->website }}">
@@ -122,7 +126,7 @@
                         </div>
                     </div>
                     <div class="qverview_sec fw">
-                        <h3 class="font36text clrBlack semiboldfont_fmly ">Specialties</h3>
+                        <h3 class="font36text clrBlack semiboldfont_fmly ">Company Vision</h3>
                         <p class="grytextPra">{{ $OrgData->specialties }}</p>
                     </div>
                 </div>

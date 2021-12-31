@@ -104,8 +104,8 @@
                 <select name="location" class="form-contorl" id="selectbox2" required>
                   <option value="">Select Location</option>
                   @foreach($locationData as $ld)
-                  <option value="<?php  echo $ld->location; ?>">
-                                  <?php  echo $ld->location; ?></option>
+                  <option value="<?php echo $ld->location; ?>">
+                    <?php echo $ld->location; ?></option>
                   @endforeach
 
                 </select>
@@ -126,7 +126,7 @@
                 <select name="job_title" class="form-contorl" id="selectbox1" required>
                   <option value="">Select Job Title</option>
                   @foreach($titleData as $td)
-                  <option value="<?php echo $td->job_title; ?>"><?php  echo $td->job_title;?></option>
+                  <option value="<?php echo $td->job_title; ?>"><?php echo $td->job_title; ?></option>
                   @endforeach
                 </select>
                 <!-- select name="job_title" class="form-contorl" id="job_title" required>
@@ -151,9 +151,7 @@
       <div class="jobsDetailBox fw">
         <div class="profile_sec fw">
           <div class="compnayBoxImg">
-            @if($appl->users_role =='3')
-            <img src="{{ asset('public/uploads/'.$appl->org_image)}}" alt="images">
-            @elseif($appl->users_role =='2')
+            @if($appl->profile_image !='')
             <img src="{{ asset('public/uploads/'.$appl->profile_image)}}" alt="images">
             @else
             <img src="{{ asset('public/uploads/placeholder.png')}}" alt="images">
@@ -187,10 +185,9 @@
           <div class="innerrow">
             <div class="col_grid9">
               <ul>
-                @foreach(unserialize($appl->offer) as $offer)
+                @foreach(unserialize($appl->offer) as $key=> $offer)
                 <li>{{ $offer }}</li>
                 @endforeach
-
               </ul>
             </div>
             <div class="col_grid3">
@@ -594,7 +591,7 @@
               </div>
             </div>
             @endif
-            <div class="innerrow">              
+            <div class="innerrow">
             </div>
           </div>
           <div class="col_grid6 text-center">

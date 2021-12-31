@@ -17,7 +17,7 @@ use Response;
 use DB;
 use Hash;
 use Auth;
-use User;
+use App\User;
 use Carbon;
 
 class RecruiterwebController extends Controller
@@ -46,7 +46,7 @@ class RecruiterwebController extends Controller
   {
     $userRole = Session::get('userRole');
     $id = Session::get('gorgID');
-    $OrgData = DB::table('users')->where('id', $id)->first(); 
+    $OrgData = DB::table('users')->where('id', $id)->first();
     $todaysdate = date('Y-m-d') . ' 00:00:00';
     $posts = app('App\Posts')->orderBy('id', 'DESC')->get();
     return view('fruntend.recruiter.dashboard')->with([
@@ -72,9 +72,9 @@ class RecruiterwebController extends Controller
   public function unfollow(Request $request, $id, $by_id)
   {
     $check_follow = DB::table('followers')
-    ->where('user_id', $id)
-    ->where('follow_id', $by_id)
-    ->first();
+      ->where('user_id', $id)
+      ->where('follow_id', $by_id)
+      ->first();
     if ($check_follow) {
       DB::table('followers')->delete($check_follow->id);
       return redirect('recruiter-people')->with('status', 'Unfollow successfully !');
@@ -85,33 +85,25 @@ class RecruiterwebController extends Controller
   {
     $editData = DB::table('users')->where('id', $request->edit_id)->first();
     if (isset($editData)) {
-      // if ($files = $request->org_image) {
-      //   $destinationPath = public_path('/uploads/');
-      //   $org_image = date('YmdHis') . "-" . $files->getClientOriginalName();
-      //   $path =  $files->move($destinationPath, $org_image);
-      //   $update = DB::table('users')->where('id', $request->edit_id)
-      //     ->update([
-      //       'org_image' => $org_image,
-      //     ]); 
-      // }
-      // if ($files = $request->profile_image) {
-      //   $destinationPath = public_path('/uploads/');
-      //   $profile_image = date('YmdHis') . "-" . $files->getClientOriginalName();
-      //   $path =  $files->move($destinationPath, $profile_image);
-      //   $update = DB::table('users')->where('id', $request->edit_id)
-      //     ->update([
-      //       'profile_image' => $profile_image,
-      //     ]);
-      // }
-      $update = DB::table('users')
-        ->where('id', $request->edit_id)
-        ->update([
-          'name' => $request->name,
+      $this->validate($request, [
+        'phone'    => 'required|unique:users,phone,' . $request->edit_id,
+        'email'     => 'required|unique:users,email,' . $request->edit_id,
+      ]);
+      User::where('id', $request->edit_id)->update([
+        'name' => $request->name,
           'email' => $request->email,
           'phone' => $request->phone,
           'designation' => $request->designation,
-          'updated_at' => date("Y-m-d H:i:s")
-        ]);
+      ]);
+      // $update = DB::table('users')
+      //   ->where('id', $request->edit_id)
+      //   ->update([
+      //     'name' => $request->name,
+      //     'email' => $request->email,
+      //     'phone' => $request->phone,
+      //     'designation' => $request->designation,
+      //     'updated_at' => date("Y-m-d H:i:s")
+      //   ]);
     }
     return back()->with('status', 'update successfully !');
   }

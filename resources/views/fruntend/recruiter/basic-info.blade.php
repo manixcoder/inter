@@ -137,16 +137,12 @@
                         <div class="form-group">
                           <label>Gender</label>
                           <select name="gender" class="form-control" id="selectbox1">
-
-
-                            @if($OrgData->gender==0)
-                            <option value="0">Male</option>
-                            <option value="1">Female</option>
-                            @endif
-                            @if($OrgData->gender==1)
-                            <option value="1">Female</option>
-                            <option value="0">Male</option>
-                            @endif
+                            
+                            <option value="0" {{ $OrgData->gender==0 ? 'selected' : '' }}>Male</option>
+                            <option value="1" {{ $OrgData->gender==1 ? 'selected' : '' }}>Female</option>
+                            <option value="2" {{ $OrgData->gender==2 ? 'selected' : '' }}>Non-Binary</option>
+                           
+                           
 
                           </select>
                         </div>

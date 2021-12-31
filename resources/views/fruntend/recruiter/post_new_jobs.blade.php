@@ -88,14 +88,6 @@
               <!--p>Recruiter will contact you through <br />your email or mobile number.</p -->
             </div>
           </div>
-          <?php
-          // sleep(10);
-          ?>
-          <!-- <script type="text/javascript">
-            window.location = "{{ URL::to('/recruiter-listings') }}";//here double curly bracket
-            </script> -->
-
-
           @endif
 
           <form action="{{ URL::to('add-job')}}" method="POST" id="FormValidation" name="postJob" enctype="multipart/form-data">

@@ -41,11 +41,7 @@
     </div>
     @endif
 
-    <?php
-    // echo "<pre>";
-    // print_r($appl);
-    // die;
-    ?>
+    
     <div class="lgcontainer">
       <div class="boxDetailbg fw">
         <figure>
@@ -123,13 +119,13 @@
                   </a>
                 </span>
               </div>
-              <div class="col_grid6 text-right checkbox_notify">
+              <!-- <div class="col_grid6 text-right checkbox_notify">
                 <div class="custominputBox">
                   <input type="checkbox" class="inputCheck">
                   <span></span>
                 </div>
                 <span>Notify me for similar jobs</span>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

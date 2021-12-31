@@ -125,7 +125,9 @@
           <div class="popupWapper">
             <div class="modal cPassword_update_popup" id="cPassword_update">
               <div class="close fw">
-                <a class="btn close-modal" data-modal="#cPassword_update" href="#"><img src="{{ asset('public/assets/images/images/close.png' )}}" alt="icon"></a>
+                <a class="btn close-modal" data-modal="#cPassword_update" href="#">
+                  <img src="{{ asset('public/assets/images/images/close.png' )}}" alt="icon">
+                </a>
               </div>
               <div class="content fw">
                 <div class="password_update_sec fw">

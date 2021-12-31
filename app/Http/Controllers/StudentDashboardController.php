@@ -22,7 +22,7 @@ use Hash;
 use Auth;
 use App\User;
 use Carbon;
-
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class StudentDashboardController extends Controller
 {
@@ -43,17 +43,19 @@ class StudentDashboardController extends Controller
     } else {
       $SearchData = '';
     }
-    return view('fruntend.student.dashboard')->with([ 
+    return view('fruntend.student.dashboard')->with([
       'OrgData' => $OrgData,
       'SearchData' => $SearchData,
       'userRole' => $userRole
     ]);
   }
-  public function deleteCourse($id){
+  public function deleteCourse($id)
+  {
     DB::table('education')->where('id', $id)->delete();
     return redirect()->back();
   }
-  public function deleteExperience($id){
+  public function deleteExperience($id)
+  {
     DB::table('experience')->where('id', $id)->delete();
     return redirect()->back();
   }
@@ -116,16 +118,28 @@ class StudentDashboardController extends Controller
     $studentData = DB::table('users')->where('id', $id)->first();
     // dd($recuratorData);
     $to = $studentData->email;
+    $INSERTJOBNAMEHERE = '';
     $subject = "Rejection Mail";
+
     $message = "
-    <html>
-        <head>
-        </head>
-        <body>
-        <p> Hi " . $studentData->name . " </p>     
-        <p> Your aplication is rejected form " . $recuratorData->org_name . " </p>     
-        </body>
-        </html>";
+        <html>
+          <head></head>
+          <body>
+            <p> Dear " . $studentData->name . " </p>
+            <p>I hope this email finds you well.</p> 
+            <p>Thank you for taking the time to apply to our " . $INSERTJOBNAMEHERE . " position. We wanted to let you know that we have chosen to move forward with a different candidate for our position.</p> 
+            <p>Our team was impressed by your outstanding accomplishments and we think you could be a good fit for other future openings and we will reach out again if we find a good match.</p>
+            <p>We wish you all the best in your job search and future professional endeavours.</p>
+            <p> Best,<br> " . $recuratorData->org_name . " </p>     
+          </body>
+       </html>";
+    // Dear INSERT STUDENT NAME HERE,
+    // I hope this email finds you well.
+    // Thank you for taking the time to apply to our INSERT JOB NAME HERE position. We wanted to let you know that we have chosen to move forward with a different candidate for our position.
+    // Our team was impressed by your outstanding accomplishments and we think you could be a good fit for other future openings and we will reach out again if we find a good match.
+    // We wish you all the best in your job search and future professional endeavours.
+    // Best,
+    // COMPANY NAME
 
     // Always set content-type when sending HTML email
     $headers = "MIME-Version: 1.0" . "\r\n";
@@ -145,16 +159,36 @@ class StudentDashboardController extends Controller
     $studentData = DB::table('users')->where('id', $id)->first();
     // dd($recuratorData);
     $to = $studentData->email;
+    $INSERTJOBNAMEHERE = '';
+    $INSERTCOMPANYNAME = '';
     $subject = "Selection mail";
     $message = "
     <html>
     <head>
     </head>
     <body>
-    <p> Hi " . $studentData->name . " </p> 
-    <p> Your aplication is rejected form " . $recuratorData->org_name . " </p> 
+    <p> Dear " . $studentData->name . " </p>
+    <p>I hope this email finds you well.</p> 
+    <p>We are delighted to inform you that we have shortlisted your application for our " . $INSERTJOBNAMEHERE . "position. Your remarkable track record and outstanding achievements have amazed our team and we’d like to hop on a quick call with you to discuss your possible future with us at " . $INSERTCOMPANYNAME . ".</p>
+    <p>We hope you can consider.</p>
+    <p>Thank you for your cooperation.</p>
+    <p>Best,
+    " . $recuratorData->org_name . "</p>
+   
     </body>
     </html>";
+    //     Dear INSERT STUDENT NAME HERE,
+
+    // I hope this email finds you well.
+
+    // We are delighted to inform you that we have shortlisted your application for our INSERT JOB NAME HERE position. Your remarkable track record and outstanding achievements have amazed our team and we’d like to hop on a quick call with you to discuss your possible future with us at INSERT COMPANY NAME.
+
+    // We hope you can consider.
+
+    // Thank you for your cooperation.
+
+    // Best,
+    // COMPANY NAME
 
     // Always set content-type when sending HTML email
     $headers = "MIME-Version: 1.0" . "\r\n";
@@ -217,14 +251,27 @@ class StudentDashboardController extends Controller
   }
   public function update_student_personal_details(Request $request)
   {
+    //dd($request->all());
     $id = Session::get('gorgID');
-    $update = DB::table('users')->where('id', $id)->update([
+    $id = Auth::user()->id;
+    $this->validate($request, [
+      'phone'    => 'required|unique:users,phone,' . $id,
+      'email'     => 'required|unique:users,email,' . $id,
+    ]);
+    User::where('id', Auth::user()->id)->update([
       'name' => $request->name,
       'email' => $request->email,
       'phone' => $request->phone,
       'dob' => $request->dob,
       'gender' => $request->gender,
     ]);
+    // $update = DB::table('users')->where('id', $id)->update([
+    //   'name' => $request->name,
+    //   'email' => $request->email,
+    //   'phone' => $request->phone,
+    //   'dob' => $request->dob,
+    //   'gender' => $request->gender,
+    // ]);
     return redirect()->back();
   }
   public function add_student_education(Request $request)
@@ -438,7 +485,7 @@ class StudentDashboardController extends Controller
     $update = DB::table('accomplishments')
       ->insert([
         'user_id' => $id,
-        'accomplishment_type'=>$request->accomplishment_type,
+        'accomplishment_type' => $request->accomplishment_type,
         'course_name' => $request->course_name,
         'awards' => $request->award,
         'test_scores' => $request->test_scores,
@@ -453,7 +500,7 @@ class StudentDashboardController extends Controller
   {
     $update = DB::table('accomplishments')->where('id', $request->id)
       ->update([
-        'accomplishment_type'=>$request->accomplishment_type,
+        'accomplishment_type' => $request->accomplishment_type,
         'course_name' => $request->course_name,
         'awards' => $request->award,
         'test_scores' => $request->test_scores,

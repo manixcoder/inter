@@ -84,9 +84,17 @@
               @endif
             </div>
             <div class="profile_publicDetail">
-              <h4 class="clrwht font36text  semiboldfont_fmly">{{$OrgData->name}}</h4>
-              <h4 class="clrwht font36text  semiboldfont_fmly"><a href="mailto:<?php echo $OrgData->email ?>">{{$OrgData->email}}</a></h4>
-              <h4 class="clrwht font36text  semiboldfont_fmly">{{$OrgData->phone}}</h4>
+              <h4 class="clrwht font36text  semiboldfont_fmly">
+                {{$OrgData->name}}
+              </h4>
+              <h4 class="clrwht font36text  semiboldfont_fmly">
+                <a href="mailto:<?php echo $OrgData->email ?>">
+                  {{$OrgData->email}}
+                </a>
+              </h4>
+              <h4 class="clrwht font36text  semiboldfont_fmly">
+                {{$OrgData->phone}}
+              </h4>
               <div class="progressbar_sec whtprogressBar fw">
                 <div class="progressbar_cont fw">
                   <span style="width: <?php echo $count; ?>%;"></span>
@@ -136,6 +144,9 @@
                         <div class="form-group">
                           <label>Email Address</label>
                           <input type="email" name="email" value="{{$OrgData->email}}" class="form-control" maxlength="30" size="100" required>
+                          @error('email')
+                          <small class="form-control-feedback">{{ $errors->first('email') }}</small>
+                          @enderror
                           <span class="inputcheck"><img src="{{ asset('public/assets/images/verified.png')}}" alt="icon"></span>
                         </div>
                       </div>
@@ -143,7 +154,9 @@
                         <div class="form-group">
                           <label>Mobile Number</label>
                           <input type="text" name="phone" value="{{$OrgData->phone}}" class="form-control" maxlength="10" minlength="10" size="10" required>
-
+                          @error('phone')
+                          <small class="form-control-feedback">{{ $errors->first('phone') }}</small>
+                          @enderror
                         </div>
                       </div>
                       <div class="col_grid6">
@@ -155,15 +168,10 @@
                       <div class="col_grid6 unlock_sec">
                         <div class="form-group">
                           <label>Gender</label>
-                          <select name="gender" class="form-control" id="selectbox1">
-                            @if($OrgData->gender==0)
-                            <option value="0">Male</option>
-                            <option value="1">Female</option>
-                            @endif
-                            @if($OrgData->gender==1)
-                            <option value="1">Female</option>
-                            <option value="0">Male</option>
-                            @endif
+                          <select name="gender" class="form-control" >
+                            <option value="0" {{ $OrgData->gender == '0' ? 'selected' : '' }}>Male</option>
+                            <option value="1" {{ $OrgData->gender == '1' ? 'selected' : '' }}>Female</option>
+                            <option value="2" {{ $OrgData->gender == '2' ? 'selected' : '' }}>Non-Binary</option>
                           </select>
                         </div>
                       </div>
@@ -219,7 +227,7 @@
                   <div class="col_grid12 ">
                     <div class="form-group">
                       <label>School Name</label>
-                      <input type="text" value="{{$ed->school_name}}"  maxlength="200" class="form-control" readonly>
+                      <input type="text" value="{{$ed->school_name}}" maxlength="200" class="form-control" readonly>
                     </div>
                   </div>
 
@@ -283,7 +291,7 @@
                   <div class="col_grid6">
                     <div class="form-group">
                       <label>School Name</label>
-                      <input type="text" name="school_name" value="{{$ed->school_name}}"  class="form-control" required />
+                      <input type="text" name="school_name" value="{{$ed->school_name}}" class="form-control" required />
                       <input type="hidden" name="id" value="{{$ed->id}}" />
                     </div>
                   </div>
@@ -316,7 +324,7 @@
         @endforeach
         <div class="fw educationSec aboutusBg smaeHeading paddTop0">
           <div class="fw aboutusBg_sec">
-            
+
             <div class="lgcontainer">
               <h3 href="javascript:void(0);" data-modal="#experience_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
                 Experience
@@ -640,19 +648,19 @@
                           <div class="col_grid6 ">
                             <div class="form-group">
                               <label>Award</label>
-                              <input type="text" value="{{$accom->awards}}" name="award" maxlength="200" class="form-control" required />
+                              <input type="text" value="{{$accom->awards}}" name="award" maxlength="200" class="form-control"  />
                             </div>
                           </div>
                           <div class="col_grid6 ">
                             <div class="form-group">
                               <label>Test Scores</label>
-                              <input type="text" value="{{$accom->test_scores}}" name="test_scores" maxlength="200" class="form-control" required />
+                              <input type="text" value="{{$accom->test_scores}}" name="test_scores" maxlength="200" class="form-control"  />
                             </div>
                           </div>
                           <div class="col_grid6 ">
                             <div class="form-group">
                               <label>Publications</label>
-                              <input type="text" value="{{$accom->publications}}" name="publications" maxlength="200" class="form-control" required />
+                              <input type="text" value="{{$accom->publications}}" name="publications" maxlength="200" class="form-control"  />
                             </div>
                           </div>
                         </div>
@@ -733,19 +741,19 @@
             <div class="col_grid6">
               <div class="form-group">
                 <label>School Name</label>
-                <input type="text" name="school_name"  maxlength="200" class="form-control" required />
+                <input type="text" name="school_name" maxlength="200" class="form-control" required />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Course</label>
-                <input type="text" name="technology"  class="form-control" maxlength="200" required />
+                <input type="text" name="technology" class="form-control" maxlength="200" required />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Percentage</label>
-                <input type="text" name="percentage"  class="form-control" maxlength="200" required />
+                <input type="text" name="percentage" class="form-control" maxlength="200" required />
               </div>
             </div>
             <div class="col_grid6 ">
@@ -780,13 +788,13 @@
             <div class="col_grid6">
               <div class="form-group">
                 <label>Company Name</label>
-                <input type="text" name="company_name"  maxlength="200" class="form-control" required />
+                <input type="text" name="company_name" maxlength="200" class="form-control" required />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Job Type</label>
-                <input type="text" name="profile_type"  maxlength="200" class="form-control" required />
+                <input type="text" name="profile_type" maxlength="200" class="form-control" required />
               </div>
             </div>
             <div class="col_grid6 ">
@@ -981,19 +989,19 @@
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Award</label>
-                <input type="text" name="award" maxlength="200" class="form-control" required />
+                <input type="text" name="award" maxlength="200" class="form-control"  />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Test Scores</label>
-                <input type="text" name="test_scores" maxlength="200" class="form-control" required />
+                <input type="text" name="test_scores" maxlength="200" class="form-control"  />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Publications</label>
-                <input type="text" name="publications" maxlength="200" class="form-control" required />
+                <input type="text" name="publications" maxlength="200" class="form-control"  />
               </div>
             </div>
           </div>
@@ -1058,32 +1066,32 @@
       // if (!(imgtype == match[0]) || (imgtype == match[1])) {
       //   $('#mgs_ta').html('<p style="color:red">Plz select a valid type image..only jpg jpeg allowed</p>');
       // } else {
-        $('#mgs_ta').empty();
-        //---image preview
-        var reader = new FileReader();
-        reader.onload = function(ev) {
-          $('#stu_id').attr('src', ev.target.result).css('width', '150px').css('height', '150px');
+      $('#mgs_ta').empty();
+      //---image preview
+      var reader = new FileReader();
+      reader.onload = function(ev) {
+        $('#stu_id').attr('src', ev.target.result).css('width', '150px').css('height', '150px');
+      }
+      reader.readAsDataURL(this.files[0]);
+      /// preview end
+      //upload
+      var postData = new FormData();
+      postData.append('file', this.files[0]);
+      var url = "{{url('student-image-upload')}}";
+      $.ajax({
+        headers: {
+          'X-CSRF-Token': $('meta[name=csrf_token]').attr('content')
+        },
+        async: true,
+        type: "post",
+        contentType: false,
+        url: url,
+        data: postData,
+        processData: false,
+        success: function() {
+          console.log("success");
         }
-        reader.readAsDataURL(this.files[0]);
-        /// preview end
-        //upload
-        var postData = new FormData();
-        postData.append('file', this.files[0]);
-        var url = "{{url('student-image-upload')}}";
-        $.ajax({
-          headers: {
-            'X-CSRF-Token': $('meta[name=csrf_token]').attr('content')
-          },
-          async: true,
-          type: "post",
-          contentType: false,
-          url: url,
-          data: postData,
-          processData: false,
-          success: function() {
-            console.log("success");
-          }
-        });
+      });
       //}
     });
 
@@ -1221,7 +1229,7 @@
     });
 
     // Iterate over each select element
-    $('select').each(function() {
+    $('select1').each(function() {
 
       // Cache the number of options
       var $this = $(this),
