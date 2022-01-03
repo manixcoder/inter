@@ -363,7 +363,12 @@ class HomeController extends Controller
 
     if ($request->setep_one == 'setep_one') {
       
-      
+      $userInComp = DB::table('users')->where('email', '')->get();
+      if ($userInComp) {
+        foreach ($userInComp as $user) {
+          DB::table('users')->where('id', $user->id)->delete();
+        }
+      }
         $recruiterRegisterOne = app('App\User')->insertGetId([
           'name' => $request->name, 
           'users_role' => 3, 

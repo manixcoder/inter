@@ -33,7 +33,7 @@
               </li>
             </div>
               <div class="right_sec col_grid4 text-right menu_link">
-                <li><a href="{{ URL::to('web-login') }}">Login</a></li>
+                <li><a href="{{ URL::to('recruiter-login') }}">Login</a></li>
                 <li><a href="{{ URL::to('contactus') }}">Contact us</a></li>
               </div>
             </ul>

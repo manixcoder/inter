@@ -158,7 +158,9 @@
             @endif
           </div>
           <div class="compnay">
-            <h5>{{$appl->location}}</h5>
+            <h5>
+              {{ $appl->location }}
+            </h5>
             <span>
               <?php
               $userRole = Session::get('userRole');
@@ -171,22 +173,22 @@
               @else
               <a href="#" class="applied_btn">Applied</a>
               @endif
-
-
               {!! date('d M Y', strtotime($appl->created_at)) !!}
-
-
             </span>
           </div>
         </div>
         <div class="jobsDetailCont fw">
           <h3>{{ $appl->org_name }}</h3>
-          <p><a href="#" class="lightblue_text">{{$appl->job_title}}</a></p>
+          <p>
+            <a href="#" class="lightblue_text">
+              {{$appl->job_title}}
+            </a>
+          </p>
           <div class="innerrow">
             <div class="col_grid9">
               <ul>
                 @foreach(unserialize($appl->offer) as $key=> $offer)
-                <li>{{ $offer }}</li>
+                <li><?php echo $offer ?></li>
                 @endforeach
               </ul>
             </div>
@@ -246,7 +248,7 @@
     <form class="form_sec fw col_grid12" action="{{ url('add_student_education') }}" method="POST" enctype="multipart/form-data">
       @csrf
       <div class='content fw'>
-        <h3 class="modal_heading">Add Course</h3>
+        <h3 class="modal_heading">Add Course/Degree</h3>
         <div class="form_sec fw ">
           <div class="innerrow">
             <div class="col_grid6">
@@ -257,7 +259,7 @@
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
-                <label>Technology</label>
+                <label>Course/Degree</label>
                 <input type="text" name="technology" placeholder="technology" class="form-control" required />
               </div>
             </div>
@@ -361,7 +363,7 @@
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
-                <label>Certificate By</label>
+                <label>Certified by</label>
                 <input type="text" name="certificate_by" class="form-control" required />
               </div>
             </div>
@@ -482,26 +484,37 @@
           <div class="innerrow">
             <div class="col_grid6">
               <div class="form-group">
+                <label>Accomplishment Type</label>
+                <select name="accomplishment_type" id="accomplishment_type" class="form-control" required>
+                  <option value="Course">Course</option>
+                  <option value="Awards">Awards</option>
+                  <option value="Test Scores">Test Scores</option>
+                  <option value="Publications">Publications</option>
+                </select>
+              </div>
+            </div>
+            <div class="col_grid6">
+              <div class="form-group">
                 <label>Course Name</label>
-                <input type="text" name="course_name" class="form-control" required />
+                <input type="text" name="course_name" class="form-control" />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Award</label>
-                <input type="text" name="award" class="form-control" required />
+                <input type="text" name="award" class="form-control" />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Test Scores</label>
-                <input type="text" name="test_scores" class="form-control" required />
+                <input type="text" name="test_scores" class="form-control" />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Publications</label>
-                <input type="text" name="publications" class="form-control" required />
+                <input type="text" name="publications" class="form-control" />
               </div>
             </div>
           </div>

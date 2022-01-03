@@ -91,9 +91,9 @@ class RecruiterwebController extends Controller
       ]);
       User::where('id', $request->edit_id)->update([
         'name' => $request->name,
-          'email' => $request->email,
-          'phone' => $request->phone,
-          'designation' => $request->designation,
+        'email' => $request->email,
+        'phone' => $request->phone,
+        'designation' => $request->designation,
       ]);
       // $update = DB::table('users')
       //   ->where('id', $request->edit_id)

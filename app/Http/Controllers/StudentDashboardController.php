@@ -638,7 +638,7 @@ class StudentDashboardController extends Controller
       'titleData'     => $titleData
     ]);
   }
-  public function student_job_details(Request $request, $id)
+ public function student_job_details(Request $request, $id)
   {
     $userRole = Session::get('userRole');
     $uid      = Session::get('gorgID');
@@ -647,6 +647,7 @@ class StudentDashboardController extends Controller
       ->where('jo.id',  $id)
       ->select('jo.*', 'r.org_name', 'r.profile_image', 'r.org_image', 'r.users_role')
       ->first();
+    //dd($jobsData);
     $OrgData  = DB::table('users')->where('id', $jobsData->user_id)->first();
     return view('fruntend.student.student-job-details')->with([
       'OrgData' => $OrgData,

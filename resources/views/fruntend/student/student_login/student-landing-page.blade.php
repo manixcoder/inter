@@ -22,7 +22,7 @@
           </a>
         </div>
         <form action="{{ url('student_logged_in') }}" method="POST" enctype="multipart/form-data" class="welcome_cont fw">
-          <h3>Welcome there!</h3>
+          <h3>Welcome !</h3>
           <div class="innerrow">
             @csrf
             <div class="col_grid8">

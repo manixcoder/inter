@@ -152,7 +152,7 @@
                     <div class="innerrow">
                       <div class="col_grid9">
                         <ul>
-                          <li>{{$appl->job_description}}</li>
+                          <li><?php echo $appl->job_description ?></li>
                          
                         </ul>
                       </div>

@@ -121,8 +121,8 @@
                 </li>
               </ul>
             </ul>
-            <h5>Don't have an account ? <a href="{{URL::to('/student-register-step-one')}}" class="textbtn_green">Register now</a></h5>
-            <!-- <h5>Don't have an account ? <a href="{{URL::to('recruiter-register-step-one')}}" class="textbtn_green">Register now</a></h5> -->
+             <h5>Don't have an account ? <a href="{{URL::to('recruiter-register-step-one')}}" class="textbtn_green">Register now</a></h5>
+            <!-- <h5>Don't have an account ? <a href="{{URL::to('student-register-step-one')}}" class="textbtn_green">Register now</a></h5> -->
           </div>
           <div class="footer_login fw">
             <h5>By logging in, you agree to our <a href="{{URL::to('termsofuse')}}" class="textbtn_green">terms and conditions</a> as well as our <a href="{{URL::to('privacypolicy')}}" class="textbtn_green">privacy policy</a></h5>
@@ -161,8 +161,6 @@
           setTimeout(function() {
             $('.emailvalidation').hide();
           }, 3000);
-
-
           return false;
         }
       });

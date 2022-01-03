@@ -188,7 +188,7 @@
               </a>
             </div>
             <form action="home-pg.html" class="welcome_cont fw">
-              <h3>Welcome there!</h3>
+              <h3>Welcome !</h3>
               <div class="innerrow">
                 <div class="col_grid8">
                   <h5>Login to Internify </h5>
