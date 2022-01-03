@@ -175,11 +175,14 @@
                           </select>
                         </div>
                       </div>
+                      @if($userid != Auth::user()->id)
+                      @else
                       <div class="col_grid12 profile_update_btn text-center">
                         <div class="form-group">
                           <input type="submit" value="Update" class="input-btn">
                         </div>
                       </div>
+                      @endif
                     </div>
                   </form>
                 </div>
@@ -200,9 +203,12 @@
                   </div>
                 </div>
                 <div class="col_grid3 profile_update_btn text-center">
+                  @if($userid != Auth::user()->id)
+                  @else
                   <div class="form-group">
                     <input type="submit" value="Update" class="input-btn">
                   </div>
+                  @endif
                 </div>
               </div>
             </form>
@@ -211,6 +217,8 @@
         <div class="fw educationSec aboutusBg smaeHeading">
           <div class="fw aboutusBg_sec">
             <div class="lgcontainer">
+              @if($userid != Auth::user()->id)
+              @else
               <h3 href="javascript:void(0);" data-modal="#education_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
                 Education
                 <span class="pull-right font20Text">
@@ -220,6 +228,7 @@
                   Add
                 </span>
               </h3>
+              @endif
               <form class="form_sec fw">
                 <div class="innerrow">
                   @foreach($edData as $ed)
@@ -252,6 +261,8 @@
                             <input type="text" onblur="yearValidation(this.value,event)" id="year" value="{{$ed->year}}" placeholder="Year" class="form-control" readonly>
                           </div>
                         </div>
+                        @if($userid != Auth::user()->id)
+                        @else
                         <div class="smaeHeading rightedit_sec">
                           <a class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#education_update_detail_{{$ed->id}}">
                             <i>
@@ -267,6 +278,7 @@
                           </a>
 
                         </div>
+                        @endif
                       </div>
                     </div>
                   </div>
@@ -326,6 +338,8 @@
           <div class="fw aboutusBg_sec">
 
             <div class="lgcontainer">
+              @if($userid != Auth::user()->id)
+              @else
               <h3 href="javascript:void(0);" data-modal="#experience_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
                 Experience
                 <span class="pull-right font20Text">
@@ -334,6 +348,7 @@
                   Add
                 </span>
               </h3>
+              @endif
               <div class="boxShodewBg fw mrtop0 experienceBox">
                 @foreach($exData as $exp)
 
@@ -355,6 +370,8 @@
                       <p class="font24Text clrGray">{{$exp->location}} <br /> {{$exp->duration_from}} - {{$exp->duration_to}}</p>
                     </div>
                   </div>
+                  @if($userid != Auth::user()->id)
+                  @else
                   <div class="col_grid3">
                     <span class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#experience_update_detail_{{$exp->id}}">
                       <i>
@@ -369,6 +386,7 @@
                       Delete
                     </a>
                   </div>
+                  @endif
                 </div>
                 <div class='modal personal_DtlPop' id='experience_update_detail_{{$exp->id}}'>
                   <div class="close fw">
@@ -443,6 +461,8 @@
         <div class="fw educationSec aboutusBg smaeHeading paddTop0">
           <div class="fw aboutusBg_sec form_sec">
             <div class="lgcontainer">
+              @if($userid != Auth::user()->id)
+              @else
               <h3 data-modal="#certificate_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
                 Certificates
                 <span class="pull-right font20Text">
@@ -452,6 +472,7 @@
                   Add
                 </span>
               </h3>
+              @endif
               <div class="innerrow certificatesSec">
 
                 @foreach($certData as $cert)
@@ -479,6 +500,8 @@
                     </div>
                   </div>
                   <div class="smaeHeading rightedit_sec">
+                    @if($userid != Auth::user()->id)
+                    @else
                     <h3>
                       <span class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#certificate_update_detail_{{$cert->id}}">
                         <i>
@@ -493,6 +516,7 @@
                         Delete
                       </a>
                     </h3>
+                    @endif
                   </div>
                 </div>
                 <div class='modal personal_DtlPop' id='certificate_update_detail_{{$cert->id}}'>
@@ -541,6 +565,8 @@
         <div class="fw educationSec aboutusBg smaeHeading paddTop0">
           <div class="fw aboutusBg_sec form_sec">
             <div class="lgcontainer">
+              @if($userid != Auth::user()->id)
+              @else
               <h3 data-modal="#industry_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
                 My Favourite Industries
                 <span class="pull-right font20Text">
@@ -550,15 +576,19 @@
                   Add
                 </span>
               </h3>
+              @endif
               <ul class="favouriteIndus_sec fw">
                 @foreach($indusData as $indus)
                 <li>
                   <a href="#" class="input-btn">
                     {{$indus->industries_name}}
                   </a>
+                  @if($userid != Auth::user()->id)
+                  @else
                   <a href="{{ url('delete_student_industry/'.$indus->id) }}" class="cross-iconpopup">
                     <i class="fa fa-times" aria-hidden="true"></i>
                   </a>
+                  @endif
                 </li>
                 @endforeach
               </ul>
@@ -568,10 +598,31 @@
         <div class="fw educationSec aboutusBg smaeHeading paddTop0">
           <div class="fw aboutusBg_sec form_sec">
             <div class="lgcontainer">
-              <h3 data-modal="#business_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">Business Functions I want to Work in <span class="pull-right font20Text"><i><img src="{{ asset('public/assets/images/add.png')}}" alt="img" /></i>Add</span></h3>
+              @if($userid != Auth::user()->id)
+              @else
+              <h3 data-modal="#business_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
+                Business Functions I want to Work in
+                <span class="pull-right font20Text">
+                  <i>
+                    <img src="{{ asset('public/assets/images/add.png')}}" alt="img" />
+                  </i>
+                  Add
+                </span>
+              </h3>
+              @endif
               <ul class="favouriteIndus_sec fw">
                 @foreach($busiData as $business)
-                <li><a href="#" class="input-btn">{{$business->business_functions_name}}</a><a href="{{ url('delete_student_business/'.$business->id) }}" class="cross-iconpopup"><i class="fa fa-times" aria-hidden="true"></i></a></li>
+                <li>
+                  <a href="#" class="input-btn">
+                    {{$business->business_functions_name}}
+                  </a>
+                  @if($userid != Auth::user()->id)
+                  @else
+                  <a href="{{ url('delete_student_business/'.$business->id) }}" class="cross-iconpopup">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                  </a>
+                  @endif
+                </li>
                 @endforeach
               </ul>
             </div>
@@ -580,10 +631,31 @@
         <div class="fw educationSec aboutusBg smaeHeading paddTop0">
           <div class="fw aboutusBg_sec form_sec">
             <div class="lgcontainer">
-              <h3 data-modal="#hobbies_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">Hobbies & Interests <span class="pull-right font20Text"><i><img src="{{ asset('public/assets/images/add.png')}}" alt="img" /></i>Add</span></h3>
+              @if($userid != Auth::user()->id)
+              @else
+              <h3 data-modal="#hobbies_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
+                Hobbies & Interests
+                <span class="pull-right font20Text">
+                  <i>
+                    <img src="{{ asset('public/assets/images/add.png')}}" alt="img" />
+                  </i>
+                  Add
+                </span>
+              </h3>
+              @endif
               <ul class="favouriteIndus_sec fw">
                 @foreach($hobbyData as $hobby)
-                <li><a href="#" class="input-btn">{{$hobby->hobbies_name}}</a><a href="{{ url('delete_student_hobby/'.$hobby->id) }}" class="cross-iconpopup"><i class="fa fa-times" aria-hidden="true"></i></a></li>
+                <li>
+                  <a href="#" class="input-btn">
+                    {{$hobby->hobbies_name}}
+                  </a>
+                  @if($userid != Auth::user()->id)
+                  @else
+                  <a href="{{ url('delete_student_hobby/'.$hobby->id) }}" class="cross-iconpopup">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                  </a>
+                  @endif
+                </li>
                 @endforeach
               </ul>
             </div>
@@ -593,13 +665,24 @@
           <div class="fw aboutusBg_sec form_sec">
             <div class="lgcontainer">
               <div class="boxShodewBg fw">
+                @if($userid != Auth::user()->id)
+                @else
                 <h3 data-modal="#accomplishment_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
+                  <!-- <h3 data-modal="#accomplishment_add_detail" class="font36text  bukhariSrptfont_fmly clrred "> -->
                   Accomplishments
                   <span class="pull-right font20Text">
                     <i><img src="{{ asset('public/assets/images/add.png')}}" alt="img" /></i>
                     Add
+                    <!-- <select name="" id="" class="font36text  bukhariSrptfont_fmly clrred open-modal">
+                      <option value=""> Add</option>
+                      <option value="Course" data-modal="#accomplishment_add_detail">Course</option>
+                      <option value="Awards" data-modal="#accomplishment_add_detail">Awards</option>
+                      <option value="Test Scores" data-modal="#accomplishment_add_detail">Test Scores</option>
+                      <option value="Publications" data-modal="#accomplishment_add_detail">Publications</option>
+                    </select> -->
                   </span>
                 </h3>
+                @endif
 
                 <?php $i = 1; ?>
                 @foreach($accomData as $key=> $accom)
@@ -612,9 +695,16 @@
                       <p>{{$accom->test_scores}}</p>
                       <p>{{$accom->publications}}</p>
                     </div>
+                    @if($userid != Auth::user()->id)
+                    @else
                     <div class="col_grid3 text-right">
-                      <span class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#accomplishment_update_detail_{{$accom->id}}"><i><img src="{{ asset('public/assets/images/edit.png')}}" alt="img"></i>Edit</span>
+                      <span class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#accomplishment_update_detail_{{$accom->id}}">
+                        <i>
+                          <img src="{{ asset('public/assets/images/edit.png')}}" alt="img"></i>
+                        Edit
+                      </span>
                     </div>
+                    @endif
                   </div>
                 </div>
                 <div class='modal personal_DtlPop' id='accomplishment_update_detail_{{$accom->id}}'>
@@ -641,7 +731,7 @@
                           <div class="col_grid6">
                             <div class="form-group">
                               <label>Course Name</label>
-                              <input type="text" value="{{$accom->course_name}}" name="course_name" maxlength="200" class="form-control"/>
+                              <input type="text" value="{{$accom->course_name}}" name="course_name" maxlength="200" class="form-control" />
                               <input type="hidden" value="{{$accom->id}}" name="id" />
                             </div>
                           </div>
@@ -983,7 +1073,7 @@
             <div class="col_grid6">
               <div class="form-group">
                 <label>Course Name</label>
-                <input type="text" name="course_name" maxlength="200" class="form-control"/>
+                <input type="text" name="course_name" maxlength="200" class="form-control" />
               </div>
             </div>
             <div class="col_grid6 ">

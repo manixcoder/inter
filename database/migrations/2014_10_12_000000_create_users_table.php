@@ -37,8 +37,8 @@ class CreateUsersTable extends Migration
             $table->string('website')->nullable();
             $table->string('industry')->nullable();
             $table->string('company_size')->nullable();
-            $table->string('headquarters')->nullable();
-            $table->string('specialties')->nullable();
+            $table->longText('headquarters')->nullable();
+            $table->longText('specialties')->nullable();
             $table->string('type')->nullable();
             $table->string('founded')->nullable();            
             $table->timestamp('email_verified_at')->nullable();

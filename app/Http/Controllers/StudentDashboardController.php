@@ -651,7 +651,7 @@ class StudentDashboardController extends Controller
     $OrgData  = DB::table('users')->where('id', $jobsData->user_id)->first();
     return view('fruntend.student.student-job-details')->with([
       'OrgData' => $OrgData,
-      'appl' => $jobsData
+      'appl' => $jobsData 
     ]);
   }
   public function companyProfile(Request $request)

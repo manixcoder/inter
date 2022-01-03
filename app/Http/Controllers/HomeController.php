@@ -51,13 +51,15 @@ class HomeController extends Controller
   }
   public function recruiterListings(Request $request)
   {
-    //dd($request->search);
     if (isset($request->search)) {
       $searchdata = $request->search;
     } else {
       $searchdata = 'No';
     }
-    return view('fruntend.recruiter_profile_section.my_listing')->with(['searchdata' => $searchdata, 'alert' => '']);
+    return view('fruntend.recruiter_profile_section.my_listing')->with([
+      'searchdata' => $searchdata, 
+      'alert' => ''
+    ]);
   }
 
   public function orgImageUpload(Request $request)

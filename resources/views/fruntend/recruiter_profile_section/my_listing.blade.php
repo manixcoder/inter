@@ -75,8 +75,11 @@ if($searchdata !='No'){
 
             <div class="col_grid9">
               <ul>
-                @foreach(unserialize($value->offer) as $offer)
+                
+                @foreach(unserialize($value->offer) as $key => $offer)
+                @if($key < 3)
                 <li>{{ $offer }}</li>
+                @endif
                 @endforeach
                 <!-- <li>Be part of a dynamic and supportive work environment</li> -->
               </ul>

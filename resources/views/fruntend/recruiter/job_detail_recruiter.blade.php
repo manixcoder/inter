@@ -48,12 +48,7 @@
           <!--  <a href="javascript:void(0);" class="lightblue_text">Extend Details <span><img src="images/arrow_drop_down_blue.png" /></span></a>-->
           <!--</div>-->
 
-          @if(Session::has('status'))
-          <div class="alert alert-{{ Session::get('status') }}">
-            <i class="fa fa-building-o" aria-hidden="true"></i> {{ Session::get('message') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-          </div>
-          @endif
+         
           <div class=" intercandidates_sec fw">
             <h3>{{ count($intrestedCandidate ?? '')}} Interested Candidates</h3>
             @if(isset($intrestedCandidate))

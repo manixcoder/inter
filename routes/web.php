@@ -261,7 +261,6 @@ Route::any('student-job-details/{id}', 'StudentDashboardController@student_job_d
 Route::any('company-profile', 'StudentDashboardController@companyProfile');
 Route::any('company-posts', 'StudentDashboardController@companyPosts');
 Route::any('company-listed-jobs', 'StudentDashboardController@companyListedJobs');
-//Route::any('company-profile/{id}', 'StudentDashboardController@compnayProfile');
 
 Route::post('student_job_apply', 'StudentDashboardController@student_job_apply');
 

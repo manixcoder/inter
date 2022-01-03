@@ -74,27 +74,7 @@
         </span>
       </div>
 
-      @if(Session::has('status'))
-      @if(Session::has('status') == 'success')
-      <div class="popupWapper">
-        <div class="modal cPassword_update_popup" id="cPassword_update">
-          <div class="close fw">
-            <a class="btn close-modal" data-modal="#cPassword_update" href="#">
-              <img src="{{ asset('public/assets/images/images/close.png' )}}" alt="icon">
-            </a>
-          </div>
-          <div class="content fw">
-            <div class="password_update_sec fw">
-              <figure class="fw">
-                <img src="{{ asset('public/assets/images/images/succcessfull.png') }}" alt="icon">
-              </figure>
-              <h3>{{ Session::get('message') }}</h3>
-            </div>
-          </div>
-        </div>
-      </div>
-      @endif
-      @endif
+     
       <div class="unlock_sec jobSearch_sec">
         <h4>Find internships that inspire</h4>
         <form method="get" action="{{url('student/jobs')}}">
@@ -188,7 +168,9 @@
             <div class="col_grid9">
               <ul>
                 @foreach(unserialize($appl->offer) as $key=> $offer)
+                @if($key < 3)
                 <li><?php echo $offer ?></li>
+                @endif
                 @endforeach
               </ul>
             </div>

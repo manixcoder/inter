@@ -78,17 +78,7 @@
         </div>
         <div class="form_sec fw">
 
-          @if(Session::has('status'))
-          <div class="hover_bkgr_fricc resumeUpload_popup successfullyModalPopup">
-            <div class='content fw'>
-              <div class="imgcheck_icon fw">
-                <img src="{{ asset('public/assets/images/succcessfull.png')}}" alt="icon" />
-              </div>
-              <h3 class="">Job Posted Successfully</h3>
-              <!--p>Recruiter will contact you through <br />your email or mobile number.</p -->
-            </div>
-          </div>
-          @endif
+         
 
           <form action="{{ URL::to('add-job')}}" method="POST" id="FormValidation" name="postJob" enctype="multipart/form-data">
             @csrf

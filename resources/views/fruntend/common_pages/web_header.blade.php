@@ -1,9 +1,3 @@
-@if (!Auth::guest())
-
-@else
-@endif
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,19 +44,24 @@
               <span></span>
             </div>
 
-            @if(Auth::user()->users_role == 2)
+            @if(Auth::user()->users_role === '2')
             <ul class="menu_right">
               <li class="{{ request()->is('student-dashboard') ? 'active' : '' }}">
-                <a href="{{url('student-dashboard')}}">Home </a>
+                <a href="{{ URL::to('student-dashboard')}}">Home </a>
               </li>
               <li class="{{ request()->is('web/blog') ? 'active' : '' }} {{ request()->is('web/blog/detail') ? 'active' : '' }}">
-                <a href="{{url('web/blog')}}">Blogs </a>
+                <a href="{{ URL::to('web/blog')}}">Blogs </a>
               </li>
               <li class="{{ request()->is('student/jobs') ? 'active' : '' }}">
-                <a href="{{url('student/jobs')}}">Jobs </a>
+                <a href="{{ URL::to('student/jobs')}}">Jobs </a>
               </li>
               <li class="{{ request()->is('notification') ? 'active' : '' }}">
-                <a href="{{url('notification')}}">Notifications </a>
+                <a href="{{ URL::to('notification')}}">
+                  Notifications
+                  @if(auth()->user()->unreadNotifications->count() > 0)
+                  <span class="badge badge-light">{{ auth()->user()->unreadNotifications->count() }}</span>
+                  @endif
+                </a>
               </li>
               <li class="{{ request()->is('contact_us') ? 'active' : '' }}">
                 <a href="{{url('contact_us')}}">Contact Us </a>
@@ -74,20 +73,20 @@
                 <a href="{{ URL::to('recruiter-dashboard') }}" class="subcategory">Home </a>
               </li>
               <li class="{{ request()->is('web/blog') ? 'active' : '' }} {{ request()->is('web/blog/detail') ? 'active' : '' }}">
-                <a href="{{URL::to('web/blog')}}" class="subcategory">Blogs </a>
+                <a href="{{ URL::to('web/blog')}}" class="subcategory">Blogs </a>
               </li>
               <li class="{{ request()->is('web/post/jobs') ? 'active' : '' }}">
-                <a href="{{URL::to('web/post/jobs')}}" class="subcategory">Post a Job </a>
+                <a href="{{ URL::to('web/post/jobs') }}" class="subcategory">Post a Job </a>
               </li>
               <li class="{{ request()->is('notification') ? 'active' : '' }}">
-                <a href="{{URL::to('notification')}}" class="subcategory">Notifications
+                <a href="{{ URL::to('notification') }}" class="subcategory">Notifications
                   @if(auth()->user()->unreadNotifications->count() > 0)
                   <span class="badge badge-light">{{ auth()->user()->unreadNotifications->count() }}</span>
                   @endif
                 </a>
               </li>
               <li class="{{ request()->is('contact_us') ? 'active' : '' }}">
-                <a href="{{URL::to('contact_us')}}" class="subcategory">Contact Us </a>
+                <a href="{{ URL::to('contact_us') }}" class="subcategory">Contact Us </a>
               </li>
             </ul>
             @endif
@@ -97,12 +96,12 @@
                   @if(Auth::user()->profile_image)
                   <img src="{{ URL::asset('/public/uploads/') }}/{{ Auth::user()->profile_image }}" alt="img">
                   @else
-                  <img src="{{ URL::asset('/public/uploads/') }}" alt="img">
+                  <img src="{{ URL::asset('/public/uploads/placeholder.png') }}" alt="img">
                   @endif
                 </i>
                 <span>{{ Auth::user()->name ?? ''}} <img src="{{ asset('public/assets/images/user-downarrow.png')}}" alt="img"></span>
               </a>
-              @if(Auth::user()->users_role == 2)
+              @if(Auth::user()->users_role === '2')
               <ul class="userdrop_down">
                 <li class="{{ request()->is('student-dashboard') ? 'active' : '' }}">
                   <a href="{{url('student-dashboard')}}" class="username">
