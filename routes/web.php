@@ -411,3 +411,8 @@ Route::prefix('google')->name('google.')->group( function(){
 	Route::get('google', 'GoogleController@redirectToGoogle')->name('login');
 	Route::get('callback', 'GoogleController@handleGoogleCallback')->name('callback');
 });
+
+Route::prefix('twitter')->name('twitter.')->group( function(){
+	Route::get('twitter', 'GoogleController@redirectToGoogle')->name('login');
+	Route::get('callback', 'GoogleController@handleGoogleCallback')->name('callback');
+});
