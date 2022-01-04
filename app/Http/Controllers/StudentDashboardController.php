@@ -117,8 +117,8 @@ class StudentDashboardController extends Controller
     $recuratorData = DB::table('users')->where('id', $r_id)->first();
     $studentData = DB::table('users')->where('id', $id)->first();
     $jobData = DB::table('jobs')->where('id', $j_id)->first();
-    $updateData = DB::table('job_applied')->where('job_id', $j_id)->where('student_id',$id)->update([
-      'status'=>'3'
+    $updateData = DB::table('job_applied')->where('job_id', $j_id)->where('student_id', $id)->update([
+      'status' => '3'
     ]);
     // dd($recuratorData);
     $to = $studentData->email;
@@ -165,8 +165,8 @@ class StudentDashboardController extends Controller
     $recuratorData = DB::table('users')->where('id', $r_id)->first();
     $studentData = DB::table('users')->where('id', $id)->first();
     $jobData = DB::table('jobs')->where('id', $j_id)->first();
-    $updateData = DB::table('job_applied')->where('job_id', $j_id)->where('student_id',$id)->update([
-      'status'=>'2'
+    $updateData = DB::table('job_applied')->where('job_id', $j_id)->where('student_id', $id)->update([
+      'status' => '2'
     ]);
     // dd($recuratorData);
     $to = $studentData->email;
@@ -638,7 +638,7 @@ class StudentDashboardController extends Controller
       'titleData'     => $titleData
     ]);
   }
- public function student_job_details(Request $request, $id)
+  public function student_job_details(Request $request, $id)
   {
     $userRole = Session::get('userRole');
     $uid      = Session::get('gorgID');
@@ -651,7 +651,7 @@ class StudentDashboardController extends Controller
     $OrgData  = DB::table('users')->where('id', $jobsData->user_id)->first();
     return view('fruntend.student.student-job-details')->with([
       'OrgData' => $OrgData,
-      'appl' => $jobsData 
+      'appl' => $jobsData
     ]);
   }
   public function companyProfile(Request $request)

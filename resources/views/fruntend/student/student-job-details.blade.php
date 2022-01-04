@@ -34,9 +34,9 @@
     @endif
     @endif
 
-    
 
-    
+
+
     <div class="lgcontainer">
       <div class="boxDetailbg fw">
         <figure>
@@ -170,10 +170,11 @@
                   <div class="innerrow">
                     <div class="col_grid12">
                       <ul>
-                        @foreach(unserialize($job->offer) as $offer)
-
+                        @foreach(unserialize($job->offer) as $key => $offer)
+                        @if($key < 3)
                         <li>{{ $offer }}</li>
-                        @endforeach
+                          @endif
+                          @endforeach
                       </ul>
                     </div>
                     <div class="col_grid8">

@@ -148,6 +148,8 @@
 </script>
 <script>
 	$(document).ready(function() {
-		$('#listjobs_table').DataTable({order:[]});
+		$('#listjobs_table').DataTable({
+			order: []
+		});
 	});
 </script>
