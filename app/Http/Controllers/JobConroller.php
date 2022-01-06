@@ -92,6 +92,7 @@ class JobConroller extends Controller
       'salary' => $request->currency . ' ' . $request->salary,
       'offer' => serialize($request->offer),
       'job_description' => $request->job_description,
+      'industry'=>Auth::user()->industry,
       'status' => 0,
       'user_id' => Session::get('gorgID'),
       'created_at' => date("Y-m-d H:i:s"),
@@ -100,12 +101,12 @@ class JobConroller extends Controller
 
     $insertData = app('App\Jobs')->insert($data);
 
-    $users = User::where('id', '!=', Session::get('gorgID'))->get();
+    $users = User::where('id', '!=', Session::get('gorgID'))->where('users_role','2')->get();
     $notificationData = array(
       'comment_user' => Auth::user()->id,
       'post_title' => $request->job_title,
       'notification_type' => 'Post a new Jobs',
-      'comment' => strip_tags($request->job_description)
+      'comment' => strip_tags($request->job_description) 
     );
     foreach ($users as $user) {
       $user->notify(new PostJobsNotification($notificationData));

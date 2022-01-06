@@ -145,7 +145,7 @@
       <p>Recruiter will contact you through <br />your email or mobile number.</p>
     </div>
   </div>
-  <script src="js/jquery-lb.js"></script>
+  <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
   <script>
     $(document).ready(function() {
       $(".clicktobtm").click(function() {

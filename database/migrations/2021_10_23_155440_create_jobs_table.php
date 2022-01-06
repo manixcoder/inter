@@ -26,7 +26,7 @@ class CreateJobsTable extends Migration
             $table->string('official_email')->nullable();
             $table->longText('offer')->nullable();
             $table->longText('job_description')->nullable();
-            $table->string('company_name')->nullable();
+            $table->string('industry')->nullable();
             $table->enum('status', ['1', '0'])->default(0)->comment = '0=Active, 1=Inactive';
             $table->timestamps();
         });

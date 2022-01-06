@@ -57,7 +57,7 @@ class HomeController extends Controller
       $searchdata = 'No';
     }
     return view('fruntend.recruiter_profile_section.my_listing')->with([
-      'searchdata' => $searchdata, 
+      'searchdata' => $searchdata,
       'alert' => ''
     ]);
   }
@@ -360,24 +360,24 @@ class HomeController extends Controller
   /* Blog web page controllers End */
 
   /* Recruiter register controllers */
-  public function recruider_register_step_one(Request $request) 
+  public function recruider_register_step_one(Request $request)
   {
 
     if ($request->setep_one == 'setep_one') {
-      
+
       $userInComp = DB::table('users')->where('email', '')->get();
       if ($userInComp) {
         foreach ($userInComp as $user) {
           DB::table('users')->where('id', $user->id)->delete();
         }
       }
-        $recruiterRegisterOne = app('App\User')->insertGetId([
-          'name' => $request->name, 
-          'users_role' => 3, 
-          'created_at' => date("Y-m-d H:i:s"), 
-          'updated_at' => date("Y-m-d H:i:s")
-        ]);
-        return view('fruntend.recruiter_register.recruiter_register_step_two')->with(['insertid' => $recruiterRegisterOne]);
+      $recruiterRegisterOne = app('App\User')->insertGetId([
+        'name' => $request->name,
+        'users_role' => 3,
+        'created_at' => date("Y-m-d H:i:s"),
+        'updated_at' => date("Y-m-d H:i:s")
+      ]);
+      return view('fruntend.recruiter_register.recruiter_register_step_two')->with(['insertid' => $recruiterRegisterOne]);
       //}
     } elseif ($request->setep_two == 'setep_two') {
       $phonecheck = app('App\User')->where('phone', $request->phone)->first();
@@ -396,7 +396,7 @@ class HomeController extends Controller
         $path =  $files->move($destinationPath, $profileImage);
         $image = $insert['photo'] = "$profileImage";
       }
-      $recruiterRegisterOne = app('App\User')->where('id', $request->recruiterid)->update(['org_image'=>'company_profileBG.png','profile_image' => $image]);
+      $recruiterRegisterOne = app('App\User')->where('id', $request->recruiterid)->update(['org_image' => 'company_profileBG.png', 'profile_image' => $image]);
       return view('fruntend.recruiter_register.recruiter_register_step_five')->with(['insertid' => $request->recruiterid]);
     } elseif ($request->setep_five == 'setep_five') {
       $recruiterRegisterOne = app('App\User')->where('id', $request->recruiterid)->update(['org_name' => $request->org_name]);
@@ -415,9 +415,19 @@ class HomeController extends Controller
         'temp_pass' => $request->confirmPassword,
         'password' => Hash::make($request->confirmPassword)
       ]);
+      return view('fruntend.recruiter_register.recruiter_register_step_nine')->with(['insertid' => $request->recruiterid]);
+      // $message = 'register successfully.!';
+      // return view('fruntend.web_login')->with(['message' => $message]);
+    } elseif ($request->setep_nine == 'setep_nine') {
+      $data = app('App\User')->where('id', $request->recruiterid)->first();
 
-      $message = 'register successfully.!';
-      return view('fruntend.web_login')->with(['message' => $message]);
+      if (Auth::loginUsingId($request->recruiterid)) {
+        return redirect('recruiter-dashboard');
+      } else {
+        return view('fruntend.recruiter_register.recruiter_register_step_nine')->with([
+          'insertid' => $request->recruiterid
+        ]);
+      }
     }
   }
   /* Recruiter register controllers End */

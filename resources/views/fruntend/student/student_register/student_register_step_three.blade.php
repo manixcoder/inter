@@ -33,7 +33,7 @@
             </div>
             @endif
             <div class="col_grid12 digitcode">
-              <h5>3 <i><img src="{{ asset('public/assets/images/logininput_right.png') }}" alt="icon"></i> Awesome! What’s your company’s official email address? </h5>
+              <h5>3 <i><img src="{{ asset('public/assets/images/logininput_right.png') }}" alt="icon"></i> Oh great! What's your email address? </h5>
             </div>
           </div>
           <div class="from-group fw">
@@ -53,7 +53,7 @@
     </div>
   </div>
   </div>
-  <script src="js/jquery-lb.js"></script>
+  <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
 
   <script type="text/javascript">
     $(document).ready(function(e) {

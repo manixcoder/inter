@@ -577,7 +577,8 @@ class StudentDashboardController extends Controller
     $id = Session::get('gorgID');
     $OrgData = DB::table('users')->where('id', $id)->first();
     $locationData = DB::table('jobs')->select('location')->groupBy('location')->get();
-    $titleData = DB::table('jobs')->select('job_title')->groupBy('job_title')->get();
+   // $titleData = DB::table('jobs')->select('job_title')->groupBy('job_title')->get();
+    $titleData = DB::table('jobs')->select('industry')->groupBy('industry')->get();
     $job_title = $request->job_title;
     $location = $request->location;
     if (empty($job_title) and empty($location)) {
@@ -592,7 +593,8 @@ class StudentDashboardController extends Controller
         ->join('users as r', 'jo.user_id', '=', 'r.id')
         ->where('jo.status', 0)
         ->where('jo.location', 'like', '%' . $location . '%')
-        ->where('jo.job_title', 'like', '%' . $job_title . '%')
+       // ->where('jo.job_title', 'like', '%' . $job_title . '%')
+        ->where('jo.industry', 'like', '%' . $job_title . '%')
         ->orderBy('jo.id', 'desc')
         ->select('jo.*', 'r.org_name', 'r.profile_image', 'r.org_image', 'r.users_role')
         ->get();

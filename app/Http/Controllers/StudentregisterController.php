@@ -25,10 +25,7 @@ class StudentregisterController extends Controller
 	{
 		date_default_timezone_set("Asia/Kolkata");
 	}
-	/*public function __construct(){
-		$this->middleware('auth');
-		$this->middleware('role');
-	}*/
+	
 	/* student register controllers */
 	public function student_register_step_one(Request $request)
 	{

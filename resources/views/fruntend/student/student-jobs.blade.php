@@ -104,9 +104,9 @@
             <div class="col_grid4">
               <div class="form_group">
                 <select name="job_title" class="form-contorl" id="selectbox1" required>
-                  <option value="">Select Job Title</option>
+                  <option value="">Select Industry</option>
                   @foreach($titleData as $td)
-                  <option value="<?php echo $td->job_title; ?>"><?php echo $td->job_title; ?></option>
+                  <option value="<?php echo $td->industry; ?>"><?php echo $td->industry; ?></option>
                   @endforeach
                 </select>
                 <!-- select name="job_title" class="form-contorl" id="job_title" required>

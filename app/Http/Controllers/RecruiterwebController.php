@@ -125,6 +125,9 @@ class RecruiterwebController extends Controller
         'founded' => $request->founded,
         'specialties' => $request->specialties
       ]);
+      DB::table('jobs')->where('user_id', $request->edit_id)->update([
+        'industry'=>$request->industry,
+      ]);
     }
     return back()->with('status', 'update successfully !');
   }

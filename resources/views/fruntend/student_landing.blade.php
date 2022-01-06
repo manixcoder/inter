@@ -97,7 +97,9 @@
 
               @php
               $locationData = DB::table('jobs')->select('location')->groupBy('location')->get();
-              $titleData = DB::table('jobs')->select('job_title')->groupBy('job_title')->get();
+              // $titleData = DB::table('jobs')->select('job_title')->groupBy('job_title')->get();
+              $titleData = DB::table('jobs')->select('industry')->groupBy('industry')->get();
+              
               @endphp
               <form method="get" action="{{url('student-jobs')}}">
                 <div class="innerrow">
@@ -125,10 +127,20 @@
                   </div>
                   <div class="col_grid4">
                     <div class="form_group">
-                      <select name="job_title" class="form-contorl" id="selectbox1">
+                      <!-- <select name="job_title" class="form-contorl" id="selectbox1">
                         <option value="">Select Job Title</option>
                         @foreach($titleData as $td)
-                        <option value="<?php  echo $td->job_title; ?>"><?php  echo $td->job_title; ?></option>
+                        <option value="<?php  //echo $td->job_title; 
+                                        ?>"><?php // echo $td->job_title; 
+                                                                          ?></option>
+                        @endforeach
+                      </select> -->
+
+                      <select name="job_title" class="form-contorl" id="selectbox1">
+                        <option value="">Select Industry</option>
+                        @foreach($titleData as $td)
+                        
+                        <option value="<?php echo $td->industry; ?>"><?php echo $td->industry; ?></option>
                         @endforeach
                       </select>
                       <!-- select name="job_title" class="form-contorl" id="selectbox2">
