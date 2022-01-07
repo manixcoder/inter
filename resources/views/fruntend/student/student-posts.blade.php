@@ -348,7 +348,7 @@
     <form class="form_sec fw col_grid12" action="{{ url('add_student_education') }}" method="POST" enctype="multipart/form-data">
       @csrf
       <div class='content fw'>
-        <h3 class="modal_heading">Add Course</h3>
+        <h3 class="modal_heading">Add Course/Degree</h3>
         <div class="form_sec fw ">
           <div class="innerrow">
             <div class="col_grid6">
@@ -359,8 +359,8 @@
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
-                <label>Technology</label>
-                <input type="text" name="technology" placeholder="technology" class="form-control" maxlength="100" size="100" required />
+                <label>Course/Degree</label>
+                <input type="text" name="technology"  class="form-control" maxlength="100" size="100" required />
               </div>
             </div>
             <div class="col_grid6 ">
@@ -458,7 +458,7 @@
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
-                <label>Certificate By</label>
+                <label>Certified by</label>
                 <input type="text" name="certificate_by" maxlength="150" class="form-control" required />
               </div>
             </div>
@@ -575,28 +575,39 @@
         <h3 class="modal_heading">Add Accomplishment</h3>
         <div class="form_sec fw ">
           <div class="innerrow">
+          <div class="col_grid6">
+              <div class="form-group">
+                <label>Accomplishment Type</label>
+                <select name="accomplishment_type" id="accomplishment_type" class="form-control" required>
+                  <option value="Course">Course</option>
+                  <option value="Awards">Awards</option>
+                  <option value="Test Scores">Test Scores</option>
+                  <option value="Publications">Publications</option>
+                </select>
+              </div>
+            </div>
             <div class="col_grid6">
               <div class="form-group">
                 <label>Course Name</label>
-                <input type="text" name="course_name" maxlength="100" class="form-control" required />
+                <input type="text" name="course_name" maxlength="100" class="form-control"/>
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Award</label>
-                <input type="text" name="award" class="form-control" maxlength="100" required />
+                <input type="text" name="award" class="form-control" maxlength="100"/>
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Test Scores</label>
-                <input type="text" name="test_scores" class="form-control" maxlength="100" required />
+                <input type="text" name="test_scores" class="form-control" maxlength="100"/>
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Publications</label>
-                <input type="text" name="publications" class="form-control" maxlength="100" required />
+                <input type="text" name="publications" class="form-control" maxlength="100"/>
               </div>
             </div>
           </div>

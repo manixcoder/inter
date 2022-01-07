@@ -17,6 +17,7 @@ class CreateJobAppliedTable extends Migration
             $table->bigIncrements('id');
             $table->integer('student_id')->nullable();
             $table->integer('job_id')->nullable();
+            $table->enum('status', ['1', '2', '3'])->default('1')->comment('1 no action 2 selected 3 rejected	');
             $table->timestamps();
         });
     }

@@ -4,12 +4,13 @@
   $recruiterDetails = DB::table('users')->where('id', $Data[0]->user_id)->first();
   $intrestedCandidate = DB::table('job_applied')->where('job_id', $Data[0]->id)->get();
   @endphp
-<?php // dd($Data[0]->logo);?>
+  <?php // dd($Data[0]->logo);
+  ?>
   <div class="body_wht-inners ">
     <div class="lgcontainer">
       <div class="boxDetailbg fw">
         <figure>
-           @if($Data[0]->logo !='')
+          @if($Data[0]->logo !='')
           <img src="{{ URL::asset('/public/uploads/'.$Data[0]->logo) }}" alt="jobs" />
           @else
           <img src="{{ URL::asset('/public/uploads/jobsDetailBG.png') }}" alt="jobs" />
@@ -34,8 +35,8 @@
             </div>
             <div class="commentsApply fw">
               <div class="commantsChat">
-              <a href="{{ URL::to('/message')}}" target="_blank">
-                <img src="{{ URL::asset('/public/assets/images/messageIcon.png')}}" alt="icon" />
+                <a href="{{ URL::to('/message')}}" target="_blank">
+                  <img src="{{ URL::asset('/public/assets/images/messageIcon.png')}}" alt="icon" />
                 </a>
               </div>
               <div class="applyBtn">
@@ -47,17 +48,12 @@
           <!--  <a href="javascript:void(0);" class="lightblue_text">Extend Details <span><img src="images/arrow_drop_down_blue.png" /></span></a>-->
           <!--</div>-->
 
-          @if(Session::has('status'))
-                    <div class="alert alert-{{ Session::get('status') }}">
-                        <i class="fa fa-building-o" aria-hidden="true"></i> {{ Session::get('message') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-                    </div>
-            @endif
+         
           <div class=" intercandidates_sec fw">
             <h3>{{ count($intrestedCandidate ?? '')}} Interested Candidates</h3>
             @if(isset($intrestedCandidate))
             @foreach($intrestedCandidate as $value)
-            @php 
+            @php
             $studentDetails = DB::table('users')->where('id', $value->student_id)->first();
             $studentResume = DB::table('student_resume')->where('student_id', $value->student_id)->first();
 
@@ -81,16 +77,25 @@
                       </h4>
                     </div>
                   </div>
-
+                  @if($value->status ==='2')
+                  <span>Selected</span>
+                  @endif
+                  @if($value->status ==='3')
+                  <span>Rejected</span>
+                  @endif
                   <div class="col_grid4">
                     <div class="commentsApply fw">
                       <div class="commantsChat">
-                      <a href="{{ URL::to('/message')}}" target="_blank">
-                        <img src="{{ URL::asset('/public/assets/images/messageIcon.png') }}" alt="icon">
-                      </a>
+                        <a href="{{ URL::to('/message')}}" target="_blank">
+                          <img src="{{ URL::asset('/public/assets/images/messageIcon.png') }}" alt="icon">
+                        </a>
                       </div>
                       <div class="applyBtn">
-                        <a href="{{ URL::to('student-selected',$studentDetails->id) }}/{{ $Data[0]->user_id }}" class="input-btn">Shortlist & Send Email</a>
+                        <a href="{{ URL::to('student-selected',$studentDetails->id) }}/{{ $Data[0]->user_id }}/{{$value->job_id}}" class="input-btn">Shortlist & Send Email</a>
+                      </div>
+                      <span><br></span>
+                      <div class="applyBtn">
+                        <a href="{{ URL::to('student-reject',$studentDetails->id) }}/{{ $Data[0]->user_id }}/{{$value->job_id}}" class="input-btn">Reject & Send Email</a>
                       </div>
                     </div>
                   </div>
@@ -115,11 +120,7 @@
                           </a>
                         </div>
                       </div>
-                      <div class="text-right  col_grid3">
-                        <div class="applyBtn">
-                          <a href="{{ URL::to('student-reject',$studentDetails->id) }}/{{ $Data[0]->user_id }}" class="input-btn redText">Reject</a>
-                        </div>
-                      </div>
+
                     </div>
                   </div>
                 </div>

@@ -4,6 +4,10 @@
 			<a href="{{URL::to('addblog_redirect')}}">Publish New Blog</a>
 		</span>
 	</h3>
+	<div id="loading_b">
+		<!-- <img id="loading-image" src="http://cdn.nirmaltv.com/images/generatorphp-thumb.gif" alt="Loading..." /> -->
+		<img id="loading-image" src="{{ URL::asset('/public/uploads/TheInternifyAnimatedLogo.gif') }}" alt="Loading..." />
+	</div>
 	<div class="row">
 		<div class="col-md-12 listtable-sec">
 			<table class="table listjob_table text-left" id="listblog_table">
@@ -84,7 +88,7 @@
 		</div>
 	</div>
 </div>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
 <!-- Table Search -->
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -116,5 +120,11 @@
 <script>
 	$(document).ready(function() {
 		$('#listblog_table').DataTable({order:[]});
+	});
+</script>
+<script>
+	$(window).load(function() {
+		//alert("hi");
+		$('#loading_b').hide();
 	});
 </script>

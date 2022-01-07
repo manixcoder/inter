@@ -78,25 +78,7 @@
         </div>
         <div class="form_sec fw">
 
-          @if(Session::has('status'))
-          <div class="hover_bkgr_fricc resumeUpload_popup successfullyModalPopup">
-            <div class='content fw'>
-              <div class="imgcheck_icon fw">
-                <img src="{{ asset('public/assets/images/succcessfull.png')}}" alt="icon" />
-              </div>
-              <h3 class="">Job Posted Successfully</h3>
-              <!--p>Recruiter will contact you through <br />your email or mobile number.</p -->
-            </div>
-          </div>
-          <?php
-          // sleep(10);
-          ?>
-          <!-- <script type="text/javascript">
-            window.location = "{{ URL::to('/recruiter-listings') }}";//here double curly bracket
-            </script> -->
-
-
-          @endif
+         
 
           <form action="{{ URL::to('add-job')}}" method="POST" id="FormValidation" name="postJob" enctype="multipart/form-data">
             @csrf
@@ -119,7 +101,7 @@
                         <option value="Front-end Developer">Front-end Developer</option>
                         <option value="Financial Analyst">Financial Analyst</option>
                       </select -->
-                  <input type="text" name="job_title" class="form-contorl" id="job_title" required>
+                  <input type="text" name="job_title" class="form-control" id="job_title" required>
                 </div>
               </div>
               <div class="col_grid6 ">
@@ -135,7 +117,7 @@
                         <option value="Chandigarh">Chandigarh</option>
                         <option value="Hydrabad">Hydrabad</option>
                       </select> -->
-                  <input type="text" name="location" class="form-contorl" id="location" required>
+                  <input type="text" name="location" class="form-control" id="location" required>
                 </div>
               </div>
 
@@ -174,7 +156,7 @@
                     <i>
                       <img src="{{ asset('public/assets/images/add.png') }}" alt="img">
                     </i>
-                    Add More Offer Point
+                    Add More Offer
                   </span>
                 </div>
               </div>

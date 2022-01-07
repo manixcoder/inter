@@ -84,9 +84,17 @@
               @endif
             </div>
             <div class="profile_publicDetail">
-              <h4 class="clrwht font36text  semiboldfont_fmly">{{$OrgData->name}}</h4>
-              <h4 class="clrwht font36text  semiboldfont_fmly"><a href="mailto:<?php echo $OrgData->email ?>">{{$OrgData->email}}</a></h4>
-              <h4 class="clrwht font36text  semiboldfont_fmly">{{$OrgData->phone}}</h4>
+              <h4 class="clrwht font36text  semiboldfont_fmly">
+                {{$OrgData->name}}
+              </h4>
+              <h4 class="clrwht font36text  semiboldfont_fmly">
+                <a href="mailto:<?php echo $OrgData->email ?>">
+                  {{$OrgData->email}}
+                </a>
+              </h4>
+              <h4 class="clrwht font36text  semiboldfont_fmly">
+                {{$OrgData->phone}}
+              </h4>
               <div class="progressbar_sec whtprogressBar fw">
                 <div class="progressbar_cont fw">
                   <span style="width: <?php echo $count; ?>%;"></span>
@@ -108,9 +116,9 @@
           <li>
             <a href="{{url('student-profile-basic-info')}}" class="active">My Details</a>
           </li>
-          <li>
+          <!-- <li>
             <a href="{{url('student-posts')}}">My Posts</a>
-          </li>
+          </li> -->
           <li>
             <a href="{{url('student-applications')}}">My Applications</a>
           </li>
@@ -136,6 +144,9 @@
                         <div class="form-group">
                           <label>Email Address</label>
                           <input type="email" name="email" value="{{$OrgData->email}}" class="form-control" maxlength="30" size="100" required>
+                          @error('email')
+                          <small class="form-control-feedback">{{ $errors->first('email') }}</small>
+                          @enderror
                           <span class="inputcheck"><img src="{{ asset('public/assets/images/verified.png')}}" alt="icon"></span>
                         </div>
                       </div>
@@ -143,7 +154,9 @@
                         <div class="form-group">
                           <label>Mobile Number</label>
                           <input type="text" name="phone" value="{{$OrgData->phone}}" class="form-control" maxlength="10" minlength="10" size="10" required>
-
+                          @error('phone')
+                          <small class="form-control-feedback">{{ $errors->first('phone') }}</small>
+                          @enderror
                         </div>
                       </div>
                       <div class="col_grid6">
@@ -155,23 +168,21 @@
                       <div class="col_grid6 unlock_sec">
                         <div class="form-group">
                           <label>Gender</label>
-                          <select name="gender" class="form-control" id="selectbox1">
-                            @if($OrgData->gender==0)
-                            <option value="0">Male</option>
-                            <option value="1">Female</option>
-                            @endif
-                            @if($OrgData->gender==1)
-                            <option value="1">Female</option>
-                            <option value="0">Male</option>
-                            @endif
+                          <select name="gender" class="form-control">
+                            <option value="0" {{ $OrgData->gender == '0' ? 'selected' : '' }}>Male</option>
+                            <option value="1" {{ $OrgData->gender == '1' ? 'selected' : '' }}>Female</option>
+                            <option value="2" {{ $OrgData->gender == '2' ? 'selected' : '' }}>Non-Binary</option>
                           </select>
                         </div>
                       </div>
+                      @if($userid != Auth::user()->id)
+                      @else
                       <div class="col_grid12 profile_update_btn text-center">
                         <div class="form-group">
                           <input type="submit" value="Update" class="input-btn">
                         </div>
                       </div>
+                      @endif
                     </div>
                   </form>
                 </div>
@@ -192,9 +203,12 @@
                   </div>
                 </div>
                 <div class="col_grid3 profile_update_btn text-center">
+                  @if($userid != Auth::user()->id)
+                  @else
                   <div class="form-group">
                     <input type="submit" value="Update" class="input-btn">
                   </div>
+                  @endif
                 </div>
               </div>
             </form>
@@ -203,6 +217,8 @@
         <div class="fw educationSec aboutusBg smaeHeading">
           <div class="fw aboutusBg_sec">
             <div class="lgcontainer">
+              @if($userid != Auth::user()->id)
+              @else
               <h3 href="javascript:void(0);" data-modal="#education_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
                 Education
                 <span class="pull-right font20Text">
@@ -212,6 +228,7 @@
                   Add
                 </span>
               </h3>
+              @endif
               <form class="form_sec fw">
                 <div class="innerrow">
                   @foreach($edData as $ed)
@@ -219,7 +236,7 @@
                   <div class="col_grid12 ">
                     <div class="form-group">
                       <label>School Name</label>
-                      <input type="text" value="{{$ed->school_name}}" placeholder="School Name" maxlength="200" class="form-control" readonly>
+                      <input type="text" value="{{$ed->school_name}}" maxlength="200" class="form-control" readonly>
                     </div>
                   </div>
 
@@ -244,6 +261,8 @@
                             <input type="text" onblur="yearValidation(this.value,event)" id="year" value="{{$ed->year}}" placeholder="Year" class="form-control" readonly>
                           </div>
                         </div>
+                        @if($userid != Auth::user()->id)
+                        @else
                         <div class="smaeHeading rightedit_sec">
                           <a class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#education_update_detail_{{$ed->id}}">
                             <i>
@@ -259,6 +278,7 @@
                           </a>
 
                         </div>
+                        @endif
                       </div>
                     </div>
                   </div>
@@ -277,20 +297,20 @@
           <form class="form_sec fw col_grid12" action="{{ url('update_student_education') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class='content fw'>
-              <h3 class="modal_heading">Update Course</h3>
+              <h3 class="modal_heading">Update Course/Degree</h3>
               <div class="form_sec fw ">
                 <div class="innerrow">
                   <div class="col_grid6">
                     <div class="form-group">
                       <label>School Name</label>
-                      <input type="text" name="school_name" value="{{$ed->school_name}}" placeholder="BSc in Cyber Security" class="form-control" required />
+                      <input type="text" name="school_name" value="{{$ed->school_name}}" class="form-control" required />
                       <input type="hidden" name="id" value="{{$ed->id}}" />
                     </div>
                   </div>
                   <div class="col_grid6 ">
                     <div class="form-group">
-                      <label>Course</label>
-                      <input type="text" name="technology" value="{{$ed->name_of_technology}}" maxlength="200" placeholder="Enter Course" class="form-control" required />
+                      <label>Course/Degree</label>
+                      <input type="text" name="technology" value="{{$ed->name_of_technology}}" maxlength="200" class="form-control" required />
                     </div>
                   </div>
                   <div class="col_grid6 ">
@@ -316,8 +336,10 @@
         @endforeach
         <div class="fw educationSec aboutusBg smaeHeading paddTop0">
           <div class="fw aboutusBg_sec">
-            
+
             <div class="lgcontainer">
+              @if($userid != Auth::user()->id)
+              @else
               <h3 href="javascript:void(0);" data-modal="#experience_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
                 Experience
                 <span class="pull-right font20Text">
@@ -326,6 +348,7 @@
                   Add
                 </span>
               </h3>
+              @endif
               <div class="boxShodewBg fw mrtop0 experienceBox">
                 @foreach($exData as $exp)
 
@@ -347,6 +370,8 @@
                       <p class="font24Text clrGray">{{$exp->location}} <br /> {{$exp->duration_from}} - {{$exp->duration_to}}</p>
                     </div>
                   </div>
+                  @if($userid != Auth::user()->id)
+                  @else
                   <div class="col_grid3">
                     <span class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#experience_update_detail_{{$exp->id}}">
                       <i>
@@ -361,6 +386,7 @@
                       Delete
                     </a>
                   </div>
+                  @endif
                 </div>
                 <div class='modal personal_DtlPop' id='experience_update_detail_{{$exp->id}}'>
                   <div class="close fw">
@@ -387,7 +413,7 @@
                           </div>
                           <div class="col_grid6 ">
                             <div class="form-group">
-                              <label> From</label>
+                              <label>From</label>
                               <input type="date" name="duration_from" value="{{ $exp->duration_from }}" class="form-control" required />
                             </div>
                           </div>
@@ -435,6 +461,8 @@
         <div class="fw educationSec aboutusBg smaeHeading paddTop0">
           <div class="fw aboutusBg_sec form_sec">
             <div class="lgcontainer">
+              @if($userid != Auth::user()->id)
+              @else
               <h3 data-modal="#certificate_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
                 Certificates
                 <span class="pull-right font20Text">
@@ -444,6 +472,7 @@
                   Add
                 </span>
               </h3>
+              @endif
               <div class="innerrow certificatesSec">
 
                 @foreach($certData as $cert)
@@ -471,6 +500,8 @@
                     </div>
                   </div>
                   <div class="smaeHeading rightedit_sec">
+                    @if($userid != Auth::user()->id)
+                    @else
                     <h3>
                       <span class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#certificate_update_detail_{{$cert->id}}">
                         <i>
@@ -485,6 +516,7 @@
                         Delete
                       </a>
                     </h3>
+                    @endif
                   </div>
                 </div>
                 <div class='modal personal_DtlPop' id='certificate_update_detail_{{$cert->id}}'>
@@ -533,6 +565,8 @@
         <div class="fw educationSec aboutusBg smaeHeading paddTop0">
           <div class="fw aboutusBg_sec form_sec">
             <div class="lgcontainer">
+              @if($userid != Auth::user()->id)
+              @else
               <h3 data-modal="#industry_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
                 My Favourite Industries
                 <span class="pull-right font20Text">
@@ -542,15 +576,19 @@
                   Add
                 </span>
               </h3>
+              @endif
               <ul class="favouriteIndus_sec fw">
                 @foreach($indusData as $indus)
                 <li>
                   <a href="#" class="input-btn">
                     {{$indus->industries_name}}
                   </a>
+                  @if($userid != Auth::user()->id)
+                  @else
                   <a href="{{ url('delete_student_industry/'.$indus->id) }}" class="cross-iconpopup">
                     <i class="fa fa-times" aria-hidden="true"></i>
                   </a>
+                  @endif
                 </li>
                 @endforeach
               </ul>
@@ -560,10 +598,31 @@
         <div class="fw educationSec aboutusBg smaeHeading paddTop0">
           <div class="fw aboutusBg_sec form_sec">
             <div class="lgcontainer">
-              <h3 data-modal="#business_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">Business Functions I want to Work in <span class="pull-right font20Text"><i><img src="{{ asset('public/assets/images/add.png')}}" alt="img" /></i>Add</span></h3>
+              @if($userid != Auth::user()->id)
+              @else
+              <h3 data-modal="#business_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
+                Business Functions I want to Work in
+                <span class="pull-right font20Text">
+                  <i>
+                    <img src="{{ asset('public/assets/images/add.png')}}" alt="img" />
+                  </i>
+                  Add
+                </span>
+              </h3>
+              @endif
               <ul class="favouriteIndus_sec fw">
                 @foreach($busiData as $business)
-                <li><a href="#" class="input-btn">{{$business->business_functions_name}}</a><a href="{{ url('delete_student_business/'.$business->id) }}" class="cross-iconpopup"><i class="fa fa-times" aria-hidden="true"></i></a></li>
+                <li>
+                  <a href="#" class="input-btn">
+                    {{$business->business_functions_name}}
+                  </a>
+                  @if($userid != Auth::user()->id)
+                  @else
+                  <a href="{{ url('delete_student_business/'.$business->id) }}" class="cross-iconpopup">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                  </a>
+                  @endif
+                </li>
                 @endforeach
               </ul>
             </div>
@@ -572,10 +631,31 @@
         <div class="fw educationSec aboutusBg smaeHeading paddTop0">
           <div class="fw aboutusBg_sec form_sec">
             <div class="lgcontainer">
-              <h3 data-modal="#hobbies_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">Hobbies & Interests <span class="pull-right font20Text"><i><img src="{{ asset('public/assets/images/add.png')}}" alt="img" /></i>Add</span></h3>
+              @if($userid != Auth::user()->id)
+              @else
+              <h3 data-modal="#hobbies_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
+                Hobbies & Interests
+                <span class="pull-right font20Text">
+                  <i>
+                    <img src="{{ asset('public/assets/images/add.png')}}" alt="img" />
+                  </i>
+                  Add
+                </span>
+              </h3>
+              @endif
               <ul class="favouriteIndus_sec fw">
                 @foreach($hobbyData as $hobby)
-                <li><a href="#" class="input-btn">{{$hobby->hobbies_name}}</a><a href="{{ url('delete_student_hobby/'.$hobby->id) }}" class="cross-iconpopup"><i class="fa fa-times" aria-hidden="true"></i></a></li>
+                <li>
+                  <a href="#" class="input-btn">
+                    {{$hobby->hobbies_name}}
+                  </a>
+                  @if($userid != Auth::user()->id)
+                  @else
+                  <a href="{{ url('delete_student_hobby/'.$hobby->id) }}" class="cross-iconpopup">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                  </a>
+                  @endif
+                </li>
                 @endforeach
               </ul>
             </div>
@@ -585,13 +665,24 @@
           <div class="fw aboutusBg_sec form_sec">
             <div class="lgcontainer">
               <div class="boxShodewBg fw">
+                @if($userid != Auth::user()->id)
+                @else
                 <h3 data-modal="#accomplishment_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
+                  <!-- <h3 data-modal="#accomplishment_add_detail" class="font36text  bukhariSrptfont_fmly clrred "> -->
                   Accomplishments
                   <span class="pull-right font20Text">
                     <i><img src="{{ asset('public/assets/images/add.png')}}" alt="img" /></i>
                     Add
+                    <!-- <select name="" id="" class="font36text  bukhariSrptfont_fmly clrred open-modal">
+                      <option value=""> Add</option>
+                      <option value="Course" data-modal="#accomplishment_add_detail">Course</option>
+                      <option value="Awards" data-modal="#accomplishment_add_detail">Awards</option>
+                      <option value="Test Scores" data-modal="#accomplishment_add_detail">Test Scores</option>
+                      <option value="Publications" data-modal="#accomplishment_add_detail">Publications</option>
+                    </select> -->
                   </span>
                 </h3>
+                @endif
 
                 <?php $i = 1; ?>
                 @foreach($accomData as $key=> $accom)
@@ -604,9 +695,16 @@
                       <p>{{$accom->test_scores}}</p>
                       <p>{{$accom->publications}}</p>
                     </div>
+                    @if($userid != Auth::user()->id)
+                    @else
                     <div class="col_grid3 text-right">
-                      <span class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#accomplishment_update_detail_{{$accom->id}}"><i><img src="{{ asset('public/assets/images/edit.png')}}" alt="img"></i>Edit</span>
+                      <span class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#accomplishment_update_detail_{{$accom->id}}">
+                        <i>
+                          <img src="{{ asset('public/assets/images/edit.png')}}" alt="img"></i>
+                        Edit
+                      </span>
                     </div>
+                    @endif
                   </div>
                 </div>
                 <div class='modal personal_DtlPop' id='accomplishment_update_detail_{{$accom->id}}'>
@@ -633,26 +731,26 @@
                           <div class="col_grid6">
                             <div class="form-group">
                               <label>Course Name</label>
-                              <input type="text" value="{{$accom->course_name}}" name="course_name" maxlength="200" class="form-control" required />
+                              <input type="text" value="{{$accom->course_name}}" name="course_name" maxlength="200" class="form-control" />
                               <input type="hidden" value="{{$accom->id}}" name="id" />
                             </div>
                           </div>
                           <div class="col_grid6 ">
                             <div class="form-group">
                               <label>Award</label>
-                              <input type="text" value="{{$accom->awards}}" name="award" maxlength="200" class="form-control" required />
+                              <input type="text" value="{{$accom->awards}}" name="award" maxlength="200" class="form-control" />
                             </div>
                           </div>
                           <div class="col_grid6 ">
                             <div class="form-group">
                               <label>Test Scores</label>
-                              <input type="text" value="{{$accom->test_scores}}" name="test_scores" maxlength="200" class="form-control" required />
+                              <input type="text" value="{{$accom->test_scores}}" name="test_scores" maxlength="200" class="form-control" />
                             </div>
                           </div>
                           <div class="col_grid6 ">
                             <div class="form-group">
                               <label>Publications</label>
-                              <input type="text" value="{{$accom->publications}}" name="publications" maxlength="200" class="form-control" required />
+                              <input type="text" value="{{$accom->publications}}" name="publications" maxlength="200" class="form-control" />
                             </div>
                           </div>
                         </div>
@@ -727,25 +825,25 @@
     <form class="form_sec fw col_grid12" action="{{ url('add_student_education') }}" method="POST" enctype="multipart/form-data">
       @csrf
       <div class='content fw'>
-        <h3 class="modal_heading">Add Course</h3>
+        <h3 class="modal_heading">Add Course/Degree</h3>
         <div class="form_sec fw ">
           <div class="innerrow">
             <div class="col_grid6">
               <div class="form-group">
                 <label>School Name</label>
-                <input type="text" name="school_name" placeholder="Enter School Name" maxlength="200" class="form-control" required />
+                <input type="text" name="school_name" maxlength="200" class="form-control" required />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
-                <label>Course</label>
-                <input type="text" name="technology" placeholder="Enter Course name" class="form-control" maxlength="200" required />
+                <label>Course/Degree</label>
+                <input type="text" name="technology" class="form-control" maxlength="200" required />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Percentage</label>
-                <input type="text" name="percentage" placeholder="percentage" class="form-control" maxlength="200" required />
+                <input type="text" name="percentage" class="form-control" maxlength="200" required />
               </div>
             </div>
             <div class="col_grid6 ">
@@ -780,13 +878,13 @@
             <div class="col_grid6">
               <div class="form-group">
                 <label>Company Name</label>
-                <input type="text" name="company_name" placeholder="Enter Company Name" maxlength="200" class="form-control" required />
+                <input type="text" name="company_name" maxlength="200" class="form-control" required />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Job Type</label>
-                <input type="text" name="profile_type" placeholder="Enter Job Type" maxlength="200" class="form-control" required />
+                <input type="text" name="profile_type" maxlength="200" class="form-control" required />
               </div>
             </div>
             <div class="col_grid6 ">
@@ -837,13 +935,13 @@
             <div class="col_grid6">
               <div class="form-group">
                 <label>Certificate Name</label>
-                <input type="text" name="certificate_name" maxlength="200" placeholder="Enter Certificate Name" class="form-control" required />
+                <input type="text" name="certificate_name" maxlength="200" class="form-control" required />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
-                <label>Certificate By</label>
-                <input type="text" name="certificate_by" maxlength="200" placeholder="Enter Certificate By" class="form-control" required />
+                <label>Certified by</label>
+                <input type="text" name="certificate_by" maxlength="200" class="form-control" required />
               </div>
             </div>
             <div class="col_grid6 ">
@@ -975,25 +1073,25 @@
             <div class="col_grid6">
               <div class="form-group">
                 <label>Course Name</label>
-                <input type="text" name="course_name" maxlength="200" class="form-control" required />
+                <input type="text" name="course_name" maxlength="200" class="form-control" />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Award</label>
-                <input type="text" name="award" maxlength="200" class="form-control" required />
+                <input type="text" name="award" maxlength="200" class="form-control" />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Test Scores</label>
-                <input type="text" name="test_scores" maxlength="200" class="form-control" required />
+                <input type="text" name="test_scores" maxlength="200" class="form-control" />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Publications</label>
-                <input type="text" name="publications" maxlength="200" class="form-control" required />
+                <input type="text" name="publications" maxlength="200" class="form-control" />
               </div>
             </div>
           </div>
@@ -1058,32 +1156,32 @@
       // if (!(imgtype == match[0]) || (imgtype == match[1])) {
       //   $('#mgs_ta').html('<p style="color:red">Plz select a valid type image..only jpg jpeg allowed</p>');
       // } else {
-        $('#mgs_ta').empty();
-        //---image preview
-        var reader = new FileReader();
-        reader.onload = function(ev) {
-          $('#stu_id').attr('src', ev.target.result).css('width', '150px').css('height', '150px');
+      $('#mgs_ta').empty();
+      //---image preview
+      var reader = new FileReader();
+      reader.onload = function(ev) {
+        $('#stu_id').attr('src', ev.target.result).css('width', '150px').css('height', '150px');
+      }
+      reader.readAsDataURL(this.files[0]);
+      /// preview end
+      //upload
+      var postData = new FormData();
+      postData.append('file', this.files[0]);
+      var url = "{{url('student-image-upload')}}";
+      $.ajax({
+        headers: {
+          'X-CSRF-Token': $('meta[name=csrf_token]').attr('content')
+        },
+        async: true,
+        type: "post",
+        contentType: false,
+        url: url,
+        data: postData,
+        processData: false,
+        success: function() {
+          console.log("success");
         }
-        reader.readAsDataURL(this.files[0]);
-        /// preview end
-        //upload
-        var postData = new FormData();
-        postData.append('file', this.files[0]);
-        var url = "{{url('student-image-upload')}}";
-        $.ajax({
-          headers: {
-            'X-CSRF-Token': $('meta[name=csrf_token]').attr('content')
-          },
-          async: true,
-          type: "post",
-          contentType: false,
-          url: url,
-          data: postData,
-          processData: false,
-          success: function() {
-            console.log("success");
-          }
-        });
+      });
       //}
     });
 
@@ -1221,7 +1319,7 @@
     });
 
     // Iterate over each select element
-    $('select').each(function() {
+    $('select1').each(function() {
 
       // Cache the number of options
       var $this = $(this),

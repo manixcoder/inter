@@ -37,12 +37,7 @@ if($searchdata !='No'){
         </div>
       </form>
     </div>
-    @if(Session::has('status'))
-    <div class="alert alert-{{ Session::get('status') }}">
-      <i class="fa fa-building-o" aria-hidden="true"></i> {{ Session::get('message') }}
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-    </div>
-    @endif
+   
     <div class="fw posted_heading">
       <h3 class="font36text clrBlack semiboldfont_fmly">
         <span>You have listed ({{ count($listedjobs ?? '') }} jobs)</span>
@@ -80,8 +75,11 @@ if($searchdata !='No'){
 
             <div class="col_grid9">
               <ul>
-                @foreach(unserialize($value->offer) as $offer)
+                
+                @foreach(unserialize($value->offer) as $key => $offer)
+                @if($key < 3)
                 <li>{{ $offer }}</li>
+                @endif
                 @endforeach
                 <!-- <li>Be part of a dynamic and supportive work environment</li> -->
               </ul>

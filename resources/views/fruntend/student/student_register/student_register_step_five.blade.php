@@ -29,6 +29,8 @@
             <div class="from-group fw">
               <input type="hidden" name="student_id" value="{{ $insertid ?? ''}}">
               <input type="hidden" name="setep_five" value="setep_five">
+              @php  $data = app('App\User')->where('id',$insertid)->first(); @endphp
+              We’ve sent a 4-digit code to {{ $data->email }}
               <input type="text" name="otp" maxlength="4" pattern="\d{4}" required class="form-control" placeholder="Enter Email 4-digit code here" required="" />
             </div>
             <div class="text-right fw continue_topbtn">

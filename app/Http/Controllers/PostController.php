@@ -47,15 +47,15 @@ class PostController extends Controller
 
     $insertData = DB::table('post_comment')->insert($data);
     $users = User::where('id', '!=', Session::get('gorgID'))->get();
-    $notificationData = array(
-      'comment_user' => Auth::user()->id,
-      'post_title' => $postdata->heading,
-      'notification_type' => 'comment',
-      'comment' => $request->comment
-    );
-    foreach ($users as $user) {
-      $user->notify(new PostCommentNotification($notificationData));
-    }
+    // $notificationData = array(
+    //   'comment_user' => Auth::user()->id,
+    //   'post_title' => $postdata->heading,
+    //   'notification_type' => 'comment',
+    //   'comment' => $request->comment
+    // );
+    // foreach ($users as $user) {
+    //   $user->notify(new PostCommentNotification($notificationData));
+    // }
     return back();
   }
 
@@ -110,10 +110,10 @@ class PostController extends Controller
       }
     }
 
-    $users = User::where('id', '!=', Session::get('gorgID'))->get();
-    foreach ($users as $user) {
-      $user->notify(new UserLikePost($notificationData));
-    }
+    // $users = User::where('id', '!=', Session::get('gorgID'))->get();
+    // foreach ($users as $user) {
+    //   $user->notify(new UserLikePost($notificationData));
+    // }
     // dd($notificationData);
   }
 

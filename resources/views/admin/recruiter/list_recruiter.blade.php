@@ -1,11 +1,15 @@
 <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>-->
 <div class="content dashboard-pg">
+	<div id="loading_r">
+		<!-- <img id="loading-image" src="http://cdn.nirmaltv.com/images/generatorphp-thumb.gif" alt="Loading..." /> -->
+		<img id="loading-image" src="{{ URL::asset('/public/uploads/TheInternifyAnimatedLogo.gif') }}" alt="Loading..." />
+	</div>
 	<h3 class="heading">Recruiters ({{ $DataCount}} )
 		<span class="add_student_btn">
 			<a href="{{ URL::to('redirect-recruiter')}}">Add New Recruiter</a>
 		</span>
 	</h3>
-	
+
 	<div class="row">
 		<div class="col-md-12 listtable-sec">
 			<table class="table listjob_table text-left" id="listrecruiter_table">
@@ -105,7 +109,7 @@
 	</div>
 </div>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
 <!-- Table Search -->
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -137,6 +141,14 @@
 
 <script>
 	$(document).ready(function() {
-		$('#listrecruiter_table').DataTable({order:[]});
+		$('#listrecruiter_table').DataTable({
+			order: []
+		});
+	});
+</script>
+<script>
+	$(window).load(function() {
+		//alert("hi");
+		$('#loading_r').hide();
 	});
 </script>

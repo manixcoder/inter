@@ -35,6 +35,16 @@ class DashboardController extends Controller
     $userRole = Session::get('userRole');
     $id = Session::get('gorgID');
     $user = User::find($id);
+
+    foreach(Auth()->user()->Notifications as $notification){
+      //dd($notification); 
+      $userData = DB::table('users')->where('id',  $notification->data['comment_user'])->first();
+      if (!$userData) {
+        DB::table('notifications')->where('id',  $notification->id)->delete();
+      }
+    }
+        
+       
     //dd($user);
     //   foreach ($user->notifications as $notification) {
     //     dd($notification);

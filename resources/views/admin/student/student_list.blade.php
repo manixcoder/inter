@@ -1,11 +1,14 @@
 <div class="content dashboard-pg">
+	<div id="loading">
+		<!-- <img id="loading-image" src="http://cdn.nirmaltv.com/images/generatorphp-thumb.gif" alt="Loading..." /> -->
+		<img id="loading-image" src="{{ URL::asset('/public/uploads/TheInternifyAnimatedLogo.gif') }}" alt="Loading..." />
+	</div>
 	<h3 class="heading">Students ({{$DataCount ?? ''}})
 		<span class="add_student_btn">
 			<a href="{{ 'addstudent_redirect' }}">Add New Student</a>
 		</span>
 	</h3>
 	<div class="row">
-
 		<div class="col-md-12 listtable-sec">
 			<table class="table listjob_table text-left" id="liststudent_table">
 				<thead>
@@ -106,10 +109,11 @@
 	</div>
 </div>
 <!-- Table Search -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$(".serachbox").on("change", function() {
-			
+
 			var value = $(this).val().toLowerCase();
 			$("#tabledata tr").filter(function() {
 				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
@@ -134,8 +138,14 @@
 </script>
 <script>
 	$(document).ready(function() {
-		$('#liststudent_table').DataTable(
-			{order:[]}
-		);
+		$('#liststudent_table').DataTable({
+			order: []
+		});
+	});
+</script>
+<script>
+	$(window).load(function() {
+		//alert("hi");
+		$('#loading').hide();
 	});
 </script>

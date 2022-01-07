@@ -17,11 +17,11 @@
     $count = $count + 20;
   }
   if ($loginby->specialties != '') {
-    $count = $count + 10;
+    $count = $count + 20;
   }
-  if ($loginby->address != '') {
-    $count = $count + 10;
-  }
+  // if ($loginby->address != '') {
+  //   $count = $count + 10;
+  // }
   // if ($hobbies) {
   //   $count = $count + 10;
   // }

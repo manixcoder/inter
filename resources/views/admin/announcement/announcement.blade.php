@@ -4,6 +4,10 @@
     <a href="{{ URL::to('add_announcement')}}">Create Announcement</a>
     </span>
    </h3>
+   <div id="loading_an">
+      <img id="loading-image" src="{{ URL::asset('/public/uploads/TheInternifyAnimatedLogo.gif') }}" alt="Loading..." />
+      <!-- <img id="loading-image" src="http://cdn.nirmaltv.com/images/generatorphp-thumb.gif" alt="Loading..." /> -->
+    </div>
    <div class="row">
       <div class="col-md-12 listtable-sec">
          <table class="table listjob_table text-left" id="announcementlist">
@@ -76,6 +80,7 @@
 </div>
 
 <!-- Table Search -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
 <script type="text/javascript">
    $(document).ready(function(){
      $(".serachbox").on("keyup", function() {
@@ -91,3 +96,9 @@
       $('#announcementlist').DataTable({order:[]});
    });
 </script>
+<script>
+    $(window).load(function() {
+   // alert("hi");
+    $('#loading').hide();
+});
+  </script>

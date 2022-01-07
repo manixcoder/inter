@@ -13,10 +13,40 @@ class User extends Authenticatable
 
 
     protected $fillable = [
-        'name', 'email', 'password','profile_image','username','users_role','facebook_id','google_id','linkedin_id'
+        'users_role',
+        'name',
+        'email',
+        'profile_image',
+        'org_image',
+        'org_name',
+        'phone',
+        'otp',
+        'gender',
+        'dob',
+        'designation',
+        'requirter_overview',
+        'address',
+        'about',
+        'create_by',
+        'country_id',
+        'status',
+        'last_login',
+        'temp_pass',
+        'website',
+        'industry',
+        'company_size',
+        'headquarters',
+        'specialties', 'type',
+        'founded',
+        'created_at',
+        'updated_at',
+        'facebook_id',
+        'linkedin_id',
+        'google_id',
+        //'name', 'email', 'password','profile_image','username','users_role','facebook_id','google_id','linkedin_id'
     ];
 
-    
+
     protected $hidden = [
         'password', 'remember_token',
     ];
@@ -30,5 +60,4 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Role');
     }
-
 }

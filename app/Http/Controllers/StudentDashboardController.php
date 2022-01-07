@@ -22,7 +22,7 @@ use Hash;
 use Auth;
 use App\User;
 use Carbon;
-
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class StudentDashboardController extends Controller
 {
@@ -49,11 +49,13 @@ class StudentDashboardController extends Controller
       'userRole' => $userRole
     ]);
   }
-  public function deleteCourse($id){
+  public function deleteCourse($id)
+  {
     DB::table('education')->where('id', $id)->delete();
     return redirect()->back();
   }
-  public function deleteExperience($id){
+  public function deleteExperience($id)
+  {
     DB::table('experience')->where('id', $id)->delete();
     return redirect()->back();
   }
@@ -110,22 +112,41 @@ class StudentDashboardController extends Controller
     ]);
   }
 
-  public function studentReject(Request $request, $id, $r_id)
+  public function studentReject(Request $request, $id, $r_id, $j_id)
   {
     $recuratorData = DB::table('users')->where('id', $r_id)->first();
     $studentData = DB::table('users')->where('id', $id)->first();
+    $jobData = DB::table('jobs')->where('id', $j_id)->first();
+    $updateData = DB::table('job_applied')->where('job_id', $j_id)->where('student_id', $id)->update([
+      'status' => '3'
+    ]);
     // dd($recuratorData);
     $to = $studentData->email;
+    $INSERTJOBNAMEHERE = $jobData->job_title;
     $subject = "Rejection Mail";
+
     $message = "
-    <html>
-        <head>
-        </head>
-        <body>
-        <p> Hi " . $studentData->name . " </p>     
-        <p> Your aplication is rejected form " . $recuratorData->org_name . " </p>     
-        </body>
-        </html>";
+        <html>
+          <head></head>
+          <body>
+            <p> Dear " . $studentData->name . " </p>
+            <p>I hope this email finds you well.</p> 
+            <p>
+            Thank you for taking the time to apply to our " . $INSERTJOBNAMEHERE . " position. 
+            We wanted to let you know that we have chosen to move forward with a different candidate for our position.
+            </p> 
+            <p>Our team was impressed by your outstanding accomplishments and we think you could be a good fit for other future openings and we will reach out again if we find a good match.</p>
+            <p>We wish you all the best in your job search and future professional endeavours.</p>
+            <p> Best,<br> " . $recuratorData->org_name . " </p>     
+          </body>
+       </html>";
+    // Dear INSERT STUDENT NAME HERE,
+    // I hope this email finds you well.
+    // Thank you for taking the time to apply to our INSERT JOB NAME HERE position. We wanted to let you know that we have chosen to move forward with a different candidate for our position.
+    // Our team was impressed by your outstanding accomplishments and we think you could be a good fit for other future openings and we will reach out again if we find a good match.
+    // We wish you all the best in your job search and future professional endeavours.
+    // Best,
+    // COMPANY NAME
 
     // Always set content-type when sending HTML email
     $headers = "MIME-Version: 1.0" . "\r\n";
@@ -139,22 +160,46 @@ class StudentDashboardController extends Controller
     return redirect()->back()->with(array('status' => 'success', 'message' => 'Rejected successfully.'));
   }
 
-  public function studentSelected(Request $request, $id, $r_id)
+  public function studentSelected(Request $request, $id, $r_id, $j_id)
   {
     $recuratorData = DB::table('users')->where('id', $r_id)->first();
     $studentData = DB::table('users')->where('id', $id)->first();
+    $jobData = DB::table('jobs')->where('id', $j_id)->first();
+    $updateData = DB::table('job_applied')->where('job_id', $j_id)->where('student_id', $id)->update([
+      'status' => '2'
+    ]);
     // dd($recuratorData);
     $to = $studentData->email;
+    $INSERTJOBNAMEHERE = $jobData->job_title;
+    $INSERTCOMPANYNAME = $recuratorData->org_name;
     $subject = "Selection mail";
     $message = "
     <html>
     <head>
     </head>
     <body>
-    <p> Hi " . $studentData->name . " </p> 
-    <p> Your aplication is rejected form " . $recuratorData->org_name . " </p> 
+    <p> Dear " . $studentData->name . " </p>
+    <p>I hope this email finds you well.</p> 
+    <p>We are delighted to inform you that we have shortlisted your application for our " . $INSERTJOBNAMEHERE . "position. Your remarkable track record and outstanding achievements have amazed our team and we’d like to hope on a quick call with you to discuss your possible future with us at " . $INSERTCOMPANYNAME . ".</p>
+    <p>We hope you can consider.</p>
+    <p>Thank you for your cooperation.</p>
+    <p>Best,
+    " . $recuratorData->org_name . "</p>
+   
     </body>
     </html>";
+    //     Dear INSERT STUDENT NAME HERE,
+
+    // I hope this email finds you well.
+
+    // We are delighted to inform you that we have shortlisted your application for our INSERT JOB NAME HERE position. Your remarkable track record and outstanding achievements have amazed our team and we’d like to hop on a quick call with you to discuss your possible future with us at INSERT COMPANY NAME.
+
+    // We hope you can consider.
+
+    // Thank you for your cooperation.
+
+    // Best,
+    // COMPANY NAME
 
     // Always set content-type when sending HTML email
     $headers = "MIME-Version: 1.0" . "\r\n";
@@ -217,14 +262,27 @@ class StudentDashboardController extends Controller
   }
   public function update_student_personal_details(Request $request)
   {
+    //dd($request->all());
     $id = Session::get('gorgID');
-    $update = DB::table('users')->where('id', $id)->update([
+    $id = Auth::user()->id;
+    $this->validate($request, [
+      'phone'    => 'required|unique:users,phone,' . $id,
+      'email'     => 'required|unique:users,email,' . $id,
+    ]);
+    User::where('id', Auth::user()->id)->update([
       'name' => $request->name,
       'email' => $request->email,
       'phone' => $request->phone,
       'dob' => $request->dob,
       'gender' => $request->gender,
     ]);
+    // $update = DB::table('users')->where('id', $id)->update([
+    //   'name' => $request->name,
+    //   'email' => $request->email,
+    //   'phone' => $request->phone,
+    //   'dob' => $request->dob,
+    //   'gender' => $request->gender,
+    // ]);
     return redirect()->back();
   }
   public function add_student_education(Request $request)
@@ -438,7 +496,7 @@ class StudentDashboardController extends Controller
     $update = DB::table('accomplishments')
       ->insert([
         'user_id' => $id,
-        'accomplishment_type'=>$request->accomplishment_type,
+        'accomplishment_type' => $request->accomplishment_type,
         'course_name' => $request->course_name,
         'awards' => $request->award,
         'test_scores' => $request->test_scores,
@@ -453,7 +511,7 @@ class StudentDashboardController extends Controller
   {
     $update = DB::table('accomplishments')->where('id', $request->id)
       ->update([
-        'accomplishment_type'=>$request->accomplishment_type,
+        'accomplishment_type' => $request->accomplishment_type,
         'course_name' => $request->course_name,
         'awards' => $request->award,
         'test_scores' => $request->test_scores,
@@ -519,7 +577,8 @@ class StudentDashboardController extends Controller
     $id = Session::get('gorgID');
     $OrgData = DB::table('users')->where('id', $id)->first();
     $locationData = DB::table('jobs')->select('location')->groupBy('location')->get();
-    $titleData = DB::table('jobs')->select('job_title')->groupBy('job_title')->get();
+   // $titleData = DB::table('jobs')->select('job_title')->groupBy('job_title')->get();
+    $titleData = DB::table('jobs')->select('industry')->groupBy('industry')->get();
     $job_title = $request->job_title;
     $location = $request->location;
     if (empty($job_title) and empty($location)) {
@@ -534,7 +593,8 @@ class StudentDashboardController extends Controller
         ->join('users as r', 'jo.user_id', '=', 'r.id')
         ->where('jo.status', 0)
         ->where('jo.location', 'like', '%' . $location . '%')
-        ->where('jo.job_title', 'like', '%' . $job_title . '%')
+       // ->where('jo.job_title', 'like', '%' . $job_title . '%')
+        ->where('jo.industry', 'like', '%' . $job_title . '%')
         ->orderBy('jo.id', 'desc')
         ->select('jo.*', 'r.org_name', 'r.profile_image', 'r.org_image', 'r.users_role')
         ->get();
@@ -589,6 +649,7 @@ class StudentDashboardController extends Controller
       ->where('jo.id',  $id)
       ->select('jo.*', 'r.org_name', 'r.profile_image', 'r.org_image', 'r.users_role')
       ->first();
+    //dd($jobsData);
     $OrgData  = DB::table('users')->where('id', $jobsData->user_id)->first();
     return view('fruntend.student.student-job-details')->with([
       'OrgData' => $OrgData,

@@ -28,7 +28,7 @@
       </div>
       <div class="compnayProfile_user fw">
         <div class="userBox_img">
-          @if(@if($recruiterInfo->profile_image !=''))
+          @if($recruiterInfo->profile_image !='')
           <img src="{{ URL::asset('/public/uploads/') }}/{{ $recruiterInfo->profile_image ?? ''}}" alt="icon_logo" />
           @else
           <img src="{{ URL::asset('/public/uploads/placeholder.png') }}" alt="icon_logo" />
@@ -219,14 +219,14 @@
                         {{ date('d M Y | H:i', strtotime($postdata->date_time)) }}
                       </span>
                       @if($users->id != $postdata->user_id)
-                        @else
-                        <span class="delete_postbtn">
-                          <a href="{{ url('delete_student_post/'.$postdata->id) }}"><i>
+                      @else
+                      <span class="delete_postbtn">
+                        <a href="{{ url('delete_student_post/'.$postdata->id) }}"><i>
                             <img src="{{ asset('public/assets/images/delete.png')}}" alt="delete-icon" /></i>
-                            Delete Post
-                          </a>
-                        </span>
-                        @endif
+                          Delete Post
+                        </a>
+                      </span>
+                      @endif
                     </h4>
                   </div>
                 </div>
@@ -245,7 +245,7 @@
                   <a href="#"><span><img src="{{ URL::asset('/public/assets/images/commentIcon.png') }}" alt="icon"></span> 05 Comments</a>
                 </li>
                 <li>
-                <a href="{{ URL::to('/message')}}" target="_blank"><span><img src="{{ URL::asset('/public/assets/images/messageIcon.png') }}" alt="icon"></span> Message</a>
+                  <a href="{{ URL::to('/message')}}" target="_blank"><span><img src="{{ URL::asset('/public/assets/images/messageIcon.png') }}" alt="icon"></span> Message</a>
                 </li>
                 <li>
                   <a href="#"><span><img src="{{ URL::asset('/public/assets/images/shareIcon.png') }}" alt="icon"></span> Share</a>

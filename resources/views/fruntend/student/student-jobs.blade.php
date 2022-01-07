@@ -74,43 +74,22 @@
         </span>
       </div>
 
-      @if(Session::has('status'))
-      @if(Session::has('status') == 'success')
-      <div class="popupWapper">
-        <div class="modal cPassword_update_popup" id="cPassword_update">
-          <div class="close fw">
-            <a class="btn close-modal" data-modal="#cPassword_update" href="#">
-              <img src="{{ asset('public/assets/images/images/close.png' )}}" alt="icon">
-            </a>
-          </div>
-          <div class="content fw">
-            <div class="password_update_sec fw">
-              <figure class="fw">
-                <img src="{{ asset('public/assets/images/images/succcessfull.png') }}" alt="icon">
-              </figure>
-              <h3>{{ Session::get('message') }}</h3>
-            </div>
-          </div>
-        </div>
-      </div>
-      @endif
-      @endif
+     
       <div class="unlock_sec jobSearch_sec">
         <h4>Find internships that inspire</h4>
         <form method="get" action="{{url('student/jobs')}}">
           <div class="innerrow">
             <div class="col_grid5 rightmap_icon">
               <div class="form_group">
-                <!--select name="location" class="form-contorl" id="selectbox2" required>
+                <select name="location" class="form-contorl" id="selectbox2" required>
                   <option value="">Select Location</option>
                   @foreach($locationData as $ld)
-                  <option value="<?php // echo $ld->location 
-                                  ?>"><?php // echo $ld->location 
-                                                                  ?></option>
+                  <option value="<?php echo $ld->location; ?>">
+                    <?php echo $ld->location; ?></option>
                   @endforeach
 
-                </select-->
-                <select name="location" class="form-contorl" id="location" required>
+                </select>
+                <!-- <select name="location" class="form-contorl" id="location" required>
                   <option value="">Select Location</option>
                   <option value="Mumbai">Mumbai</option>
                   <option value="Delhi">Delhi</option>
@@ -119,25 +98,23 @@
                   <option value="Mohali">Mohali</option>
                   <option value="Chandigarh">Chandigarh</option>
                   <option value="Hydrabad">Hydrabad</option>
-                </select>
+                </select> -->
               </div>
             </div>
             <div class="col_grid4">
               <div class="form_group">
-                <!--select name="job_title" class="form-contorl" id="selectbox1" required>
-                  <option value="">Select Job Title</option>
+                <select name="job_title" class="form-contorl" id="selectbox1" required>
+                  <option value="">Select Industry</option>
                   @foreach($titleData as $td)
-                  <option value="<?php // echo $td->job_title 
-                                  ?>"><?php // echo $td->job_title 
-                                                                  ?></option>
+                  <option value="<?php echo $td->industry; ?>"><?php echo $td->industry; ?></option>
                   @endforeach
-                </select-->
-                <select name="job_title" class="form-contorl" id="job_title" required>
+                </select>
+                <!-- select name="job_title" class="form-contorl" id="job_title" required>
                   <option value="">Select Job Title</option>
                   <option value="Sales & Marketing Executive">Sales & Marketing Executive</option>
                   <option value="Front-end Developer">Front-end Developer</option>
                   <option value="Financial Analyst">Financial Analyst</option>
-                </select>
+                </select -->
               </div>
             </div>
             <div class="col_grid3  ">
@@ -154,16 +131,16 @@
       <div class="jobsDetailBox fw">
         <div class="profile_sec fw">
           <div class="compnayBoxImg">
-            @if($appl->users_role =='3')
-            <img src="{{ asset('public/uploads/'.$appl->org_image)}}" alt="images">
-            @elseif($appl->users_role =='2')
+            @if($appl->profile_image !='')
             <img src="{{ asset('public/uploads/'.$appl->profile_image)}}" alt="images">
             @else
             <img src="{{ asset('public/uploads/placeholder.png')}}" alt="images">
             @endif
           </div>
           <div class="compnay">
-            <h5>{{$appl->location}}</h5>
+            <h5>
+              {{ $appl->location }}
+            </h5>
             <span>
               <?php
               $userRole = Session::get('userRole');
@@ -176,24 +153,25 @@
               @else
               <a href="#" class="applied_btn">Applied</a>
               @endif
-
-
               {!! date('d M Y', strtotime($appl->created_at)) !!}
-
-
             </span>
           </div>
         </div>
         <div class="jobsDetailCont fw">
           <h3>{{ $appl->org_name }}</h3>
-          <p><a href="#" class="lightblue_text">{{$appl->job_title}}</a></p>
+          <p>
+            <a href="#" class="lightblue_text">
+              {{$appl->job_title}}
+            </a>
+          </p>
           <div class="innerrow">
             <div class="col_grid9">
               <ul>
-                @foreach(unserialize($appl->offer) as $offer)
-                <li>{{ $offer }}</li>
+                @foreach(unserialize($appl->offer) as $key=> $offer)
+                @if($key < 3)
+                <li><?php echo $offer ?></li>
+                @endif
                 @endforeach
-
               </ul>
             </div>
             <div class="col_grid3">
@@ -252,7 +230,7 @@
     <form class="form_sec fw col_grid12" action="{{ url('add_student_education') }}" method="POST" enctype="multipart/form-data">
       @csrf
       <div class='content fw'>
-        <h3 class="modal_heading">Add Course</h3>
+        <h3 class="modal_heading">Add Course/Degree</h3>
         <div class="form_sec fw ">
           <div class="innerrow">
             <div class="col_grid6">
@@ -263,7 +241,7 @@
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
-                <label>Technology</label>
+                <label>Course/Degree</label>
                 <input type="text" name="technology" placeholder="technology" class="form-control" required />
               </div>
             </div>
@@ -367,7 +345,7 @@
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
-                <label>Certificate By</label>
+                <label>Certified by</label>
                 <input type="text" name="certificate_by" class="form-control" required />
               </div>
             </div>
@@ -488,26 +466,37 @@
           <div class="innerrow">
             <div class="col_grid6">
               <div class="form-group">
+                <label>Accomplishment Type</label>
+                <select name="accomplishment_type" id="accomplishment_type" class="form-control" required>
+                  <option value="Course">Course</option>
+                  <option value="Awards">Awards</option>
+                  <option value="Test Scores">Test Scores</option>
+                  <option value="Publications">Publications</option>
+                </select>
+              </div>
+            </div>
+            <div class="col_grid6">
+              <div class="form-group">
                 <label>Course Name</label>
-                <input type="text" name="course_name" class="form-control" required />
+                <input type="text" name="course_name" class="form-control" />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Award</label>
-                <input type="text" name="award" class="form-control" required />
+                <input type="text" name="award" class="form-control" />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Test Scores</label>
-                <input type="text" name="test_scores" class="form-control" required />
+                <input type="text" name="test_scores" class="form-control" />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Publications</label>
-                <input type="text" name="publications" class="form-control" required />
+                <input type="text" name="publications" class="form-control" />
               </div>
             </div>
           </div>
@@ -597,7 +586,7 @@
               </div>
             </div>
             @endif
-            <div class="innerrow">              
+            <div class="innerrow">
             </div>
           </div>
           <div class="col_grid6 text-center">

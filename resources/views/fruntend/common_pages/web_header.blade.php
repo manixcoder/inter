@@ -1,9 +1,3 @@
-@if (!Auth::guest())
-
-@else
-@endif
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,16 +17,16 @@
 </head>
 
 <body class="lightwht_bg">
-@if (!Auth::guest())
-@php
-$userRole = Auth::user()->users_role;
-//$userRole = Session::get('userRole');
-//$id = Session::get('gorgID');
-$id = Auth::user()->id;
-$OrgData = DB::table('users')->where('id', $id)->first();
-//dd($OrgData);
-$todaysdate = date('Y-m-d').' 00:00:00';
-@endphp
+  @if (!Auth::guest())
+  @php
+  $userRole = Auth::user()->users_role;
+  //$userRole = Session::get('userRole');
+  //$id = Session::get('gorgID');
+  $id = Auth::user()->id;
+  $OrgData = DB::table('users')->where('id', $id)->first();
+  //dd($OrgData);
+  $todaysdate = date('Y-m-d').' 00:00:00';
+  @endphp
   <header class="header_sec flow2_header fw">
     <div class="lgcontainer">
       <div class="innerrow">
@@ -49,20 +43,25 @@ $todaysdate = date('Y-m-d').' 00:00:00';
               <span></span>
               <span></span>
             </div>
-           
-            @if(Auth::user()->users_role == 2)
+
+            @if(Auth::user()->users_role === '2')
             <ul class="menu_right">
               <li class="{{ request()->is('student-dashboard') ? 'active' : '' }}">
-                <a href="{{url('student-dashboard')}}">Home </a>
+                <a href="{{ URL::to('student-dashboard')}}">Home </a>
               </li>
               <li class="{{ request()->is('web/blog') ? 'active' : '' }} {{ request()->is('web/blog/detail') ? 'active' : '' }}">
-                <a href="{{url('web/blog')}}">Blogs </a>
+                <a href="{{ URL::to('web/blog')}}">Blogs </a>
               </li>
               <li class="{{ request()->is('student/jobs') ? 'active' : '' }}">
-                <a href="{{url('student/jobs')}}">Jobs </a>
+                <a href="{{ URL::to('student/jobs')}}">Jobs </a>
               </li>
               <li class="{{ request()->is('notification') ? 'active' : '' }}">
-                <a href="{{url('notification')}}">Notifications </a>
+                <a href="{{ URL::to('notification')}}">
+                  Notifications
+                  @if(auth()->user()->unreadNotifications->count() > 0)
+                  <span class="badge badge-light">{{ auth()->user()->unreadNotifications->count() }}</span>
+                  @endif
+                </a>
               </li>
               <li class="{{ request()->is('contact_us') ? 'active' : '' }}">
                 <a href="{{url('contact_us')}}">Contact Us </a>
@@ -74,45 +73,53 @@ $todaysdate = date('Y-m-d').' 00:00:00';
                 <a href="{{ URL::to('recruiter-dashboard') }}" class="subcategory">Home </a>
               </li>
               <li class="{{ request()->is('web/blog') ? 'active' : '' }} {{ request()->is('web/blog/detail') ? 'active' : '' }}">
-                <a href="{{URL::to('web/blog')}}" class="subcategory">Blogs </a>
+                <a href="{{ URL::to('web/blog')}}" class="subcategory">Blogs </a>
               </li>
               <li class="{{ request()->is('web/post/jobs') ? 'active' : '' }}">
-                <a href="{{URL::to('web/post/jobs')}}" class="subcategory">Post a Job </a>
+                <a href="{{ URL::to('web/post/jobs') }}" class="subcategory">Post a Job </a>
               </li>
               <li class="{{ request()->is('notification') ? 'active' : '' }}">
-                <a href="{{URL::to('notification')}}" class="subcategory">Notifications
+                <a href="{{ URL::to('notification') }}" class="subcategory">Notifications
                   @if(auth()->user()->unreadNotifications->count() > 0)
                   <span class="badge badge-light">{{ auth()->user()->unreadNotifications->count() }}</span>
                   @endif
                 </a>
               </li>
               <li class="{{ request()->is('contact_us') ? 'active' : '' }}">
-                <a href="{{URL::to('contact_us')}}" class="subcategory">Contact Us </a>
+                <a href="{{ URL::to('contact_us') }}" class="subcategory">Contact Us </a>
               </li>
             </ul>
             @endif
             <div class="login_user">
-              <a class="user_dropdown" href="#" >
+              <a class="user_dropdown" href="#">
                 <i>
                   @if(Auth::user()->profile_image)
                   <img src="{{ URL::asset('/public/uploads/') }}/{{ Auth::user()->profile_image }}" alt="img">
                   @else
-                  <img src="{{ URL::asset('/public/uploads/') }}" alt="img">
+                  <img src="{{ URL::asset('/public/uploads/placeholder.png') }}" alt="img">
                   @endif
                 </i>
                 <span>{{ Auth::user()->name ?? ''}} <img src="{{ asset('public/assets/images/user-downarrow.png')}}" alt="img"></span>
               </a>
-              @if(Auth::user()->users_role == 2)
+              @if(Auth::user()->users_role === '2')
               <ul class="userdrop_down">
                 <li class="{{ request()->is('student-dashboard') ? 'active' : '' }}">
-                  <a href="{{url('student-dashboard')}}" class="username">{{ Auth::user()->name}}
-                    <span>{{ Auth::user()->email}}</span></a>
+                  <a href="{{url('student-dashboard')}}" class="username">
+                    {{ Auth::user()->name}}
+                    <span>
+                      {{ Auth::user()->email}}
+                    </span>
+                  </a>
                 </li>
                 <li class="{{ request()->is('student_setting') ? 'active' : '' }}">
-                  <a href="{{url('student_setting')}}">Settings</a>
+                  <a href="{{url('student_setting')}}">
+                    Settings
+                  </a>
                 </li>
                 <li class="{{ request()->is('student_change_password') ? 'active' : '' }}">
-                  <a href="{{url('student_change_password')}}">Change Password</a>
+                  <a href="{{url('student_change_password')}}">
+                    Change Password
+                  </a>
                 </li>
                 <li>
                   <a href="{{ url('/logout') }}" onClick="event.preventDefault();  document.getElementById('logout-form').submit();">Logout</a>
@@ -138,7 +145,7 @@ $todaysdate = date('Y-m-d').' 00:00:00';
                 </li>
               </ul>
               @endif
-             
+
             </div>
           </div>
         </div>
@@ -165,7 +172,7 @@ $todaysdate = date('Y-m-d').' 00:00:00';
                 <img src="http://localhost/internify/public/assets/images/header-logo.svg" alt="logo">
                 <img src="http://localhost/internify/public/assets/images/logo.svg" alt="wht-logo" class="wth-logo-hide">
               </a>
-              
+
             </div>
             <div class="right_sec col_grid4 text-right menu_link">
               <li><a href="http://localhost/internify/web-login">Login</a></li>
@@ -177,4 +184,4 @@ $todaysdate = date('Y-m-d').' 00:00:00';
     </div>
   </header>
 
-              @endif
+  @endif

@@ -51,13 +51,15 @@ class HomeController extends Controller
   }
   public function recruiterListings(Request $request)
   {
-    //dd($request->search);
     if (isset($request->search)) {
       $searchdata = $request->search;
     } else {
       $searchdata = 'No';
     }
-    return view('fruntend.recruiter_profile_section.my_listing')->with(['searchdata' => $searchdata, 'alert' => '']);
+    return view('fruntend.recruiter_profile_section.my_listing')->with([
+      'searchdata' => $searchdata,
+      'alert' => ''
+    ]);
   }
 
   public function orgImageUpload(Request $request)
@@ -358,25 +360,24 @@ class HomeController extends Controller
   /* Blog web page controllers End */
 
   /* Recruiter register controllers */
-  public function recruider_register_step_one(Request $request) 
+  public function recruider_register_step_one(Request $request)
   {
 
     if ($request->setep_one == 'setep_one') {
-      DB::table('users')->where('name','=', '')->orWhere('email', '=', '')->delete();
-      // $usersdata = DB::table('users')->where('name', $request->name)->orderBy('id', 'Desc')->get();
-      // $userscheck = app('App\User')->where('name', $request->name)->first();
-      // if ($userscheck == true) {
-      //   // $message = 'Name already taken.!';
-      //   // return view('fruntend.recruiter_register.recruiter_register_step_one')->with(['message' => $message]);
-      //   return view('fruntend.recruiter_register.recruiter_register_step_one')->with(['error' => 'name alredy exist', 'insertid' => $userscheck->id]);
-      // } else {
-        $recruiterRegisterOne = app('App\User')->insertGetId([
-          'name' => $request->name, 
-          'users_role' => 3, 
-          'created_at' => date("Y-m-d H:i:s"), 
-          'updated_at' => date("Y-m-d H:i:s")
-        ]);
-        return view('fruntend.recruiter_register.recruiter_register_step_two')->with(['insertid' => $recruiterRegisterOne]);
+
+      $userInComp = DB::table('users')->where('email', '')->get();
+      if ($userInComp) {
+        foreach ($userInComp as $user) {
+          DB::table('users')->where('id', $user->id)->delete();
+        }
+      }
+      $recruiterRegisterOne = app('App\User')->insertGetId([
+        'name' => $request->name,
+        'users_role' => 3,
+        'created_at' => date("Y-m-d H:i:s"),
+        'updated_at' => date("Y-m-d H:i:s")
+      ]);
+      return view('fruntend.recruiter_register.recruiter_register_step_two')->with(['insertid' => $recruiterRegisterOne]);
       //}
     } elseif ($request->setep_two == 'setep_two') {
       $phonecheck = app('App\User')->where('phone', $request->phone)->first();
@@ -395,7 +396,7 @@ class HomeController extends Controller
         $path =  $files->move($destinationPath, $profileImage);
         $image = $insert['photo'] = "$profileImage";
       }
-      $recruiterRegisterOne = app('App\User')->where('id', $request->recruiterid)->update(['org_image'=>'company_profileBG.png','profile_image' => $image]);
+      $recruiterRegisterOne = app('App\User')->where('id', $request->recruiterid)->update(['org_image' => 'company_profileBG.png', 'profile_image' => $image]);
       return view('fruntend.recruiter_register.recruiter_register_step_five')->with(['insertid' => $request->recruiterid]);
     } elseif ($request->setep_five == 'setep_five') {
       $recruiterRegisterOne = app('App\User')->where('id', $request->recruiterid)->update(['org_name' => $request->org_name]);
@@ -412,11 +413,42 @@ class HomeController extends Controller
     } elseif ($request->setep_seven == 'setep_seven') {
       $recruiterRegisterOne = app('App\User')->where('id', $request->recruiterid)->update([
         'temp_pass' => $request->confirmPassword,
+        'otp'=>'0000',
         'password' => Hash::make($request->confirmPassword)
       ]);
+      $data = app('App\User')->where('id',$request->recruiterid)->first();
+      $to = $data->email;
+			$subject = "Verification Code";
 
-      $message = 'register successfully.!';
-      return view('fruntend.web_login')->with(['message' => $message]);
+			$message = 'Dear ' . $data->name . ',<br>';
+			$message .= "Your verification code is <br><br>".$data->otp;
+			$message .= "Regards,<br>";
+
+			// Always set content-type when sending HTML email
+			$headers = "MIME-Version: 1.0" . "\r\n";
+			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+			// More headers
+			$headers .= 'From: <enquiry@example.com>' . "\r\n";
+			$headers .= 'Cc: pathakmanish86@gmail.com' . "\r\n";
+
+			mail($to, $subject, $message, $headers);
+      return view('fruntend.recruiter_register.recruiter_register_step_nine')->with(['insertid' => $request->recruiterid]);
+      // $message = 'register successfully.!';
+      // return view('fruntend.web_login')->with(['message' => $message]);
+    } elseif ($request->setep_nine == 'setep_nine') {
+      $data = app('App\User')->where('id', $request->recruiterid)->first();
+      $data = app('App\User')->where('id', $request->recruiterid)->update([
+        'email_verified_at'=>date("Y-m-d H:i:s")
+      ]);
+      if (Auth::loginUsingId($request->recruiterid)) {
+
+        return redirect('recruiter-dashboard');
+      } else {
+        return view('fruntend.recruiter_register.recruiter_register_step_nine')->with([
+          'insertid' => $request->recruiterid
+        ]);
+      }
     }
   }
   /* Recruiter register controllers End */

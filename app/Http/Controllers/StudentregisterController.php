@@ -25,14 +25,17 @@ class StudentregisterController extends Controller
 	{
 		date_default_timezone_set("Asia/Kolkata");
 	}
-	/*public function __construct(){
-		$this->middleware('auth');
-		$this->middleware('role');
-	}*/
+
 	/* student register controllers */
 	public function student_register_step_one(Request $request)
 	{
 		if ($request->setep_one == 'setep_one') {
+			$userInComp = DB::table('users')->where('email', '')->get();
+			if ($userInComp) {
+				foreach ($userInComp as $user) {
+					DB::table('users')->where('id', $user->id)->delete();
+				}
+			}
 			$studentRegisterOne = app('App\User')->insertGetId([
 				'name' => $request->name,
 				'users_role' => 2,
@@ -80,14 +83,36 @@ class StudentregisterController extends Controller
 		} elseif ($request->setep_four == 'setep_four') {
 			$studentRegisterOne = app('App\User')->where('id', $request->student_id)->update([
 				'password' => Hash::make($request->confirmPassword),
+				'otp' => '0000',
 				'updated_at' => date("Y-m-d H:i:s")
 			]);
+			$data = app('App\User')->where('id', $request->student_id)->first();
+			
+			$to = $data->email;
+			$subject = "Verification Code";
+
+			$message = 'Dear ' . $data->name . ',<br>';
+			$message .= "Your verification code is <br><br>".$data->otp;
+			$message .= "Regards,<br>";
+
+			// Always set content-type when sending HTML email
+			$headers = "MIME-Version: 1.0" . "\r\n";
+			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+			// More headers
+			$headers .= 'From: <enquiry@example.com>' . "\r\n";
+			$headers .= 'Cc: pathakmanish86@gmail.com' . "\r\n";
+
+			mail($to, $subject, $message, $headers);
+
 			return view('fruntend.student.student_register.student_register_step_five')->with([
 				'insertid' => $request->student_id
 			]);
 		} elseif ($request->setep_five == 'setep_five') {
 			$data = app('App\User')->where('id', $request->student_id)->first();
-
+			$data = app('App\User')->where('id', $request->student_id)->update([
+				'email_verified_at' => date("Y-m-d H:i:s")
+			]);
 			if (Auth::loginUsingId($request->student_id)) {
 				return redirect('student-dashboard');
 			} else {
@@ -170,9 +195,8 @@ class StudentregisterController extends Controller
 		}
 		if (Auth::check()) {
 			return view('fruntend.student_job_search')->with(['job_title' => $job_title, 'location' => $location, 'OrgData' => $OrgData, 'jobsData' => $jobsData, 'locationData' => $locationData, 'titleData' => $titleData]);
-		}else{
-			return redirect('/student-login')->with(array('success_msg'=>'correct Updated.'));
+		} else {
+			return redirect('/student-login')->with(array('success_msg' => 'correct Updated.'));
 		}
-		
 	}
 }

@@ -110,6 +110,9 @@ Route::get('verification_otp', function () {
 Route::get('recruiter-lending', function () {
 	return view('fruntend.recruiter_landing');
 });
+Route::get('recruiter-login', function () {
+	return view('fruntend.recruiter_login');
+});
 Route::any('blogsearch', 'SearchController@blogsearch');
 //Route::any('blogsearch', 'HomeController@blogsearch');
 Route::any('blogsearchweb', 'HomeController@blogsearchweb');
@@ -208,8 +211,8 @@ Route::any('delete-experience/{id}', 'StudentDashboardController@deleteExperienc
 //Here 
 Route::get('student-profile-basic-info', 'StudentDashboardController@basic_info');
 Route::any('student-profiles/{id}', 'StudentDashboardController@studentProfiles');
-Route::any('student-reject/{id}/{r_id}', 'StudentDashboardController@studentReject');
-Route::any('student-selected/{id}/{r_id}', 'StudentDashboardController@studentSelected');
+Route::any('student-reject/{id}/{r_id}/{j_id}', 'StudentDashboardController@studentReject');
+Route::any('student-selected/{id}/{r_id}/{j_id}', 'StudentDashboardController@studentSelected');
 Route::get('student-posts', 'StudentDashboardController@student_posts');
 
 Route::get('student-applications', 'StudentDashboardController@student_applications');
@@ -258,7 +261,6 @@ Route::any('student-job-details/{id}', 'StudentDashboardController@student_job_d
 Route::any('company-profile', 'StudentDashboardController@companyProfile');
 Route::any('company-posts', 'StudentDashboardController@companyPosts');
 Route::any('company-listed-jobs', 'StudentDashboardController@companyListedJobs');
-//Route::any('company-profile/{id}', 'StudentDashboardController@compnayProfile');
 
 Route::post('student_job_apply', 'StudentDashboardController@student_job_apply');
 
@@ -407,5 +409,10 @@ Route::get('/callback', 'SocialAuthLinkedinController@callbackFromLinkedin')->na
 
 Route::prefix('google')->name('google.')->group( function(){
 	Route::get('google', 'GoogleController@redirectToGoogle')->name('login');
+	Route::get('callback', 'GoogleController@handleGoogleCallback')->name('callback');
+});
+
+Route::prefix('twitter')->name('twitter.')->group( function(){
+	Route::get('twitter', 'GoogleController@redirectToGoogle')->name('login');
 	Route::get('callback', 'GoogleController@handleGoogleCallback')->name('callback');
 });

@@ -34,18 +34,9 @@
     @endif
     @endif
 
-    @if(Session::has('status'))
-    <div class="alert alert-{{ Session::get('status') }}">
-      <i class="fa fa-building-o" aria-hidden="true"></i> {{ Session::get('message') }}
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-    </div>
-    @endif
 
-    <?php
-    // echo "<pre>";
-    // print_r($appl);
-    // die;
-    ?>
+
+
     <div class="lgcontainer">
       <div class="boxDetailbg fw">
         <figure>
@@ -123,13 +114,13 @@
                   </a>
                 </span>
               </div>
-              <div class="col_grid6 text-right checkbox_notify">
+              <!-- <div class="col_grid6 text-right checkbox_notify">
                 <div class="custominputBox">
                   <input type="checkbox" class="inputCheck">
                   <span></span>
                 </div>
                 <span>Notify me for similar jobs</span>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -179,10 +170,11 @@
                   <div class="innerrow">
                     <div class="col_grid12">
                       <ul>
-                        @foreach(unserialize($job->offer) as $offer)
-
+                        @foreach(unserialize($job->offer) as $key => $offer)
+                        @if($key < 3)
                         <li>{{ $offer }}</li>
-                        @endforeach
+                          @endif
+                          @endforeach
                       </ul>
                     </div>
                     <div class="col_grid8">

@@ -36,15 +36,20 @@ $recruiterInfo = DB::table('users')->where('id', $id)->first();
           <div class="col_grid6 ">
             <div class="form-group">
               <label>Mobile Number</label>
-              <input type="text" name="phone" class="form-control" onkeyup="this.value=this.value.replace(/[^\d]/,'')" placeholder="Enter your mobile number" class="form-control" required maxlength="10" value="{{ $recruiterInfo->phone }}" readonly="" />
-
+              <input type="text" name="phone" class="form-control" onkeyup="this.value=this.value.replace(/[^\d]/,'')" placeholder="Enter your mobile number" class="form-control" required maxlength="10" value="{{ $recruiterInfo->phone }}"  />
+              @error('phone')
+              <small class="form-control-feedback">{{ $errors->first('phone') }}</small>
+              @enderror
               <span class="inputcheck"><img src="{{ asset('public/assets/images/verified.png')}}" alt="icon"></span>
             </div>
           </div>
           <div class="col_grid6 ">
             <div class="form-group">
               <label>Official Email Address</label>
-              <input type="text" name="email" placeholder="" id='txtEmail' class="email form-control" value="{{ $recruiterInfo->email ?? ''}}" required="" maxlength="100" readonly="">
+              <input type="text" name="email" placeholder="" id='txtEmail' class="email form-control" value="{{ $recruiterInfo->email ?? ''}}" required="" maxlength="100" >
+              @error('email')
+              <small class="form-control-feedback">{{ $errors->first('email') }}</small>
+              @enderror
               <span class="inputcheck"><img src="{{ asset('public/assets/images/verified.png')}}" alt="icon"></span>
               <span style="display:none; color: red;" class="emailvalidation">Enter valid email address.!</span>
               <span style="display:none; color: red;" class="emailvalidation1">Please Enter email address.!</span>

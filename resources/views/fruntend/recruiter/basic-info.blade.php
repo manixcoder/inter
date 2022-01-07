@@ -86,9 +86,9 @@
           <li>
             <a href="#profileTab_Details1">My Details</a>
           </li>
-          <li>
+          <!-- <li>
             <a href="#profileTab_Posts2">My Posts</a>
-          </li>
+          </li> -->
           <li>
             <a href="#profileTab_Applications3">My Applications</a>
           </li>
@@ -137,16 +137,12 @@
                         <div class="form-group">
                           <label>Gender</label>
                           <select name="gender" class="form-control" id="selectbox1">
-
-
-                            @if($OrgData->gender==0)
-                            <option value="0">Male</option>
-                            <option value="1">Female</option>
-                            @endif
-                            @if($OrgData->gender==1)
-                            <option value="1">Female</option>
-                            <option value="0">Male</option>
-                            @endif
+                            
+                            <option value="0" {{ $OrgData->gender==0 ? 'selected' : '' }}>Male</option>
+                            <option value="1" {{ $OrgData->gender==1 ? 'selected' : '' }}>Female</option>
+                            <option value="2" {{ $OrgData->gender==2 ? 'selected' : '' }}>Non-Binary</option>
+                           
+                           
 
                           </select>
                         </div>
@@ -219,7 +215,7 @@
                     <form class="form_sec fw col_grid12" action="{{ url('update_student_education') }}" method="POST" enctype="multipart/form-data">
                       @csrf
                       <div class='content fw'>
-                        <h3 class="modal_heading">Update Course</h3>
+                        <h3 class="modal_heading">Update Course/Degree</h3>
                         <div class="form_sec fw ">
                           <div class="innerrow">
                             <div class="col_grid6">
@@ -231,8 +227,8 @@
                             </div>
                             <div class="col_grid6 ">
                               <div class="form-group">
-                                <label>Technology</label>
-                                <input type="text" name="technology" value="{{$ed->name_of_technology}}" placeholder="technology" class="form-control" required />
+                                <label>Course/Degree</label>
+                                <input type="text" name="technology" value="{{$ed->name_of_technology}}"  class="form-control" required />
                               </div>
                             </div>
                             <div class="col_grid6 ">
@@ -862,7 +858,7 @@
     <form class="form_sec fw col_grid12" action="{{ url('add_student_education') }}" method="POST" enctype="multipart/form-data">
       @csrf
       <div class='content fw'>
-        <h3 class="modal_heading">Add Course</h3>
+        <h3 class="modal_heading">Add Course/Degree</h3>
         <div class="form_sec fw ">
           <div class="innerrow">
             <div class="col_grid6">
@@ -873,7 +869,7 @@
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
-                <label>Technology</label>
+                <label>Course/Degree</label>
                 <input type="text" name="technology" placeholder="technology" class="form-control" required />
               </div>
             </div>
@@ -977,7 +973,7 @@
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
-                <label>Certificate By</label>
+                <label>Certified by</label>
                 <input type="text" name="certificate_by" class="form-control" required />
               </div>
             </div>
