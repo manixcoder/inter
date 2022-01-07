@@ -52,7 +52,7 @@
         </div>
       </div>
     </div>
-    <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
+    <script src="js/jquery-lb.js"></script>
      <script type="text/javascript">        
       setTimeout(function() {
         $(".alert").fadeOut(1500);
