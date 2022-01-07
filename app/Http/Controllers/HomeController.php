@@ -413,15 +413,36 @@ class HomeController extends Controller
     } elseif ($request->setep_seven == 'setep_seven') {
       $recruiterRegisterOne = app('App\User')->where('id', $request->recruiterid)->update([
         'temp_pass' => $request->confirmPassword,
+        'otp'=>'0000',
         'password' => Hash::make($request->confirmPassword)
       ]);
+      $data = app('App\User')->where('id',$request->recruiterid)->first();
+      $to = $data->email;
+			$subject = "Verification Code";
+
+			$message = 'Dear ' . $data->name . ',<br>';
+			$message .= "Your verification code is <br><br>".$data->otp;
+			$message .= "Regards,<br>";
+
+			// Always set content-type when sending HTML email
+			$headers = "MIME-Version: 1.0" . "\r\n";
+			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+			// More headers
+			$headers .= 'From: <enquiry@example.com>' . "\r\n";
+			$headers .= 'Cc: pathakmanish86@gmail.com' . "\r\n";
+
+			mail($to, $subject, $message, $headers);
       return view('fruntend.recruiter_register.recruiter_register_step_nine')->with(['insertid' => $request->recruiterid]);
       // $message = 'register successfully.!';
       // return view('fruntend.web_login')->with(['message' => $message]);
     } elseif ($request->setep_nine == 'setep_nine') {
       $data = app('App\User')->where('id', $request->recruiterid)->first();
-
+      $data = app('App\User')->where('id', $request->recruiterid)->update([
+        'email_verified_at'=>date("Y-m-d H:i:s")
+      ]);
       if (Auth::loginUsingId($request->recruiterid)) {
+
         return redirect('recruiter-dashboard');
       } else {
         return view('fruntend.recruiter_register.recruiter_register_step_nine')->with([

@@ -25,7 +25,7 @@ class StudentregisterController extends Controller
 	{
 		date_default_timezone_set("Asia/Kolkata");
 	}
-	
+
 	/* student register controllers */
 	public function student_register_step_one(Request $request)
 	{
@@ -83,14 +83,36 @@ class StudentregisterController extends Controller
 		} elseif ($request->setep_four == 'setep_four') {
 			$studentRegisterOne = app('App\User')->where('id', $request->student_id)->update([
 				'password' => Hash::make($request->confirmPassword),
+				'otp' => '0000',
 				'updated_at' => date("Y-m-d H:i:s")
 			]);
+			$data = app('App\User')->where('id', $request->student_id)->first();
+			
+			$to = $data->email;
+			$subject = "Verification Code";
+
+			$message = 'Dear ' . $data->name . ',<br>';
+			$message .= "Your verification code is <br><br>".$data->otp;
+			$message .= "Regards,<br>";
+
+			// Always set content-type when sending HTML email
+			$headers = "MIME-Version: 1.0" . "\r\n";
+			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+			// More headers
+			$headers .= 'From: <enquiry@example.com>' . "\r\n";
+			$headers .= 'Cc: pathakmanish86@gmail.com' . "\r\n";
+
+			mail($to, $subject, $message, $headers);
+
 			return view('fruntend.student.student_register.student_register_step_five')->with([
 				'insertid' => $request->student_id
 			]);
 		} elseif ($request->setep_five == 'setep_five') {
 			$data = app('App\User')->where('id', $request->student_id)->first();
-
+			$data = app('App\User')->where('id', $request->student_id)->update([
+				'email_verified_at' => date("Y-m-d H:i:s")
+			]);
 			if (Auth::loginUsingId($request->student_id)) {
 				return redirect('student-dashboard');
 			} else {

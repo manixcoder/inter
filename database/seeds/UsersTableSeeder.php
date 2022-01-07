@@ -23,7 +23,7 @@ class UsersTableSeeder extends Seeder
 				'email' => 'admin@gmail.com',
 				'phone' => '8054251404',
 				'password' => bcrypt('Qwert@123'),
-				'otp' => '0',
+				'otp' => '0000',
 				'gender' => '1',
 				'dob' => '',
 				'designation' => 'administrator',

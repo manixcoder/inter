@@ -108,6 +108,10 @@
                     </div>
                     <div class="from-group fw">
                         <input type="hidden" name="recruiterid" value="{{ $insertid ?? ''}}">
+                        @php 
+                        $user = DB::table('users')->where('id', $insertid)->first(); 
+                        @endphp
+                        We’ve sent a 4-digit code to {{ $user->email }}
                         <input type="hidden" name="setep_nine" value="setep_nine">
                         <input type="text" name="otp" maxlength="4" pattern="\d{4}" required class="form-control" placeholder="Enter Email 4-digit code here" required="" />
                     </div>

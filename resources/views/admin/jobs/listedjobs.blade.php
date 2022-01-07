@@ -3,6 +3,10 @@
 	<div class="row">
 		<h3 class="heading">Listed Jobs ({{ $DataCount}} )</h3>
 		<div class="col-md-12 listtable-sec">
+		<div id="loading_j">
+		<!-- <img id="loading-image" src="http://cdn.nirmaltv.com/images/generatorphp-thumb.gif" alt="Loading..." /> -->
+		<img id="loading-image" src="{{ URL::asset('/public/uploads/TheInternifyAnimatedLogo.gif') }}" alt="Loading..." />
+	</div>
 			<table class="table listjob_table text-left" id="listjobs_table">
 				<thead>
 					<tr>
@@ -107,6 +111,7 @@
 		</div>
 	</div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$("#datepicker").datepicker({
@@ -151,5 +156,11 @@
 		$('#listjobs_table').DataTable({
 			order: []
 		});
+	});
+</script>
+<script>
+	$(window).load(function() {
+		//alert("hi");
+		$('#loading_j').hide();
 	});
 </script>

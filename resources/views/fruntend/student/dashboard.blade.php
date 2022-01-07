@@ -58,17 +58,17 @@
     </div>
   </header>
   <div class="body_wht-inners bloglgHome_sec">
+    <div id="loading">
+      <!-- <img id="loading-image" src="{{ URL::asset('/public/uploads/TheInternifyAnimatedLogo.gif') }}" alt="Loading..." /> -->
+      <img id="loading-image" src="http://cdn.nirmaltv.com/images/generatorphp-thumb.gif" alt="Loading..." />
+    </div>
     <div class="lgcontainer">
       <div class="innerrow">
         <div class="col_grid4">
           <div class="profile_leftsidebar fw">
             <div class="user_namesec fw">
               <figure>
-                <?php
-                // echo "<pre>";
-                // print_r($OrgData);
-                // die;
-                ?>
+
                 @if($userRole === 1)
                 <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->org_image ?? ''}}" alt="img">
                 @endif
@@ -126,7 +126,7 @@
           //dd($users->profile_image);
           if(empty($SearchData))
           {
-            $posts = DB::table('posts')->orderBy('id', 'DESC')->get();
+          $posts = DB::table('posts')->orderBy('id', 'DESC')->get();
           }else{
           $generatequery = "SELECT * FROM posts WHERE heading LIKE '%' '".$SearchData."' '%' OR description LIKE '%' '".$SearchData."' '%' OR date_time LIKE '%' '".$SearchData."' '%' ";
           $posts = DB::select($generatequery);
@@ -139,7 +139,7 @@
 
           @php
           $UsrData = DB::table('users')->where('id', $post->user_id)->first();
-         // dd($UsrData);
+          // dd($UsrData);
           $userid = Session::get('gorgID');
           $loginby = app('App\user')->where('id', $userid)->first();
           $createdby = app('App\user')->where('id', $post->user_id)->first();
@@ -188,12 +188,12 @@
               @if($likeby == null)
               <li>
                 <a href="javascript:void(0);" onclick="editRecords({{ $post->id }})">
-                <span>
-                  <img src="{{ asset('public/assets/images/likedIcon.png')}}" alt="icon">
-                </span> 
-                {{ $likeby ?? ''}} 
-                Likes
-              </a>
+                  <span>
+                    <img src="{{ asset('public/assets/images/likedIcon.png')}}" alt="icon">
+                  </span>
+                  {{ $likeby ?? ''}}
+                  Likes
+                </a>
               </li>
               @else
               <li>
@@ -597,7 +597,15 @@
     $('.close-modal').click(function() {
       location.reload();
     });
+
   </script>
+  <script>
+    $(window).load(function() {
+   // alert("hi");
+    $('#loading').hide();
+});
+  </script>
+
 </body>
 
 </html>
