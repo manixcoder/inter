@@ -42,9 +42,9 @@ class JobsApplyNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->line('The introduction to the notification.')
+            ->action('Notification Action', url('/'))
+            ->line('Thank you for using our application!');
     }
 
     /**
@@ -56,10 +56,11 @@ class JobsApplyNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'comment_user'=>$this->notificationData['comment_user'],
-            'post_title'=>$this->notificationData['post_title'],
-            'notification_type'=>$this->notificationData['notification_type'],
-            'comment'=>$this->notificationData['comment'],
+            'comment_user' => $this->notificationData['comment_user'],
+            'post_title' => $this->notificationData['post_title'],
+            'notification_type' => $this->notificationData['notification_type'],
+            'comment' => $this->notificationData['comment'],
         ];
+        
     }
 }

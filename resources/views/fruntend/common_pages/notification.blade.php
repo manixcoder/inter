@@ -18,7 +18,7 @@
           @if($userData->users_role === '2')
           <img src="{{ URL::asset('/public/uploads/') }}/{{ $userData->profile_image}}" alt="icon" />
           @elseif($userData->users_role === '3')
-          <img src="{{ URL::asset('/public/uploads/') }}/{{ $userData->org_image}}" alt="icon" />
+          <img src="{{ URL::asset('/public/uploads/') }}/{{ $userData->profile_image}}" alt="icon" />
           @else
           <img src="{{ URL::asset('/public/uploads/placeholder.png') }}" alt="icon" />
           @endif

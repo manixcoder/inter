@@ -49,6 +49,17 @@ class RecruiterwebController extends Controller
     $OrgData = DB::table('users')->where('id', $id)->first();
     $todaysdate = date('Y-m-d') . ' 00:00:00';
     $posts = app('App\Posts')->orderBy('id', 'DESC')->get();
+
+    $notifications = DB::table('notifications')->get(); 
+    foreach ($notifications as $notification) {
+      $someArray = json_decode($notification->data, true);
+      $userData = DB::table('users')->Where('id', $someArray['comment_user'])->first();
+      if ($userData ) {
+      } else {
+        DB::table('notifications')->Where('id', $notification->id)->delete();
+      }
+    }
+
     return view('fruntend.recruiter.dashboard')->with([
       'OrgData' => $OrgData,
       'posts' => $posts

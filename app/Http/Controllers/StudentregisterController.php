@@ -94,13 +94,14 @@ class StudentregisterController extends Controller
 			$message = 'Dear ' . $data->name . ',<br>';
 			$message .= "Your verification code is <br><br>".$data->otp;
 			$message .= "Regards,<br>";
+			$message .= "The Internify,<br>";
 
 			// Always set content-type when sending HTML email
 			$headers = "MIME-Version: 1.0" . "\r\n";
 			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
 			// More headers
-			$headers .= 'From: <enquiry@example.com>' . "\r\n";
+			$headers .= 'From: contact@theinternify.com' . "\r\n";
 			$headers .= 'Cc: pathakmanish86@gmail.com' . "\r\n";
 
 			mail($to, $subject, $message, $headers);

@@ -36,11 +36,11 @@
          <div class="profile_leftsidebar fw">
            <div class="user_namesec fw">
              <figure>
-             @if(Auth::user()->profile_image !='')
-                   <img src="{{ URL::asset('/public/uploads/') }}/{{ Auth::user()->profile_image ?? ''}}" alt="profile">
-                   @else
-                   <img src="{{ URL::asset('/public/uploads/no-image.png') }}" alt="profile">
-                   @endif
+               @if(Auth::user()->profile_image !='')
+               <img src="{{ URL::asset('/public/uploads/') }}/{{ Auth::user()->profile_image ?? ''}}" alt="profile">
+               @else
+               <img src="{{ URL::asset('/public/uploads/no-image.png') }}" alt="profile">
+               @endif
                <!-- <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->org_image ?? ''}}" alt="profile"> -->
              </figure>
              <h5>{{ Auth::user()->name ?? ''}}</h5>
@@ -98,7 +98,7 @@
              <div class="text-cont fw">
                <div class="userCommnet_deta fw">
                  <span>
-                  
+
                    @if($createdby->profile_image !='')
                    <img src="{{ URL::asset('/public/uploads/') }}/{{ $createdby->profile_image ?? ''}}" alt="icon">
                    @else
@@ -115,16 +115,30 @@
                  </div>
                </div>
                <h1>{{ $value->heading ?? ''}}</h1>
-               @php
-               $clear = strip_tags($value->description);
-               $clear = html_entity_decode($clear);
-               $clear = urldecode($clear);
-               $clear = preg_replace('/[^A-Za-z0-9]/', ' ', $clear);
-               $clear = preg_replace('/ +/', ' ', $clear);
-               $clear = trim($clear);
-               @endphp
-               <p class="site-pra"><?php echo $value->description ?></p>
+               <div id="newpost_{{ $value->id}}">
+                 <p> <?php echo $value->description; ?></p>
+
+               </div>
+
+               <!-- <p class="site-pra" id="short_{{ $value->id}}">
+                 <?php // echo substr($value->description, 0, 500); 
+                  ?>
+                 <button class="readmore" id="button_{{ $value->id}}" onclick="showhide()">Read More</button>
+               </p> -->
              </div>
+             <script>
+               function showhide() {
+                 var div = document.getElementById("newpost_{{ $value->id}}");
+                 var short = document.getElementById('short_{{ $value->id}}');
+                 if (div.style.display === "none") {
+                   div.style.display = "block";
+                   short.style.display = "none";
+                 } else {
+                   div.style.display = "none";
+                   short.style.display = "block";
+                 }
+               }
+             </script>
              <div class="img-cont fw">
                <figure class="full-img">
                  <img src="{{ URL::asset('/public/uploads/') }}/{{ $value->post_image }}" alt="img1" />
@@ -290,6 +304,7 @@
    </div>
  </div>
  <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
+
  <script type="text/javascript">
    function editRecords(id) {
      $.ajaxSetup({

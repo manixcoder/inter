@@ -57,8 +57,8 @@ if($searchdata !='No'){
       <div class="jobsDetailBox fw">
         <div class="profile_sec fw">
           <div class="compnayBoxImg">
-            @if($userdetail->org_image !='')
-            <img src="{{ URL::asset('/public/uploads/') }}/{{ $userdetail->org_image }}" alt="images" />
+          @if($userdetail->profile_image !='')
+            <img src="{{ URL::asset('/public/uploads/') }}/{{ $userdetail->profile_image }}" alt="images" />
             @else
             <img src="{{ URL::asset('/public/uploads/no-image.png') }}" alt="images" />
             @endif

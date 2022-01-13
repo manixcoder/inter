@@ -9,6 +9,8 @@
   <meta name="csrf_token" content="{{csrf_token()}}">
   <title>internify - Home</title>
   <!-- Fontawesome 4 Cdn from BootstrapCDN -->
+  
+  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="{{ asset('public/assets/web_assets/css/style.css')}}" rel="stylesheet">
   <link href="{{ asset('public/assets/web_assets/fonts/fonts.css')}}" rel="stylesheet">
@@ -75,9 +77,16 @@
               <li class="{{ request()->is('web/blog') ? 'active' : '' }} {{ request()->is('web/blog/detail') ? 'active' : '' }}">
                 <a href="{{ URL::to('web/blog')}}" class="subcategory">Blogs </a>
               </li>
+              @if(Auth::user()->users_role === '2')
+              <li class="{{ request()->is('student/jobs') ? 'active' : '' }}">
+                <a href="{{ URL::to('student/jobs')}}">Jobs </a>
+              </li>
+              @else
               <li class="{{ request()->is('web/post/jobs') ? 'active' : '' }}">
                 <a href="{{ URL::to('web/post/jobs') }}" class="subcategory">Post a Job </a>
               </li>
+              @endif
+
               <li class="{{ request()->is('notification') ? 'active' : '' }}">
                 <a href="{{ URL::to('notification') }}" class="subcategory">Notifications
                   @if(auth()->user()->unreadNotifications->count() > 0)

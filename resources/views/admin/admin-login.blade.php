@@ -4,6 +4,7 @@
       <!-- Required meta tags -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
       <link href="{{ asset('public/assets/css/style.css')}}" rel="stylesheet">
       <link href="{{ asset('public/assets/css/responsive.css')}}" rel="stylesheet">
       <link href="{{ asset('public/assets/fonts/fonts.css')}}" rel="stylesheet">

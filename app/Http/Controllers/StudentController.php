@@ -30,6 +30,15 @@ class StudentController extends Controller
   {
     $Data = app('App\User')->where('users_role', 2)->orderBy('id', 'DESC')->get();
     $DataCount = app('App\User')->where('users_role', 2)->count();
+    $notifications = DB::table('notifications')->get();
+    foreach ($notifications as $notification) {
+      $someArray = json_decode($notification->data, true);
+      $userData = DB::table('users')->Where('id', $someArray['comment_user'])->first();
+      if ($userData) {
+      } else {
+        DB::table('notifications')->Where('id', $notification->id)->delete();
+      }
+    }
     $data['content'] = 'admin.student.student_list';
     return view('layouts.content', compact('data'))->with(['Data' => $Data, 'DataCount' => $DataCount]);
   }
@@ -54,6 +63,9 @@ class StudentController extends Controller
 
   public function delete($id)
   {
+
+
+
     $delete = app('App\User')->where('id', $id)->delete();
     $postsData = DB::table('posts')->where('user_id', $id)->get();
     foreach ($postsData as $post) {
@@ -73,6 +85,16 @@ class StudentController extends Controller
     $industries = DB::table('my_favorite_industries')->Where('user_id', $id)->delete();
     $student_resume = DB::table('student_resume')->Where('student_id', $id)->delete();
     $notifications = DB::table('notifications')->Where('notifiable_id', $id)->delete();
+    $notifications = DB::table('notifications')->get();
+    foreach ($notifications as $notification) {
+      $someArray = json_decode($notification->data, true);
+      $userData = DB::table('users')->Where('id', $someArray['comment_user'])->first();
+      if ($userData) {
+      } else {
+        DB::table('notifications')->Where('id', $notification->id)->delete();
+      }
+    }
+
     return redirect('student-list')->with(array('status' => 'success', 'message' => 'Deleted Successfully !'));
   }
 

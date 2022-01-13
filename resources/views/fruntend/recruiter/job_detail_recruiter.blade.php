@@ -112,7 +112,7 @@
                           @endif
                         </div>
                         <div class="retextbtn_sec">
-                          <a href="{{ URL::to('student-profiles',$studentDetails->id) }}" class="retextbtn">
+                          <a href="{{ URL::to('student-profiles', $studentDetails->id) }}" class="retextbtn">
                             View Profile
                             <span>
                               <img src="{{ URL::asset('/public/assets/images/arrow_right_red.png') }}" alt="redarrow">

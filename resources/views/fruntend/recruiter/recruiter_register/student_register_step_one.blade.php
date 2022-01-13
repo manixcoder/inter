@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>internify - Login</title>
     <!-- Fontawesome 4 Cdn from BootstrapCDN -->
+    <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="{{ asset('public/assets/web_assets/css/style.css')}}" rel="stylesheet">
     <link href="{{ asset('public/assets/web_assets/fonts/fonts.css')}}" rel="stylesheet">

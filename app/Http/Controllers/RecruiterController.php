@@ -35,6 +35,15 @@ class RecruiterController extends Controller
    */
   public function index()
   {
+    $notifications = DB::table('notifications')->get();
+    foreach ($notifications as $notification) {
+      $someArray = json_decode($notification->data, true);
+      $userData = DB::table('users')->Where('id', $someArray['comment_user'])->first();
+      if ($userData) {
+      } else {
+        DB::table('notifications')->Where('id', $notification->id)->delete();
+      }
+    }
     $Data = app('App\User')->where('users_role', 3)->orderBy('id', 'DESC')->get();
     $DataCount = app('App\User')->where('users_role', 3)->count();
     $data['content'] = 'admin.recruiter.list_recruiter';
@@ -95,6 +104,19 @@ class RecruiterController extends Controller
     $post_comment = DB::table('post_comment')->where('user_id', $id)->delete();
     $post_like = DB::table('post_like')->where('user_id', $id)->delete();
     $notifications = DB::table('notifications')->Where('notifiable_id', $id)->delete();
+
+    $notifications = DB::table('notifications')->get();
+    foreach ($notifications as $notification) {
+      $someArray = json_decode($notification->data, true);
+      // dd( $someArray);
+      $userData = DB::table('users')->Where('id', $someArray['comment_user'])->first();
+      if ($userData) {
+        
+      } else {
+        DB::table('notifications')->Where('id', $notification->id)->delete();
+      }
+    }
+
     return redirect('recruiter-list');
   }
 
@@ -161,6 +183,16 @@ class RecruiterController extends Controller
     $post_comment = DB::table('post_comment')->where('user_id', $id)->delete();
     $post_like = DB::table('post_like')->where('user_id', $id)->delete();
     $notifications = DB::table('notifications')->Where('notifiable_id', $id)->delete();
+    $notifications = DB::table('notifications')->get();
+    foreach ($notifications as $notification) {
+      $someArray = json_decode($notification->data, true);
+      // dd( $someArray);
+      $userData = DB::table('users')->Where('id', $someArray['comment_user'])->first();
+      if ($userData) {
+      } else {
+        DB::table('notifications')->Where('id', $notification->id)->delete();
+      }
+    }
     return redirect('recruiter-list')->with(array('status' => 'success', 'message' => 'Deleted Successfully!'));
 
     // $Data = app('App\User')->where('users_role', 3)->orderBy('id', 'Desc')->get();
