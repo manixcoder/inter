@@ -2,7 +2,6 @@
    <div class=" fw postpg-sec fw">
       <div class="col-md-6 postblog-sec">
          <div id="loading_p">
-            <!-- <img id="loading-image" src="http://cdn.nirmaltv.com/images/generatorphp-thumb.gif" alt="Loading..." /> -->
             <img id="loading-image" src="{{ URL::asset('/public/uploads/TheInternifyAnimatedLogo.gif') }}" alt="Loading..." />
          </div>
          @if(isset($Data))

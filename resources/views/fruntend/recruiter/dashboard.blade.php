@@ -19,15 +19,7 @@
   if ($loginby->specialties != '') {
     $count = $count + 20;
   }
-  // if ($loginby->address != '') {
-  //   $count = $count + 10;
-  // }
-  // if ($hobbies) {
-  //   $count = $count + 10;
-  // }
-  // if ($accomplishments) {
-  //   $count = $count + 10;
-  // }
+
   ?>
  <div class="body_wht-inners bloglgHome_sec">
    <div class="lgcontainer">

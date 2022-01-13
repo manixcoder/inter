@@ -60,8 +60,7 @@
   </header>
   <div class="body_wht-inners bloglgHome_sec">
     <div id="loading">
-      <!-- <img id="loading-image" src="{{ URL::asset('/public/uploads/TheInternifyAnimatedLogo.gif') }}" alt="Loading..." /> -->
-      <img id="loading-image" src="http://cdn.nirmaltv.com/images/generatorphp-thumb.gif" alt="Loading..." />
+      <img id="loading-image" src="{{ URL::asset('/public/uploads/TheInternifyAnimatedLogo.gif') }}" alt="Loading..." />
     </div>
     <div class="lgcontainer">
       <div class="innerrow">

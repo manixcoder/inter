@@ -1,7 +1,6 @@
 <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>-->
 <div class="content dashboard-pg">
 	<div id="loading_r">
-		<!-- <img id="loading-image" src="http://cdn.nirmaltv.com/images/generatorphp-thumb.gif" alt="Loading..." /> -->
 		<img id="loading-image" src="{{ URL::asset('/public/uploads/TheInternifyAnimatedLogo.gif') }}" alt="Loading..." />
 	</div>
 	<h3 class="heading">Recruiters ({{ $DataCount}} )
