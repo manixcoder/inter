@@ -28,7 +28,10 @@
            {{ $value->blog_heading ?? ''}}
          </h3>
          <p class="site-pra addReadMore showlesscontent">
-           <?php echo $value->description ?>
+           <?php 
+           // echo $value->description;
+           echo substr($value->description, 0, 500);
+           ?>
            <form action="{{URL::to('web/blog/detail')}}" method="post" enctype="multipart/form-data">
              @csrf
              <input type="hidden" name="blog_id" value="{{ $value->id }}">

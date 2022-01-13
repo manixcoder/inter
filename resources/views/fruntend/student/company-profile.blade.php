@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>internify - Home</title>
     <!-- Fontawesome 4 Cdn from BootstrapCDN -->
+    <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="{{ asset('public/assets/web_assets/css/style.css')}}" rel="stylesheet">
     <link href="{{ asset('public/assets/web_assets/fonts/fonts.css')}}" rel="stylesheet">
@@ -92,7 +93,7 @@
                         <p class="grytextPra">{{ $OrgData->about }}</p>
                         <div class="address_Cont fw">
                             <p class="font20Text"><a class="blueLink_text" href="{{ $OrgData->website }}">{{ $OrgData->website }}</a></p>
-                            <!-- <p class="font20Text clrBlack">Information Technology</p>
+                            <!-- <p class="font20Text clrBlack">Industry:</p>
                             <p class="font20Text clrBlack">2-10 employees</p>
                             <p class="font20Text clrBlack">Noida, Uttar Pradesh</p>
                             <p class="font20Text clrBlack">Privately Held</p> -->

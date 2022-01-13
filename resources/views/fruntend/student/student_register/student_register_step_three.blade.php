@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>internify - Home</title>
   <!-- Fontawesome 4 Cdn from BootstrapCDN -->
+  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="{{ asset('public/assets/js/jequery-main3.5.js')}}"></script>
   <script src="{{ asset('public/js/commonjs.js')}}"></script>

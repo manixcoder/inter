@@ -10,6 +10,7 @@
   <link href="{{ asset('public/assets/css/style.css')}}" rel="stylesheet">
   <link href="{{ asset('public/assets/css/responsive.css')}}" rel="stylesheet">
   <link href="{{ asset('public/assets/fonts/fonts.css')}}" rel="stylesheet">
+ 
   <script src="{{ asset('public/assets/js/jequery-main3.5.js')}}"></script>
   <script src="{{ asset('public/js/commonjs.js')}}"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -21,6 +22,7 @@
 
 
   <script type="text/javascript" src="https://cdn.ckeditor.com/4.11.1/standard/styles.js?t=IA8F"></script>
+  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
   <link rel="stylesheet" type="text/css" href="https://cdn.ckeditor.com/4.11.1/standard/plugins/scayt/skins/moono-lisa/scayt.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.ckeditor.com/4.11.1/standard/plugins/scayt/dialogs/dialog.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.ckeditor.com/4.11.1/standard/plugins/tableselection/styles/tableselection.css">

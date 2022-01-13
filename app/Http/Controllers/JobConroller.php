@@ -83,13 +83,17 @@ class JobConroller extends Controller
     // }else{
     //   $attachment = '';
     // }
-
+if($request->salary !=''){
+ $salery =  $request->currency . ' ' . $request->salary;
+}else{
+  $salery='';
+}
     $data = array(
       'attachment' => $attachment,
       'logo' => $image,
       'job_title' => $request->job_title,
       'location' => $request->location,
-      'salary' => $request->currency . ' ' . $request->salary,
+      'salary' => $salery,
       'offer' => serialize($request->offer),
       'job_description' => $request->job_description,
       'industry'=>Auth::user()->industry,

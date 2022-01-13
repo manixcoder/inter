@@ -8,6 +8,7 @@
 
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
+        <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
         <!-- Styles -->

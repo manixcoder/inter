@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>internify - Home</title>
   <!-- Fontawesome 4 Cdn from BootstrapCDN -->
+  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}" />
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="{{ asset('public/assets/web_assets/css/style.css')}}" rel="stylesheet">
   <link href="{{ asset('public/assets/web_assets/fonts/fonts.css')}}" rel="stylesheet">
@@ -175,10 +176,28 @@
                 </div>
               </div>
               <h3 class="font57text clrBlack semiboldfont_fmly">{{$post->heading}}</h3>
-              <p class="site-pra">
-                <?php echo $post->description ?>
-              </p>
+              <div id="newpost_{{ $post->id}}">
+                <p> <?php echo $post->description; ?></p>
+              </div>
+              <!-- <p class="site-pra" id="short_{{ $post->id}}">
+                <?php // echo substr($post->description, 0, 500); 
+                ?>
+                <button class="readmore" id="button_{{ $post->id}}" onclick="showhide()">Read More</button>
+              </p> -->
             </div>
+            <script>
+              // function showhide() {
+              //   var div = document.getElementById("newpost_{{ $post->id}}");
+              //   var short = document.getElementById('short_{{ $post->id}}');
+              //   if (div.style.display === "none") {
+              //     div.style.display = "block";
+              //     short.style.display = "none";
+              //   } else {
+              //     div.style.display = "none";
+              //     short.style.display = "block";
+              //   }
+              // }
+            </script>
             <div class="img-cont fw">
               <figure class="full-img">
                 <img src="{{ asset('public/uploads/'.$post->post_image)}}" alt="img1">
@@ -597,13 +616,12 @@
     $('.close-modal').click(function() {
       location.reload();
     });
-
   </script>
   <script>
     $(window).load(function() {
-   // alert("hi");
-    $('#loading').hide();
-});
+      // alert("hi");
+      $('#loading').hide();
+    });
   </script>
 
 </body>

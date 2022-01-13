@@ -8,6 +8,7 @@
   <meta name="csrf_token" content="{{csrf_token()}}">
   <title>internify - Home</title>
   <!-- Fontawesome 4 Cdn from BootstrapCDN -->
+  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="{{ asset('public/assets/web_assets/css/style.css')}}" rel="stylesheet">
   <link href="{{ asset('public/assets/web_assets/fonts/fonts.css')}}" rel="stylesheet">
@@ -16,14 +17,12 @@
 <body class="lightwht_bg">
   <header class="header_sec flow2_header fw">
     <div class="lgcontainer">
-
-
-      @include('fruntend.student.inc.top-menu')
+      @include('fruntend.common_pages.web_header')
       <?php
       if (!empty($user_id)) {
         $userid = $user_id;
       } else {
-        $userid = Session::get('gorgID');
+        $userid = Auth::user()->id;
       }
       $userRole = Session::get('userRole');
       $count = 30;
@@ -137,13 +136,13 @@
                       <div class="col_grid12 ">
                         <div class="form-group">
                           <label>Your Name</label>
-                          <input type="text" name="name" value="{{$OrgData->name}}" class="form-control" maxlength="100" size="100" required>
+                          <input type="text" name="name" value="{{$OrgData->name}}" class="form-control" maxlength="100" size="100" required @if($userid !=Auth::user()->id) disabled @endif>
                         </div>
                       </div>
                       <div class="col_grid6">
                         <div class="form-group">
                           <label>Email Address</label>
-                          <input type="email" name="email" value="{{$OrgData->email}}" class="form-control" maxlength="30" size="100" required>
+                          <input type="email" name="email" value="{{$OrgData->email}}" class="form-control" maxlength="30" @if($userid !=Auth::user()->id) disabled @endif size="100" required>
                           @error('email')
                           <small class="form-control-feedback">{{ $errors->first('email') }}</small>
                           @enderror
@@ -153,7 +152,7 @@
                       <div class="col_grid6">
                         <div class="form-group">
                           <label>Mobile Number</label>
-                          <input type="text" name="phone" value="{{$OrgData->phone}}" class="form-control" maxlength="10" minlength="10" size="10" required>
+                          <input type="text" name="phone" value="{{$OrgData->phone}}" class="form-control" maxlength="10" @if($userid !=Auth::user()->id) disabled @endif minlength="10" size="10" required>
                           @error('phone')
                           <small class="form-control-feedback">{{ $errors->first('phone') }}</small>
                           @enderror
@@ -162,13 +161,13 @@
                       <div class="col_grid6">
                         <div class="form-group">
                           <label>Date of Birth</label>
-                          <input type="date" name="dob" value="{{$OrgData->dob}}" class="form-control" required>
+                          <input type="date" name="dob" value="{{$OrgData->dob}}" class="form-control" @if($userid !=Auth::user()->id) disabled @endif required>
                         </div>
                       </div>
                       <div class="col_grid6 unlock_sec">
                         <div class="form-group">
                           <label>Gender</label>
-                          <select name="gender" class="form-control">
+                          <select name="gender" class="form-control" @if($userid !=Auth::user()->id) disabled @endif>
                             <option value="0" {{ $OrgData->gender == '0' ? 'selected' : '' }}>Male</option>
                             <option value="1" {{ $OrgData->gender == '1' ? 'selected' : '' }}>Female</option>
                             <option value="2" {{ $OrgData->gender == '2' ? 'selected' : '' }}>Non-Binary</option>
@@ -199,7 +198,7 @@
                 <h3 class="font36text  bukhariSrptfont_fmly clrred">About</h3>
                 <div class="boxShodewBg fw">
                   <div class="form-group">
-                    <textarea name="about" class="grytextPra">{!! $OrgData->about !!}</textarea>
+                    <textarea name="about" class="grytextPra" @if($userid !=Auth::user()->id) disabled @endif>{!! $OrgData->about !!}</textarea>
                   </div>
                 </div>
                 <div class="col_grid3 profile_update_btn text-center">
@@ -217,10 +216,12 @@
         <div class="fw educationSec aboutusBg smaeHeading">
           <div class="fw aboutusBg_sec">
             <div class="lgcontainer">
-              @if($userid != Auth::user()->id)
-              @else
-              <h3 href="javascript:void(0);" data-modal="#education_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
+
+              <h3 href="javascript:void(0);" data-modal="#education_add_detail" class="font36text  bukhariSrptfont_fmly clrred @if($userid != Auth::user()->id)
+                @else open-modal @endif">
                 Education
+                @if($userid != Auth::user()->id)
+                @else
                 <span class="pull-right font20Text">
                   <i>
                     <img src="{{ asset('public/assets/images/add.png')}}" alt="img" />
@@ -232,14 +233,12 @@
               <form class="form_sec fw">
                 <div class="innerrow">
                   @foreach($edData as $ed)
-
                   <div class="col_grid12 ">
                     <div class="form-group">
                       <label>School Name</label>
                       <input type="text" value="{{$ed->school_name}}" maxlength="200" class="form-control" readonly>
                     </div>
                   </div>
-
                   <div class="col_grid12">
                     <div class="form_btm_sec">
                       <div class="innerrow">
@@ -338,10 +337,12 @@
           <div class="fw aboutusBg_sec">
 
             <div class="lgcontainer">
-              @if($userid != Auth::user()->id)
-              @else
-              <h3 href="javascript:void(0);" data-modal="#experience_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
+
+              <h3 href="javascript:void(0);" data-modal="#experience_add_detail" class="font36text  bukhariSrptfont_fmly clrred @if($userid != Auth::user()->id)
+                @else open-modal @endif">
                 Experience
+                @if($userid != Auth::user()->id)
+                @else
                 <span class="pull-right font20Text">
                   <i>
                     <img src="{{ asset('public/assets/images/add.png')}}" alt="img" /></i>
@@ -461,10 +462,12 @@
         <div class="fw educationSec aboutusBg smaeHeading paddTop0">
           <div class="fw aboutusBg_sec form_sec">
             <div class="lgcontainer">
-              @if($userid != Auth::user()->id)
-              @else
-              <h3 data-modal="#certificate_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
+
+              <h3 data-modal="#certificate_add_detail" class="font36text  bukhariSrptfont_fmly clrred @if($userid != Auth::user()->id)
+                @else open-modal @endif">
                 Certificates
+                @if($userid != Auth::user()->id)
+                @else
                 <span class="pull-right font20Text">
                   <i>
                     <img src="{{ asset('public/assets/images/add.png')}}" alt="img" />
@@ -565,10 +568,12 @@
         <div class="fw educationSec aboutusBg smaeHeading paddTop0">
           <div class="fw aboutusBg_sec form_sec">
             <div class="lgcontainer">
-              @if($userid != Auth::user()->id)
-              @else
-              <h3 data-modal="#industry_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
+
+              <h3 data-modal="#industry_add_detail" class="font36text  bukhariSrptfont_fmly clrred @if($userid != Auth::user()->id)
+                @else open-modal @endif">
                 My Favourite Industries
+                @if($userid != Auth::user()->id)
+                @else
                 <span class="pull-right font20Text">
                   <i>
                     <img src="{{ asset('public/assets/images/add.png')}}" alt="img" />
@@ -598,10 +603,12 @@
         <div class="fw educationSec aboutusBg smaeHeading paddTop0">
           <div class="fw aboutusBg_sec form_sec">
             <div class="lgcontainer">
-              @if($userid != Auth::user()->id)
-              @else
-              <h3 data-modal="#business_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
+
+              <h3 data-modal="#business_add_detail" class="font36text  bukhariSrptfont_fmly clrred @if($userid != Auth::user()->id)
+                @else open-modal @endif">
                 Business Functions I want to Work in
+                @if($userid != Auth::user()->id)
+                @else
                 <span class="pull-right font20Text">
                   <i>
                     <img src="{{ asset('public/assets/images/add.png')}}" alt="img" />
@@ -631,10 +638,12 @@
         <div class="fw educationSec aboutusBg smaeHeading paddTop0">
           <div class="fw aboutusBg_sec form_sec">
             <div class="lgcontainer">
-              @if($userid != Auth::user()->id)
-              @else
-              <h3 data-modal="#hobbies_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
+
+              <h3 data-modal="#hobbies_add_detail" class="font36text  bukhariSrptfont_fmly clrred @if($userid != Auth::user()->id)
+                @else open-modal @endif">
                 Hobbies & Interests
+                @if($userid != Auth::user()->id)
+                @else
                 <span class="pull-right font20Text">
                   <i>
                     <img src="{{ asset('public/assets/images/add.png')}}" alt="img" />
@@ -665,11 +674,13 @@
           <div class="fw aboutusBg_sec form_sec">
             <div class="lgcontainer">
               <div class="boxShodewBg fw">
-                @if($userid != Auth::user()->id)
-                @else
-                <h3 data-modal="#accomplishment_add_detail" class="font36text  bukhariSrptfont_fmly clrred open-modal">
+
+                <h3 data-modal="#accomplishment_add_detail" class="font36text  bukhariSrptfont_fmly clrred @if($userid != Auth::user()->id)
+                @else open-modal @endif">
                   <!-- <h3 data-modal="#accomplishment_add_detail" class="font36text  bukhariSrptfont_fmly clrred "> -->
                   Accomplishments
+                  @if($userid != Auth::user()->id)
+                  @else
                   <span class="pull-right font20Text">
                     <i><img src="{{ asset('public/assets/images/add.png')}}" alt="img" /></i>
                     Add

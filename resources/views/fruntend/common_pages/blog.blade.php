@@ -8,6 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>internify - Blog</title>
   <!-- Fontawesome 4 Cdn from BootstrapCDN -->
+  
+  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="{{ asset('public/assets/web_assets/css/style.css')}}" rel="stylesheet">
   <link href="{{ asset('public/assets/web_assets/fonts/fonts.css')}}" rel="stylesheet">
@@ -183,11 +185,11 @@
         <div class="login_wapper">
           <div class="login_contbox">
             <div class="logo_img fw">
-              <a href="home-pg.html">
+              <a href="#">
                 <img src="{{ asset('public/assets/images/logo.svg') }}" alt="logo">
               </a>
             </div>
-            <form action="home-pg.html" class="welcome_cont fw">
+            <form action="#" class="welcome_cont fw">
               <h3>Welcome !</h3>
               <div class="innerrow">
                 <div class="col_grid8">

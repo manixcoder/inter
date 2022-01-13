@@ -43,6 +43,15 @@ class StudentDashboardController extends Controller
     } else {
       $SearchData = '';
     }
+    $notifications = DB::table('notifications')->get();
+    foreach ($notifications as $notification) {
+      $someArray = json_decode($notification->data, true);
+      $userData = DB::table('users')->Where('id', $someArray['comment_user'])->first();
+      if ($userData) {
+      } else {
+        DB::table('notifications')->Where('id', $notification->id)->delete();
+      }
+    }
     return view('fruntend.student.dashboard')->with([
       'OrgData' => $OrgData,
       'SearchData' => $SearchData,
@@ -112,6 +121,7 @@ class StudentDashboardController extends Controller
     ]);
   }
 
+
   public function studentReject(Request $request, $id, $r_id, $j_id)
   {
     $recuratorData = DB::table('users')->where('id', $r_id)->first();
@@ -154,7 +164,7 @@ class StudentDashboardController extends Controller
 
     // More headers
     $headers .= 'From: ' . $recuratorData->email . "\r\n";
-    $headers .= 'Cc: pathakmanish86@gmail.com' . "\r\n";
+    // $headers .= 'Cc: pathakmanish86@gmail.com' . "\r\n";
 
     mail($to, $subject, $message, $headers);
     return redirect()->back()->with(array('status' => 'success', 'message' => 'Rejected successfully.'));
@@ -188,20 +198,8 @@ class StudentDashboardController extends Controller
    
     </body>
     </html>";
-    //     Dear INSERT STUDENT NAME HERE,
+  
 
-    // I hope this email finds you well.
-
-    // We are delighted to inform you that we have shortlisted your application for our INSERT JOB NAME HERE position. Your remarkable track record and outstanding achievements have amazed our team and we’d like to hop on a quick call with you to discuss your possible future with us at INSERT COMPANY NAME.
-
-    // We hope you can consider.
-
-    // Thank you for your cooperation.
-
-    // Best,
-    // COMPANY NAME
-
-    // Always set content-type when sending HTML email
     $headers = "MIME-Version: 1.0" . "\r\n";
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
@@ -577,7 +575,7 @@ class StudentDashboardController extends Controller
     $id = Session::get('gorgID');
     $OrgData = DB::table('users')->where('id', $id)->first();
     $locationData = DB::table('jobs')->select('location')->groupBy('location')->get();
-   // $titleData = DB::table('jobs')->select('job_title')->groupBy('job_title')->get();
+    // $titleData = DB::table('jobs')->select('job_title')->groupBy('job_title')->get();
     $titleData = DB::table('jobs')->select('industry')->groupBy('industry')->get();
     $job_title = $request->job_title;
     $location = $request->location;
@@ -593,7 +591,7 @@ class StudentDashboardController extends Controller
         ->join('users as r', 'jo.user_id', '=', 'r.id')
         ->where('jo.status', 0)
         ->where('jo.location', 'like', '%' . $location . '%')
-       // ->where('jo.job_title', 'like', '%' . $job_title . '%')
+        // ->where('jo.job_title', 'like', '%' . $job_title . '%')
         ->where('jo.industry', 'like', '%' . $job_title . '%')
         ->orderBy('jo.id', 'desc')
         ->select('jo.*', 'r.org_name', 'r.profile_image', 'r.org_image', 'r.users_role')
