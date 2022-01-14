@@ -26,7 +26,7 @@
     </header>
     <div class="body_wht-inners ">
         <div class="lgcontainer">
-            <div class="boxDetailbg fw">
+            <div class="boxDetailbg fw" >
                 <figure>
                     <img src="{{ asset('public/uploads')}}/{{ $OrgData->org_image }}" alt="jobs" />
                 </figure>
