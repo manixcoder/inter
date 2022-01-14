@@ -39,7 +39,7 @@ class StudentregisterController extends Controller
 			$studentRegisterOne = app('App\User')->insertGetId([
 				'name' => $request->name,
 				'users_role' => 2,
-				'profile_image' => 'no-image.png',
+				'profile_image' => 'blank-profile-picture.png',
 				'created_at' => date("Y-m-d H:i:s"),
 				'updated_at' => date("Y-m-d H:i:s")
 			]);

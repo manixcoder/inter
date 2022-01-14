@@ -20,7 +20,7 @@
           @elseif($userData->users_role === '3')
           <img src="{{ URL::asset('/public/uploads/') }}/{{ $userData->profile_image}}" alt="icon" />
           @else
-          <img src="{{ URL::asset('/public/uploads/placeholder.png') }}" alt="icon" />
+          <img src="{{ URL::asset('/public/uploads/blank-profile-picture.png') }}" alt="icon" />
           @endif
         </div>
         <div class="notification_cont">

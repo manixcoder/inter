@@ -18,7 +18,7 @@
                      @if($userdetail->profile_image !='')
                      <img src="{{ URL::asset('/public/uploads/') }}/{{ $userdetail->profile_image ?? ''}}" alt="icon">
                      @else
-                     <img src="{{ URL::asset('/public/uploads/placeholder.png') }}" alt="icon">
+                     <img src="{{ URL::asset('/public/uploads/blank-profile-picture.png') }}" alt="icon">
                      @endif
 
                   </span>

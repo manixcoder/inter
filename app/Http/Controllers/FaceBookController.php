@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 use URL;
+use DB;
 
 class FaceBookController extends Controller
 {
@@ -27,31 +28,28 @@ class FaceBookController extends Controller
     {
         try {
             $user = Socialite::driver('facebook')->stateless()->user();
-            /* image generation start */
-            //dd($user->avatar);
-            $path = $user->avatar;
-            $type = pathinfo($path, PATHINFO_EXTENSION);
-            $data = file_get_contents($path);
-            $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-           // dd($base64);
-            $img = $base64;
-            $img = str_replace('data:image/png;base64,', '', $img);
-            $img = str_replace(' ', '+', $img);
-            $data = base64_decode($img);
-            $imageName = uniqid() . '.png';
-            $file = "public/uploads/" . $imageName;
-            $success = file_put_contents($file, $data);
-            // dd($success);
-            /* image generation end */
+            $findUser = User::where('email',$user->getEmail())->get();
+
+            if(count($findUser) > 0){
+                DB::table('users')->where('email',$user->getEmail())->update([
+                    'facebook_id' => $user->getId(),
+                ]);
+                Auth::loginUsingId($findUser[0]->id);
+                if ($findUser[0]->users_role === '3') {
+                return redirect('/recruiter-dashboard');
+            } elseif ($findUser[0]->users_role === '2') {
+                return redirect('/student-dashboard');
+            }
+            }
+            
             $saveUser = User::updateOrCreate([
                 'facebook_id' => $user->getId(),
             ], [
                 'name' => $user->getName(),
                 'email' => $user->getEmail(),
-                'profile_image' => 'placeholder.png',
-                //'profile_image' => $imageName,
+                'profile_image' => 'blank-profile-picture.png',
                 'users_role' => '2',
-                'password' => Hash::make($user->getName() . '@' . $user->getId())
+                //'password' => Hash::make($user->getName() . '@' . $user->getId())
             ]);
 
             Auth::loginUsingId($saveUser->id);

@@ -44,11 +44,32 @@
               </div>
             </div>
           </div>
-          <!--<div class="col_grid12 Jobextend_details text-center">-->
-          <!--  <a href="javascript:void(0);" class="lightblue_text">Extend Details <span><img src="images/arrow_drop_down_blue.png" /></span></a>-->
-          <!--</div>-->
+          <div id="description" style="display: none;">
+            <div>
+              <?php echo $Data[0]->job_description; ?>
+            </div>
+            <div class="col_grid9">
+              <ul>
+                @foreach(unserialize($Data[0]->offer) as $key => $offer)
+                <li>{{ $offer }}</li>
+                @endforeach
+                <!-- <li>Be part of a dynamic and supportive work environment</li> -->
+              </ul>
+            </div>
 
-         
+          </div> 
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <div class="col_grid12 Jobextend_details text-center">
+            <a href="javascript:void(0);" class="lightblue_text" id="extend">
+              Extend Details
+              <span>
+                <img src="{{ URL::asset('/public/assets/images/arrow_drop_down_blue.png')}}" />
+              </span>
+            </a>
+          </div>
+          
+
+
           <div class=" intercandidates_sec fw">
             <h3>{{ count($intrestedCandidate ?? '')}} Interested Candidates</h3>
             @if(isset($intrestedCandidate))
@@ -90,12 +111,17 @@
                           <img src="{{ URL::asset('/public/assets/images/messageIcon.png') }}" alt="icon">
                         </a>
                       </div>
+
                       <div class="applyBtn">
-                        <a href="{{ URL::to('student-selected',$studentDetails->id) }}/{{ $Data[0]->user_id }}/{{$value->job_id}}" class="input-btn">Shortlist & Send Email</a>
+                        <a href="{{ URL::to('student-selected',$studentDetails->id) }}/{{ $Data[0]->user_id }}/{{$value->job_id}}" class="input-btn">
+                          Shortlist & Send Email
+                        </a>
                       </div>
                       <span><br></span>
                       <div class="applyBtn">
-                        <a href="{{ URL::to('student-reject',$studentDetails->id) }}/{{ $Data[0]->user_id }}/{{$value->job_id}}" class="input-btn">Reject & Send Email</a>
+                        <a href="{{ URL::to('student-reject',$studentDetails->id) }}/{{ $Data[0]->user_id }}/{{$value->job_id}}" class="input-btn">
+                          Reject & Send Email
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -117,6 +143,15 @@
                             <span>
                               <img src="{{ URL::asset('/public/assets/images/arrow_right_red.png') }}" alt="redarrow">
                             </span>
+                          </a>
+                        </div>
+
+                        <div class="retextbtn_sec">
+                          <button> Questionnaire</button>
+
+                          <!-- <span>
+                              <img src="{{ URL::asset('/public/assets/images/arrow_right_red.png') }}" alt="redarrow">
+                            </span> -->
                           </a>
                         </div>
                       </div>
@@ -146,6 +181,14 @@
     </div>
   </div>
   <script src="js/jquery-lb.js"></script>
+
+  <script>
+    $('#extend').click(function() {
+      //alert("Hello");
+      $('#description').show();
+      $('#extend').hide();
+    })
+  </script>
   <script>
     $(document).ready(function() {
       $(".clicktobtm").click(function() {

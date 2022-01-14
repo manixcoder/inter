@@ -67,7 +67,7 @@ class JobConroller extends Controller
       $path =  $files->move($destinationPath, $logoImage);
       $image = $insert['logo'] = "$logoImage";
     } else {
-      $image = 'placeholder.png';
+      $image = 'blank-profile-picture.png';
     }
     if ($files = $request->acttachPhoto) {
       $destinationPath = public_path('/uploads/');

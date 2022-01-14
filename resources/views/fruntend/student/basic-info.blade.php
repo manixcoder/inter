@@ -112,6 +112,8 @@
     <div class="tabCompnay_profile profileDetail_tab text-center fw">
       <div class="lgcontainer">
         <ul class=" profileDetail_ul" id="profileTab_link">
+        @if($userid != Auth::user()->id)
+        @else
           <li>
             <a href="{{url('student-profile-basic-info')}}" class="active">My Details</a>
           </li>
@@ -121,6 +123,7 @@
           <li>
             <a href="{{url('student-applications')}}">My Applications</a>
           </li>
+          @endif
         </ul>
       </div>
       <div class="profileTab_contBox fw" id="profileTab_Details1">
@@ -135,7 +138,7 @@
                     <div class="innerrow">
                       <div class="col_grid12 ">
                         <div class="form-group">
-                          <label>Your Name</label>
+                          <label>Name</label>
                           <input type="text" name="name" value="{{$OrgData->name}}" class="form-control" maxlength="100" size="100" required @if($userid !=Auth::user()->id) disabled @endif>
                         </div>
                       </div>
@@ -360,7 +363,7 @@
                       <img src="{{ asset('public/uploads/'.$exp->company_image)}}" alt="icon" />
 
                       @else
-                      <img src="{{ asset('public/uploads/placeholder.png')}}" alt="icon" />
+                      <img src="{{ asset('public/uploads/blank-profile-picture.png')}}" alt="icon" />
                       @endif
                     </div>
 
@@ -571,7 +574,7 @@
 
               <h3 data-modal="#industry_add_detail" class="font36text  bukhariSrptfont_fmly clrred @if($userid != Auth::user()->id)
                 @else open-modal @endif">
-                My Favourite Industries
+                My Favourite Industries (e.g. Healthcare, Entertainment, Consulting)
                 @if($userid != Auth::user()->id)
                 @else
                 <span class="pull-right font20Text">
@@ -606,7 +609,7 @@
 
               <h3 data-modal="#business_add_detail" class="font36text  bukhariSrptfont_fmly clrred @if($userid != Auth::user()->id)
                 @else open-modal @endif">
-                Business Functions I want to Work in
+                Business Functions I Want to Work in (e.g. Sales, HR, R&D)
                 @if($userid != Auth::user()->id)
                 @else
                 <span class="pull-right font20Text">

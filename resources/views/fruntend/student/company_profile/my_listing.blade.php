@@ -57,7 +57,7 @@
                           @if($userdetail->org_image !='')
                           <img src="{{ URL::asset('/public/uploads/') }}/{{ $userdetail->org_image }}" alt="images" />
                           @else
-                          <img src="{{ URL::asset('/public/uploads/no-image.png') }}" alt="images" />
+                          <img src="{{ URL::asset('/public/uploads/blank-profile-picture.png') }}" alt="images" />
                           @endif
                         </div>
                         <div class="compnay">

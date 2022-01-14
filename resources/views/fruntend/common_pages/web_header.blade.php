@@ -105,7 +105,7 @@
                   @if(Auth::user()->profile_image)
                   <img src="{{ URL::asset('/public/uploads/') }}/{{ Auth::user()->profile_image }}" alt="img">
                   @else
-                  <img src="{{ URL::asset('/public/uploads/placeholder.png') }}" alt="img">
+                  <img src="{{ URL::asset('/public/uploads/blank-profile-picture.png') }}" alt="img">
                   @endif
                 </i>
                 <span>{{ Auth::user()->name ?? ''}} <img src="{{ asset('public/assets/images/user-downarrow.png')}}" alt="img"></span>

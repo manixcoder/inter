@@ -65,7 +65,7 @@
 								@if($value->profile_image !='')
 								<img src="{{ URL::asset('/public/uploads/') }}/{{ $value->profile_image }}" alt="usericon">
 								@else
-								<img src="{{ URL::asset('/public/uploads/placeholder.png') }}" alt="usericon">
+								<img src="{{ URL::asset('/public/uploads/blank-profile-picture.png') }}" alt="usericon">
 								@endif
 							</i>
 							{{ $value->org_name }}

@@ -72,7 +72,7 @@
         <div class="innerrow">
           <div class="col_grid9">
             <div class="profile_publicimg">
-              @if($loginby->profile_image =='no-image.png')
+              @if($loginby->profile_image =='blank-profile-picture.png')
               <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="img" />
               @else
               <img src="{{ asset('public/uploads/'.$loginby->profile_image)}}" alt="img" />
@@ -170,7 +170,7 @@
                     @else
                     <img src="{{ asset('public/uploads/userimg-icon.png')}}" alt="icon" />
                     @endif
-                    <!-- @if($users->profile_image =='no-image.png')
+                    <!-- @if($users->profile_image =='blank-profile-picture.png')
                     <img src="{{ asset('public/uploads/userimg-icon.png')}}" alt="icon" />
                     @else
                     <img src="{{ asset('public/uploads/'.$loginby->profile_image)}}" alt="icon" />

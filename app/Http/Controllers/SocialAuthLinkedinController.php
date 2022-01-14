@@ -37,7 +37,7 @@ class SocialAuthLinkedinController extends Controller
                 $user->name = $linkdinUser->name;
                 $user->email = $linkdinUser->email;
                 $user->linkedin_id = $linkdinUser->id;
-                $user->profile_image = 'placeholder.png';
+                $user->profile_image = 'blank-profile-picture.png';
                 $user->password = md5(rand(1, 10000));
 
                 $user->users_role = '2';
