@@ -19,15 +19,7 @@
   if ($loginby->specialties != '') {
     $count = $count + 20;
   }
-  // if ($loginby->address != '') {
-  //   $count = $count + 10;
-  // }
-  // if ($hobbies) {
-  //   $count = $count + 10;
-  // }
-  // if ($accomplishments) {
-  //   $count = $count + 10;
-  // }
+
   ?>
  <div class="body_wht-inners bloglgHome_sec">
    <div class="lgcontainer">
@@ -39,7 +31,7 @@
                @if(Auth::user()->profile_image !='')
                <img src="{{ URL::asset('/public/uploads/') }}/{{ Auth::user()->profile_image ?? ''}}" alt="profile">
                @else
-               <img src="{{ URL::asset('/public/uploads/no-image.png') }}" alt="profile">
+               <img src="{{ URL::asset('/public/uploads/blank-profile-picture.png') }}" alt="profile">
                @endif
                <!-- <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->org_image ?? ''}}" alt="profile"> -->
              </figure>
@@ -102,7 +94,7 @@
                    @if($createdby->profile_image !='')
                    <img src="{{ URL::asset('/public/uploads/') }}/{{ $createdby->profile_image ?? ''}}" alt="icon">
                    @else
-                   <img src="{{ URL::asset('/public/uploads/no-image.png') }}" alt="icon">
+                   <img src="{{ URL::asset('/public/uploads/blank-profile-picture.png') }}" alt="icon">
                    @endif
                  </span>
                  <div class="userCommnet_Name">

@@ -114,7 +114,7 @@ class StudentController extends Controller
         $path =  $files->move($destinationPath, $profileImage);
         $profile_image = $insert['photo'] = "$profileImage";
       } else {
-        $profile_image = 'placeholder.png';
+        $profile_image = 'blank-profile-picture.png';
       }
       $data = array(
         'profile_image' => $profile_image,

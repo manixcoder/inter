@@ -43,7 +43,7 @@
           @if($appl->logo !='')
           <img src="{{ asset('public/uploads')}}/{{ $appl->logo }}" alt="jobs">
           @else
-          <img src="{{ asset('public/uploads/placeholder.png')}}" alt="newtechlogo">
+          <img src="{{ asset('public/uploads/blank-profile-picture.png')}}" alt="newtechlogo">
           @endif
         </figure>
       </div>
@@ -54,7 +54,7 @@
               @if($appl->profile_image !='')
               <img src="{{ asset('public/uploads')}}/{{ $appl->profile_image }}" alt="newtechlogo">
               @else
-              <img src="{{ asset('public/uploads/placeholder.png')}}" alt="newtechlogo">
+              <img src="{{ asset('public/uploads/blank-profile-picture.png')}}" alt="newtechlogo">
               @endif
             </div>
             <div class="jobsDetailComp_cont">

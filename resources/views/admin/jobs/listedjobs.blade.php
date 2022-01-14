@@ -3,10 +3,9 @@
 	<div class="row">
 		<h3 class="heading">Listed Jobs ({{ $DataCount}} )</h3>
 		<div class="col-md-12 listtable-sec">
-		<div id="loading_j">
-		<!-- <img id="loading-image" src="http://cdn.nirmaltv.com/images/generatorphp-thumb.gif" alt="Loading..." /> -->
-		<img id="loading-image" src="{{ URL::asset('/public/uploads/TheInternifyAnimatedLogo.gif') }}" alt="Loading..." />
-	</div>
+			<div id="loading_j">
+				<img id="loading-image" src="{{ URL::asset('/public/uploads/TheInternifyAnimatedLogo.gif') }}" alt="Loading..." />
+			</div>
 			<table class="table listjob_table text-left" id="listjobs_table">
 				<thead>
 					<tr>

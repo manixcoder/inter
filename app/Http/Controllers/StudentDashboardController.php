@@ -340,7 +340,7 @@ class StudentDashboardController extends Controller
       $profileImage = date('YmdHis') . "-" . $files->getClientOriginalName();
       $path =  $files->move($destinationPath, $profileImage);
     } else {
-      $profileImage = "placeholder.png";
+      $profileImage = "blank-profile-picture.png";
     }
 
     $update = DB::table('experience')

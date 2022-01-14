@@ -5,7 +5,6 @@
 		</span>
 	</h3>
 	<div id="loading_b">
-		<!-- <img id="loading-image" src="http://cdn.nirmaltv.com/images/generatorphp-thumb.gif" alt="Loading..." /> -->
 		<img id="loading-image" src="{{ URL::asset('/public/uploads/TheInternifyAnimatedLogo.gif') }}" alt="Loading..." />
 	</div>
 	<div class="row">

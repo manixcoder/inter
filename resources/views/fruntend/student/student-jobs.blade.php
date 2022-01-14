@@ -135,7 +135,7 @@
             @if($appl->profile_image !='')
             <img src="{{ asset('public/uploads/'.$appl->profile_image)}}" alt="images">
             @else
-            <img src="{{ asset('public/uploads/placeholder.png')}}" alt="images">
+            <img src="{{ asset('public/uploads/blank-profile-picture.png')}}" alt="images">
             @endif
           </div>
           <div class="compnay">

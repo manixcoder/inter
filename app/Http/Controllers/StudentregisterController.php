@@ -39,7 +39,7 @@ class StudentregisterController extends Controller
 			$studentRegisterOne = app('App\User')->insertGetId([
 				'name' => $request->name,
 				'users_role' => 2,
-				'profile_image' => 'no-image.png',
+				'profile_image' => 'blank-profile-picture.png',
 				'created_at' => date("Y-m-d H:i:s"),
 				'updated_at' => date("Y-m-d H:i:s")
 			]);
@@ -87,12 +87,12 @@ class StudentregisterController extends Controller
 				'updated_at' => date("Y-m-d H:i:s")
 			]);
 			$data = app('App\User')->where('id', $request->student_id)->first();
-			
+
 			$to = $data->email;
 			$subject = "Verification Code";
 
 			$message = 'Dear ' . $data->name . ',<br>';
-			$message .= "Your verification code is <br><br>".$data->otp;
+			$message .= "Your verification code is <br><br>" . $data->otp;
 			$message .= "Regards,<br>";
 			$message .= "The Internify,<br>";
 
@@ -102,7 +102,7 @@ class StudentregisterController extends Controller
 
 			// More headers
 			$headers .= 'From: contact@theinternify.com' . "\r\n";
-			$headers .= 'Cc: pathakmanish86@gmail.com' . "\r\n";
+			//$headers .= 'Cc: pathakmanish86@gmail.com' . "\r\n";
 
 			mail($to, $subject, $message, $headers);
 
@@ -124,10 +124,6 @@ class StudentregisterController extends Controller
 		}
 	}
 	/* student register controllers End */
-
-
-
-
 	public function student_logged_in(Request $request)
 	{
 		$email = $request->input('email');

@@ -1,7 +1,7 @@
  @include('fruntend.common_pages.web_header')
  @php
  $createdby = DB::table('users')->where('id', $Data->created_by)->first();
- $blogData = DB::table('blogs')->orderBy('id', 'Desc')->where('id',$Data->id)->take(2)->get();
+ $blogData = DB::table('blogs')->orderBy('id', 'Desc')->where('id','!=',$Data->id)->take(2)->get();
  @endphp
  <div class="body_wht-inners viewDetailBlog_sec ">
    <div class="small_contaner blogcontainer">

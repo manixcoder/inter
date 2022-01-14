@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>internify - Home</title>
     <!-- Fontawesome 4 Cdn from BootstrapCDN -->
-    <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
+    <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}" />
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="{{ asset('public/assets/web_assets/css/style.css')}}" rel="stylesheet">
     <link href="{{ asset('public/assets/web_assets/fonts/fonts.css')}}" rel="stylesheet">
@@ -17,10 +17,6 @@
     <header class="header_sec flow2_header fw">
         <div class="lgcontainer">
             @include('fruntend.student.inc.top-menu')
-            <?php
-            // echo "<pre>";
-            // print_r($OrgData);
-            ?>
         </div>
     </header>
     <div class="body_wht-inners ">
@@ -35,7 +31,7 @@
                     @if($OrgData->profile_image !='')
                     <img src="{{ asset('public/uploads')}}/{{ $OrgData->profile_image }}" alt="icon_logo" />
                     @else
-                    <img src="{{ asset('public/uploads/placeholder.png') }}" alt="icon_logo" />
+                    <img src="{{ asset('public/uploads/blank-profile-picture.png') }}" alt="icon_logo" />
                     @endif
                 </div>
             </div>
@@ -125,7 +121,12 @@
                                                 <img src="{{ URL::asset('/public/uploads/') }}/{{ $OrgData->profile_image }}" alt="icon">
                                             </span>
                                             <div class="userCommnet_Name">
-                                                <h4>{{ $OrgData->name ?? ''}}<span>{{ date('d M Y | H:i', strtotime($post->date_time)) }}</span></h4>
+                                                <h4>
+                                                    {{ $OrgData->name ?? ''}}
+                                                    <span>
+                                                        {{ date('d M Y | H:i', strtotime($post->date_time)) }}
+                                                    </span>
+                                                </h4>
                                             </div>
                                         </div>
                                         <p class="site-pra">

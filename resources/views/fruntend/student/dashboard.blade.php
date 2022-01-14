@@ -60,8 +60,7 @@
   </header>
   <div class="body_wht-inners bloglgHome_sec">
     <div id="loading">
-      <!-- <img id="loading-image" src="{{ URL::asset('/public/uploads/TheInternifyAnimatedLogo.gif') }}" alt="Loading..." /> -->
-      <img id="loading-image" src="http://cdn.nirmaltv.com/images/generatorphp-thumb.gif" alt="Loading..." />
+      <img id="loading-image" src="{{ URL::asset('/public/uploads/TheInternifyAnimatedLogo.gif') }}" alt="Loading..." />
     </div>
     <div class="lgcontainer">
       <div class="innerrow">
@@ -156,7 +155,7 @@
                   @if($users->profile_image !="")
                   <img src="{{ URL::asset('/public/uploads') }}/{{ $users->profile_image ?? ''}}" alt="img">
                   @else
-                  <img src="{{ URL::asset('/public/uploads/placeholder.png') }}" alt="img">
+                  <img src="{{ URL::asset('/public/uploads/blank-profile-picture.png') }}" alt="img">
                   @endif
                 </span>
                 <div class="userCommnet_Name">
@@ -180,7 +179,8 @@
                 <p> <?php echo $post->description; ?></p>
               </div>
               <!-- <p class="site-pra" id="short_{{ $post->id}}">
-                <?php // echo substr($post->description, 0, 500); 
+                <?php 
+                // echo substr($post->description, 0, 500); 
                 ?>
                 <button class="readmore" id="button_{{ $post->id}}" onclick="showhide()">Read More</button>
               </p> -->
@@ -255,7 +255,7 @@
                     </span>
                     @else
                     <span class="usericon">
-                      <img src="{{ URL::asset('/public/uploads/placeholder.png') }}" alt="icon" />
+                      <img src="{{ URL::asset('/public/uploads/blank-profile-picture.png') }}" alt="icon" />
                     </span>
                     @endif
                     <div class="commentuser-rightuser">

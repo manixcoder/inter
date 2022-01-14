@@ -13,7 +13,7 @@
           @if($studentDetail->profile_image !='')
           <img src="{{ URL::asset('/public/uploads/') }}/{{ $studentDetail->profile_image ?? ''}}" />
           @else
-          <img src="{{ URL::asset('/public/uploads/placeholder.png') }}" />
+          <img src="{{ URL::asset('/public/uploads/blank-profile-picture.png') }}" />
           @endif
         </div>
         <div class="userdetail_cont">

@@ -25,7 +25,7 @@
              @if($recruiterInfo->profile_image !='')
             <img  src="{{ URL::asset('/public/uploads/') }}/{{ $recruiterInfo->profile_image ?? ''}}" alt="icon_logo" />
             @else
-            <img id="routput" src="{{ asset('public/uploads/no-image.png')}}" alt="jobs" />
+            <img id="routput" src="{{ asset('public/uploads/blank-profile-picture.png')}}" alt="jobs" />
             @endif
           </div>
         </div> 
