@@ -154,6 +154,7 @@ Route::get('recruiter/mylisting', function () {
 
 Route::any('edit/recruiter/profile', 'RecruiterwebController@edit_recruiter_profile');
 Route::any('edit/recruiter/about', 'RecruiterwebController@edit_recruiter_about');
+Route::any('remove-profile-image','RecruiterwebController@removeProfileImage');
 /* After web login pages End */
 
 

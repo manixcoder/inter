@@ -8,7 +8,7 @@
   <meta name="csrf_token" content="{{csrf_token()}}">
   <title>internify - Home</title>
   <!-- Fontawesome 4 Cdn from BootstrapCDN -->
-  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
+  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}" />
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="{{ asset('public/assets/web_assets/css/style.css')}}" rel="stylesheet">
   <link href="{{ asset('public/assets/web_assets/fonts/fonts.css')}}" rel="stylesheet">
@@ -81,6 +81,11 @@
                 <input type="file" name="student_image" id="studentImage">
               </div>
               @endif
+              <form method="post" action="{{url('remove-profile-image')}}">
+                @csrf
+                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                <button type="submit">Remove Profile</button>
+              </form>
             </div>
             <div class="profile_publicDetail">
               <h4 class="clrwht font36text  semiboldfont_fmly">
@@ -112,8 +117,8 @@
     <div class="tabCompnay_profile profileDetail_tab text-center fw">
       <div class="lgcontainer">
         <ul class=" profileDetail_ul" id="profileTab_link">
-        @if($userid != Auth::user()->id)
-        @else
+          @if($userid != Auth::user()->id)
+          @else
           <li>
             <a href="{{url('student-profile-basic-info')}}" class="active">My Details</a>
           </li>
@@ -1163,7 +1168,7 @@
 
   <script type="text/javascript">
     $('#studentImage').on('change', function(ev) {
-      console.log("here inside");
+      //console.log("here inside");
       var filedata = this.files[0];
       var imgtype = filedata.type;
       var match = ['image/jpeg', 'image/jpg', 'image/png'];
@@ -1193,6 +1198,8 @@
         data: postData,
         processData: false,
         success: function() {
+          location.reload();
+              return false;
           console.log("success");
         }
       });
