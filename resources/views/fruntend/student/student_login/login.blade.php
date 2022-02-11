@@ -97,7 +97,7 @@
             <h5>
               By logging in, you agree to our 
               <a href="{{url('termsofuse')}}" class="textbtn_green">
-                terms and conditions
+                terms and views
               </a> 
               as well as our <a href="{{url('privacypolicy')}}" class="textbtn_green">privacy policy</a></h5>
           </div>

@@ -23,7 +23,7 @@
               <img src="{{ asset('public/assets/images/logo.svg') }}" alt="logo">
             </a>
           </div>
-           <form class="welcome_cont fw" action="{{ url('recruider_register_step_one') }}" method="POST" enctype="multipart/form-data">
+           <form class="welcome_cont regstepfive-sec fw" action="{{ url('recruider_register_step_one') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="innerrow">
               <div class="col_grid12 digitcode">
@@ -42,7 +42,6 @@
               @endif
             </div>
             <div class="text-right fw continue_topbtn">
-              <span class="continue_text pull-left">Just press "Enter " to continue</span>
               <span class="pull-right btn_continue">
                 <button type="submit" id='btnValidate' class="input-btn">Continue <span><img src="{{ asset('public/assets/images/logininput_right.png')}}" class="wht-icon" alt="icon"></span><span><img src="{{ asset('public/assets/images/arrow_right_red.png')}}" class="none-img redimg-arrow" alt="icon" ></span></button>
               </span>

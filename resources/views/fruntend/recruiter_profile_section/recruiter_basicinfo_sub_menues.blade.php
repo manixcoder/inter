@@ -19,37 +19,31 @@ $listedjobs = DB::table('jobs')->where('user_id', $id)->orderBy('id', 'Desc')->g
         <img id="img_profile" src="{{ asset('public/uploads/company_profileBG.png')}}" alt="jobs" />
         @endif
       </figure>
+      <div class="form-group fileupload  banner-info">
+
+      <input type="file" name="org_image" id="org_image" class="file-upload">
+      <i class="camera-icon"><img src="{{ asset('public/assets/images/camera-icon.png')}}" alt="icon" /></i>
     </div>
-    <div class="compnayProfile_user fw">
+    </div>
+    
+    <div class="profile_publicimg recruiter-remove-profile">
+      <i class="camara-sdudentcamara"><img src="{{ asset('public/assets/images/camera-icon.png')}}" alt="icon" /></i>
       <div class="userBox_img">
         @if($recruiterInfo->profile_image !='')
         <img id="routput" src="{{ URL::asset('/public/uploads/') }}/{{ $recruiterInfo->profile_image ?? ''}}" alt="icon_logo" />
         @else
         <img id="routput" src="{{ asset('public/uploads/blank-profile-picture.png')}}" alt="jobs" />
         @endif
-      </div>
     </div>
-    <div class="form-group">
-      <label>Profile Image</label>
-      <input type="file" name="profile_image" id="profile_image">
+    <div class="form-group fileupload">
+      <input type="file" name="profile_image" id="profile_image" class="file-upload">
     </div>
-
-
-    <div class="form-group">
-      <label>Banner Image</label>
-      <input type="file" name="org_image" id="org_image">
-    </div>
-    <div class="form-group">
-
-      <form method="post" action="{{url('remove-profile-image')}}">
-        @csrf
-        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-        <button type="submit">Remove Profile</button>
-      </form>
-
-
-    </div>
-
+    <form method="post" action="{{url('remove-profile-image')}}" class="remoovicon">
+      @csrf
+      <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+      <button type="submit"><span>&#215;</span></button>
+    </form>
+</div>
 
     <div id="mgs_ta"></div>
     <div class="tabCompnay_profile text-center fw">

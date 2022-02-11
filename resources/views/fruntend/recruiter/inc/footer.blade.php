@@ -13,7 +13,7 @@
             <a href="https://www.facebook.com/Theinternify"><i class="fa fa-facebook" aria-hidden="true"></i></a>
           </li>
           <li>
-            <a href="https://twitter.com/TInternify "><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a href="https://twitter.com/TInternify "><i class="fa fa-twitter" aria-hidden="true"></i></a>   
           </li>
           <li>
             <a href="https://www.instagram.com/theinternify/"><i class="fa fa-instagram" aria-hidden="true"></i></a>

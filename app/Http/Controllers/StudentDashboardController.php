@@ -198,7 +198,7 @@ class StudentDashboardController extends Controller
    
     </body>
     </html>";
-  
+
 
     $headers = "MIME-Version: 1.0" . "\r\n";
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
@@ -606,10 +606,11 @@ class StudentDashboardController extends Controller
   }
   public function deleteStudentResume(Request $request, $id)
   {
+    //dd($id);
     $res = DB::table('student_resume')->where('id', $id)->delete();
     $userRole = Session::get('userRole');
-    $id = Session::get('gorgID');
-    $OrgData = DB::table('users')->where('id', $id)->first();
+    $userid = Session::get('gorgID');
+    $OrgData = DB::table('users')->where('id', $userid)->first();
     $locationData = DB::table('jobs')->select('location')->groupBy('location')->get();
     $titleData = DB::table('jobs')->select('job_title')->groupBy('job_title')->get();
     $job_title = $request->job_title;
@@ -631,6 +632,7 @@ class StudentDashboardController extends Controller
         ->select('jo.*', 'r.org_name', 'r.profile_image', 'r.org_image', 'r.users_role')
         ->get();
     }
+    return back();
     return view('fruntend.student.student-jobs')->with([
       'OrgData'       => $OrgData,
       'jobsData'      => $jobsData,

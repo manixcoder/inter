@@ -49,7 +49,8 @@
             </div>
           </div>
           <div class="notipra_text fw">
-            <?php echo  $notification->data['comment'] ?>
+            <?php //echo  $notification->data['comment'] ?>
+            <p>Check their profile out!</p>
           </div>
           <div class="notipra_text fw">
             @if($notification->data['notification_type'] ==='Post a new Jobs')

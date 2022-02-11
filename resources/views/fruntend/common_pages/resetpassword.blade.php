@@ -110,7 +110,14 @@
                 <h5>Now, you can reset your  <br />new password! </h5>
               </div>
               <div class="text-right col_grid4">
-                <button type="submit" id="checkpassword" class="input-btn">Done <span><img src="{{ asset('public/assets/images/loginCheck_icon.png')}}" alt="checkicon" /></span></button>
+                <button type="submit" id="checkpassword" class="input-btn">Done 
+                  <span>
+                    <img class="wht-icon" src="{{ asset('public/assets/images/logininput_right.png')}}" alt="icon">
+                  </span>
+                  <span>
+                    <img src="{{ asset('public/assets/images/arrow_right_red.png')}}" class="none-img redimg-arrow" alt="icon">
+                  </span>
+              </button>
               </div>
             </div>
             <div class="from-group fw">

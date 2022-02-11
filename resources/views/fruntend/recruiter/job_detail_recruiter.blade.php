@@ -45,10 +45,8 @@
             </div>
           </div>
           <div id="description" style="display: none;">
-            <div>
-              <?php echo $Data[0]->job_description; ?>
-            </div>
-            <div class="col_grid9">
+            <div class="jobDescriptions_sec fw">
+              <h3 class="borderBox_heading">Offer</h3>
               <ul>
                 @foreach(unserialize($Data[0]->offer) as $key => $offer)
                 <li>{{ $offer }}</li>
@@ -56,10 +54,12 @@
                 <!-- <li>Be part of a dynamic and supportive work environment</li> -->
               </ul>
             </div>
-
+            <div class="jobDescriptions_sec fw">
+              <h3 class="borderBox_heading">Job Descriptions</h3>
+              <?php echo $Data[0]->job_description; ?>
+            </div>
           </div> 
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <div class="col_grid12 Jobextend_details text-center">
+          <div class="col_grid12 Jobextend_details text-center fw">
             <a href="javascript:void(0);" class="lightblue_text" id="extend">
               Extend Details
               <span>
@@ -82,7 +82,7 @@
             <div class="intercandidates_box fw">
               <div class="jobsDetailBox fw">
                 <div class="innerrow">
-                  <div class="col_grid8">
+                  <div class="col_grid6">
                     <div class="intercandidates_imgbox">
                       <img src="{{ URL::asset('/public/uploads/') }}/{{ $studentDetails->profile_image ?? ''}}" alt="img">
                     </div>
@@ -104,7 +104,7 @@
                   @if($value->status ==='3')
                   <span>Rejected</span>
                   @endif
-                  <div class="col_grid4">
+                  <div class="col_grid6">
                     <div class="commentsApply fw">
                       <div class="commantsChat">
                         <a href="{{ URL::to('/message')}}" target="_blank">
@@ -127,7 +127,7 @@
                   </div>
                   <div class="col_grid12 intercandidatesProfile">
                     <div class="innerrow">
-                      <div class="col_grid9">
+                      <div class="col_grid12">
                         <div class="cvpdf">
                           @if(!empty($studentResume))
                           <a href="{{ URL::asset('/public/uploads/') }}/{{ $studentResume->image ?? ''}}" download>
@@ -146,8 +146,8 @@
                           </a>
                         </div>
 
-                        <div class="retextbtn_sec">
-                          <button> Questionnaire</button>
+                        <div class="retextbtn_sec pull-right rightside-cont">
+                          <button class="input-btn redBGmanage_btn whtbg-btn "> Questionnaire</button>
 
                           <!-- <span>
                               <img src="{{ URL::asset('/public/assets/images/arrow_right_red.png') }}" alt="redarrow">

@@ -40,7 +40,6 @@
             <span style="display:none; color: #ffffff;" class="emailvalidation1">Please Enter email address.!</span>
           </div>
           <div class="text-right fw continue_topbtn">
-            <span class="continue_text pull-left">Just press "Enter " to continue</span>
             <span class="pull-right btn_continue">
               <button type="submit" id='btnValidate' class="input-btn">Continue <span><img src="{{ asset('public/assets/images/logininput_right.png')}}" class="wht-icon" alt="icon"></span><span><img src="{{ asset('public/assets/images/arrow_right_red.png')}}" class="none-img redimg-arrow" alt="icon"></span></button>
             </span>

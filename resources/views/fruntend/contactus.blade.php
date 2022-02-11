@@ -89,10 +89,12 @@
       <div class="lgcontainer">
         <div class="aboutCont_box fw">
           <div class="innerrow">
-            <div class="col_grid12">
-              <h3>Reach Out!</h3>
-            </div>
             <div class="adress_cont col_grid5">
+              <div class="innerrow ">
+                <div class="col_grid12 contect-heading">
+                  <h3>Reach Out!</h3>
+                </div>
+              </div>
               <h4>Mumbai, India</h4>
               <ul class="adreeInfo">
                 <!-- <li><a href="#"><i><img src="{{ asset('public/assets/images/c_address.png')}}" alt="icon"></i>909 Sardis Station, Minneapolis, 55402</a></li> -->
@@ -140,9 +142,9 @@
                     <span style="display:none; color: red;" class="emailvalidation">Enter valid email address.!</span>
                     <span style="display:none; color: red;" class="emailvalidation1">Please Enter email address.!</span>
                   </div>
-                  <label>Write Message <span id="remainingC">(0/500)</span></label>
+                  
                   <div class="form-group col_grid12 write-message">
-
+                    <label>Write Message <span id="remainingC">(0/500)</span></label>
                     <textarea class="form-control" name="message" id="message" placeholder="Please provide any relevant details or expiation" required="" maxlength="500"></textarea>
                     <!-- <span style="display:none; color: red;" class="validate_msg">Please enter message.</span> -->
                   </div>

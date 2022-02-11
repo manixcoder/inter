@@ -214,7 +214,7 @@
                   <ul class="social_icon fw">
                     <li><a href="#" class="login_icon"><img src="{{ asset('public/assets/images/login_facebook.png') }}" alt="icon"></a></li>
                     <li><a href="#" class="login_icon"><img src="{{ asset('public/assets/images/login_linkedin.png') }}" alt="icon"></a></li>
-                    <li><a href="#" class="login_icon"><img src="{{ asset('public/assets/images/login_google.png') }}" alt="icon"></a></li>
+                    <!-- <li><a href="#" class="login_icon"><img src="{{ asset('public/assets/images/login_google.png') }}" alt="icon"></a></li> -->
                   </ul>
                 </ul>
                 <h5>Don't have an account ? <a href="./register_step1.html" class="textbtn_green">Register now</a></h5>

@@ -78,9 +78,9 @@
             </ul>
             <h5>Don't have an account ? <a href="{{URL::to('student-register-step-one')}}" class="textbtn_green">Register now</a></h5>
           </div>
-          <div class="footer_login fw">
+          <!-- <div class="footer_login fw">
             <h5>By logging in, you agree to our <a href="./terms_use-login.html" class="textbtn_green">terms and conditions</a> as well as our <a href="./privacy_policy-login.html" class="textbtn_green">privacy policy</a></h5>
-          </div>
+          </div> -->
         </form>
       </div>
     </div>

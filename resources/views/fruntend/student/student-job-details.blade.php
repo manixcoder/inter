@@ -70,8 +70,8 @@
                 @csrf
                 <input type="hidden" name="comp_id" value="{{ $OrgData->id }}">
 
-                <button type="submit" class="retextbtn">View Company Profile</button>
-                <img src="{{ asset('public/assets/images/arrow_right_red.png')}}" alt="redarrow">
+                <button type="submit" class="retextbtn viewcompany-btn">View Company Profile <img src="{{ asset('public/assets/images/arrow_right_red.png')}}" alt="redarrow"></button>
+                
               </form>
               <!--a href="{{ url('company-profile') }}/{{ $OrgData->id }}" class="retextbtn">View Company Profile
                 <span>
@@ -140,7 +140,7 @@
       @if($appl->attachment !='')
       <div class="jobDescriptions_sec fw">
         <h3 class="borderBox_heading">Attachment</h3>
-        <a href="{{ URL::asset('/public/uploads/') }}/{{ $appl->attachment ?? ''}}" download>
+        <a href="{{ URL::asset('/public/uploads/') }}/{{ $appl->attachment ?? ''}}" download class="right-attachment">
           <img src="{{ URL::asset('/public/assets/images/fileupload_sec.png') }}" alt="icon">
 
           <img src="{{ URL::asset('/public/assets/images/download.png') }}" alt="icon">

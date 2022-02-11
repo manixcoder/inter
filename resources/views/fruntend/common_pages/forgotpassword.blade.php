@@ -32,7 +32,12 @@
               <h5>We'll help you to reset it</h5>
             </div>
             <div class="text-right col_grid4">
-              <button type="submit" id="btnValidate" class="input-btn">Next <span><img src="{{ asset('public/assets/images/logininput_right.png')}}" alt="icon"></span></button>
+              <button type="submit" id="btnValidate" class="input-btn">Next 
+                <span><img class="wht-icon" src="{{ asset('public/assets/images/logininput_right.png')}}" alt="icon"></span>
+                <span>
+                  <img src="{{ asset('public/assets/images/arrow_right_red.png')}}" class="none-img redimg-arrow" alt="icon">
+                </span>
+              </button>
             </div>
           </div>
 

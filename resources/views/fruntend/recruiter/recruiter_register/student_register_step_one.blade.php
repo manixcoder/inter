@@ -20,7 +20,7 @@
               <img src="{{ asset('public/assets/images/logo.svg')}}" alt="logo">
             </a>
           </div>
-          <form class="welcome_cont fw" action="{{ url('student_register_step_one') }}" method="POST" enctype="multipart/form-data">
+          <form class="welcome_cont  fw" action="{{ url('student_register_step_one') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="innerrow">
               <div class="col_grid12 digitcode">

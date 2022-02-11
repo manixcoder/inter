@@ -26,13 +26,13 @@
                 <li class="active"><a href="{{ URL::to('/') }}">Home</a></li>
                 <li><a href="{{ URL::to('blog') }}">Blogs</a></li>
               </div>
-              <li>
-               <div class="center_sec text-center col_grid4 menu_logo">
-                 <a href="{{ URL::to('/') }}"><img src="{{ asset('public/assets/images/header-logo.svg')}}" alt="logo" />
-                 <img src="{{ asset('public/assets/images/logo.svg')}}" alt="wht-logo" class="wth-logo-hide" />
-                </a>
-              </li>
-            </div>
+              <div class="center_sec text-center col_grid4 menu_logo">
+                <li>
+                  <a href="{{ URL::to('/') }}"><img src="{{ asset('public/assets/images/header-logo.svg')}}" alt="logo" />
+                    <img src="{{ asset('public/assets/images/logo.svg')}}" alt="wht-logo" class="wth-logo-hide" />
+                  </a>
+                </li>
+              </div>
               <div class="right_sec col_grid4 text-right menu_link">
                 <li><a href="{{ URL::to('recruiter-login') }}">Login</a></li>
                 <li><a href="{{ URL::to('contactus') }}">Contact us</a></li>
@@ -160,7 +160,64 @@
         </div>
       </div>
     </div>
-    <div class="internships_sec fw">
+    <div class="internships_sec fw" id="internships_id">
+    <div class="lgcontainer">
+      <div class="innerrow">
+        <div class="col_grid12 arrowheading_site">
+          <h3><span class="btm_bdrleanding">Internships</span> in Countless Industries</h3>
+        </div>
+        <div class="col_grid4">
+          <div class="internships_img_box">
+            <figure>
+              <img src="{{ asset('public/assets/images/detialicon2.png') }}" alt="icon1">
+            </figure>
+            <h4>Human Resources</h4>
+          </div>
+        </div>
+        <div class="col_grid4">
+          <div class="internships_img_box">
+            <figure>
+              <img src="{{ asset('public/assets/images/detialicon6.png') }}" alt="icon1">
+            </figure>
+            <h4>Finance & Accounting</h4>
+          </div>
+        </div>
+        <div class="col_grid4">
+          <div class="internships_img_box">
+            <figure>
+              <img src="{{ asset('public/assets/images/detialicon1.png') }}" alt="icon1">
+            </figure>
+            <h4>Strategy</h4>
+          </div>
+        </div>
+        <div class="col_grid4">
+          <div class="internships_img_box">
+            <figure>
+              <img src="{{ asset('public/assets/images/detialicon5.png') }}" alt="icon1">
+            </figure>
+            <h4>Marketing</h4>
+          </div>
+        </div>
+        <div class="col_grid4">
+          <div class="internships_img_box">
+            <figure>
+              <img src="{{ asset('public/assets/images/detialicon4.png') }}" alt="icon1">
+            </figure>
+            <h4>Research & Development</h4>
+          </div>
+        </div>
+        <div class="col_grid4">
+          <div class="internships_img_box">
+            <figure>
+              <img src="{{ asset('public/assets/images/detialicon3.png') }}" alt="icon1">
+            </figure>
+            <h4>Operations</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- <div class="internships_sec fw">
       <div class="lgcontainer">
         <div class="innerrow">
           <div class="col_grid12 arrowheading_site recruiterGreenText ">
@@ -216,7 +273,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <footer class="fw">
       <div class="lgcontainer">
         <ul class="footer_menu col_grid7 text-left">

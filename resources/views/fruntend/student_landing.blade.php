@@ -180,7 +180,7 @@
             <figure>
               <img src="{{ asset('public/assets/images/detialicon2.png') }}" alt="icon1">
             </figure>
-            <h4>Digital Marketing</h4>
+            <h4>Human Resources</h4>
           </div>
         </div>
         <div class="col_grid4">
@@ -188,7 +188,7 @@
             <figure>
               <img src="{{ asset('public/assets/images/detialicon6.png') }}" alt="icon1">
             </figure>
-            <h4>Human Resources</h4>
+            <h4>Finance & Accounting</h4>
           </div>
         </div>
         <div class="col_grid4">
@@ -196,7 +196,7 @@
             <figure>
               <img src="{{ asset('public/assets/images/detialicon1.png') }}" alt="icon1">
             </figure>
-            <h4>Industry:</h4>
+            <h4>Strategy</h4>
           </div>
         </div>
         <div class="col_grid4">
@@ -204,7 +204,7 @@
             <figure>
               <img src="{{ asset('public/assets/images/detialicon5.png') }}" alt="icon1">
             </figure>
-            <h4>Banking & Finance</h4>
+            <h4>Marketing</h4>
           </div>
         </div>
         <div class="col_grid4">
@@ -212,7 +212,7 @@
             <figure>
               <img src="{{ asset('public/assets/images/detialicon4.png') }}" alt="icon1">
             </figure>
-            <h4>Sales & Marketing</h4>
+            <h4>Research & Development</h4>
           </div>
         </div>
         <div class="col_grid4">
@@ -220,13 +220,13 @@
             <figure>
               <img src="{{ asset('public/assets/images/detialicon3.png') }}" alt="icon1">
             </figure>
-            <h4>Hospitality & Tourism</h4>
+            <h4>Operations</h4>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <!-- div class="logo_slider fw">
+  <!-- <div class="logo_slider fw">
       <div class="lgcontainer">
         <div class="innerrow">
           <div class="col_grid12 arrowheading_site right_after_arrow">
@@ -250,7 +250,7 @@
         </div>
       </div>
     </div>
-    </div -->
+  </div> -->
   <footer class="fw">
     <div class="lgcontainer">
       <ul class="footer_menu col_grid7 text-left">

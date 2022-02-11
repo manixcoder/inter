@@ -48,8 +48,8 @@
              <ul class="userTablink_cont fw">
                <li><a href="{{ url('basic/info') }}">View Profile</a></li>
                <!-- li><a href="{{ URL::to('recruiter-posts')}}">My Posts</a></li -->
-               <li><a href="{{ URL::to('recruiter-listings')}}">My Listing</a></li>
-               <li><a href="{{ URL::to('/message')}}" target="_blank">Messages</a></li>
+               <li><a href="{{ URL::to('recruiter-listings')}}">My Listing</a></li><!-- 
+               <li><a href="{{ URL::to('/message')}}" target="_blank">Messages</a></li> -->
              </ul>
            </div>
          </div>

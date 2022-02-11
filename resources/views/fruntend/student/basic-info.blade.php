@@ -69,22 +69,21 @@
         <div class="innerrow">
           <div class="col_grid9">
             <div class="profile_publicimg">
-
+              <i class="camara-sdudentcamara"><img src="{{ asset('public/assets/images/camera-icon.png')}}" alt="icon" /></i>
               @if($OrgData->users_role =='2')
               <img id="stu_id" src="{{ asset('public/uploads/')}}/{{$OrgData->profile_image}}" alt="img" />
               @else
               <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="img" />
               @endif
               @if($userRole !='3')
-              <div class="form-group">
-                <label>Profile Image</label>
-                <input type="file" name="student_image" id="studentImage">
+              <div class="form-group fileupload">
+                <input type="file" name="student_image" id="studentImage" class="fileupload-btn">
               </div>
               @endif
-              <form method="post" action="{{url('remove-profile-image')}}">
+              <form method="post" action="{{url('remove-profile-image')}}" class="remoovicon">
                 @csrf
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                <button type="submit">Remove Profile</button>
+                <button type="submit">&#215;</button>
               </form>
             </div>
             <div class="profile_publicDetail">
@@ -136,7 +135,7 @@
           <div class="lgcontainer">
             <div class="innerrow">
               <div class="col_grid12 text-left">
-                <h3 class="font36text  bukhariSrptfont_fmly clrred">Personal Details <a style="display:none" href="javascript:void(0);" class="open-modal" data-modal="#personal_DtlPop_edit"><span class="pull-right font20Text"><i><img src="{{ asset('public/assets/images/edit.png')}}" alt="img" /></i>Edit</span></a></h3>
+                <h3 class="font36text  bukhariSrptfont_fmly clrred">Personal Details <a style="display:none" href="javascript:void(0);" class="open-modal" data-modal="#personal_DtlPop_edit"><span class="pull-right font20Text"><i><img src="{{ asset('public/assets/images/edit.png')}}" alt="img" /></i></span></a></h3>
                 <div class="innerrow">
                   <form class="form_sec fw col_grid12" action="{{ url('update_student_personal_details') }}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -248,7 +247,7 @@
                     </div>
                   </div>
                   <div class="col_grid12">
-                    <div class="form_btm_sec">
+                    <div class="form_btm_sec education-view-sec ">
                       <div class="innerrow">
                         <div class="col_grid4">
                           <div class="form-group">
@@ -270,20 +269,19 @@
                         </div>
                         @if($userid != Auth::user()->id)
                         @else
-                        <div class="smaeHeading rightedit_sec">
-                          <a class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#education_update_detail_{{$ed->id}}">
-                            <i>
-                              <img src="{{ asset('public/assets/images/edit.png')}}" alt="img" />
-                            </i>
-                            Edit
-                          </a>
-                          <a class="pull-right font20Text" href="{{ url('delete-course') }}/{{$ed->id}}">
-                            <i>
-                              <img src="{{ asset('public/assets/images/edit.png')}}" alt="img" />
-                            </i>
-                            Delete
-                          </a>
-
+                        <div class="smaeHeading rightedit_sec ">
+                          <div class="certificatesSec-edit">
+                            <a class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#education_update_detail_{{$ed->id}}">
+                              <i>
+                                <img src="{{ asset('public/assets/images/edit.png')}}" alt="img" />
+                              </i>
+                            </a>
+                            <a class="pull-right font20Text" href="{{ url('delete-course') }}/{{$ed->id}}">
+                              <i>
+                                <img src="{{ asset('public/assets/images/delete.png')}}" alt="img" class="delete-icon" />
+                              </i>
+                            </a>
+                          </div>
                         </div>
                         @endif
                       </div>
@@ -381,18 +379,16 @@
                   </div>
                   @if($userid != Auth::user()->id)
                   @else
-                  <div class="col_grid3">
-                    <span class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#experience_update_detail_{{$exp->id}}">
+                  <div class="col_grid3 experience-edit">
+                    <span class=" font20Text open-modal" href="javascript:void(0);" data-modal="#experience_update_detail_{{$exp->id}}">
                       <i>
                         <img src="{{ asset('public/assets/images/edit.png')}}" alt="img">
                       </i>
-                      Edit
                     </span>
-                    <a class="pull-right font20Text" href="{{ url('delete-experience') }}/{{$exp->id}}">
+                    <a class="font20Text" href="{{ url('delete-experience') }}/{{$exp->id}}">
                       <i>
-                        <img src="{{ asset('public/assets/images/edit.png')}}" alt="img" />
+                        <img src="{{ asset('public/assets/images/delete.png')}}" alt="img" class="delete-icon" />
                       </i>
-                      Delete
                     </a>
                   </div>
                   @endif
@@ -439,9 +435,10 @@
                             </div>
                           </div>
                           <div class="col_grid6 file-popupinput">
-                            <div class="form-group">
+                            <div class="form-group fileupload-group">
                               <label>Company logo</label>
                               <input type="file" name="company_image" class="form-control" />
+                              <span class="fileupload-popup"></span>
                             </div>
                           </div>
                           <div class="col_grid6 file-popupinput ">
@@ -513,19 +510,19 @@
                   <div class="smaeHeading rightedit_sec">
                     @if($userid != Auth::user()->id)
                     @else
-                    <h3>
-                      <span class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#certificate_update_detail_{{$cert->id}}">
+                    <h3 class="certificatesSec-edit">
+                      <span class=" font20Text open-modal" href="javascript:void(0);" data-modal="#certificate_update_detail_{{$cert->id}}">
                         <i>
-                          <img src="{{ asset('public/assets/images/add.png')}}" alt="img" />
+                          <img src="{{ asset('public/assets/images/edit.png')}}" alt="img" />
                         </i>
-                        Edit
                       </span>
-                      <a class="pull-right font20Text" href="{{ url('delete-certificate') }}/{{$cert->id}}">
-                        <i>
-                          <img src="{{ asset('public/assets/images/add.png')}}" alt="img" />
-                        </i>
-                        Delete
-                      </a>
+                      <span class=" font20Text">
+                        <a class=" font20Text" href="{{ url('delete-certificate') }}/{{$cert->id}}">
+                          <i>
+                            <img src="{{ asset('public/assets/images/delete.png')}}" alt="img" class="delete-icon" />
+                          </i>
+                        </a>
+                      </span>
                     </h3>
                     @endif
                   </div>
@@ -681,9 +678,7 @@
         <div class="fw educationSec aboutusBg smaeHeading paddTop0 lastdiv">
           <div class="fw aboutusBg_sec form_sec">
             <div class="lgcontainer">
-              <div class="boxShodewBg fw">
-
-                <h3 data-modal="#accomplishment_add_detail" class="font36text  bukhariSrptfont_fmly clrred @if($userid != Auth::user()->id)
+              <h3 data-modal="#accomplishment_add_detail" class="font36text  bukhariSrptfont_fmly clrred @if($userid != Auth::user()->id)
                 @else open-modal @endif">
                   <!-- <h3 data-modal="#accomplishment_add_detail" class="font36text  bukhariSrptfont_fmly clrred "> -->
                   Accomplishments
@@ -702,6 +697,9 @@
                   </span>
                 </h3>
                 @endif
+              <div class="boxShodewBg fw">
+
+                
 
                 <?php $i = 1; ?>
                 @foreach($accomData as $key=> $accom)
@@ -720,7 +718,6 @@
                       <span class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#accomplishment_update_detail_{{$accom->id}}">
                         <i>
                           <img src="{{ asset('public/assets/images/edit.png')}}" alt="img"></i>
-                        Edit
                       </span>
                     </div>
                     @endif
@@ -925,9 +922,10 @@
               </div>
             </div>
             <div class="col_grid6 file-popupinput">
-              <div class="form-group">
+              <div class="form-group fileupload-group">
                 <label>Company Logo</label>
                 <input type="file" name="company_image" class="form-control" />
+                <span class="fileupload-popup"></span>
               </div>
             </div>
           </div>

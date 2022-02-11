@@ -20,7 +20,7 @@
         <div class="logo_img fw">
           <a href="{{URL::to('/')}}"><img src="{{ asset('public/assets/images/logo.svg') }}" alt="logo"></a>
         </div>
-        <form class="welcome_cont fw" action="{{ url('student_register_step_one') }}" method="POST" enctype="multipart/form-data">
+        <form class="welcome_cont  regsteptow-sec  fw" action="{{ url('student_register_step_one') }}" method="POST" enctype="multipart/form-data">
           @csrf
           <div class="innerrow">
             @if(!empty($error_msg))
@@ -38,7 +38,6 @@
             <input type="text" name="phone" onkeyup="this.value=this.value.replace(/[^\d]/,'')" placeholder="Enter your mobile number" class="form-control" required maxlength="10">
           </div>
           <div class="text-right fw continue_topbtn">
-            <span class="continue_text pull-left">Just press "Enter " to continue</span>
             <span class="pull-right btn_continue">
               <button type="sumbit" class="input-btn">Continue <span><img src="{{ asset('public/assets/images/logininput_right.png')}}" class="wht-icon" alt="icon"></span><span><img src="{{ asset('public/assets/images/arrow_right_red.png')}}" class="none-img redimg-arrow" alt="icon"></span></button>
             </span>

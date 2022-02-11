@@ -1,6 +1,6 @@
 /*common css start*/
 *{box-sizing: border-box; margin: 0; padding: 0; font-weight: normal !important;}
-body{width: 100%; height: 100%; word-break: break-all;font-family: 'poppinsregular';}
+body{width: 100%; height: 100%; word-break: break-word;font-family: 'poppinsregular';}
 a,button,input,select,textarea{outline: none; text-decoration: none; box-shadow: none;}
 figure{margin: 0;}
 .fw{width: 100%; float: left;}
@@ -206,6 +206,7 @@ footer {
     -webkit-transition: all .5s ease .0s;
     -ms-transition: all .5s ease .0s;
     -moz-transition: all .5s ease .0s;
+    text-shadow: none;
 }
 .social_icon li {
     margin-right: 15px;
@@ -238,7 +239,7 @@ footer {
     display: inline-block;
     vertical-align: middle;
     position: relative;
-    padding: 30px 80px;
+    padding: 40px 0 52px;
     border-right: 2px solid #fff;
     font-size: 125px;
     font-family: 'poppinssemibold';
@@ -369,7 +370,7 @@ footer ul.social_icon {
 }
 .content-group {
     margin-bottom: 30px;
-    word-break: break-all;
+    word-break: break-word;
 }
 .site-pra {
     font-size: 20px;
@@ -782,7 +783,7 @@ footer ul.social_icon {
     padding-right: 20px;
     line-height: 70px;
 }
-.welcome_cont .from-group {margin-top: 28px; position: relative;}
+.welcome_cont .from-group {margin-top: 28px; position: relative; color: #fff;}
 .welcome_cont .from-group .form-control::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     color: #FFFFFF; line-height: 70px;
   }
@@ -860,7 +861,7 @@ span.froget_btn {
     text-align: center;
 }
 .logo_img img {
-    width: 236px;
+    width: 150px;
 }
 .welcome_cont {
     margin-top: 190px;
@@ -913,6 +914,8 @@ span.froget_btn {
 .menu_right {
     display: inline-block;
     vertical-align: middle;
+    margin-bottom: 0 !important;
+    margin-top: 5px !important;
 }
 .menu_right li {
     display: inline-block;
@@ -933,10 +936,11 @@ span.froget_btn {
     -webkit-transition: all .5s ease .0s;
     -ms-transition: all .5s ease .0s;
     -moz-transition: all .5s ease .0s;
+    text-decoration: none;
 }
 .menu_right li a:after {
     position: absolute;
-    bottom: -10px;
+    bottom: -7px;
     width: 100%;
     height: 8px;
     content: "";
@@ -1046,7 +1050,10 @@ span.froget_btn {
 }
 header.header_sec.flow2_header{
     padding: 12px 0 7px;
-    box-shadow: 0 2px 6px rgba(0,0,0,.2);
+    box-shadow: none !important;
+}
+.flow2header header.header_sec.flow2_header{
+    box-shadow: 0 2px 6px rgba(0,0,0,.2)!important;
 }
 .flow2_header .menu_right{
     margin-top: -5px;
@@ -1265,7 +1272,7 @@ display: none;
     color: #fff;
     font-size: 24px;
     font-weight: 400;
-    font-family: 'poppinsmedium';
+    font-family: 'poppinsregular';
     transition: all .5s ease .0s;
     -webkit-transition: all .5s ease .0s;
     -ms-transition: all .5s ease .0s;
@@ -1953,7 +1960,7 @@ display: none;
     padding-top: 8px;
 }
 .jobDescriptions_sec ul , .similarBox_sec  .jobsDetailBox .col_grid12 ul{
-    margin-top: 32px;
+    margin-top: 25px;
     float: left;
     width: 100%;
     list-style: none;
@@ -1992,7 +1999,7 @@ display: none;
     min-width: 145px;
 }
 .similarBox_sec  .jobsDetailBox .col_grid12 ul{
-    margin-top: 20px;
+    margin-top: 0;
 }
 .similarBox_sec .jobsDetailBox p {
     color: #7F7F7F;
@@ -2004,10 +2011,10 @@ display: none;
     margin-top: 50px;
 }
 .similarBox_sec .col_grid12.arrowheading_site.right_after_arrow {
-    margin-bottom: 70px;
+    margin-bottom: 55px;
 }
 .similarBox_sec .jobsDetailCont .innerrow .col_grid12 {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 .similarBox_sec .jobsDetailBox span.dots {
     padding-left: 8px;
@@ -2403,9 +2410,15 @@ display: none;
     width: 295px;
     height: 295px;
     float: left;
+    position: relative;
+    border: 3px solid #72cbcb;
+    border-radius: 100%;
+
 }
 .profile_publicimg img {
     width: 100%;
+    height: 100%;
+    border-radius: 100%;
 }
 .profile_publicDetail {
     float: left;
@@ -2674,7 +2687,7 @@ display: none;
     color: #ba3143;
     display: inline-block;
     vertical-align: middle;
-    margin-top: 70px;
+    margin-top: 25px;
 }
 .coursesBox .pull-right.font20Text i {
     display: inline-block;
@@ -2748,7 +2761,7 @@ display: none;
 .personal_DtlPop {
     width: 700px;
     border-radius: 30px;
-    padding: 42px 50px 90px !important;
+    padding: 42px 35px 90px !important;
 }
 .popupWapper .modal .close {
     position: absolute;
@@ -3660,6 +3673,8 @@ display: none;
     width: 145px;
     height: 145px;
     line-height: 145px;
+    position: relative;
+    z-index: 9;
 }
 .basicInfo_tab .profileTab {
     padding: 0 0 0 20px;
@@ -3743,10 +3758,10 @@ display: none;
     min-width: 220px;
 }
 .Jobextend_details {
-    margin-top: 50px;
-    padding-bottom: 30px;
+    margin-top: 30px;
+    padding-bottom: 28px;
     border-bottom: 1px solid #ddd;
-    margin-bottom: 32px;
+    margin-bottom: 0;
 }
 .Jobextend_details .lightblue_text {
     font-size: 13px;
@@ -3975,10 +3990,10 @@ display: none;
     float: left;
     width: 50%;
     border-right: 2px solid #fff;
-    padding: 22px 0 42px;
+    padding: 40px 0 52pxs;
 }
 .internships_sec span.btm_bdrleanding:after {
-    background: #ba3143;
+    background: #086C84;
 }
 
 
@@ -4186,7 +4201,7 @@ input::-webkit-inner-spin-button {
 .input-icon::-webkit-scrollbar-thumb{
     background:none !important;
 }
-.upload_box_sec .file_cont img[src="https://162.241.87.160/haresh/internifys_admin/public/assets/images/attach_img.png"] {
+.upload_box_sec .file_cont img[src="https://www.theinternify.com/public/assets/images/attach_img.png"]  , .upload_box_sec .file_cont img[src="theinternify.com/public/assets/images/attach_img.png"] {
     width: 50px;
     max-width: none !important;
     min-height: 1px;
@@ -4194,7 +4209,7 @@ input::-webkit-inner-spin-button {
     position: relative;
     margin-top: 32px;
 }
-.newPostJob_pg .file_cont img[src="https://162.241.87.160/haresh/internifys_admin/public/assets/images/attach_img.png"] {
+.newPostJob_pg .file_cont img[src="https://www.theinternify.com/public/assets/images/attach_img.png"] , .newPostJob_pg .file_cont img[src="theinternify.com/public/assets/images/attach_img.png"] {
     margin-top: 23px;
      width: 75px;
 }
@@ -4313,7 +4328,7 @@ textarea {
     border-radius: 170px;
     object-fit: cover;
 }
-.organization_logo .upload_logo img[src="https://162.241.87.160/haresh/internifys_admin/public/assets/images/uploadgreen.png"] {
+.organization_logo .upload_logo img[src="https://www.theinternify.com/public/assets/images/attach_img.png"] , .organization_logo .upload_logo figure img[src="https://www.theinternify.com/public/assets/images/uploadgreen.png"] , .organization_logo .upload_logo img[src="theinternify.com/public/assets/images/attach_img.png"] , .organization_logo .upload_logo figure img[src="theinternify.com/public/assets/images/uploadgreen.png"] {
     position: relative;
     width: 54px;
     height: 48px;
@@ -4324,6 +4339,14 @@ textarea {
     object-fit: cover;
     height: 100%;
     max-height: none;
+}
+.newPostJob_pg .file_cont .jobpostnew-file[src="https://www.theinternify.com/public/assets/images/attach_img.png"] , .newPostJob_pg .file_cont .jobpostnew-file[src="theinternify.com/public/assets/images/attach_img.png"] ,  {
+    position: relative;
+    width: 54px;
+    height: 48px;
+    border-radius: 0;
+        min-height: 1px;
+            margin-top: 32px;
 }
 .resumeimg iframe {
     height: auto;
@@ -4354,7 +4377,7 @@ textarea {
     height:100%;
 } 
 .tabCompnay_profile ul#profileTab_link li {
-    margin: 0 15px;
+    margin: 0 28px;
 }
 .profileTab li a{ font-size: 32px;}
 .followers_shodeobox .img_box img {
@@ -4436,7 +4459,7 @@ textarea {
         width: 700px;
     }
     .internships_sec {
-        padding: 80px 0 60px;
+        padding: 68px 0 60px;
     }
     .aboutCont_box p {
         font-size: 17px;
@@ -4488,7 +4511,7 @@ textarea {
     
     .iam_text_cont li {
         float: left;
-        padding: 22px 0 42px;
+        padding: 40px 0 52px;
     }
     .iam_text_cont li {
         font-size: 85px;
@@ -4530,7 +4553,7 @@ textarea {
         margin-top: 125px;
     }
     .login_contbox.reset_password .welcome_cont {
-        margin-top: 50px;
+        margin-top: 100px;
     }
     .loginBGRED_sec {
         padding: 22px 0;
@@ -4609,7 +4632,7 @@ textarea {
         font-size: 22px;
     }
     .footer_login {
-        margin-top: 20px;
+        margin-top: 30px;
     }
     .welcome_cont h5 {
         font-size: 15.5px;
@@ -4681,7 +4704,7 @@ textarea {
         width: 35px;
     }
     .modal_heading {
-        font-size: 35px;
+        font-size: 30px;
         margin-bottom: 30px;
         line-height: 1;
     }
@@ -4955,7 +4978,8 @@ textarea {
         margin-top: 12px;
     }
     .userdrop_down li a {
-        font-size: 15px;
+        font-size: 14px;
+        text-decoration: none;
     }
     .middleContainerbox{    width: 960px;}
     .unlock_sec .styledSelect {
@@ -5001,6 +5025,12 @@ textarea {
     }
     .profile_sec .compnayBoxImg {
         width: 70px;
+        height: 70px;
+        object-fit: cover !important;
+    }
+    .profile_sec .compnayBoxImg img{
+        height: 70px;
+        object-fit: cover;
     }
     .jobsDetailCont h3 {
         font-size: 18px;
@@ -5050,9 +5080,9 @@ textarea {
         font-size: 16px;
     }
     .commentsApply .commantsChat {
-        width: 52px;
-        height: 52px;
-        line-height: 52px;
+        width: 42px;
+        height: 42px;
+        line-height: 42px;
         margin-left: 35px;
     }
     .commentsApply {
@@ -5144,6 +5174,9 @@ textarea {
     .profile_publicimg {
         width: 140px;
         height: 140px;
+        border-radius: 140px;
+        display: inline-block;
+        border: 3px solid #72cbcb;
     }
     .profile_publicDetail {
         padding-left: 28px;
@@ -5271,7 +5304,7 @@ textarea {
     }
     .confirmApply .input-btn {
         min-width: 255px;
-        font-size: 18px;
+        font-size: 17px;
         height: 55px;
         line-height: 57px;
         padding-right: 12px;
@@ -5382,9 +5415,9 @@ textarea {
         font-size: 58px;
         font-family: 'league_spartanbold';
     }
-    .contactus_pg .adress_cont {
+    /*.contactus_pg .adress_cont {
         margin-top: 45px;
-    }
+    }*/
     .contactus_pg .aboutCont_box h3 {
         font-size: 33px;
         line-height: 32px;
@@ -5453,6 +5486,7 @@ textarea {
     }
     .leanding_pg .unlock_sec h4 {
         font-size: 26px;
+        letter-spacing: .5px;
     }
     .comProInfo_cont h4 {
         font-size: 20px;
@@ -5462,6 +5496,7 @@ textarea {
     }
     .qverview_sec .font36text {
         font-size: 22px;
+        color: #011638;
     }
     .comProInfo_cont p {
         margin-bottom: 20px;
@@ -5497,7 +5532,7 @@ textarea {
         font-size: 22px;
     }
     .input-btn {
-        padding: 21px 20px 17px!important;
+        padding: 16px 20px 15px!important;
         letter-spacing: 0 !important;
     }
     .followers_topHeading span .input-btn{line-height: 63px;}
@@ -5551,6 +5586,7 @@ textarea {
     .uplaodCheckBtn .input-btn{line-height: 57px; min-width: 165px;}
     .login_contbox .welcome_cont .digitcode h5 {
         font-size: 21px;
+        margin-top: 15px;
     }
 }
 @media (max-width:1330px){ 
@@ -6135,6 +6171,8 @@ textarea {
     .profile_publicimg {
         width: 215px;
         height: 215px;
+        border: 3px solid #72cbcb;
+        border-radius: 100%;
     }
     .profile_publicDetail {
         width: calc(100% - 215px);
@@ -8041,6 +8079,7 @@ textarea {
     .profile_publicimg {
         width: 115px;
         height: 115px;
+        border: 3px solid #72cbcb;
     }
     .profile_publicDetail {
         width: 100% !important;
@@ -8844,7 +8883,7 @@ textarea {
     height: 100%;
     object-fit: cover;
 }
-.newPostJob_pg .jobUpload_sec .uploadBox .fileupload2.file_cont img[src="https://162.241.87.160/haresh/internifys_admin/public/assets/images/upload_file.png"] {
+.newPostJob_pg .jobUpload_sec .uploadBox .fileupload2.file_cont img[src="https://www.theinternify.com/public/assets/images/upload_file.png"] , .newPostJob_pg .jobUpload_sec .uploadBox .fileupload2.file_cont img[src="theinternify.com/public/assets/images/upload_file.png"] {
     height: auto;
     width: 40px;
     display: inline-block;
@@ -8982,10 +9021,6 @@ small.shareclosebtn img {
     display: none;
 }
 
-
-
-
-
 .personal_DtlPop 
  .select {
     float: left;
@@ -9012,4 +9047,585 @@ small.shareclosebtn img {
     padding: 15px;
     background: #f5f5f5;
     border: 1px solid #eee;
+}
+.accomplishment-popup{position: relative;}
+.educationSec.lastdiv .boxShodewBg .course-selectbox {
+    width: 200px;
+    right: 0;
+    position: absolute;
+    top: 25px;
+    padding: 0;
+    background: #fff;
+    z-index: 9;
+    border: 1px solid #eee;
+    opacity: 0;
+    visibility: hidden;
+}
+.educationSec.lastdiv .boxShodewBg .course-selectbox li {
+    display: inline-block;
+    width: 100%;
+}
+.educationSec.lastdiv .boxShodewBg .course-selectbox li span {
+    font-size: 14px;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    width: 100%;
+    display: inline-block;
+    padding: 7px 15px;
+}
+.educationSec.lastdiv .boxShodewBg .course-selectbox li span:hover{
+   background: #ba3143;
+    color: #fff;
+}
+.educationSec.lastdiv .boxShodewBg .course-selectbox.addopen-model-ul{opacity: 1; visibility: visible;}
+.findblog_search.blogView_search {
+    margin-top: 15px;
+}
+.blogcontainer .content-group {
+    word-break: break-word;
+    line-height: 24px;
+    font-size: 15px;
+}
+.social_login ul.social_icon.fw ul.social_icon.fw {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+.forgot_pass_pg form.welcome_cont {
+    margin-top: 75px;
+}
+.forgot_pass_pg form.welcome_cont .from-group span {
+    margin-top: 8px !important;
+    float: left;
+    width: 100%;
+}
+.forgot_pass_pg form.welcome_cont .alert-success {
+    margin-top: 10px;
+    float: left;
+    width: 100%;
+}
+.bloglgHome_sec .content-group h3.font57text {
+    color: #086C84;
+    margin-bottom: 15px;
+    font-size: 18px;
+    line-height: 26px;
+}
+.bloglgHome_sec .content-group p {
+    word-break: break-word;
+    line-height: 24px;
+    font-size: 15px;
+    color: #011638;
+}
+.bloglgHome_sec .content-group p a {
+    color: #011638;
+}
+.blogcontainer .content-group p {
+    font-size: 14px;
+    color: #011638;
+    line-height: 25px;
+    font-family: 'poppinsregular';
+}
+.blogcontainer .content-group form input[type="submit"] {
+    border: 0;
+    outline: none !important;
+    font-size: 14px;
+    color: #011638;
+    font-family: 'poppinsregular';
+    text-decoration: underline;
+    transition: all .5s ease .0s;
+    -webkit-transition: all .5s ease .0s;
+    -ms-transition: all .5s ease .0s;
+    -moz-transition: all .5s ease .0s;
+    cursor: pointer;
+}
+.blogcontainer .content-group form input[type="submit"]:hover{text-decoration: none;}
+.boxDetailbg figure{
+    height: 320px;
+    overflow: hidden;
+    border-radius: 15px;
+}
+.boxDetailbg figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.viewcompany-btn {
+    background: none;
+    border: 0;
+    box-shadow: none !important;
+    outline: none !important;
+    display: inline-block;
+    vertical-align: top;
+    cursor: pointer;
+}
+.viewcompany-btn img {
+    width: 22px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+.compnayProfile_user .userBox_img img {
+    width: 100%;
+}
+.tabCompnay_profile .profileTab li button {
+    border: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+    color: #086C84;
+    font-size: 20px;
+    font-family: 'poppinssemibold';
+    letter-spacing: .2px;
+    border-bottom: 0;
+    display: inline-block;
+    position: relative;
+    padding-bottom: 8px;
+    cursor: pointer;
+}
+.tabCompnay_profile .profileTab li button:after {
+    position: absolute;
+    content: "";
+    border-bottom: 0px solid #b83143;
+    border-radius: 10px;
+    left: 0;
+    bottom: -4px;
+    height: 7px;
+    background: #b83143;
+    z-index: 9;
+    width: 100%;
+    opacity: 0;
+    transition: all .5s ease .0s;
+}
+.tabCompnay_profile .profileTab li.active button:after , .tabCompnay_profile .profileTab li.active button:hover{opacity: 1;}
+.profileTab_contBox .commentsApply .commantsChat {
+    float: right;
+}
+.profileTab_contBox {
+    margin-top: 40px;
+}
+.right-attachment {
+    float: left;
+    margin-top: 15px;
+}
+.right-attachment img {
+    margin-left: 12px;
+    width: 20px;
+}
+.profile_publicimg .fileupload {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    cursor: pointer;
+}
+.profile_publicimg .fileupload #studentImage , .recruiter-remove-profile .fileupload .file-upload  {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 99;
+    position: relative;
+}
+.profile_publicimg .remoovicon {
+    position: absolute;
+    bottom: 0;
+    z-index: 99;
+    left: 15px;
+    cursor: pointer;
+    width: 24px;
+}
+.profile_publicimg .remoovicon button {
+    width: 22px;
+    height: 22px;
+    border-radius: 20px;
+    border: 0;
+    background: #72cbcb;
+    color: #000;
+    font-size: 20px;
+    box-shadow: 0 0 3px rgb(0 0 0 / 22%);
+    position: relative;
+    z-index: 9999;
+    cursor: pointer;
+    display: inline-block;
+}
+.profile_publicimg .remoovicon {
+    position: absolute;
+    bottom: 12px;
+    z-index: 99;
+    right: 24px;
+    cursor: pointer;
+}
+.resumeUpload_popup  .resumeimg {
+    border: 1px solid #ddd;
+    padding: 0px;
+    background: #eee;
+}
+.resumeUpload_popup  .form_sec .col_grid6 span {
+    padding-left: 0;
+    padding-right: 0;
+}
+.resumeUpload_popup .form_sec .col_grid6 .col_grid6 {
+    padding: 0 0 0 15px;
+}
+.resumeUpload_popup .form_sec .col_grid6 .col_grid6 .download_btn img {
+    width: 13px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.resumeUpload_popup .form_sec .col_grid6 .col_grid6:first-child .download_btn img {
+    width: 17px;
+}
+.contactmail a {
+    color: #4BA5FF;
+}
+.notification_cont .notipra_text a {
+    color: #72cbcb;
+    font-size: 15px;
+}
+.tabCompnay_profile ul#profileTab_link li:first-child {
+    margin-left: 0;
+    margin-right: 0;
+}
+.profileDetail_tab .profileTab_contBox .col_grid12.text-left {
+    padding: 0 50px;
+}
+.aboutusBg_sec form.form_sec .profile_update_btn .form-group {
+    margin-top: 25px;
+}
+.certificatesSec .form_btm_sec {
+    width: 80%;
+}
+.certificatesSec .col_grid12:first-child .rightedit_sec {
+    width: 20%;
+}
+.certificatesSec-edit span {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+h3.certificatesSec-edit {
+    text-align: right;
+}
+.education-view-sec .col_grid4 {
+    width: 28%;
+}
+.education-view-sec {
+    width: 100%;
+}
+.education-view-sec  .rightedit_sec {
+    width: 16%;
+}
+.education-view-sec  .rightedit_sec {
+    width: 16%;
+    padding-top: 35px;
+}
+.education-view-sec .rightedit_sec .pull-right {
+    margin-right: 15px;
+}
+.rightedit_sec a i img.delete-icon {
+    width: 17px;
+}
+.experience-edit {
+    text-align: right;
+}
+.experience-edit .font20Text {
+    color: #BA3143;
+    margin-left: 5px;
+}
+.experience-edit .font20Text .delete-icon {
+    width: 18px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -5px;
+    margin-right: 10px;
+}
+.experience-edit .font20Text {
+    color: #BA3143;
+    margin-left: 5px;
+    margin-top: 80px;
+    display: inline-block;
+}
+.changePassword_box .form_sec .confirmApply .input-btn span img {
+    width: 20px;
+    float: right;
+    margin-top: 0px;
+}
+.changePassword_box .form_sec .glyphicon-ok {
+    color: #00afaf !important;
+    margin-top: -5px;
+}
+.changePassword_box .alert.alert-success {
+    float: left;
+    width: 100%;
+}
+.changePassword_box .alert.alert-success {
+    display: inline-block;
+    width: 64%;
+    margin-left: 18%;
+}
+@media(max-width: 991px){
+    .changePassword_box .alert.alert-success {
+        display: inline-block;
+        width: 100%;
+        margin-left: 0%;
+    }
+}
+.contect-heading h3 {
+    margin-bottom: 50px;
+}
+.internships_sec .recruiterGreenText .btm_bdrleanding::after {
+    background: #ba3143;
+}
+#internships_id .recruiterGreenText.bdrCntr {
+    margin-bottom: 0;
+}
+.login_contbox .welcome_cont .digitcode h3 {
+    margin-bottom: 12px;
+}
+.login_contbox.reset_password 
+ .regstepone-sec.fw {
+    margin-top: 25px;
+}
+.login_contbox.reset_password 
+ .regsteptow-sec.fw {
+    margin-top: 65px;
+}
+.login_contbox.reset_password .welcome_cont.regstep4-sec .mr0 {
+    margin-top: 0;
+}
+.login_contbox.reset_password .welcome_cont.regstep4-sec {
+    margin-top: 80px;
+}
+.login_contbox.reset_password .regstepfive-sec {
+    margin-top: 45px;
+}
+.login_contbox.reset_password .regstepfive-sec .glyphicon-ok {
+    text-align: right;
+    padding-right: 20px;
+    margin-top: 0 !important;
+    color: #72cbcb;
+}
+div#moreoffer span#add_more {
+    font-size: 16px;
+    color: #ba3142;
+    display: inline-block;
+    margin-bottom: -12px;
+}
+div#moreoffer span#add_more i {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+.form_sec .form-group .styledSelect {
+    height: 42px;
+    line-height: 42px;
+    box-shadow: none;
+}
+.form_sec .form-group .styledSelect {
+    background: url(../../images/arrow_down_grey.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: 96% center !important;
+    background-size: 14px !important;
+    color: #7c7c7c !important;
+}
+.forgot_pass_pg form.welcome_cont .from-group span.froget_btn {
+    float: right;
+    width: auto;
+    margin: 0 !important;
+    min-height: 55px !important;
+    line-height: 55px !important;
+}
+.forgot_pass_pg form.welcome_cont .from-group .glyphicon-ok , .forgot_pass_pg form.welcome_cont .from-group span.glyphicon-remove {
+    float: right !important;
+    width: auto;
+    margin-right: 15px;
+    line-height: 55px;
+    min-height: 55px;
+    margin-top: 0 !important;
+    top: 0;
+    color: #72cbcb;
+}
+ .forgot_pass_pg form.welcome_cont .from-group span.glyphicon-remove{color: #BA3143;}
+.recruiter-remove-profile {
+    margin-top: -60px;
+    margin-left: 15px;
+}
+.recruiter-remove-profile .userBox_img {
+    height: 100%;
+    width: 100%;
+    display: inline-block;
+    border-radius: 100%;
+    overflow: hidden;
+}
+.basicInfo_tab .boxDetailbg{position: relative;}
+.basicInfo_tab .boxDetailbg .banner-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9;
+}
+.basicInfo_tab .boxDetailbg .banner-info input#org_image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    opacity: 0;
+    z-index: 9;
+    cursor: pointer;
+}
+.basicInfo_tab .banner-info .camera-icon {
+    float: right;
+    width: 26px;
+    height: 26px;
+    margin-right: 10px;
+    margin-top: 10px;
+    background: #fff;
+    border-radius: 100%;
+    border: 2px solid #FFF;
+    overflow: hidden;
+}
+.basicInfo_tab .banner-info .camera-icon img {
+    width: 16px;
+    height: auto;
+    border-radius: 0;
+    margin: 3px auto 0;
+    display: block;
+}
+.login_contbox .welcome_cont .col_grid8[style="color:red"] {
+    color: #fff !important;
+}
+.login_contbox.reset_password 
+ .verificationTOP-Section.fw {
+    margin-top: 20px;
+}
+.file-popupinput .form-group .form-control[name="company_image"] {
+    padding-top: 0;
+    line-height: 58px !important;
+    box-shadow: 0 3px 6px rgb(0 0 0 / 15%);
+        padding-left: 15px;
+}
+div#loading {
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    left: 0px !important;
+    right: 0px !important;
+    background: rgb(0 0 0 / 78%);
+    width: 100%;
+    z-index: 9999;
+}
+div#loading img#loading-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.blogcontainer .content-group form input[type="submit"][value="READ MORE"] {
+    color: #ba3143;
+    text-decoration: none;
+}
+.commantsChat {
+    display: none;
+}
+.compnayProfile_user .userBox_img{border: 1px solid #ccc;}
+.camara-sdudentcamara {
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    right: 18px;
+    bottom: 12px;
+    background: #fff;
+    text-align: center;
+    line-height: 22px;
+    border-radius: 30px;
+}
+.camara-sdudentcamara img {
+    width: 14px;
+    height: auto;
+    border-radius: 0;
+    margin: 4px auto 0;
+    background: transparent;
+    display: inline-block;
+}
+.jobsDetailComp_img{border: 2px solid #ccc;}
+.social_icon li a[href="https://open.spotify.com/user/64p2h14btruk2aydbijnajk9o"] {
+    display: none;
+}
+.fileupload-popup {
+    position: absolute;
+    top: 25px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    text-align: center;
+    background: #fff;
+    box-shadow: 0 3px 6px rgb(0 0 0 / 15%);
+    cursor: pointer;
+}
+.fileupload-popup:after {
+    position: absolute;
+    content: "Upload";
+    top: 23px;
+    left: 15px;
+}
+.fileupload-popup:before {
+    position: absolute;
+    right: 15px;
+    content: "+";
+    width: 30px;
+    height: 30px;
+    background: #72cbcb;
+    border-radius: 30px;
+    color: #fff;
+    line-height: 34px;
+    font-size: 26px;
+    top: 15px;
+}
+.file-popupinput input.form-control {
+    position: relative;
+    left: 0;
+    cursor: pointer;
+    z-index: 99;
+    opacity: 0;
+}
+.retextbtn_sec.pull-right.rightside-cont {
+    float: right;
+    margin-top: -15px;
+}
+.jobsDetailProfile .intercandidates_sec {
+    margin-top: 42px;
+}
+div#description {
+    float: left;
+    width: 100%;
+    margin-bottom: -35px;
+}
+.notification_cont h4 span {
+    color: #000;
+    font-size: 16px;
+    font-family: 'poppinssemibold';
+}
+.notification_cont  p {
+    font-size: 14px;
+    margin-top: 3px;
+}
+.right-attachment img:first-child {
+    margin-left: 22px;
+}
+.jobsDetailProfile .intercandidates_box .commentsApply  span {
+    display: none;
+}
+.jobsDetailProfile  .intercandidates_box .commentsApply .applyBtn {
+    width: auto;
+    margin-left: 15px;
+}
+.jobsDetailProfile  .intercandidates_box .commentsApply .applyBtn:last-child{margin-left: 0;}
+.jobsDetailProfile .intercandidates_box .commentsApply .applyBtn a.input-btn {
+    font-size: 14px;
+}
+.jobsDetailProfile .intercandidates_box 
+ .intercandidatesProfile {
+    margin-top: 25px;
 }

@@ -117,7 +117,6 @@
                         <input type="text" name="otp" maxlength="4" pattern="\d{4}" required class="form-control" placeholder="Enter Email 4-digit code here" required="" />
                     </div>
                     <div class="text-right fw continue_topbtn">
-                        <span class="continue_text pull-left">Just press "Enter " to continue</span>
                         <span class="pull-right btn_continue">
                             <button type="submit" class="input-btn">Verify <span><img src="{{ asset('public/assets/images/logininput_right.png')}}" class="wht-icon" alt="icon"></span><span><img src="{{ asset('public/assets/images/arrow_right_red.png')}}" class="none-img redimg-arrow" alt="icon"></span></button>
                         </span>

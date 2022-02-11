@@ -26,9 +26,9 @@
           <h1 class="message" style="color:#fff">@if(isset($message)){{$message}}@endif</h1>
         </div>
 
-        <form action="{{ URL::to('web-login-dashboard') }}" method="POST" class="welcome_cont fw" id="signup-form" enctype="multipart/form-data">
+        <form action="{{ URL::to('web-login-dashboard') }}" method="POST" class="welcome_cont regstepone-sec fw" id="signup-form" enctype="multipart/form-data">
           @csrf
-          <h3>Welcome !</h3>
+          <h3>Welcome there!</h3>
           <div class="innerrow">
             <div class="col_grid8">
               <h5>Login to Internify </h5>

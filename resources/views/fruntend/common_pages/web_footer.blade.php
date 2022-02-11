@@ -9,9 +9,9 @@
       <li><a href="{{ URL::to('privacy_policy') }}">Privacy Policy</a></li>
     </ul>
     <ul class="social_icon col_grid5 text-right">
-      <li>
+      <!-- <li>
         <a href="https://open.spotify.com/user/64p2h14btruk2aydbijnajk9o"><i class="fa fa-spotify" aria-hidden="true"></i></a>
-      </li>
+      </li> -->
       <li>
         <a href="https://www.facebook.com/Theinternify"><i class="fa fa-facebook" aria-hidden="true"></i></a>
       </li>

@@ -1,4 +1,4 @@
-  @include('fruntend.common_pages.web_header')
+@include('fruntend.common_pages.web_header')
 
   @php
   $userRole = Session::get('userRole');

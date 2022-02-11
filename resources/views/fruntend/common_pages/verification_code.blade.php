@@ -32,10 +32,14 @@
                     <h3><a href="#">{{ $email ?? '' }}</a></h3>
                   </div>
                   <div class="text-right col_grid4">
-                       
-                  
-                    <button type="submit" id="btnValidate" class="input-btn">Verify <span><img src="{{ asset('public/assets/images/logininput_right.png')}}" alt="icon"></span></button>
-                   
+                    <button type="submit" id="btnValidate" class="input-btn">Verify 
+                      <span>
+                        <img class="wht-icon" src="{{ asset('public/assets/images/logininput_right.png')}}" alt="icon">
+                      </span>
+                      <span>
+                        <img src="{{ asset('public/assets/images/arrow_right_red.png')}}" class="none-img redimg-arrow" alt="icon">
+                      </span>
+                    </button>
                   </div>
                 </div>
                 <div class="from-group fw">
