@@ -312,7 +312,7 @@
   <footer class="fw">
     @include('fruntend.student.inc.footer')
   </footer>
-
+  <div class="se-pre-con"></div>
 
 
 
@@ -365,7 +365,11 @@
 
 
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
-
+    <script>
+      $(window).on('load', function(){
+       $('.se-pre-con').delay(1500).fadeOut('slow');
+     });
+   </script>
   <!-- image viewer -->
   <script>
     var loadFile = function(event) {

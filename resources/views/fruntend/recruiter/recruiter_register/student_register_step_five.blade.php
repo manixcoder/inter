@@ -42,8 +42,13 @@
         </div>
       </div>
     </div>
-    <script src="js/jquery-lb.js"></script>
-    
+    <div class="se-pre-con"></div>
+  <script src="js/jquery-lb.js"></script>
+  <script>
+      $(window).on('load', function(){
+       $('.se-pre-con').delay(1500).fadeOut('slow');
+     });
+   </script>
    
   </body>
 </html>

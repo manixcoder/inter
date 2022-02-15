@@ -678,28 +678,34 @@
         <div class="fw educationSec aboutusBg smaeHeading paddTop0 lastdiv">
           <div class="fw aboutusBg_sec form_sec">
             <div class="lgcontainer">
-              <h3 data-modal="#accomplishment_add_detail" class="font36text  bukhariSrptfont_fmly clrred @if($userid != Auth::user()->id)
+              <h3 class="font36text  bukhariSrptfont_fmly clrred @if($userid != Auth::user()->id)
                 @else open-modal @endif">
-                  <!-- <h3 data-modal="#accomplishment_add_detail" class="font36text  bukhariSrptfont_fmly clrred "> -->
-                  Accomplishments
-                  @if($userid != Auth::user()->id)
-                  @else
-                  <span class="pull-right font20Text">
-                    <i><img src="{{ asset('public/assets/images/add.png')}}" alt="img" /></i>
-                    Add
-                    <!-- <select name="" id="" class="font36text  bukhariSrptfont_fmly clrred open-modal">
+                <!-- <h3 data-modal="#accomplishment_add_detail" class="font36text  bukhariSrptfont_fmly clrred "> -->
+                Accomplishments
+                @if($userid != Auth::user()->id)
+                @else
+                <span class="pull-right font20Text toggle-Acmntsbtn">
+                  <i><img src="{{ asset('public/assets/images/add.png')}}" alt="img" /></i>
+                  Add
+                  <!-- <select name="" id="" class="font36text  bukhariSrptfont_fmly clrred open-modal">
                       <option value=""> Add</option>
-                      <option value="Course" data-modal="#accomplishment_add_detail">Course</option>
-                      <option value="Awards" data-modal="#accomplishment_add_detail">Awards</option>
-                      <option value="Test Scores" data-modal="#accomplishment_add_detail">Test Scores</option>
-                      <option value="Publications" data-modal="#accomplishment_add_detail">Publications</option>
+                      <option value="Course" data-modal="#accomplishment_add_detai4" >Course</option>
+                      <option value="Awards" data-modal="#accomplishment_add_detail3">Awards</option>
+                      <option value="Test Scores" data-modal="#accomplishment_add_detail2">Test Scores</option>
+                      <option value="Publications" data-modal="#accomplishment_add_detail1">Publications</option>
                     </select> -->
-                  </span>
-                </h3>
-                @endif
+                </span>
+                <ul class="toggle-Acmnts" style="display:none;">
+                  <li><a href="#" data-modal="#accomplishment_add_detail" class="open-modal">Course</a></li>
+                  <li><a href="#" data-modal="#accomplishment_add_detail1" class="open-modal">Awards</a></li>
+                  <li><a href="#" data-modal="#accomplishment_add_detail2" class="open-modal">Test Scores</a></li>
+                  <li><a href="#" data-modal="#accomplishment_add_detail3" class="open-modal">Publications</a></li>
+                </ul>
+              </h3>
+              @endif
               <div class="boxShodewBg fw">
 
-                
+
 
                 <?php $i = 1; ?>
                 @foreach($accomData as $key=> $accom)
@@ -724,8 +730,12 @@
                   </div>
                 </div>
                 <div class='modal personal_DtlPop' id='accomplishment_update_detail_{{$accom->id}}'>
+                  <?php  // dd($accom);
+                  ?>
                   <div class="close fw">
-                    <a class='btn close-modal' data-modal="#accomplishment_update_detail_{{$accom->id}}" href="#"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></a>
+                    <a class='btn close-modal' data-modal="#accomplishment_update_detail_{{$accom->id}}" href="#">
+                      <img src="{{ asset('public/assets/images/close.png')}}" alt="icon">
+                    </a>
                   </div>
                   <form class="form_sec fw col_grid12" action="{{ url('update_student_accomplishment') }}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -736,12 +746,13 @@
                           <div class="col_grid6">
                             <div class="form-group">
                               <label>Accomplishment Type</label>
-                              <select name="accomplishment_type" id="accomplishment_type" class="form-control" required>
+                              <input type="text" value="{{$accom->accomplishment_type}}" name="accomplishment_type"  maxlength="200" class="form-control disable" />
+                              <!--select name="accomplishment_type" id="accomplishment_type" class="form-control" required>
                                 <option value="Course" {{ ( $accom->accomplishment_type == 'Course') ? 'selected' : '' }}>Course</option>
                                 <option value="Awards" {{ ( $accom->accomplishment_type == 'Awards') ? 'selected' : '' }}>Awards</option>
                                 <option value="Test Scores" {{ ( $accom->accomplishment_type == 'Test Scores') ? 'selected' : '' }}>Test Scores</option>
                                 <option value="Publications" {{ ( $accom->accomplishment_type == 'Publications') ? 'selected' : '' }}>Publications</option>
-                              </select>
+                              </select -->
                             </div>
                           </div>
                           <div class="col_grid6">
@@ -795,6 +806,7 @@
   <footer class="fw">
     @include('fruntend.student.inc.footer')
   </footer>
+  <div class="se-pre-con"></div>
   <div class='modal personal_DtlPop createNewPost_popup' id='createHomePostrecuriter'>
     <div class="close fw">
       <a class='btn close-modal' data-modal="#createHomePostrecuriter" href="#"><img src="{{ asset('public/assets/images/close.png')}}')}}" alt="icon"></a>
@@ -1078,13 +1090,15 @@
           <div class="innerrow">
             <div class="col_grid6">
               <div class="form-group">
+             
                 <label>Accomplishment Type</label>
-                <select name="accomplishment_type" id="accomplishment_type" class="form-control" required>
+                <input type="text" name="accomplishment_type"  class="form-control disable" value="Course">
+                <!-- <select name="accomplishment_type" id="accomplishment_type" class="form-control" required>
                   <option value="Course">Course</option>
                   <option value="Awards">Awards</option>
                   <option value="Test Scores">Test Scores</option>
                   <option value="Publications">Publications</option>
-                </select>
+                </select> -->
               </div>
             </div>
             <div class="col_grid6">
@@ -1119,8 +1133,153 @@
       </div>
     </form>
   </div>
+  <div class='modal personal_DtlPop' id='accomplishment_add_detail1'>
+    <div class="close fw">
+      <a class='btn close-modal' data-modal="#accomplishment_add_detail1" href="#"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></a>
+    </div>
+    <form class="form_sec fw col_grid12" action="{{ url('add_student_accomplishment') }}" method="POST" enctype="multipart/form-data">
+      @csrf
+      <div class='content fw'>
+        <h3 class="modal_heading">Add Accomplishment</h3>
+        <div class="form_sec fw ">
+          <div class="innerrow">
+            <div class="col_grid6">
+              <div class="form-group">
+                <label>Accomplishment Type</label>
+                <input type="text" name="accomplishment_type" class="form-control disable" value="Awards">
 
+              </div>
+            </div>
+            <div class="col_grid6">
+              <div class="form-group">
+                <label>Course Name</label>
+                <input type="text" name="course_name" maxlength="200" class="form-control" />
+              </div>
+            </div>
+            <div class="col_grid6 ">
+              <div class="form-group">
+                <label>Award</label>
+                <input type="text" name="award" maxlength="200" class="form-control" />
+              </div>
+            </div>
+            <div class="col_grid6 ">
+              <div class="form-group">
+                <label>Test Scores</label>
+                <input type="text" name="test_scores" maxlength="200" class="form-control" />
+              </div>
+            </div>
+            <div class="col_grid6 ">
+              <div class="form-group">
+                <label>Publications</label>
+                <input type="text" name="publications" maxlength="200" class="form-control" />
+              </div>
+            </div>
+          </div>
+          <div class="confirmApply fw">
+            <button type="submit" class="input-btn">Save</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class='modal personal_DtlPop' id='accomplishment_add_detail2'>
+    <div class="close fw">
+      <a class='btn close-modal' data-modal="#accomplishment_add_detail2" href="#"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></a>
+    </div>
+    <form class="form_sec fw col_grid12" action="{{ url('add_student_accomplishment') }}" method="POST" enctype="multipart/form-data">
+      @csrf
+      <div class='content fw'>
+        <h3 class="modal_heading">Add Accomplishment</h3>
+        <div class="form_sec fw ">
+          <div class="innerrow">
+            <div class="col_grid6">
+              <div class="form-group">
+                <label>Accomplishment Type</label>
+                <input type="text" name="accomplishment_type" class="form-control disable" value="Test Scores">
 
+              </div>
+            </div>
+            <div class="col_grid6">
+              <div class="form-group">
+                <label>Course Name</label>
+                <input type="text" name="course_name" maxlength="200" class="form-control" />
+              </div>
+            </div>
+            <div class="col_grid6 ">
+              <div class="form-group">
+                <label>Award</label>
+                <input type="text" name="award" maxlength="200" class="form-control" />
+              </div>
+            </div>
+            <div class="col_grid6 ">
+              <div class="form-group">
+                <label>Test Scores</label>
+                <input type="text" name="test_scores" maxlength="200" class="form-control" />
+              </div>
+            </div>
+            <div class="col_grid6 ">
+              <div class="form-group">
+                <label>Publications</label>
+                <input type="text" name="publications" maxlength="200" class="form-control" />
+              </div>
+            </div>
+          </div>
+          <div class="confirmApply fw">
+            <button type="submit" class="input-btn">Save</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class='modal personal_DtlPop' id='accomplishment_add_detail3'>
+    <div class="close fw">
+      <a class='btn close-modal' data-modal="#accomplishment_add_detail3" href="#"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></a>
+    </div>
+    <form class="form_sec fw col_grid12" action="{{ url('add_student_accomplishment') }}" method="POST" enctype="multipart/form-data">
+      @csrf
+      <div class='content fw'>
+        <h3 class="modal_heading">Add Accomplishment</h3>
+        <div class="form_sec fw ">
+          <div class="innerrow">
+            <div class="col_grid6">
+              <div class="form-group">
+                <label>Accomplishment Type</label>
+                <input type="text" name="accomplishment_type" class="form-control disable" value="Publications">
+
+              </div>
+            </div>
+            <div class="col_grid6">
+              <div class="form-group">
+                <label>Course Name</label>
+                <input type="text" name="course_name" maxlength="200" class="form-control" />
+              </div>
+            </div>
+            <div class="col_grid6 ">
+              <div class="form-group">
+                <label>Award</label>
+                <input type="text" name="award" maxlength="200" class="form-control" />
+              </div>
+            </div>
+            <div class="col_grid6 ">
+              <div class="form-group">
+                <label>Test Scores</label>
+                <input type="text" name="test_scores" maxlength="200" class="form-control" />
+              </div>
+            </div>
+            <div class="col_grid6 ">
+              <div class="form-group">
+                <label>Publications</label>
+                <input type="text" name="publications" maxlength="200" class="form-control" />
+              </div>
+            </div>
+          </div>
+          <div class="confirmApply fw">
+            <button type="submit" class="input-btn">Save</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 
   <div class='modal personal_DtlPop' id='createNewPost'>
     <div class="close fw">
@@ -1163,7 +1322,11 @@
   <!----------------Popup end----------------------->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
+  <script>
+    $(window).on('load', function() {
+      $('.se-pre-con').delay(1500).fadeOut('slow');
+    });
+  </script>
   <script type="text/javascript">
     $('#studentImage').on('change', function(ev) {
       //console.log("here inside");
@@ -1197,7 +1360,7 @@
         processData: false,
         success: function() {
           location.reload();
-              return false;
+          return false;
           console.log("success");
         }
       });
@@ -1464,6 +1627,16 @@
 
     $('.close-modal').click(function() {
       location.reload();
+    });
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.toggle-Acmntsbtn').click(function() {
+        $(".toggle-Acmnts").toggleClass("toggle-contpopup");
+      });
+      $(".toggle-Acmnts li a").click(function() {
+        $(".toggle-Acmnts").removeClass("toggle-contpopup");
+      });
     });
   </script>
 </body>

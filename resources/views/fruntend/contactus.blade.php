@@ -190,9 +190,16 @@
     </div>
   </footer>
 
+  <div class="se-pre-con"></div>
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
   <script src="{{ asset('public/assets/web_assets/js/commen-hd.js')}}"></script>
-  <script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+<script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+  <script>
+      $(window).on('load', function(){
+       $('.se-pre-con').delay(1500).fadeOut('slow');
+     });
+   </script>
+  
   <script type="text/javascript">
     CKEDITOR.replace('message');
   </script>

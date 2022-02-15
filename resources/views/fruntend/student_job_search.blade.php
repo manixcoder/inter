@@ -203,8 +203,14 @@
         </ul>
       </div>
     </footer>
-    <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
+    <div class="se-pre-con"></div>
+  <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
+  <script>
+      $(window).on('load', function(){
+       $('.se-pre-con').delay(1500).fadeOut('slow');
+     });
+   </script>
    <script>
      $(document).ready(function(){
     $('.customer-logos').slick({

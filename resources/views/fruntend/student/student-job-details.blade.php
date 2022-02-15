@@ -211,6 +211,7 @@
   <footer class="fw">
     @include('fruntend.student.inc.footer')
   </footer>
+  <div class="se-pre-con"></div>
   <div class='modal personal_DtlPop createNewPost_popup' id='createHomePostrecuriter'>
     <div class="close fw">
       <a class='btn close-modal' data-modal="#createHomePostrecuriter" href="#"><img src="{{ asset('public/assets/images/close.png')}}')}}" alt="icon"></a>
@@ -246,6 +247,11 @@
     </div>
   </div>
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
+  <script>
+      $(window).on('load', function(){
+       $('.se-pre-con').delay(1500).fadeOut('slow');
+     });
+   </script>
   <script>
     $(document).ready(function() {
       $(".clicktobtm").click(function() {

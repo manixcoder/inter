@@ -499,6 +499,7 @@
     <footer class="fw">
         @include('fruntend.student.inc.footer')
     </footer>
+    <div class="se-pre-con"></div>
     <div class='modal resumeUpload_popup successfullyModalPopup' id='successfullyModal'>
 
         <div class='content fw'>

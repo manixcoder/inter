@@ -490,6 +490,7 @@ class StudentDashboardController extends Controller
   }
   public function add_student_accomplishment(Request $request)
   {
+   // dd($request->all());
     $id = Session::get('gorgID');
     $update = DB::table('accomplishments')
       ->insert([
@@ -606,11 +607,10 @@ class StudentDashboardController extends Controller
   }
   public function deleteStudentResume(Request $request, $id)
   {
-    //dd($id);
     $res = DB::table('student_resume')->where('id', $id)->delete();
     $userRole = Session::get('userRole');
-    $userid = Session::get('gorgID');
-    $OrgData = DB::table('users')->where('id', $userid)->first();
+    $id = Session::get('gorgID');
+    $OrgData = DB::table('users')->where('id', $id)->first();
     $locationData = DB::table('jobs')->select('location')->groupBy('location')->get();
     $titleData = DB::table('jobs')->select('job_title')->groupBy('job_title')->get();
     $job_title = $request->job_title;
@@ -697,6 +697,7 @@ class StudentDashboardController extends Controller
   {
     $id = Session::get('gorgID');
     $jobData  = DB::table('jobs')->where('id', $request->job_id)->first();
+    // dd($jobData->user_id);
     $update = DB::table('job_applied')
       ->insert([
         'student_id' => $id,
@@ -705,7 +706,7 @@ class StudentDashboardController extends Controller
         'updated_at' => date("Y-m-d H:i:s")
       ]);
     //$users = User::where('id', $jobData->user_id)->get();
-    $users = User::where('id', '!=', Session::get('gorgID'))->get();
+    $users = User::where('id', '=', $jobData->user_id)->get();
     $notificationData = array(
       'comment_user' => Auth::user()->id,
       'post_title' => $jobData->job_title,
