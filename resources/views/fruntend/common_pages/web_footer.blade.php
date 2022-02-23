@@ -27,7 +27,7 @@
     </ul>
   </div>
 </footer>
-<div class="se-pre-con" >
+<!-- <div class="se-pre-con" > -->
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>

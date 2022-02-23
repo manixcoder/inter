@@ -990,6 +990,11 @@ span.froget_btn {
     color: #fff;
     font-size: 24px;
     font-family: 'Bukhari Script';
+    white-space: nowrap;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
 }
 .login_user .user_dropdown span img {
     display: inline-block;
@@ -3827,13 +3832,13 @@ display: none;
     font-size: 14px;
 }
 .intercandidatesProfile .cvpdf a img {
-    width: 15px;
+    width: 18px;
     display: inline-block;
     vertical-align: middle;
     margin-right: 2px;
 }
 .intercandidatesProfile .cvpdf a img:last-child {
-    margin-left: 11px;
+    margin-left: 11px; opacity: .8;
 }
 .intercandidatesProfile .retextbtn_sec {
     float: none;
@@ -4335,13 +4340,21 @@ textarea {
     height: 48px;
     border-radius: 0;
 }
+
+.organization_logo .upload_logo figure img[src="https://www.theinternify.com/public/assets/images/uploadgreen.png"] ,  .organization_logo .upload_logo figure img[src="theinternify.com/public/assets/images/uploadgreen.png"] {
+    position: relative;
+    width: 54px;
+    height: 48px;
+    border-radius: 0;
+}
+
 .newPostJob_pg .file_cont .jobpostnew-file {
     width: 100%;
     object-fit: cover;
     height: 100%;
     max-height: none;
 }
-.newPostJob_pg .file_cont .jobpostnew-file[src="https://www.theinternify.com/public/assets/images/attach_img.png"] , .newPostJob_pg .file_cont .jobpostnew-file[src="theinternify.com/public/assets/images/attach_img.png"] ,  {
+.newPostJob_pg .file_cont .jobpostnew-file[src="https://www.theinternify.com/public/assets/images/attach_img.png"] , .newPostJob_pg .file_cont .jobpostnew-file[src="theinternify.com/public/assets/images/attach_img.png"]  {
     position: relative;
     width: 54px;
     height: 48px;
@@ -6734,6 +6747,11 @@ textarea {
     }
     .login_user .user_dropdown span {
         font-size: 15px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 70px;
+        position: relative;
     }
     .user_namesec figure {
         width: 100px;
@@ -9183,7 +9201,7 @@ small.shareclosebtn img {
 .boxDetailbg figure img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: fill;
 }
 .viewcompany-btn {
     background: none;
@@ -9568,6 +9586,7 @@ div#moreoffer span#add_more i {
 .blogcontainer .content-group form input[type="submit"][value="READ MORE"] {
     color: #ba3143;
     text-decoration: none;
+        background: transparent !important;
 }
 .commantsChat {
     display: none;
@@ -10020,4 +10039,49 @@ div#internships_id .arrowheading_site.recruiterGreenText {
 .popupWapper .form_sec .form-group .form-control.disable {
     pointer-events: none;
     cursor: not-allowed;
+}
+.blogcontainer .nrml-heading {
+    text-align: center;
+}
+.intercandidatesProfile .retextbtn_sec span {
+    padding: 0;
+}
+.viewdetail_pra ul, .viewdetail_pra ol {
+    margin: 12px 0 12px;
+    width: 100%;
+    float: left;
+    padding: 0;
+    padding-left: 14px;
+}
+.viewdetail_pra ul {
+    list-style: disc;
+}
+.viewdetail_pra ul li , .viewdetail_pra ol li{
+    margin: 8px 0;
+}
+.blog_intersted_box .viewdetail_pra p {
+    font-size: 15px;
+    color: #011638;
+    line-height: 25px;
+    font-family: 'poppinsregular';
+    margin-bottom: 12px;
+}
+.blog_intersted_box .viewdetail_pra .read_more_btn {
+    background: transparent !important;
+    border: 0 !important;
+    margin: 5px 0 0;
+    font-family: 'poppinsregular';
+    font-size: 14px;
+}
+.organization_logo .upload_logo figure img[src="https://theinternify.com/public/assets/images/uploadgreen.png"] , .organization_logo .upload_logo figure img[src="theinternify.com/public/assets/images/uploadgreen.png"] {
+    position: relative;
+    width: 55px;
+    height: 50px;
+    border-radius: 0;
+    overflow: visible !important;
+}
+
+
+.body_wht-inners.basicInfo_tab.banner_image {
+    margin-top: 104px;
 }

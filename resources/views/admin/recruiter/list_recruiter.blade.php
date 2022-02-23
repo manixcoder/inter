@@ -1,8 +1,8 @@
 <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>-->
 <div class="content dashboard-pg">
-	<div id="loading_r">
+	<!-- <div id="loading_r">
 		<img id="loading-image" src="{{ URL::asset('/public/uploads/TheInternifyAnimatedLogo.gif') }}" alt="Loading..." />
-	</div>
+	</div> -->
 	<h3 class="heading">Recruiters ({{ $DataCount}} )
 		<span class="add_student_btn">
 			<a href="{{ URL::to('redirect-recruiter')}}">Add New Recruiter</a>
@@ -88,9 +88,9 @@
 									<img src="{{ asset('public/assets/images/view.svg')}}" alt="icon">
 								</a>
 							</span>
-							<span class="edit_icon">
+							<!-- <span class="edit_icon">
 								<a href="{{ URL::to('/message')}}" target="_blank"><img src="{{ URL::asset('/public/assets/images/chat_2.svg') }}" alt="chat"></a>
-							</span>
+							</span> -->
 							<span class="edit_icon">
 								<a href="{{ URL::to('recruiter-delete',$value->id) }}" onclick="return confirm('Are you sure you want to delete this item?');">
 									<img src="{{ asset('public/assets/images/delete.svg')}}" alt="icon">

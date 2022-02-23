@@ -4,9 +4,9 @@
 			<a href="{{URL::to('addblog_redirect')}}">Publish New Blog</a>
 		</span>
 	</h3>
-	<div id="loading_b">
+	<!-- <div id="loading_b">
 		<img id="loading-image" src="{{ URL::asset('/public/uploads/TheInternifyAnimatedLogo.gif') }}" alt="Loading..." />
-	</div>
+	</div> -->
 	<div class="row">
 		<div class="col-md-12 listtable-sec">
 			<table class="table listjob_table text-left" id="listblog_table">
@@ -65,7 +65,7 @@
 						<td>
 							<span class="edit_icon">
 								<a href="{{ URL::to('edit-blog/'.$value->id)}}">
-									<img src="{{ asset('public/assets/images/edit.svg')}}" alt="edit">
+									<img src="{{ asset('public/assets/images/edit.png')}}" alt="edit">
 								</a>
 							</span>
 							<!-- <span class="edit_icon">

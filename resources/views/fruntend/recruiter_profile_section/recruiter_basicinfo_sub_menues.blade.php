@@ -9,12 +9,12 @@ $todaysdate = date('Y-m-d').' 00:00:00';
 $posts = DB::table('posts')->where('user_id', $recruiterInfo->id)->where('status', 0)->orderBy('id', 'Desc')->get();
 $listedjobs = DB::table('jobs')->where('user_id', $id)->orderBy('id', 'Desc')->get();
 @endphp
-<div class="body_wht-inners basicInfo_tab ">
+<div class="body_wht-inners basicInfo_tab banner_image">
   <div class="lgcontainer">
     <div class="boxDetailbg fw">
       <figure>
         @if($recruiterInfo->org_image !='')
-        <img src="{{ asset('public/uploads')}}/{{ $recruiterInfo->org_image }}" alt="jobs" />
+        <img id="img_profile" src="{{ asset('public/uploads')}}/{{ $recruiterInfo->org_image }}" alt="jobs" />
         @else
         <img id="img_profile" src="{{ asset('public/uploads/company_profileBG.png')}}" alt="jobs" />
         @endif
@@ -85,7 +85,7 @@ $listedjobs = DB::table('jobs')->where('user_id', $id)->orderBy('id', 'Desc')->g
           //---image preview
           var reader = new FileReader();
           reader.onload = function(ev) {
-            $('#img_profile').attr('src', ev.target.result).css('width', '150px').css('height', '150px');
+            $('#img_profile').attr('src', ev.target.result).css('width', '100%');
           }
           reader.readAsDataURL(this.files[0]);
           /// preview end

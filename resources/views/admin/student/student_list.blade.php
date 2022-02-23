@@ -1,7 +1,7 @@
 <div class="content dashboard-pg">
-	<div id="loading">
+	<!-- <div id="loading">
 		<img id="loading-image" src="{{ URL::asset('/public/uploads/TheInternifyAnimatedLogo.gif') }}" alt="Loading..." />
-	</div>
+	</div> -->
 	<h3 class="heading">Students ({{$DataCount ?? ''}})
 		<span class="add_student_btn">
 			<a href="{{ 'addstudent_redirect' }}">Add New Student</a>
@@ -85,11 +85,11 @@
 							<a href="{{ URL::to('student-detail',$value->id) }}">
 								<img src="{{ asset('public/assets/images/view.svg')}}" alt="icon">
 							</a>
-							<span class="edit_icon">
+							<!-- <span class="edit_icon">
 								<a href="{{ URL::to('/message')}}" target="_blank">
 									<img src="{{ asset('public/assets/images/chat_2.svg')}}" alt="icon">
 								</a>
-							</span>
+							</span> -->
 
 							<span class="edit_icon">
 								<a href="{{ URL::to('student-delete',$value->id) }}" onclick="return confirm('Are you sure you want to delete this item?');">

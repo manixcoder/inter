@@ -20,6 +20,7 @@ class CreateExperienceTable extends Migration
             $table->string('profile')->nullable();
             $table->date('duration_from')->nullable();
             $table->date('duration_to')->nullable();
+            $table->enum('current', ['1', '0'])->default('1')->comment('1 Current 0 Ex');
             $table->string('location')->nullable();
             $table->string('company_image')->nullable();
             $table->timestamps();

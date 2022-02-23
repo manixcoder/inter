@@ -5,9 +5,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>internify - Contact Us</title>
+  <title>Internify - Contact Us</title>
   <!-- Fontawesome 4 Cdn from BootstrapCDN -->
-  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
+  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.png') }}"/>
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="{{ asset('public/assets/web_assets/css/style.css')}}" rel="stylesheet">
   <link href="{{ asset('public/assets/web_assets/fonts/fonts.css')}}" rel="stylesheet">
@@ -190,7 +190,7 @@
     </div>
   </footer>
 
-  <div class="se-pre-con"></div>
+  <!-- <div class="se-pre-con"></div> -->
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
   <script src="{{ asset('public/assets/web_assets/js/commen-hd.js')}}"></script>
 <script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>

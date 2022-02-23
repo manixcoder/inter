@@ -4,9 +4,9 @@
     <a href="{{ URL::to('add_announcement')}}">Create Announcement</a>
     </span>
    </h3>
-   <div id="loading_an">
+   <!-- <div id="loading_an">
       <img id="loading-image" src="{{ URL::asset('/public/uploads/TheInternifyAnimatedLogo.gif') }}" alt="Loading..." />
-    </div>
+    </div> -->
    <div class="row">
       <div class="col-md-12 listtable-sec">
          <table class="table listjob_table text-left" id="announcementlist">

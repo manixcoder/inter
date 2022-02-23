@@ -11,7 +11,7 @@
     <link href="{{ asset('public/assets/css/style.css')}}" rel="stylesheet">
     <link href="{{ asset('public/assets/css/responsive.css')}}" rel="stylesheet">
     <link href="{{ asset('public/assets/fonts/fonts.css')}}" rel="stylesheet">
-    <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
+    <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.png') }}"/>
     <script src="{{ asset('public/assets/js/jequery-main3.5.js')}}"></script> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Verification OTP</title>         

@@ -29,7 +29,7 @@ if($searchdata !='No'){
         <div class="from-group">
           <div class="input-icon">
             <i><img src="{{ URL::asset('/public/assets/images/searchIcon.png') }}" alt="icon"></i>
-            <input class="form-control" type="text" name="search" placeholder="Search job by name !">
+            <input class="form-control" type="text" name="search" placeholder="Search job by name!">
           </div>
           <div class="btn_group">
             <button type="submit" class="input-btn">Search</button>

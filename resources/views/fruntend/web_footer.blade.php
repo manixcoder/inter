@@ -25,7 +25,7 @@
         </ul>
       </div>
     </footer>
-    <div class="se-pre-con"></div>
+    <!-- <div class="se-pre-con"></div> -->
      <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
     <script src="{{ asset('public/assets/web_assets/js/commen-hd.js')}}"></script>
     <script src="{{ asset('public/assets/web_assets/js/jquery.multiform-text-editor.js')}}"></script>
@@ -150,6 +150,6 @@ $(".close-modal").on('click', function(e){
       $(window).on('load', function(){
        $('.se-pre-con').delay(1500).fadeOut('slow');
      });
-   </script>
+  </script>
   </body>
 </html>

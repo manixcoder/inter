@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>internify - Login</title>
+    <title>Internify - Login</title>
     <!-- Fontawesome 4 Cdn from BootstrapCDN -->
-    <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
+    <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.png') }}"/>
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="{{ asset('public/assets/web_assets/css/style.css')}}" rel="stylesheet">
     <link href="{{ asset('public/assets/web_assets/fonts/fonts.css')}}" rel="stylesheet">
@@ -125,7 +125,7 @@
             </div>
         </div>
     </div>
-    <div class="se-pre-con"></div>
+    <!-- <div class="se-pre-con"></div> -->
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
 
   <script>

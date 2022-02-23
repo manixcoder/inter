@@ -109,7 +109,7 @@ if($request->salary !=''){
     $notificationData = array(
       'comment_user' => Auth::user()->id,
       'post_title' => $request->job_title,
-      'notification_type' => 'Post a new Jobs',
+      'notification_type' => 'Posted a new job',
       'comment' => strip_tags($request->job_description) 
     );
     foreach ($users as $user) {

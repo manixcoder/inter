@@ -182,7 +182,7 @@ class StudentDashboardController extends Controller
     $to = $studentData->email;
     $INSERTJOBNAMEHERE = $jobData->job_title;
     $INSERTCOMPANYNAME = $recuratorData->org_name;
-    $subject = "Selection mail";
+    $subject = "Selection Email";
     $message = "
     <html>
     <head>
@@ -190,7 +190,7 @@ class StudentDashboardController extends Controller
     <body>
     <p> Dear " . $studentData->name . " </p>
     <p>I hope this email finds you well.</p> 
-    <p>We are delighted to inform you that we have shortlisted your application for our " . $INSERTJOBNAMEHERE . "position. Your remarkable track record and outstanding achievements have amazed our team and we’d like to hope on a quick call with you to discuss your possible future with us at " . $INSERTCOMPANYNAME . ".</p>
+    <p>We are delighted to inform you that we have shortlisted your application for our " . $INSERTJOBNAMEHERE . "position. Your remarkable track record and outstanding achievements have amazed our team and we’d like to hop on a quick call with you to discuss your possible future with us at " . $INSERTCOMPANYNAME . ".</p>
     <p>We hope you can consider.</p>
     <p>Thank you for your cooperation.</p>
     <p>Best,
@@ -490,7 +490,6 @@ class StudentDashboardController extends Controller
   }
   public function add_student_accomplishment(Request $request)
   {
-   // dd($request->all());
     $id = Session::get('gorgID');
     $update = DB::table('accomplishments')
       ->insert([

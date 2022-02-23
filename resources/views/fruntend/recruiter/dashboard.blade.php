@@ -251,7 +251,7 @@
    </div>
  </div>
  @include('fruntend.common_pages.web_footer')
-
+<div class="se-pre-con"></div>
  <!--  Model for add posts -->
 
  <div class='modal personal_DtlPop createNewPost_popup' id='createHomePostrecuriter'>
@@ -296,7 +296,11 @@
    </div>
  </div>
  <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
-
+<script>
+      $(window).on('load', function(){
+       $('.se-pre-con').delay(1500).fadeOut('slow');
+     });
+  </script>
  <script type="text/javascript">
    function editRecords(id) {
      $.ajaxSetup({
