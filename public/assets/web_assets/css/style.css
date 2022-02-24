@@ -1,6 +1,6 @@
 /*common css start*/
 *{box-sizing: border-box; margin: 0; padding: 0; font-weight: normal !important;}
-body{width: 100%; height: 100%; word-break: break-all;font-family: 'poppinsregular';}
+body{width: 100%; height: 100%; word-break: break-word;font-family: 'poppinsregular';}
 a,button,input,select,textarea{outline: none; text-decoration: none; box-shadow: none;}
 figure{margin: 0;}
 .fw{width: 100%; float: left;}
@@ -206,6 +206,7 @@ footer {
     -webkit-transition: all .5s ease .0s;
     -ms-transition: all .5s ease .0s;
     -moz-transition: all .5s ease .0s;
+    text-shadow: none;
 }
 .social_icon li {
     margin-right: 15px;
@@ -238,7 +239,7 @@ footer {
     display: inline-block;
     vertical-align: middle;
     position: relative;
-    padding: 30px 80px;
+    padding: 40px 0 52px;
     border-right: 2px solid #fff;
     font-size: 125px;
     font-family: 'poppinssemibold';
@@ -369,7 +370,7 @@ footer ul.social_icon {
 }
 .content-group {
     margin-bottom: 30px;
-    word-break: break-all;
+    word-break: break-word;
 }
 .site-pra {
     font-size: 20px;
@@ -782,7 +783,7 @@ footer ul.social_icon {
     padding-right: 20px;
     line-height: 70px;
 }
-.welcome_cont .from-group {margin-top: 28px; position: relative;}
+.welcome_cont .from-group {margin-top: 28px; position: relative; color: #fff;}
 .welcome_cont .from-group .form-control::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     color: #FFFFFF; line-height: 70px;
   }
@@ -860,7 +861,7 @@ span.froget_btn {
     text-align: center;
 }
 .logo_img img {
-    width: 236px;
+    width: 150px;
 }
 .welcome_cont {
     margin-top: 190px;
@@ -913,6 +914,8 @@ span.froget_btn {
 .menu_right {
     display: inline-block;
     vertical-align: middle;
+    margin-bottom: 0 !important;
+    margin-top: 5px !important;
 }
 .menu_right li {
     display: inline-block;
@@ -933,10 +936,11 @@ span.froget_btn {
     -webkit-transition: all .5s ease .0s;
     -ms-transition: all .5s ease .0s;
     -moz-transition: all .5s ease .0s;
+    text-decoration: none;
 }
 .menu_right li a:after {
     position: absolute;
-    bottom: -10px;
+    bottom: -7px;
     width: 100%;
     height: 8px;
     content: "";
@@ -986,6 +990,11 @@ span.froget_btn {
     color: #fff;
     font-size: 24px;
     font-family: 'Bukhari Script';
+    white-space: nowrap;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
 }
 .login_user .user_dropdown span img {
     display: inline-block;
@@ -1046,7 +1055,10 @@ span.froget_btn {
 }
 header.header_sec.flow2_header{
     padding: 12px 0 7px;
-    box-shadow: 0 2px 6px rgba(0,0,0,.2);
+    box-shadow: none !important;
+}
+.flow2header header.header_sec.flow2_header{
+    box-shadow: 0 2px 6px rgba(0,0,0,.2)!important;
 }
 .flow2_header .menu_right{
     margin-top: -5px;
@@ -1265,7 +1277,7 @@ display: none;
     color: #fff;
     font-size: 24px;
     font-weight: 400;
-    font-family: 'poppinsmedium';
+    font-family: 'poppinsregular';
     transition: all .5s ease .0s;
     -webkit-transition: all .5s ease .0s;
     -ms-transition: all .5s ease .0s;
@@ -1953,7 +1965,7 @@ display: none;
     padding-top: 8px;
 }
 .jobDescriptions_sec ul , .similarBox_sec  .jobsDetailBox .col_grid12 ul{
-    margin-top: 32px;
+    margin-top: 25px;
     float: left;
     width: 100%;
     list-style: none;
@@ -1992,7 +2004,7 @@ display: none;
     min-width: 145px;
 }
 .similarBox_sec  .jobsDetailBox .col_grid12 ul{
-    margin-top: 20px;
+    margin-top: 0;
 }
 .similarBox_sec .jobsDetailBox p {
     color: #7F7F7F;
@@ -2004,10 +2016,10 @@ display: none;
     margin-top: 50px;
 }
 .similarBox_sec .col_grid12.arrowheading_site.right_after_arrow {
-    margin-bottom: 70px;
+    margin-bottom: 55px;
 }
 .similarBox_sec .jobsDetailCont .innerrow .col_grid12 {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 .similarBox_sec .jobsDetailBox span.dots {
     padding-left: 8px;
@@ -2403,9 +2415,15 @@ display: none;
     width: 295px;
     height: 295px;
     float: left;
+    position: relative;
+    border: 3px solid #72cbcb;
+    border-radius: 100%;
+
 }
 .profile_publicimg img {
     width: 100%;
+    height: 100%;
+    border-radius: 100%;
 }
 .profile_publicDetail {
     float: left;
@@ -2674,7 +2692,7 @@ display: none;
     color: #ba3143;
     display: inline-block;
     vertical-align: middle;
-    margin-top: 70px;
+    margin-top: 25px;
 }
 .coursesBox .pull-right.font20Text i {
     display: inline-block;
@@ -2748,7 +2766,7 @@ display: none;
 .personal_DtlPop {
     width: 700px;
     border-radius: 30px;
-    padding: 42px 50px 90px !important;
+    padding: 42px 35px 90px !important;
 }
 .popupWapper .modal .close {
     position: absolute;
@@ -3660,6 +3678,8 @@ display: none;
     width: 145px;
     height: 145px;
     line-height: 145px;
+    position: relative;
+    z-index: 9;
 }
 .basicInfo_tab .profileTab {
     padding: 0 0 0 20px;
@@ -3675,7 +3695,7 @@ display: none;
     margin-top: 15px;
 }
 .basicInfo_tab .basicTab_contBox {
-    padding: 0 35px;
+    padding: 0 15px;
 }
 .basicInfo_tab .profileTab_contBox .form-group textarea.form-control {
     height: 150px;
@@ -3743,10 +3763,10 @@ display: none;
     min-width: 220px;
 }
 .Jobextend_details {
-    margin-top: 50px;
-    padding-bottom: 30px;
+    margin-top: 30px;
+    padding-bottom: 28px;
     border-bottom: 1px solid #ddd;
-    margin-bottom: 32px;
+    margin-bottom: 0;
 }
 .Jobextend_details .lightblue_text {
     font-size: 13px;
@@ -3812,13 +3832,13 @@ display: none;
     font-size: 14px;
 }
 .intercandidatesProfile .cvpdf a img {
-    width: 15px;
+    width: 18px;
     display: inline-block;
     vertical-align: middle;
     margin-right: 2px;
 }
 .intercandidatesProfile .cvpdf a img:last-child {
-    margin-left: 11px;
+    margin-left: 11px; opacity: .8;
 }
 .intercandidatesProfile .retextbtn_sec {
     float: none;
@@ -3975,10 +3995,10 @@ display: none;
     float: left;
     width: 50%;
     border-right: 2px solid #fff;
-    padding: 22px 0 42px;
+    padding: 40px 0 52pxs;
 }
 .internships_sec span.btm_bdrleanding:after {
-    background: #ba3143;
+    background: #086C84;
 }
 
 
@@ -3992,10 +4012,11 @@ display: none;
 }
 .adressMap_sec label {
     color: #011638;
-    font-size: 15px;
+    font-size: 15.5px;
     font-family: 'poppinsregular';
     display: block;
     margin: 0 0 10px;
+    letter-spacing: .1px;
 }
 .adressMap_sec input.form-control {
     box-shadow: 0px 1px 6px #00000029;
@@ -4186,7 +4207,7 @@ input::-webkit-inner-spin-button {
 .input-icon::-webkit-scrollbar-thumb{
     background:none !important;
 }
-.upload_box_sec .file_cont img[src="https://162.241.87.160/haresh/internifys_admin/public/assets/images/attach_img.png"] {
+.upload_box_sec .file_cont img[src="https://www.theinternify.com/public/assets/images/attach_img.png"]  , .upload_box_sec .file_cont img[src="theinternify.com/public/assets/images/attach_img.png"] {
     width: 50px;
     max-width: none !important;
     min-height: 1px;
@@ -4194,7 +4215,7 @@ input::-webkit-inner-spin-button {
     position: relative;
     margin-top: 32px;
 }
-.newPostJob_pg .file_cont img[src="https://162.241.87.160/haresh/internifys_admin/public/assets/images/attach_img.png"] {
+.newPostJob_pg .file_cont img[src="https://www.theinternify.com/public/assets/images/attach_img.png"] , .newPostJob_pg .file_cont img[src="theinternify.com/public/assets/images/attach_img.png"] {
     margin-top: 23px;
      width: 75px;
 }
@@ -4313,17 +4334,33 @@ textarea {
     border-radius: 170px;
     object-fit: cover;
 }
-.organization_logo .upload_logo img[src="https://162.241.87.160/haresh/internifys_admin/public/assets/images/uploadgreen.png"] {
+.organization_logo .upload_logo img[src="https://www.theinternify.com/public/assets/images/attach_img.png"] , .organization_logo .upload_logo figure img[src="https://www.theinternify.com/public/assets/images/uploadgreen.png"] , .organization_logo .upload_logo img[src="theinternify.com/public/assets/images/attach_img.png"] , .organization_logo .upload_logo figure img[src="theinternify.com/public/assets/images/uploadgreen.png"] {
     position: relative;
     width: 54px;
     height: 48px;
     border-radius: 0;
 }
+
+.organization_logo .upload_logo figure img[src="https://www.theinternify.com/public/assets/images/uploadgreen.png"] ,  .organization_logo .upload_logo figure img[src="theinternify.com/public/assets/images/uploadgreen.png"] {
+    position: relative;
+    width: 54px;
+    height: 48px;
+    border-radius: 0;
+}
+
 .newPostJob_pg .file_cont .jobpostnew-file {
     width: 100%;
     object-fit: cover;
     height: 100%;
     max-height: none;
+}
+.newPostJob_pg .file_cont .jobpostnew-file[src="https://www.theinternify.com/public/assets/images/attach_img.png"] , .newPostJob_pg .file_cont .jobpostnew-file[src="theinternify.com/public/assets/images/attach_img.png"]  {
+    position: relative;
+    width: 54px;
+    height: 48px;
+    border-radius: 0;
+        min-height: 1px;
+            margin-top: 32px;
 }
 .resumeimg iframe {
     height: auto;
@@ -4354,14 +4391,14 @@ textarea {
     height:100%;
 } 
 .tabCompnay_profile ul#profileTab_link li {
-    margin: 0 15px;
+    margin: 0 28px;
 }
 .profileTab li a{ font-size: 32px;}
 .followers_shodeobox .img_box img {
     height: 100%;
 }
 .body_wht-inners.bloglgHome_sec h1 {
-    font-size: 24px;
+    font-size: 25px;
     color: #011638;
     line-height: 35px;
     font-family: 'poppinssemibold';
@@ -4436,7 +4473,7 @@ textarea {
         width: 700px;
     }
     .internships_sec {
-        padding: 80px 0 60px;
+        padding: 68px 0 60px;
     }
     .aboutCont_box p {
         font-size: 17px;
@@ -4472,7 +4509,7 @@ textarea {
     /*new css*/
     /*.lgcontainer{width: 1170px;}*/
     .empotext-cont h2 {
-        font-size: 85px;
+        font-size: 90px;
         line-height: 80px;
         letter-spacing: 3px;
     }
@@ -4488,10 +4525,10 @@ textarea {
     
     .iam_text_cont li {
         float: left;
-        padding: 22px 0 42px;
+        padding: 40px 0 52px;
     }
     .iam_text_cont li {
-        font-size: 85px;
+        font-size: 87px;
         line-height: 70px;
         font-family: 'league_spartanbold';
     }
@@ -4518,7 +4555,7 @@ textarea {
         margin-top: 40px;
     }
     .unlock_sec h4 {
-        font-size: 20px;
+        font-size: 21px;
     }
     .jobSearch_sec form {
         margin-top: 28px;
@@ -4530,13 +4567,13 @@ textarea {
         margin-top: 125px;
     }
     .login_contbox.reset_password .welcome_cont {
-        margin-top: 50px;
+        margin-top: 100px;
     }
     .loginBGRED_sec {
         padding: 22px 0;
     }
     .welcome_cont h3 {
-        font-size: 25px;
+        font-size: 28px;
         font-family: 'league_spartanbold';
     }
     .welcome_cont .innerrow {
@@ -4609,7 +4646,7 @@ textarea {
         font-size: 22px;
     }
     .footer_login {
-        margin-top: 20px;
+        margin-top: 30px;
     }
     .welcome_cont h5 {
         font-size: 15.5px;
@@ -4628,13 +4665,13 @@ textarea {
     .digitcode h3{font-size: 25px;}
     .commntsMsgBox li a{font-size: 15px;}
     .commntsMsgBox li{margin-right: 30px;}
-    .arrowheading_site h3 {font-size: 35px;}
+    .arrowheading_site h3 {font-size: 37px;}
     .interested_right h3::after {
         min-width: 500px !important;
         right: 75px !important;
     }
     .nrml-heading {
-        font-size: 18px;
+        font-size: 20px;
         line-height: 25px;
     }
     .findblog_search {
@@ -4651,7 +4688,7 @@ textarea {
         font-family: 'poppinssemibold';
     }
     .gary-small-text {
-        font-size: 14px;
+        font-size: 15px;
     }
     .gary-small-text span {
         margin-left: 8px;
@@ -4681,7 +4718,7 @@ textarea {
         width: 35px;
     }
     .modal_heading {
-        font-size: 35px;
+        font-size: 30px;
         margin-bottom: 30px;
         line-height: 1;
     }
@@ -4875,7 +4912,7 @@ textarea {
         margin-bottom: -100px;
     }
     .arrowheading_site {
-        margin-bottom: 30px;
+        margin-bottom: 10px;
     }
     .welcome_cont.verificationBlog {
         margin-top: 80px;
@@ -4906,7 +4943,7 @@ textarea {
         border: 1px solid #eee;
     }
     .user_namesec h5 {
-        font-size: 18px;
+        font-size: 19px;
         margin-top: 22px;
     }
     .user_namesec a {
@@ -4918,21 +4955,21 @@ textarea {
         margin-bottom: 14px;
     }
     .progressbar_sec {
-        font-size: 13px;
+        font-size: 14px;
     }    
     .userTablink_cont li a {
         padding: 15px 20px 12px;
-        font-size: 15px;
+        font-size: 16px;
         border-radius: 8px;
     }
     .viewDetailBlog_sec .blog_intersted .img-cont img {
         min-height: 300px;
     }
     .menu_right li a {
-        font-size: 18px;
+        font-size: 19px;
     }
     .login_user .user_dropdown span {
-        font-size: 17px;
+        font-size: 19px;
         font-weight: normal !important;
     }
     .login_user .user_dropdown i {
@@ -4951,11 +4988,12 @@ textarea {
     }
     .login_user {
         margin-left: 38px;
-        padding-bottom: 10px;
+        padding-bottom: 3px;
         margin-top: 12px;
     }
     .userdrop_down li a {
-        font-size: 15px;
+        font-size: 14px;
+        text-decoration: none;
     }
     .middleContainerbox{    width: 960px;}
     .unlock_sec .styledSelect {
@@ -5001,9 +5039,15 @@ textarea {
     }
     .profile_sec .compnayBoxImg {
         width: 70px;
+        height: 70px;
+        object-fit: cover !important;
+    }
+    .profile_sec .compnayBoxImg img{
+        height: 70px;
+        object-fit: cover;
     }
     .jobsDetailCont h3 {
-        font-size: 18px;
+        font-size: 19px;
         font-family: 'poppinsbold';
     }
     .lightblue_text {
@@ -5025,7 +5069,7 @@ textarea {
         margin: 15px 0;
     }
     .profile_sec .compnay span{margin-top: 10px;}
-    .input-btn{font-size: 16px;}
+    .input-btn{font-size: 17px;}
     .jobsDetailComp_cont h3, .jobsDetailComp_cont h3 a {
         font-size: 18px;
     }
@@ -5050,9 +5094,9 @@ textarea {
         font-size: 16px;
     }
     .commentsApply .commantsChat {
-        width: 52px;
-        height: 52px;
-        line-height: 52px;
+        width: 42px;
+        height: 42px;
+        line-height: 42px;
         margin-left: 35px;
     }
     .commentsApply {
@@ -5144,6 +5188,9 @@ textarea {
     .profile_publicimg {
         width: 140px;
         height: 140px;
+        border-radius: 140px;
+        display: inline-block;
+        border: 3px solid #72cbcb;
     }
     .profile_publicDetail {
         padding-left: 28px;
@@ -5174,7 +5221,10 @@ textarea {
     .body_wht-inners {
         margin-top: 100px;
     }
-    .form_sec .form-group label{font-size: 15px;}
+    .form_sec .form-group label{
+        font-size: 15.5px;
+        letter-spacing: .1px;
+    }
     .form_sec .form-group .form-control{height: 50px; font-size: 16px !important;}
     .form_sec .form-group{margin-bottom: 36px;}
     .personal_Details h3 span{font-size: 17px;}
@@ -5271,7 +5321,7 @@ textarea {
     }
     .confirmApply .input-btn {
         min-width: 255px;
-        font-size: 18px;
+        font-size: 16px;
         height: 55px;
         line-height: 57px;
         padding-right: 12px;
@@ -5292,7 +5342,7 @@ textarea {
         padding-bottom: 21px !important;
     }
     .profile_sec .compnay span .applied_btn {
-        font-size: 18px;
+        font-size: 16px;
     }
     .myPostSec .jobsDetailBox {
         padding: 10px 25px 20px;
@@ -5314,7 +5364,7 @@ textarea {
         line-height: 60px;
     }
     .settingBox h4 {
-        font-size: 20px;
+        font-size: 21px;
     }
     .settingBox p {
         margin-top: 8px;
@@ -5382,9 +5432,9 @@ textarea {
         font-size: 58px;
         font-family: 'league_spartanbold';
     }
-    .contactus_pg .adress_cont {
+    /*.contactus_pg .adress_cont {
         margin-top: 45px;
-    }
+    }*/
     .contactus_pg .aboutCont_box h3 {
         font-size: 33px;
         line-height: 32px;
@@ -5428,7 +5478,7 @@ textarea {
         font-size: 50px;
     }
     .banner_bgsec  .empotext-cont h2 span {
-        font-size: 80px;
+        font-size: 84px;
         margin-top: 4px;
     }
     
@@ -5453,6 +5503,7 @@ textarea {
     }
     .leanding_pg .unlock_sec h4 {
         font-size: 26px;
+        letter-spacing: .5px;
     }
     .comProInfo_cont h4 {
         font-size: 20px;
@@ -5462,6 +5513,7 @@ textarea {
     }
     .qverview_sec .font36text {
         font-size: 22px;
+        color: #011638;
     }
     .comProInfo_cont p {
         margin-bottom: 20px;
@@ -5475,7 +5527,7 @@ textarea {
         font-size: 15px;
     }
     .profileTab li a {
-        font-size: 18px;
+        font-size: 19px;
     }
     .compnayProfile_user .userBox_img {
         width: 175px;
@@ -5497,7 +5549,7 @@ textarea {
         font-size: 22px;
     }
     .input-btn {
-        padding: 21px 20px 17px!important;
+        padding: 16px 20px 15px!important;
         letter-spacing: 0 !important;
     }
     .followers_topHeading span .input-btn{line-height: 63px;}
@@ -5551,6 +5603,7 @@ textarea {
     .uplaodCheckBtn .input-btn{line-height: 57px; min-width: 165px;}
     .login_contbox .welcome_cont .digitcode h5 {
         font-size: 21px;
+        margin-top: 15px;
     }
 }
 @media (max-width:1330px){ 
@@ -5683,19 +5736,19 @@ textarea {
         width: 940px;
     }
     .menu_right li a {
-        font-size: 20px;
+        font-size: 17px;
     }
     .menu_right li a:after {
-        bottom: -29px;
+        bottom: -9px;
         height: 7px;
     }
     .menu_right li {
         margin: 0 5px;
     }
     .login_user {
-        margin-left: 25px;
-        padding-bottom: 15px;
-        margin-top: 20px;
+        margin-left: 15px;
+        padding-bottom: 0px;
+        margin-top: 13px;
     }
     .login_user .user_dropdown span{font-size: 20px;}
     .findblog_search .input-icon i img {
@@ -5901,7 +5954,7 @@ textarea {
         padding: 60px 0 60px;
     }
     .arrowheading_site h3 {
-        font-size: 42px;
+        font-size: 35px;
     }
     .arrowheading_site h3 span:after{min-width: 220px;}
     .internships_img_box {
@@ -5980,11 +6033,14 @@ textarea {
         margin-left: 5px;
     }
     .jobsDetailComp_cont h3, .jobsDetailComp_cont h3 a {
-        font-size: 25px;
+        font-size: 20px;
     }
     .jobsDetailComp_cont p {
-        font-size: 18px;
+        font-size: 15px;
         margin-top: 1px;
+    }
+    .jobsDetailProfile .retextbtn_sec .viewcompany-btn {
+        font-size: 15px;
     }
     .commentsApply {
         margin-top: 25px;
@@ -6014,13 +6070,13 @@ textarea {
     }
     .jobDescriptions_sec {
         padding: 0 20px;
-        margin-top: 60px;
+        margin-top: 40px;
     }
     .extraleft_pad {
         padding-left: 30px;
     }
     .borderBox_heading {
-        font-size: 32px;
+        font-size: 24px;
         padding-left: 12px;
         line-height: 25px;
         padding-top: 6px;
@@ -6029,7 +6085,7 @@ textarea {
         margin-top: 25px;
     }
     .jobDescriptions_sec ul li, .similarBox_sec .jobsDetailBox .col_grid12 ul li {
-        font-size: 18px;
+        font-size: 16px;
     }
     .jobDescriptions_sec ul li:after, .similarBox_sec .jobsDetailBox .col_grid12 ul li:after {
         width: 6px;
@@ -6040,16 +6096,26 @@ textarea {
         padding-left: 15px;
     }
     .jobDescriptions_sec p {
-        font-size: 20px;
+        font-size: 14px;
         margin-bottom: 8px;
-        margin-top: 20px;
-        line-height: 40px;
+        margin-top: 10px;
+        line-height: 25px;
     }
     .similarBox_sec {
         margin-top: 35px;
     }
     .similarBox_sec .col_grid12.arrowheading_site.right_after_arrow {
-        margin-bottom: 35px;
+        margin-bottom: 10px;
+    }
+    .similarBox_sec  .jobsDetailCont h3 {
+        font-size: 20px;
+    }
+    .similarBox_sec .jobsDetailBox p {
+        margin-bottom: 5px;
+    }
+    .similarBox_sec .jobsDetailBox .redBGmanage_btn {
+        font-size: 14px;
+        padding: 15px 10px 14px!important;
     }
     .jobsDetailCont h3 {
         font-size: 26px;
@@ -6068,7 +6134,7 @@ textarea {
     .input-btn.redBGmanage_btn {
 /*        line-height: 53px !important;
         height: 50px !important;*/
-        font-size: 18px;
+        font-size: 16px;
     }
     .jobsDetailBox:last-child {
         margin-bottom: 40px;
@@ -6080,11 +6146,14 @@ textarea {
         font-size: 18px;
     }
     .font36text {
-        font-size: 30px;
+        font-size: 25px;
     }
     .grytextPra{
         font-size: 20px;
         line-height: 42px;
+    }
+    .profile_publicDetail h4.clrwht.font36text.semiboldfont_fmly {
+        font-size: 20px;
     }
     .profileTab li {
         margin: 0 15px;
@@ -6133,8 +6202,10 @@ textarea {
         padding: 20px 25px;
     }
     .profile_publicimg {
-        width: 215px;
-        height: 215px;
+        width: 135px;
+        height: 135px;
+        border: 3px solid #72cbcb;
+        border-radius: 100%;
     }
     .profile_publicDetail {
         width: calc(100% - 215px);
@@ -6178,10 +6249,11 @@ textarea {
         font-size: 18px;
     }
     .inputcheck {
-        bottom: 10px;
+        bottom: 12px;
+        font-size: 13px !important;
     }
     .form_sec .form-group label {
-        font-size: 20px;
+        font-size: 18px;
     }
     .form_sec .form-group .styledSelect {
         height: 60px;
@@ -6264,14 +6336,15 @@ textarea {
         font-size: 36px;
     }
     .siteheading span a {
-        font-size: 22px;
+        font-size: 20px;
+        padding-top: 10px;
     }
     .settingBox h4 {
-        font-size: 22px;
+        font-size: 20px;
     }
     .settingBox p {
-        line-height: 28px;
-        font-size: 18px;
+        line-height: 22px;
+        font-size: 16px;
     }
     .settingBox .unlock_sec .select .styledSelect {
         line-height: 68px;
@@ -6660,11 +6733,11 @@ textarea {
         margin: 0 5px;
     }
     .menu_right li a {
-        font-size: 16px;
+        font-size: 15px;
         padding: 0 5px;
     }
     .menu_right li a:after {
-        bottom: -34px;
+        bottom: -9px;
         height: 6px;
     }
     .login_user {
@@ -6673,7 +6746,12 @@ textarea {
         margin-top: 12px;
     }
     .login_user .user_dropdown span {
-        font-size: 17px;
+        font-size: 15px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 70px;
+        position: relative;
     }
     .user_namesec figure {
         width: 100px;
@@ -6740,7 +6818,7 @@ textarea {
         font-size: 20px;
     }
     .createPost_Sec {
-        margin-bottom: 28px;
+        margin-bottom: 0;
     }
     .userCommnet_deta span {
         width: 47px;
@@ -6772,7 +6850,7 @@ textarea {
         margin-right: 10px;
     }
     .commntsMsgBox li a {
-        font-size: 15px;
+        font-size: 13px;
     }
     .commntsMsgBox li a span {
         margin-right: 4px;
@@ -6955,13 +7033,13 @@ textarea {
         padding: 30px 30px;
     }
     .jobsDetailCont h3 {
-        font-size: 26px;
+        font-size: 22px;
     }
     .profile_sec .compnayBoxImg {
         width: 80px;
     }
     .lightblue_text, .jobsDetailCont .col_grid9 ul li, .profile_sec .compnay h5 {
-        font-size: 17px;
+        font-size: 15px;
     }
     .jobsDetailCont p{    margin: 8px 0 2px;}
     .jobsDetailCont .col_grid9 ul li:after {
@@ -7001,10 +7079,10 @@ textarea {
         margin-top: 10px;
     }
     .jobsDetailComp_cont h3, .jobsDetailComp_cont h3 a {
-        font-size: 20px;
+        font-size: 16px;
     }
     .jobsDetailComp_cont p {
-        font-size: 16px;
+        font-size: 14px;
         margin-top: 0px;
     }
     .retextbtn_sec {
@@ -7032,13 +7110,13 @@ textarea {
         float: right;
     }
     .contact_profileinfo .contactmail span {
-        font-size: 18px;
+        font-size: 16px;
     }                                            
     .checkbox_notify span {
         font-size: 18px;
     }                                            
     .borderBox_heading {
-        font-size: 30px;
+        font-size: 20px;
         padding-left: 10px;
         line-height: 23px;
         padding-top: 4px;
@@ -7051,13 +7129,13 @@ textarea {
         padding-left: 25px;
     }
     .jobDescriptions_sec ul li, .similarBox_sec .jobsDetailBox .col_grid12 ul li {
-        font-size: 17px;
+        font-size: 15px;
     }
     .jobDescriptions_sec p {
-        font-size: 18px;
+        font-size: 14px;
         margin-bottom: 6px;
         margin-top: 15px;
-        line-height: 30px;
+        line-height: 26px;
     }    
     .similarBox_sec .jobsDetailCont .innerrow .col_grid12 {
         margin-bottom: 10px;
@@ -7068,10 +7146,20 @@ textarea {
         margin-bottom: 12px;
     }
     .similarBox_sec .jobsDetailCont h3 {
-        font-size: 20px;
+        font-size: 18px;
     }
     .similarBox_sec .jobsDetailCont a.lightblue_text {
         font-size: 15px;
+    }
+    .similarBox_sec .jobsDetailBox p {
+        font-size: 14px;
+    }
+    .jobsDetailProfile .retextbtn_sec .viewcompany-btn {
+        font-size: 14px;
+    }
+    .viewcompany-btn img {
+        width: 16px;
+        margin-left: 2px;
     }
     .similarBox_sec .jobsDetailBox .col_grid12 ul li {
         font-size: 15px;
@@ -7207,7 +7295,7 @@ textarea {
         height: 55px;
     }
     .changePassword_box .form_sec .form-group label {
-        font-size: 18px;
+        font-size: 16px;
     }
     .changePassword_box .form_sec .form-group {
         margin-bottom: 30px;
@@ -7220,10 +7308,10 @@ textarea {
         font-size: 30px;
     }
     .settingBox {
-        padding-top: 38px;
-        padding-bottom: 25px;
-        padding-left: 32px;
-        padding-right: 20px;
+        padding-top: 20px;
+        padding-bottom: 18px;
+        padding-left: 0;
+        padding-right: 0;
     }
     .siteheading {
         font-size: 32px;
@@ -7327,7 +7415,9 @@ textarea {
         margin-top: -15px;
     }
     .basicInfo_tab .mylisting_recuriter {
-        width: 740px;
+        width: 700px;
+        margin: 0 auto;
+        display: block;
     }
     .bloglgHome_sec .col_grid4 {
         width: 300px;
@@ -7602,8 +7692,8 @@ textarea {
         width: 100%; padding: 0 15px;
     }
     .admin-date-box {
-        padding: 15px 10px;
-        margin-top: 10px;
+        padding: 8px 10px 5px;
+        margin-top: 2px;
     }
     .body_wht-inners {
         margin-top: 100px;
@@ -7734,7 +7824,7 @@ textarea {
         padding: 15px 15px 15px;
     }           
     .myPostSec .jobsDetailBox {
-        padding: 10px 20px 20px;
+        padding: 10px 15px 20px;
     }
     .profile_sec .compnayBoxImg {
         width: 65px;
@@ -7744,8 +7834,8 @@ textarea {
         line-height: 22px;
     }          
     .jobsDetailCont h3 {
-        font-size: 18px;
-        line-height: 24px;
+        font-size: 16px;
+        line-height: 15px;
     }
     .jobsDetailCont .col_grid9 ul li{
         padding-left: 14px;
@@ -7897,10 +7987,10 @@ textarea {
     }
     .profileTab li a:after{display: none;}
     .profileTab li a {
-        font-size: 16px;
+        font-size: 14px;
         width: 100%;
         vertical-align: middle;
-        padding: 10px 10px 8px;
+        padding: 10px 7px 8px;
         background: #72cbcb;
         color: #fff;
         margin-bottom: 0;
@@ -8041,6 +8131,7 @@ textarea {
     .profile_publicimg {
         width: 115px;
         height: 115px;
+        border: 3px solid #72cbcb;
     }
     .profile_publicDetail {
         width: 100% !important;
@@ -8082,9 +8173,8 @@ textarea {
         padding-top: 15px;
     }
     .experienceBox_cont h4, .experienceBox_cont p {
-        line-height: 25px;
-        font-size: 16px;
-
+        line-height: 24px;
+        font-size: 15px;
     }
     .experienceBox .col_grid3 span {
         margin: 10px 0px 0 65px;
@@ -8213,11 +8303,12 @@ textarea {
         border-radius: 30px;
     }
     .siteheading {
-        font-size: 29px;
+        font-size: 24px;
     }
     .siteheading span a {
-        font-size: 18px;
+        font-size: 16px;
         margin: 0;
+        padding-top: 0;
     }
     .settingBox {
         padding-top: 25px;
@@ -8226,7 +8317,7 @@ textarea {
         padding-right: 2px;
     }
     .settingBox h4 {
-        font-size: 18px;
+        font-size: 16px;
     }
     .settingBox .toggleArrow {
         right: 0;
@@ -8236,8 +8327,8 @@ textarea {
         width: 15px;
     }
     .settingBox p {
-        line-height: 26px;
-        font-size: 17px;
+        line-height: 20px;
+        font-size: 14px;
     }
     .settingBox  .unlock_sec .styledSelect {
         line-height: 68px;
@@ -8520,10 +8611,10 @@ textarea {
         margin-bottom: 10px;
     }
     .coursesBox h3 {
-        font-size: 20px;
+        font-size: 18px;
     }
     .coursesBox p {
-        font-size: 15px;
+        font-size: 14px;
     }
     .footer_menu li {
         margin-right: 5px;
@@ -8584,7 +8675,7 @@ textarea {
         min-height: 200px;
     }
 }
-@media(max-width:500px){
+@media(max-width:500px){ 
     .admin-date-box .col_grid6 {
         width: 100% !important;
         text-align: left;
@@ -8615,7 +8706,7 @@ textarea {
         margin: 0 0 22px !important;
     }
     .profileDetail_ul li a {
-        width: 100%;
+        width: 100%; 
     }
 }
 @media (max-width:450px){
@@ -8669,7 +8760,7 @@ textarea {
     }
     .profileTab li {
         margin: 0;
-        width: 50%;
+        width: 33.33%;
         text-align: left;
         float: left;
     }
@@ -8844,7 +8935,7 @@ textarea {
     height: 100%;
     object-fit: cover;
 }
-.newPostJob_pg .jobUpload_sec .uploadBox .fileupload2.file_cont img[src="https://162.241.87.160/haresh/internifys_admin/public/assets/images/upload_file.png"] {
+.newPostJob_pg .jobUpload_sec .uploadBox .fileupload2.file_cont img[src="https://www.theinternify.com/public/assets/images/upload_file.png"] , .newPostJob_pg .jobUpload_sec .uploadBox .fileupload2.file_cont img[src="theinternify.com/public/assets/images/upload_file.png"] {
     height: auto;
     width: 40px;
     display: inline-block;
@@ -8982,10 +9073,6 @@ small.shareclosebtn img {
     display: none;
 }
 
-
-
-
-
 .personal_DtlPop 
  .select {
     float: left;
@@ -9012,4 +9099,1066 @@ small.shareclosebtn img {
     padding: 15px;
     background: #f5f5f5;
     border: 1px solid #eee;
+}
+.accomplishment-popup{position: relative;}
+.educationSec.lastdiv .boxShodewBg .course-selectbox {
+    width: 200px;
+    right: 0;
+    position: absolute;
+    top: 25px;
+    padding: 0;
+    background: #fff;
+    z-index: 9;
+    border: 1px solid #eee;
+    opacity: 0;
+    visibility: hidden;
+}
+.educationSec.lastdiv .boxShodewBg .course-selectbox li {
+    display: inline-block;
+    width: 100%;
+}
+.educationSec.lastdiv .boxShodewBg .course-selectbox li span {
+    font-size: 14px;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    width: 100%;
+    display: inline-block;
+    padding: 7px 15px;
+}
+.educationSec.lastdiv .boxShodewBg .course-selectbox li span:hover{
+   background: #ba3143;
+    color: #fff;
+}
+.educationSec.lastdiv .boxShodewBg .course-selectbox.addopen-model-ul{opacity: 1; visibility: visible;}
+.findblog_search.blogView_search {
+    margin-top: 15px;
+}
+.blogcontainer .content-group {
+    word-break: break-word;
+    line-height: 24px;
+    font-size: 15px;
+}
+.social_login ul.social_icon.fw ul.social_icon.fw {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+.forgot_pass_pg form.welcome_cont {
+    margin-top: 75px;
+}
+.forgot_pass_pg form.welcome_cont .from-group span {
+    margin-top: 8px !important;
+    float: left;
+    width: 100%;
+}
+.forgot_pass_pg form.welcome_cont .alert-success {
+    margin-top: 10px;
+    float: left;
+    width: 100%;
+}
+.bloglgHome_sec .content-group h3.font57text {
+    color: #086C84;
+    margin-bottom: 15px;
+    font-size: 19px;
+    line-height: 26px;
+
+}
+.bloglgHome_sec .content-group p {
+    word-break: break-word;
+    line-height: 25px;
+    font-size: 15.5px;
+    color: #011638;
+    letter-spacing: .2px;
+
+}
+.bloglgHome_sec .content-group p a { 
+    color: #011638;
+}
+.blogcontainer .content-group p {
+    font-size: 15px;
+    color: #011638;
+    line-height: 25px;
+    font-family: 'poppinsregular';
+}
+.blogcontainer .content-group form input[type="submit"] {
+    border: 0;
+    outline: none !important;
+    font-size: 14px;
+    color: #011638;
+    font-family: 'poppinsregular';
+    text-decoration: underline;
+    transition: all .5s ease .0s;
+    -webkit-transition: all .5s ease .0s;
+    -ms-transition: all .5s ease .0s;
+    -moz-transition: all .5s ease .0s;
+    cursor: pointer;
+}
+.blogcontainer .content-group form input[type="submit"]:hover{text-decoration: none;}
+.boxDetailbg figure{
+    height: 320px;
+    overflow: hidden;
+    border-radius: 15px;
+}
+.boxDetailbg figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+.viewcompany-btn {
+    background: none;
+    border: 0;
+    box-shadow: none !important;
+    outline: none !important;
+    display: inline-block;
+    vertical-align: top;
+    cursor: pointer;
+}
+.viewcompany-btn img {
+    width: 22px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+.compnayProfile_user .userBox_img img {
+    width: 100%;
+}
+.tabCompnay_profile .profileTab li button {
+    border: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+    color: #086C84;
+    font-size: 20px;
+    font-family: 'poppinssemibold';
+    letter-spacing: .2px;
+    border-bottom: 0;
+    display: inline-block;
+    position: relative;
+    padding-bottom: 8px;
+    cursor: pointer;
+}
+.tabCompnay_profile .profileTab li button:after {
+    position: absolute;
+    content: "";
+    border-bottom: 0px solid #b83143;
+    border-radius: 10px;
+    left: 0;
+    bottom: -4px;
+    height: 7px;
+    background: #b83143;
+    z-index: 9;
+    width: 100%;
+    opacity: 0;
+    transition: all .5s ease .0s;
+}
+.tabCompnay_profile .profileTab li.active button:after , .tabCompnay_profile .profileTab li.active button:hover{opacity: 1;}
+.profileTab_contBox .commentsApply .commantsChat {
+    float: right;
+}
+.profileTab_contBox {
+    margin-top: 40px;
+}
+.right-attachment {
+    float: left;
+    margin-top: 15px;
+}
+.right-attachment img {
+    margin-left: 12px;
+    width: 20px;
+}
+.profile_publicimg .fileupload {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    cursor: pointer;
+}
+.profile_publicimg .fileupload #studentImage , .recruiter-remove-profile .fileupload .file-upload  {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 99;
+    position: relative;
+}
+.profile_publicimg .remoovicon {
+    position: absolute;
+    bottom: 0;
+    z-index: 99;
+    left: 15px;
+    cursor: pointer;
+    width: 24px;
+}
+.profile_publicimg .remoovicon button {
+    width: 22px;
+    height: 22px;
+    border-radius: 20px;
+    border: 0;
+    background: #72cbcb;
+    color: #000;
+    font-size: 20px;
+    box-shadow: 0 0 3px rgb(0 0 0 / 22%);
+    position: relative;
+    z-index: 9999;
+    cursor: pointer;
+    display: inline-block;
+}
+.profile_publicimg .remoovicon {
+    position: absolute;
+    bottom: 12px;
+    z-index: 99;
+    right: 24px;
+    cursor: pointer;
+}
+.resumeUpload_popup  .resumeimg {
+    border: 1px solid #ddd;
+    padding: 0px;
+    background: #eee;
+}
+.resumeUpload_popup  .form_sec .col_grid6 span {
+    padding-left: 0;
+    padding-right: 0;
+}
+.resumeUpload_popup .form_sec .col_grid6 .col_grid6 {
+    padding: 0 0 0 15px;
+}
+.resumeUpload_popup .form_sec .col_grid6 .col_grid6 .download_btn img {
+    width: 13px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.resumeUpload_popup .form_sec .col_grid6 .col_grid6:first-child .download_btn img {
+    width: 17px;
+}
+.contactmail a {
+    color: #4BA5FF;
+}
+.notification_cont .notipra_text a {
+    color: #72cbcb;
+    font-size: 15px;
+}
+.tabCompnay_profile ul#profileTab_link li:first-child {
+    margin-left: 0;
+    margin-right: 0;
+}
+.profileDetail_tab .profileTab_contBox .col_grid12.text-left {
+    padding: 0 50px;
+}
+.aboutusBg_sec form.form_sec .profile_update_btn .form-group {
+    margin-top: 25px;
+}
+.certificatesSec .form_btm_sec {
+    width: 80%;
+}
+.certificatesSec .col_grid12:first-child .rightedit_sec {
+    width: 20%;
+}
+.certificatesSec-edit span {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+h3.certificatesSec-edit {
+    text-align: right;
+}
+.education-view-sec .col_grid4 {
+    width: 28%;
+}
+.education-view-sec {
+    width: 100%;
+}
+.education-view-sec  .rightedit_sec {
+    width: 16%;
+}
+.education-view-sec  .rightedit_sec {
+    width: 16%;
+    padding-top: 35px;
+}
+.education-view-sec .rightedit_sec .pull-right {
+    margin-right: 15px;
+}
+.rightedit_sec a i img.delete-icon {
+    width: 17px;
+}
+.experience-edit {
+    text-align: right;
+}
+.experience-edit .font20Text {
+    color: #BA3143;
+    margin-left: 5px;
+}
+.experience-edit .font20Text .delete-icon {
+    width: 18px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -5px;
+    margin-right: 10px;
+}
+.experience-edit .font20Text {
+    color: #BA3143;
+    margin-left: 5px;
+    margin-top: 80px;
+    display: inline-block;
+}
+.changePassword_box .form_sec .confirmApply .input-btn span img {
+    width: 19px;
+    float: right;
+    margin-top: 0px;
+    margin-left: 5px;
+}
+.changePassword_box .form_sec .glyphicon-ok {
+    color: #00afaf !important;
+    margin-top: -5px;
+}
+.changePassword_box .alert.alert-success {
+    float: left;
+    width: 100%;
+}
+.changePassword_box .alert.alert-success {
+    display: inline-block;
+    width: 64%;
+    margin-left: 18%;
+}
+@media(max-width: 991px){
+    .changePassword_box .alert.alert-success {
+        display: inline-block;
+        width: 100%;
+        margin-left: 0%;
+    }
+}
+.contect-heading h3 {
+    margin-bottom: 50px;
+}
+.internships_sec .recruiterGreenText .btm_bdrleanding::after {
+    background: #ba3143;
+}
+#internships_id .recruiterGreenText.bdrCntr {
+    margin-bottom: 0;
+}
+.login_contbox .welcome_cont .digitcode h3 {
+    margin-bottom: 12px;
+}
+.login_contbox.reset_password 
+ .regstepone-sec.fw {
+    margin-top: 25px;
+}
+.login_contbox.reset_password 
+ .regsteptow-sec.fw {
+    margin-top: 65px;
+}
+.login_contbox.reset_password .welcome_cont.regstep4-sec .mr0 {
+    margin-top: 0;
+}
+.login_contbox.reset_password .welcome_cont.regstep4-sec {
+    margin-top: 80px;
+}
+.login_contbox.reset_password .regstepfive-sec {
+    margin-top: 45px;
+}
+.login_contbox.reset_password .regstepfive-sec .glyphicon-ok {
+    text-align: right;
+    padding-right: 20px;
+    margin-top: 0 !important;
+    color: #72cbcb;
+}
+div#moreoffer span#add_more {
+    font-size: 16px;
+    color: #ba3142;
+    display: inline-block;
+    margin-bottom: -25px;
+    cursor: pointer;
+        position: relative;
+    z-index: 9;
+}
+div#moreoffer span#add_more i {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+.form_sec .form-group .styledSelect {
+    height: 42px;
+    line-height: 42px;
+    box-shadow: none;
+}
+.form_sec .form-group .styledSelect {
+    background: url(../../images/arrow_down_grey.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: 96% center !important;
+    background-size: 14px !important;
+    color: #7c7c7c !important;
+}
+.forgot_pass_pg form.welcome_cont .from-group span.froget_btn {
+    float: right;
+    width: auto;
+    margin: 0 !important;
+    min-height: 55px !important;
+    line-height: 55px !important;
+}
+.forgot_pass_pg form.welcome_cont .from-group .glyphicon-ok , .forgot_pass_pg form.welcome_cont .from-group span.glyphicon-remove {
+    float: right !important;
+    width: auto;
+    margin-right: 15px;
+    line-height: 55px;
+    min-height: 55px;
+    margin-top: 0 !important;
+    top: 0;
+    color: #72cbcb;
+}
+ .forgot_pass_pg form.welcome_cont .from-group span.glyphicon-remove{color: #BA3143;}
+.recruiter-remove-profile {
+    margin-top: -60px;
+    margin-left: 15px;
+}
+.recruiter-remove-profile .userBox_img {
+    height: 100%;
+    width: 100%;
+    display: inline-block;
+    border-radius: 100%;
+    overflow: hidden;
+}
+.basicInfo_tab .boxDetailbg{position: relative;}
+.basicInfo_tab .boxDetailbg .banner-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9;
+}
+.basicInfo_tab .boxDetailbg .banner-info input#org_image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    opacity: 0;
+    z-index: 9;
+    cursor: pointer;
+}
+.basicInfo_tab .banner-info .camera-icon {
+    float: right;
+    width: 26px;
+    height: 26px;
+    margin-right: 10px;
+    margin-top: 10px;
+    background: #fff;
+    border-radius: 100%;
+    border: 2px solid #FFF;
+    overflow: hidden;
+}
+.basicInfo_tab .banner-info .camera-icon img {
+    width: 16px;
+    height: auto;
+    border-radius: 0;
+    margin: 3px auto 0;
+    display: block;
+}
+.login_contbox .welcome_cont .col_grid8[style="color:red"] {
+    color: #fff !important;
+}
+.login_contbox.reset_password 
+ .verificationTOP-Section.fw {
+    margin-top: 20px;
+}
+.file-popupinput .form-group .form-control[name="company_image"] {
+    padding-top: 0;
+    line-height: 58px !important;
+    box-shadow: 0 3px 6px rgb(0 0 0 / 15%);
+        padding-left: 15px;
+}
+
+.no-js #loader { display: none;  }
+.se-pre-con {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url("../../images/TheInternifyAnimatedLogo.gif") center no-repeat #fff;
+    background-size: 100% ;
+}
+.se-pre-con {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.blogcontainer .content-group form input[type="submit"][value="READ MORE"] {
+    color: #ba3143;
+    text-decoration: none;
+        background: transparent !important;
+}
+.commantsChat {
+    display: none;
+}
+.compnayProfile_user .userBox_img{border: 1px solid #ccc;}
+.camara-sdudentcamara {
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    right: 18px;
+    bottom: 12px;
+    background: #fff;
+    text-align: center;
+    line-height: 22px;
+    border-radius: 30px;
+}
+.camara-sdudentcamara img {
+    width: 14px;
+    height: auto;
+    border-radius: 0;
+    margin: 4px auto 0;
+    background: transparent;
+    display: inline-block;
+}
+.jobsDetailComp_img{border: 2px solid #ccc;}
+.social_icon li a[href="https://open.spotify.com/user/64p2h14btruk2aydbijnajk9o"] {
+    display: none;
+}
+.fileupload-popup {
+    position: absolute;
+    top: 25px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    text-align: center;
+    background: #fff;
+    box-shadow: 0 3px 6px rgb(0 0 0 / 15%);
+    cursor: pointer;
+}
+.fileupload-popup:after {
+    position: absolute;
+    content: "Upload";
+    top: 23px;
+    left: 15px;
+}
+.fileupload-popup:before {
+    position: absolute;
+    right: 15px;
+    content: "+";
+    width: 30px;
+    height: 30px;
+    background: #72cbcb;
+    border-radius: 30px;
+    color: #fff;
+    line-height: 34px;
+    font-size: 26px;
+    top: 15px;
+}
+.file-popupinput input.form-control {
+    position: relative;
+    left: 0;
+    cursor: pointer;
+    z-index: 99;
+    opacity: 0;
+}
+.retextbtn_sec.pull-right.rightside-cont {
+    float: right;
+    margin-top: -15px;
+}
+.jobsDetailProfile .intercandidates_sec {
+    margin-top: 42px;
+}
+div#description {
+    float: left;
+    width: 100%;
+    margin-bottom: -35px;
+}
+.notification_cont h4 span {
+    color: #000;
+    font-size: 17px;
+    font-family: 'poppinssemibold';
+}
+.notification_cont  p {
+    font-size: 15px;
+    margin-top: 3px;
+}
+.right-attachment img:first-child {
+    margin-left: 22px;
+}
+.jobsDetailProfile .intercandidates_box .commentsApply  span {
+    display: none;
+}
+.jobsDetailProfile  .intercandidates_box .commentsApply .applyBtn {
+    width: auto;
+    margin-left: 15px;
+}
+.jobsDetailProfile  .intercandidates_box .commentsApply .applyBtn:last-child{margin-left: 0;}
+.jobsDetailProfile .intercandidates_box .commentsApply .applyBtn a.input-btn {
+    font-size: 14px;
+}
+.jobsDetailProfile .intercandidates_box 
+ .intercandidatesProfile {
+    margin-top: 25px;
+}
+.newPostJob_pg .file_cont img[src="https://theinternify.com/public/assets/images/upload_file.png"] , .newPostJob_pg .file_cont img[src="theinternify.com/public/assets/images/upload_file.png"] {
+    width: 55px !important;
+    min-height: 1px !important;
+    position: relative !important;
+}
+.newPostJob_pg .file_cont img[src="https://theinternify.com/public/assets/images/attach_img.png"] , .newPostJob_pg .file_cont img[src="theinternify.com/public/assets/images/attach_img.png"] {
+    width: 75px;
+    min-height: 1px;
+    position: relative;
+}
+.leanding_pg .unlock_sec .input-btn.lending_search {
+    height: 58px !important;
+}
+.commntsMsgBox li:last-child {
+    margin-right: 0;
+    display: none;
+}
+.commntsMsgBox li.commentbyopne + li {
+    display: none;
+}
+@media(max-width: 1199px){
+div#internships_id .arrowheading_site.recruiterGreenText {
+    margin-bottom: 45px;
+}
+.leanding_pg .unlock_sec .input-btn.lending_search {
+    height: 58px!important;
+    line-height: 1 !important;
+}
+.body_wht-inners.bloglgHome_sec h1 {
+    font-size: 20px;
+    line-height: 26px;
+}
+.settingBox .toggleArrow a {
+    float: right;
+    margin-top: 5px;
+}
+.changePassword_heading .font36text {
+    font-size: 25px;
+}
+}
+@media(max-width: 991px){
+    .welcome_cont .digitcode i img{ margin-top: 1px;}
+    .leanding_pg .unlock_sec {
+        padding: 0 0 !important;
+        margin-top: 55px;
+    }
+    .leanding_pg .unlock_sec .input-btn.lending_search {
+        height: 55px!important;
+        line-height: 1 !important;
+    }
+    .redAbout_banner.contactus_banner {
+        margin: -45px 0 0!important;
+    }
+    .contactus_pg .adreeInfo li a {
+        font-size: 15px;
+    }
+    .contactus_pg .adress_cont h4 {
+        font-size: 22px;
+    }
+    .findblog_search .btn_group .input-btn{font-size: 14px;}
+    .findblog_search .input-icon i{top: 20px;}
+    .body_wht-inners.bloglgHome_sec h1 {
+        font-size: 18px;
+        line-height: 24px;
+    }
+    .bloglgHome_sec .content-group p {
+        font-size: 14px;
+    }
+    .basicInfo_tab h3 .input-btn[data-modal="#createNewPostrecuriter"], .mylisting_recuriter .posted_heading h3 a.input-btn {
+        margin-top: 0;
+    }
+    .profile_sec .compnay {
+        float: right;
+        margin-top: 20px;
+        width: calc(100% - 100px);
+    }
+    .profilePost_wapper.listjob_wapper .jobsDetailCont .innerrow .col_grid3 {
+        width: 22%;
+        float: right;
+    }
+}
+@media(max-width: 767px){
+    .file_cont h4 {
+        font-size: 14px;
+        margin-top: 5px;
+    }
+    div#iam_text_btm .empowering-sec .iam_text_cont li:last-child {
+        padding-bottom: 0 !important;
+    }
+    .newPostJob_pg .upload_box_sec img#output2 {
+        margin-left: 15px;
+        width: 30px;
+        top: 24px;
+    }
+    .contect-heading h3 {
+        margin-bottom: 25px;
+    }
+    .contactus_pg {
+        padding: 42px 0 0;
+    }
+    .redAbout_banner.contactus_banner {
+        padding-top: 40px;
+    }
+    .contactus_pg .adress_cont h4 {
+        font-size: 17px;
+    }
+    .user_namesec h5 {
+        font-size: 16px;
+        margin-top: 8px;
+    }
+    .user_namesec a {
+        font-size: 15px;
+        margin-top: 0px;
+    }
+    .commntsMsgBox li {
+        margin-right: 8px;
+    }
+    .commntsMsgBox li a span {
+        margin-right: 1px;
+        width: 12.5px;
+    }
+    .body_wht-inners.bloglgHome_sec h1 {
+        font-size: 16px;
+        line-height: 22px;
+    }
+    .userCommnet_Name h4 span {
+        font-size: 13px;
+    }
+    .nrml-heading {
+        font-size: 16px;
+        line-height: 24px;
+    }
+    .gary-small-text span {
+        margin-left: 8px;
+        font-size: 14px;
+    }
+    .notifivation_box{
+        min-height: 145px;
+    }
+    .newPostJob_pg .file_cont img[src="https://www.theinternify.com/public/assets/images/attach_img.png"], .newPostJob_pg .file_cont img[src="theinternify.com/public/assets/images/attach_img.png"] {
+        
+        width: 55px;
+    }
+    .form_sec .form-group .form-control {
+        height: 50px;
+        font-size: 14.5px !important;
+    }
+    .settingBox .toggleArrow a {
+        float: right;
+        margin-top: 1px;
+    }
+    .confirmApply.postjob_btn.col_grid12 button.input-btn.text-left {
+        font-size: 16px;
+    }
+    .basicInfo_tab .profileTab_contBox {
+        margin-top: 5px;
+    }
+    .confirmApply.postjob_btn.col_grid12 button.input-btn.text-left i {
+        font-size: 10px;
+        width: 14px;
+    }
+    .confirmApply.postjob_btn.col_grid12 button.input-btn.text-left {
+        padding: 14px 18px !important;
+    }
+    .confirmApply.postjob_btn {
+        margin-top: 10px;
+    }
+    .boxDetailbg figure {
+        height: 270px;
+    }
+    .camara-sdudentcamara{z-index: 9999;}
+    .profile_publicimg {
+        position: relative;
+        z-index: 9;
+    }
+    .basicInfo_tab .mylisting_recuriter .blogView_search {
+        margin-top: 15px;
+        margin-bottom: 20px;
+    }
+    .mylisting_recuriter .posted_heading {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .profile_sec .compnay {
+        width: calc(100% - 80px);
+    }
+    .lightblue_text, .jobsDetailCont .col_grid9 ul li, .profile_sec .compnay h5 {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .profile_sec .compnay .interested_link {
+        margin-top: 10px;
+        font-size: 14px;
+        float: right;
+    }
+    .basicInfo_tab div#profileTab_link3 .jobsDetailCont p .lightblue_text {
+        font-size: 15px;
+    }
+    .jobsDetailCont .col_grid9 ul {
+        margin-top: 10px;
+    }
+    .input-btn.redBGmanage_btn {
+        font-size: 16px;
+     }
+    .mylisting_recuriter .posted_heading {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .basicInfo_tab .mylisting_recuriter .blogView_search {
+        margin-top: 15px;
+        margin-bottom: 45px;
+    }
+    .input-btn.redBGmanage_btn {
+        font-size: 14px;
+    }
+    .input-btn {
+        padding: 12px 13px !important;
+    }
+    .jobsDetailProfile .intercandidates_box .commentsApply .applyBtn {
+        width: 100%;
+        margin-left: 8px;
+        margin-bottom: 5px;
+    }
+    .intercandidates_sec .intercandidates_contbox h4 {
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+}
+@media(max-width: 991px){
+    .tabCompnay_profile ul#profileTab_link li {
+        margin: 0 10px;
+    }
+    .address_Cont p {
+        margin-top: 15px;
+        font-size: 14px;
+    }
+    div#profileTab_link1 .address_Cont {
+        margin-top: 0;
+    }
+    .qverview_sec .font36text {
+        font-size: 17px;
+    }
+    .tabCompnay_profile .profileTab li button{font-size: 16px;}
+    .commentsApply .applyBtn a.input-btn {
+        padding: 12px 8px 12px !important;
+        font-size: 13px !important;
+    }
+    .jobsDetailProfile  .intercandidates_box .commentsApply .applyBtn {
+        margin-left: 8px;
+    }
+    .intercandidates_box {
+        padding: 0 15px;
+    }
+    .jobsDetailBox:last-child {
+        margin-bottom: 30px;
+    }
+    .input-btn.redBGmanage_btn {
+        font-size: 15px;
+    }
+    .certificatesSec .smaeHeading h3 span i {
+        margin-top: 0;
+        margin-right: 0;
+    }
+    .experience-edit .font20Text{margin-top: 12px;}
+    .experienceBox .col_grid3 span {
+        margin: 10px 0px 0 0;
+    }
+    .education-view-sec .col_grid4 {
+        width: 100%;
+    }
+    .education-view-sec  .rightedit_sec {
+        width: 16%;
+        padding-top: 0;
+    } 
+    .education-view-sec .rightedit_sec .pull-right {
+        margin-right: 10px;
+    }
+    .education-view-sec .rightedit_sec {
+        width: 100%;
+        padding-top: 0;
+    }
+    .progressbar_sec.whtprogressBar.fw {
+        width: 100%;
+    }
+    .commentsApply .applyBtn{width: -webkit-calc(100% - 0px); width: calc(100% - 0px);
+        width: -webkit-calc(100% - 0px);
+        width: -ms-calc(100% - 0px);
+        width: -moz-calc(100% - 0px);
+    }
+    .jobsDetailComp_img img {    
+        height: 65px;
+        margin-top: -8px;
+    }
+    .qverview_sec {
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+    .comProInfo_cont p {
+        font-size: 14px;
+        margin-bottom: 5px !important;
+    }
+    .profilePost_wapper.listjob_wapper .jobsDetailCont .innerrow .col_grid3 {
+        width: 100%;
+        float: right;
+    }
+    .profile_sec .compnay span {
+        margin-top: 10px;
+        font-size: 14px;
+        float: right;
+    }
+    .commntsMsgBox li.commentbyopne + li {
+        display: none;
+    }
+}
+
+.toggle-contpopup {
+    padding: 10px;
+    position: absolute;
+    right: 0;
+    z-index: 9;
+    background: #fff;
+    top: 25px;
+    display: block !important;
+    width: 130px;
+    box-shadow: 0px 1px 3px rgb(0 0 0 / 21%);
+    border-radius: 4px;
+}
+.toggle-contpopup li {
+    display: inline-block;
+    width: 100%;
+    line-height: 1;
+}
+.toggle-contpopup li a {
+    font-size: 16px;
+    color: #000;
+    font-family: 'poppinsregular';
+    display: inline-block;
+    width: 100%;
+    padding: 7px 0;
+}
+.intercandidates_box .jobsDetailBox span {
+    float: right;
+    padding-right: 18px;
+    margin-bottom: 2px;
+}
+.popupWapper .form_sec .form-group .form-control.disable {
+    pointer-events: none;
+    cursor: not-allowed;
+}
+.blogcontainer .nrml-heading {
+    text-align: center;
+}
+.intercandidatesProfile .retextbtn_sec span {
+    padding: 0;
+}
+.viewdetail_pra ul, .viewdetail_pra ol {
+    margin: 12px 0 12px;
+    width: 100%;
+    float: left;
+    padding: 0;
+    padding-left: 14px;
+}
+.viewdetail_pra ul {
+    list-style: disc;
+}
+.viewdetail_pra ul li , .viewdetail_pra ol li{
+    margin: 8px 0;
+}
+.blog_intersted_box .viewdetail_pra p {
+    font-size: 15px;
+    color: #011638;
+    line-height: 25px;
+    font-family: 'poppinsregular';
+    margin-bottom: 12px;
+}
+.blog_intersted_box .viewdetail_pra .read_more_btn {
+    background: transparent !important;
+    border: 0 !important;
+    margin: 5px 0 0;
+    font-family: 'poppinsregular';
+    font-size: 14px;
+}
+.organization_logo .upload_logo figure img[src="https://theinternify.com/public/assets/images/uploadgreen.png"] , .organization_logo .upload_logo figure img[src="theinternify.com/public/assets/images/uploadgreen.png"] {
+    position: relative;
+    width: 55px;
+    height: 50px;
+    border-radius: 0;
+    overflow: visible !important;
+}
+
+
+.body_wht-inners.basicInfo_tab.banner_image {
+    margin-top: 104px;
+}
+.login_user .user_dropdown:after {
+    position: absolute;
+    content: "";
+    right: -6px;
+    top: 17px;
+    font-size: 28px;
+    color: #fff;
+    opacity: 0;
+    background: url(../../images/user-downarrow.png);
+    width: 13px;
+    height: 8px;
+    display: inline-block;
+    background-repeat: no-repeat;
+}
+@media(max-width: 991px){
+.login_user .user_dropdown:after{
+    opacity: 1;
+}
+}
+.opne_flow2header .togglebtn span {
+    background: #fff !important;
+}
+@media(max-width: 767px){
+.tabCompnay_profile ul#profileTab_link li {
+    margin: 0 0px;
+}
+}
+.blog_header + .header_sec  .togglebtn span{margin-bottom: 10px;}
+body.body_blog.flow2header .logo-flow2 img + .wth-logo-hide {
+    display: block;
+}
+
+.checkbox-date .form-control {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    height: 100% !important;
+    width: 100%;
+    cursor: pointer;
+    opacity: 0;
+    z-index: 99;
+}
+.checkbox-date {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    margin: 0;
+    float: left;
+    border: 1px solid #ba3143;
+    border-radius: 4px;
+    margin-top: 20px;
+}
+.checkbox-date span {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: #ba3143;
+    opacity: 0;
+}
+.checkbox-date span:after {
+    content: "\2714";
+    color: #fff;
+}
+.checkbox-date .form-control:checked + span {opacity: 1;}
+.checkbox-current {
+    float: left;
+    width: 100%;
+    min-height: 60px;
+}
+
+.col_grid6.duration_group.datetype-remove {
+    display: none;
 }

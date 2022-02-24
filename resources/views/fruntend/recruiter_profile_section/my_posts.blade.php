@@ -277,5 +277,11 @@ $listedjobs = DB::table('jobs')->where('user_id', $id)->orderBy('id', 'Desc')->g
     location.reload();
   });
 </script>
-
+<script >
+    $(document).ready(function(){
+    $(".header_sec .togglebtn").click(function(){
+      $(".header_sec ").toggleClass("opne_flow2header");
+    });
+  });
+  </script>
 @include('fruntend.common_pages.web_footer')

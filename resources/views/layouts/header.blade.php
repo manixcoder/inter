@@ -22,7 +22,7 @@
 
 
   <script type="text/javascript" src="https://cdn.ckeditor.com/4.11.1/standard/styles.js?t=IA8F"></script>
-  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
+  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.png') }}"/>
   <link rel="stylesheet" type="text/css" href="https://cdn.ckeditor.com/4.11.1/standard/plugins/scayt/skins/moono-lisa/scayt.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.ckeditor.com/4.11.1/standard/plugins/scayt/dialogs/dialog.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.ckeditor.com/4.11.1/standard/plugins/tableselection/styles/tableselection.css">

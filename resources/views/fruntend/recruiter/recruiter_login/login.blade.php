@@ -5,9 +5,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>internify - Home</title>
+  <title>Internify - Home</title>
   <!-- Fontawesome 4 Cdn from BootstrapCDN -->
-  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
+  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.png') }}"/>
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="{{ asset('public/assets/web_assets/css/style.css')}}" rel="stylesheet">
   <link href="{{ asset('public/assets/web_assets/fonts/fonts.css')}}" rel="stylesheet">
@@ -56,7 +56,7 @@
             </span>
           </div>
           <div class="social_login bloglogin_icon fw">
-            <h4><span><a href="./home-pg.html">Or Login With</a></span></h4>
+            <!--h4><span><a href="./home-pg.html">Or Login With</a></span></h4>
             <ul class="social_icon fw">
               <ul class="social_icon fw">
                 <li>
@@ -75,18 +75,23 @@
                   </a>
                 </li>
               </ul>
-            </ul>
+            </ul-->
             <h5>Don't have an account ? <a href="{{URL::to('student-register-step-one')}}" class="textbtn_green">Register now</a></h5>
           </div>
-          <div class="footer_login fw">
+          <!-- <div class="footer_login fw">
             <h5>By logging in, you agree to our <a href="./terms_use-login.html" class="textbtn_green">terms and conditions</a> as well as our <a href="./privacy_policy-login.html" class="textbtn_green">privacy policy</a></h5>
-          </div>
+          </div> -->
         </form>
       </div>
     </div>
   </div>
+  <!-- <div class="se-pre-con"></div> -->
   <script src="js/jquery-lb.js"></script>
-
+  <script>
+      $(window).on('load', function(){
+       $('.se-pre-con').delay(1500).fadeOut('slow');
+     });
+   </script>
 
 </body>
 

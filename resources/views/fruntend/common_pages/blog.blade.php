@@ -6,10 +6,10 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>internify - Blog</title>
+  <title>Internify - Blog</title>
   <!-- Fontawesome 4 Cdn from BootstrapCDN -->
   
-  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
+  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.png') }}"/>
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="{{ asset('public/assets/web_assets/css/style.css')}}" rel="stylesheet">
   <link href="{{ asset('public/assets/web_assets/fonts/fonts.css')}}" rel="stylesheet">
@@ -214,7 +214,7 @@
                   <ul class="social_icon fw">
                     <li><a href="#" class="login_icon"><img src="{{ asset('public/assets/images/login_facebook.png') }}" alt="icon"></a></li>
                     <li><a href="#" class="login_icon"><img src="{{ asset('public/assets/images/login_linkedin.png') }}" alt="icon"></a></li>
-                    <li><a href="#" class="login_icon"><img src="{{ asset('public/assets/images/login_google.png') }}" alt="icon"></a></li>
+                    <!-- <li><a href="#" class="login_icon"><img src="{{ asset('public/assets/images/login_google.png') }}" alt="icon"></a></li> -->
                   </ul>
                 </ul>
                 <h5>Don't have an account ? <a href="./register_step1.html" class="textbtn_green">Register now</a></h5>
@@ -231,6 +231,14 @@
 
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
   <script src="{{ asset('public/assets/web_assets/js/commen-hd.js')}}"></script>
+  
+  <script >
+    $(document).ready(function(){
+    $(".header_sec .togglebtn").click(function(){
+      $(".header_sec ").toggleClass("opne_flow2header");
+    });
+  });
+  </script>
   <script>
     $(document).ready(function() {
       $(".clicktobtm").click(function() {

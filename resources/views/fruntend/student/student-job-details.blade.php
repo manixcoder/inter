@@ -5,7 +5,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>internify - Home</title>
+  <title>Internify - Home</title>
+   <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.png') }}"/>
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="{{ asset('public/assets/web_assets/css/style.css')}}" rel="stylesheet">
   <link href="{{ asset('public/assets/web_assets/fonts/fonts.css')}}" rel="stylesheet">
@@ -70,8 +71,8 @@
                 @csrf
                 <input type="hidden" name="comp_id" value="{{ $OrgData->id }}">
 
-                <button type="submit" class="retextbtn">View Company Profile</button>
-                <img src="{{ asset('public/assets/images/arrow_right_red.png')}}" alt="redarrow">
+                <button type="submit" class="retextbtn viewcompany-btn">View Company Profile <img src="{{ asset('public/assets/images/arrow_right_red.png')}}" alt="redarrow"></button>
+                
               </form>
               <!--a href="{{ url('company-profile') }}/{{ $OrgData->id }}" class="retextbtn">View Company Profile
                 <span>
@@ -140,7 +141,7 @@
       @if($appl->attachment !='')
       <div class="jobDescriptions_sec fw">
         <h3 class="borderBox_heading">Attachment</h3>
-        <a href="{{ URL::asset('/public/uploads/') }}/{{ $appl->attachment ?? ''}}" download>
+        <a href="{{ URL::asset('/public/uploads/') }}/{{ $appl->attachment ?? ''}}" download class="right-attachment">
           <img src="{{ URL::asset('/public/assets/images/fileupload_sec.png') }}" alt="icon">
 
           <img src="{{ URL::asset('/public/assets/images/download.png') }}" alt="icon">
@@ -211,6 +212,7 @@
   <footer class="fw">
     @include('fruntend.student.inc.footer')
   </footer>
+  <!-- <div class="se-pre-con"></div> -->
   <div class='modal personal_DtlPop createNewPost_popup' id='createHomePostrecuriter'>
     <div class="close fw">
       <a class='btn close-modal' data-modal="#createHomePostrecuriter" href="#"><img src="{{ asset('public/assets/images/close.png')}}')}}" alt="icon"></a>
@@ -246,6 +248,11 @@
     </div>
   </div>
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
+  <script>
+      $(window).on('load', function(){
+       $('.se-pre-con').delay(1500).fadeOut('slow');
+     });
+   </script>
   <script>
     $(document).ready(function() {
       $(".clicktobtm").click(function() {
@@ -427,6 +434,13 @@
       $(' .menu_right li').removeClass('active');
       $(this).addClass('active');
     });
+  </script>
+  <script >
+    $(document).ready(function(){
+    $(".header_sec .togglebtn").click(function(){
+      $(".header_sec ").toggleClass("opne_flow2header");
+    });
+  });
   </script>
 </body>
 

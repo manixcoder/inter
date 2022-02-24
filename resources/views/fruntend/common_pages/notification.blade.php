@@ -10,6 +10,7 @@
       @php
       // dd($notification);
       $userData = DB::table('users')->where('id', $notification->data['comment_user'])->first();
+
       $role = $userData->users_role;
       $notification->markAsRead();
       @endphp
@@ -37,22 +38,32 @@
                 </span>
               </h4>
               <p>
-                {{ $notification->data['notification_type']}} {{ $notification->data['post_title']}}
+                {{ $notification->data['notification_type']}}!
+                @if($notification->data['notification_type'] =='applied for')
+                {{ $notification->data['post_title']}}
+                @endif
               </p>
             </div>
             <div class="col_grid4 text-right">
               <div class="fw text-right dateText">
                 <p>
-                  {!! date('d M Y H:i', strtotime($notification->created_at)) !!}
+                  {!! date('d M Y | H:i', strtotime($notification->created_at)) !!}
                 </p>
               </div>
             </div>
           </div>
           <div class="notipra_text fw">
-            <?php echo  $notification->data['comment'] ?>
+            <?php //echo  $notification->data['comment'] ?>
+            @if($notification->data['notification_type'] =='Posted a new job')
+            <?php $jobData = DB::table('jobs')->where('job_title', $notification->data['post_title'])->first(); ?>
+                <p>{{ $userData->org_name }} is looking for a {{ $notification->data['post_title']}} in {{ $jobData->location }}. Interested?</p>
+                @else
+                <p>Check their profile out!</p>
+                @endif
+            
           </div>
-          <div class="notipra_text fw">
-            @if($notification->data['notification_type'] ==='Post a new Jobs')
+          <!--div class="notipra_text fw">
+            @if($notification->data['notification_type'] ==='Posted a new job')            
             <a href="{{ URL::to('student/jobs')}}">View</a>
             @endif
             @if($notification->data['notification_type'] ==='Posted a post')
@@ -60,10 +71,17 @@
             @endif
             
 
-          </div>
+          </div-->
         </div>
       </div>
       @endforeach
     </div>
   </div>
+  <script >
+    $(document).ready(function(){
+    $(".header_sec .togglebtn").click(function(){
+      $(".header_sec ").toggleClass("opne_flow2header");
+    });
+  });
+  </script>
   @include('fruntend.common_pages.web_footer')

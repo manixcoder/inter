@@ -5,9 +5,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>internify - Home</title>
+  <title>Internify - Home</title>
   <!-- Fontawesome 4 Cdn from BootstrapCDN -->
-  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
+  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.png') }}"/>
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="{{ asset('public/assets/web_assets/css/style.css')}}" rel="stylesheet">
   <link href="{{ asset('public/assets/web_assets/fonts/fonts.css')}}" rel="stylesheet">
@@ -23,7 +23,7 @@
           </a>
         </div>
         <form action="{{ url('student_logged_in') }}" method="POST" enctype="multipart/form-data" class="welcome_cont fw">
-          <h3>Welcome !</h3>
+          <h3>Welcome!</h3>
           <div class="innerrow">
             @csrf
             <div class="col_grid8">
@@ -97,7 +97,7 @@
             <h5>
               By logging in, you agree to our 
               <a href="{{url('termsofuse')}}" class="textbtn_green">
-                terms and conditions
+                terms and views
               </a> 
               as well as our <a href="{{url('privacypolicy')}}" class="textbtn_green">privacy policy</a></h5>
           </div>
@@ -105,7 +105,14 @@
       </div>
     </div>
   </div>
+  <!-- <div class="se-pre-con"></div> -->
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
+
+  <script>
+      $(window).on('load', function(){
+       $('.se-pre-con').delay(1500).fadeOut('slow');
+     });
+   </script>
 </body>
 
 </html>

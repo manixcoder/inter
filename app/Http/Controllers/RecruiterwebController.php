@@ -42,6 +42,13 @@ class RecruiterwebController extends Controller
       return redirect('dashboard')->with('status', 'Profile updated!');
     }
   }
+  public function removeProfileImage(Request $request)
+  {
+    DB::table('users')->where('id', $request->user_id)->update([
+      'profile_image'=>'blank-profile-picture.png'
+    ]);
+    return back()->with('status', 'update successfully !');
+  }
   public function dashboard(Request $request)
   {
     $userRole = Session::get('userRole');
@@ -50,11 +57,11 @@ class RecruiterwebController extends Controller
     $todaysdate = date('Y-m-d') . ' 00:00:00';
     $posts = app('App\Posts')->orderBy('id', 'DESC')->get();
 
-    $notifications = DB::table('notifications')->get(); 
+    $notifications = DB::table('notifications')->get();
     foreach ($notifications as $notification) {
       $someArray = json_decode($notification->data, true);
       $userData = DB::table('users')->Where('id', $someArray['comment_user'])->first();
-      if ($userData ) {
+      if ($userData) {
       } else {
         DB::table('notifications')->Where('id', $notification->id)->delete();
       }
@@ -137,7 +144,7 @@ class RecruiterwebController extends Controller
         'specialties' => $request->specialties
       ]);
       DB::table('jobs')->where('user_id', $request->edit_id)->update([
-        'industry'=>$request->industry,
+        'industry' => $request->industry,
       ]);
     }
     return back()->with('status', 'update successfully !');

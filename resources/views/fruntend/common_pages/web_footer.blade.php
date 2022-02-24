@@ -9,9 +9,9 @@
       <li><a href="{{ URL::to('privacy_policy') }}">Privacy Policy</a></li>
     </ul>
     <ul class="social_icon col_grid5 text-right">
-      <li>
+      <!-- <li>
         <a href="https://open.spotify.com/user/64p2h14btruk2aydbijnajk9o"><i class="fa fa-spotify" aria-hidden="true"></i></a>
-      </li>
+      </li> -->
       <li>
         <a href="https://www.facebook.com/Theinternify"><i class="fa fa-facebook" aria-hidden="true"></i></a>
       </li>
@@ -27,9 +27,12 @@
     </ul>
   </div>
 </footer>
+<!-- <div class="se-pre-con" > -->
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
 <script src="{{ asset('public/assets/web_assets/js/commen-hd.js')}}"></script>
+
 <script>
   $(function() {
     var current = location.pathname;
@@ -244,6 +247,18 @@
     });
   });
 </script>
+<script>
+      $(window).on('load', function(){
+       $('.se-pre-con').delay(1500).fadeOut('slow');
+     });
+   </script>
+   <script >
+    $(document).ready(function(){
+    $(".header_sec .togglebtn").click(function(){
+      $(".header_sec ").toggleClass("opne_flow2header");
+    });
+  });
+  </script>
 </body>
 
 </html>

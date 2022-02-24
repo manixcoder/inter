@@ -65,9 +65,9 @@
                    <span style="display:none; color: red;" class="emailvalidation">Enter valid email address.!</span>
                    <span style="display:none; color: red;" class="emailvalidation1">Please Enter email address.!</span>
                  </div>
-                 <label>Write Message <span id="remainingC">(0/500)</span></label>
-                 <div class="form-group col_grid12 write-message">
                  
+                 <div class="form-group col_grid12 write-message">
+                   <label>Write Message <span id="remainingC">(0/500)</span></label>
                    <textarea class="form-control" name="message" id="message" placeholder="Please provide any relevant details or expiation"  maxlength="500"></textarea>
                    <!--span style="display:none; color: red;" class="validate_msg">Please enter message.</span-->
                  </div>
@@ -224,4 +224,11 @@
      });
    });
  </script>
+ <script >
+    $(document).ready(function(){
+    $(".header_sec .togglebtn").click(function(){
+      $(".header_sec ").toggleClass("opne_flow2header");
+    });
+  });
+  </script>
  @include('fruntend.common_pages.web_footer')

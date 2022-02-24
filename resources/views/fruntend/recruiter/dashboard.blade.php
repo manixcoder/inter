@@ -48,8 +48,8 @@
              <ul class="userTablink_cont fw">
                <li><a href="{{ url('basic/info') }}">View Profile</a></li>
                <!-- li><a href="{{ URL::to('recruiter-posts')}}">My Posts</a></li -->
-               <li><a href="{{ URL::to('recruiter-listings')}}">My Listing</a></li>
-               <li><a href="{{ URL::to('/message')}}" target="_blank">Messages</a></li>
+               <li><a href="{{ URL::to('recruiter-listings')}}">My Listing</a></li><!-- 
+               <li><a href="{{ URL::to('/message')}}" target="_blank">Messages</a></li> -->
              </ul>
            </div>
          </div>
@@ -251,7 +251,7 @@
    </div>
  </div>
  @include('fruntend.common_pages.web_footer')
-
+<div class="se-pre-con"></div>
  <!--  Model for add posts -->
 
  <div class='modal personal_DtlPop createNewPost_popup' id='createHomePostrecuriter'>
@@ -296,7 +296,11 @@
    </div>
  </div>
  <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
-
+<script>
+      $(window).on('load', function(){
+       $('.se-pre-con').delay(1500).fadeOut('slow');
+     });
+  </script>
  <script type="text/javascript">
    function editRecords(id) {
      $.ajaxSetup({
@@ -310,7 +314,8 @@
        contentType: 'application/json',
        success: function(data) {
          var url = window.location.href;
-         $(".lightwht_bg").load(url);
+         location.reload();
+        // $(".lightwht_bg").load(url);
        }
      });
    }

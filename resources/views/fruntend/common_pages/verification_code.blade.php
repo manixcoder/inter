@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>internify - Verification Code</title>
+    <title>Internify - Verification Code</title>
     <!-- Fontawesome 4 Cdn from BootstrapCDN -->
-    <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
+    <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.png') }}"/>
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="{{ asset('public/assets/web_assets/css/style.css')}}" rel="stylesheet">
     <link href="{{ asset('public/assets/web_assets/fonts/fonts.css')}}" rel="stylesheet">
@@ -32,10 +32,14 @@
                     <h3><a href="#">{{ $email ?? '' }}</a></h3>
                   </div>
                   <div class="text-right col_grid4">
-                       
-                  
-                    <button type="submit" id="btnValidate" class="input-btn">Verify <span><img src="{{ asset('public/assets/images/logininput_right.png')}}" alt="icon"></span></button>
-                   
+                    <button type="submit" id="btnValidate" class="input-btn">Verify 
+                      <span>
+                        <img class="wht-icon" src="{{ asset('public/assets/images/logininput_right.png')}}" alt="icon">
+                      </span>
+                      <span>
+                        <img src="{{ asset('public/assets/images/arrow_right_red.png')}}" class="none-img redimg-arrow" alt="icon">
+                      </span>
+                    </button>
                   </div>
                 </div>
                 <div class="from-group fw">
@@ -59,5 +63,12 @@
         $(".alert").fadeOut(1500);
       }, 5000);      
     </script>
+    <script >
+    $(document).ready(function(){
+    $(".header_sec .togglebtn").click(function(){
+      $(".header_sec ").toggleClass("opne_flow2header");
+    });
+  });
+  </script>
   </body>
 </html>

@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Internify- Terms of Use</title>
   <!-- Fontawesome 4 Cdn from BootstrapCDN -->
-  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
-  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
+  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.png') }}"/>
+  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.png') }}"/>
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="{{ asset('public/assets/web_assets/css/style.css')}}" rel="stylesheet">
   <link href="{{ asset('public/assets/web_assets/fonts/fonts.css')}}" rel="stylesheet">
@@ -51,8 +51,9 @@
       <div class="innerrow">
         <div class="col_grid3">
           <a href="{{ URL::to('/') }}" class="logo-flow2">
-            <img src="images/logo.svg" alt="logo-img" />
-            <img class="hidelogo_header" src="images/header-logo.svg" alt="logo-img" />
+            
+            <img src="{{ asset('public/assets/images/logo.svg')}}" alt="wht-logo" />
+            <img src="{{ asset('public/assets/images/header-logo.svg')}}" alt="logo" class="wth-logo-hide"  />
           </a>
         </div>
         <div class="col_grid9 text-right">
@@ -125,8 +126,15 @@
     </div>
   </footer>
 
+  <!-- <div class="se-pre-con"></div> -->
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
   <script src="{{ asset('public/assets/web_assets/js/commen-hd.js')}}"></script>
+
+  <script>
+      $(window).on('load', function(){
+       $('.se-pre-con').delay(1500).fadeOut('slow');
+     });
+   </script>
   <script>
     $(document).ready(function() {
       $(".clicktobtm").click(function() {

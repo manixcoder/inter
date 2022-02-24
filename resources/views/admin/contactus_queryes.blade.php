@@ -57,7 +57,7 @@
 								<td>{{$value->email }}</td>
 								<td>{{$value->mobile }}</td>										
 								<td><?php echo $value->message ?></td>
-								<td>{{ date('d-M-Y / H:m', strtotime($value->created_at)) }}</td>
+								<td>{{ date('d-M-y | H:m', strtotime($value->created_at)) }}</td>
 								<td>
 									<span class="edit_icon">
 										<a href="{{ URL::to('query-delete',$value->id) }}" onclick="return confirm('Are you sure you want to delete this item?');">

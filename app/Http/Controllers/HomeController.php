@@ -407,37 +407,74 @@ class HomeController extends Controller
       if ($emailcheck == true) {
         return view('fruntend.recruiter_register.recruiter_register_step_six')->with(['error' => 'email alredy exist', 'insertid' => $request->recruiterid]);
       }
-
+      $userData = app('App\User')->where('id', $request->recruiterid)->first();
       $recruiterRegisterOne = app('App\User')->where('id', $request->recruiterid)->update(['email' => $request->email]);
+
+
+
       return view('fruntend.recruiter_register.recruiter_register_step_seven')->with(['insertid' => $request->recruiterid]);
     } elseif ($request->setep_seven == 'setep_seven') {
       $recruiterRegisterOne = app('App\User')->where('id', $request->recruiterid)->update([
         'temp_pass' => $request->confirmPassword,
-        'otp' => '0000',
+        'otp' => rand(1111, 9999),
         'password' => Hash::make($request->confirmPassword)
       ]);
       $data = app('App\User')->where('id', $request->recruiterid)->first();
-      $to = $data->email;
-      $subject = "Verification Code";
 
-      $message = 'Dear ' . $data->name . ',<br>';
-      $message .= "Your verification code is <br><br>" . $data->otp;
-      $message .= "Regards,<br>";
-      $message .= "The Internify,<br>";
 
-      // Always set content-type when sending HTML email
-      $headers = "MIME-Version: 1.0" . "\r\n";
-      $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
-      // More headers
-      $headers .= 'From: contact@theinternify.com' . "\r\n";
-      // $headers .= 'Cc: pathakmanish86@gmail.com' . "\r\n";
 
-      mail($to, $subject, $message, $headers);
+
+      $to = $data->email; // note the comma
+      // Subject
+      $subject = 'Registration Verification Email';
+      // Message
+      $message = "
+      <html>
+      <head>
+      <title>Registration Verification Email</title>
+      </head>
+      <body>
+      <p>Dear " . $data->name . "</p></br>
+      <p>We’re so glad you’re joining Internify today, get ready to realise your true potential!</p></br>
+      <p>Your verification code is " . $data->otp . ".</p></br>
+      <p>Welcome to Internify!</p></br>
+      <p>Best,</p></br>
+      <p>The Internify Team</p></br>
+      </body>
+      </html>";
+      // To send HTML mail, the Content-type header must be set
+      $headers[] = 'MIME-Version: 1.0';
+      $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+
+      // Additional headers
+      // $headers[] = 'To: Mary <mary@example.com>, Kelly <kelly@example.com>';
+      // $headers[] = 'From: Registration Verification Email contact@theinternify.com';
+      //$headers[] = 'Cc: birthdayarchive@example.com';
+      //$headers[] = 'Bcc: birthdaycheck@example.com';
+      // Mail it
+      mail($to, $subject, $message, implode("\r\n", $headers));
+
       return view('fruntend.recruiter_register.recruiter_register_step_nine')->with(['insertid' => $request->recruiterid]);
       // $message = 'register successfully.!';
       // return view('fruntend.web_login')->with(['message' => $message]);
     } elseif ($request->setep_nine == 'setep_nine') {
+      //dd($request->all());
+      $otpcheck = app('App\User')->where('id', $request->recruiterid)->where('otp', $request->otp)->first();
+      if ($otpcheck == true) {
+        $data = app('App\User')->where('id', $request->recruiterid)->first();
+        $data = app('App\User')->where('id', $request->recruiterid)->update([
+          'email_verified_at' => date("Y-m-d H:i:s"),
+          'otp' => ''
+        ]);
+        if (Auth::loginUsingId($request->recruiterid)) {
+
+          return redirect('recruiter-dashboard');
+        }
+      } else {
+        return view('fruntend.recruiter_register.recruiter_register_step_nine')->with(['error' => 'Otp wrong! Please try again', 'insertid' => $request->recruiterid]);
+        // return view('fruntend.recruiter_register.recruiter_register_step_six')->with(['error' => 'email alredy exist', 'insertid' => $request->recruiterid]);
+      }
       $data = app('App\User')->where('id', $request->recruiterid)->first();
       $data = app('App\User')->where('id', $request->recruiterid)->update([
         'email_verified_at' => date("Y-m-d H:i:s")

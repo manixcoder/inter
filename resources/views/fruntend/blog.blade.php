@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,9 +6,9 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>internify - Blog</title>
+  <title>Internify - Blog</title>
   <!-- Fontawesome 4 Cdn from BootstrapCDN -->
-  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
+  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.png') }}"/>
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="{{ asset('public/assets/web_assets/css/style.css')}}" rel="stylesheet">
   <link href="{{ asset('public/assets/web_assets/fonts/fonts.css')}}" rel="stylesheet">
@@ -196,7 +196,7 @@
                   <h5>Login to Internify </h5>
                 </div>
                 <div class="text-right col_grid4">
-                  <button type="submit" class="input-btn">Login <span><img src="{{ asset('public/assets/images/logininput_right.png') }}" alt="icon"></span></button>
+                  <button type="submit" class="input-btn">Login <span><img src="{{ asset('public/assets/images/logininput_right.png') }}" class="wht-icon" alt="icon"></span><span><img src="{{ asset('public/assets/images/arrow_right_red.png') }}" class="none-img redimg-arrow" alt="icon" ></span></button>
                 </div>
               </div>
               <div class="from-group fw">
@@ -214,14 +214,14 @@
                   <ul class="social_icon fw">
                     <li><a href="https://www.facebook.com/Theinternify" class="login_icon"><img src="{{ asset('public/assets/images/login_facebook.png') }}" alt="icon"></a></li>
                     <li><a href="https://www.linkedin.com/company/the-internify/" class="login_icon"><img src="{{ asset('public/assets/images/login_linkedin.png') }}" alt="icon"></a></li>
-                    <li><a href="#" class="login_icon"><img src="{{ asset('public/assets/images/login_google.png') }}" alt="icon"></a></li>
+                    <!-- <li><a href="#" class="login_icon"><img src="{{ asset('public/assets/images/login_google.png') }}" alt="icon"></a></li> -->
                   </ul>
                 </ul>
-                 <<h5>Don't have an account ? <a href="{{URL::to('student-register-step-one')}}" class="textbtn_green">Register now</a></h5>
+                 <h5>Don't have an account ? <a href="{{URL::to('student-register-step-one')}}" class="textbtn_green">Register now</a></h5>
               </div>
-              <div class="footer_login fw">
+              <!-- <div class="footer_login fw">
                 <h5>By logging in, you agree to our <a href="{{URL::to('termsofuse')}}" class="textbtn_green">terms and conditions</a> as well as our <a href="{{URL::to('privacypolicy')}}" class="textbtn_green">privacy policy</a></h5>
-              </div>
+              </div> -->
             </form>
           </div>
         </div>
@@ -229,8 +229,15 @@
     </div>
   </div>
 
+  <!-- <div class="se-pre-con"></div> -->
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
   <script src="{{ asset('public/assets/web_assets/js/commen-hd.js')}}"></script>
+
+  <script>
+      $(window).on('load', function(){
+       $('.se-pre-con').delay(1500).fadeOut('slow');
+     });
+   </script>
   <script>
     $(document).ready(function() {
       $(".clicktobtm").click(function() {

@@ -5,10 +5,10 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>internify - Home</title>
+  <title>Internify - Home</title>
   <!-- Fontawesome 4 Cdn from BootstrapCDN -->
-  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
-  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
+  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.png') }}"/>
+  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.png') }}"/>
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="{{ asset('public/assets/web_assets/css/style.css')}}" rel="stylesheet">
   <link href="{{ asset('public/assets/web_assets/fonts/fonts.css')}}" rel="stylesheet">
@@ -180,7 +180,7 @@
             <figure>
               <img src="{{ asset('public/assets/images/detialicon2.png') }}" alt="icon1">
             </figure>
-            <h4>Digital Marketing</h4>
+            <h4>Human Resources</h4>
           </div>
         </div>
         <div class="col_grid4">
@@ -188,7 +188,7 @@
             <figure>
               <img src="{{ asset('public/assets/images/detialicon6.png') }}" alt="icon1">
             </figure>
-            <h4>Human Resources</h4>
+            <h4>Finance & Accounting</h4>
           </div>
         </div>
         <div class="col_grid4">
@@ -196,7 +196,7 @@
             <figure>
               <img src="{{ asset('public/assets/images/detialicon1.png') }}" alt="icon1">
             </figure>
-            <h4>Industry:</h4>
+            <h4>Strategy</h4>
           </div>
         </div>
         <div class="col_grid4">
@@ -204,7 +204,7 @@
             <figure>
               <img src="{{ asset('public/assets/images/detialicon5.png') }}" alt="icon1">
             </figure>
-            <h4>Banking & Finance</h4>
+            <h4>Marketing</h4>
           </div>
         </div>
         <div class="col_grid4">
@@ -212,7 +212,7 @@
             <figure>
               <img src="{{ asset('public/assets/images/detialicon4.png') }}" alt="icon1">
             </figure>
-            <h4>Sales & Marketing</h4>
+            <h4>Research & Development</h4>
           </div>
         </div>
         <div class="col_grid4">
@@ -220,13 +220,13 @@
             <figure>
               <img src="{{ asset('public/assets/images/detialicon3.png') }}" alt="icon1">
             </figure>
-            <h4>Hospitality & Tourism</h4>
+            <h4>Operations</h4>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <!-- div class="logo_slider fw">
+  <!-- <div class="logo_slider fw">
       <div class="lgcontainer">
         <div class="innerrow">
           <div class="col_grid12 arrowheading_site right_after_arrow">
@@ -250,7 +250,7 @@
         </div>
       </div>
     </div>
-    </div -->
+  </div> -->
   <footer class="fw">
     <div class="lgcontainer">
       <ul class="footer_menu col_grid7 text-left">
@@ -278,8 +278,15 @@
       </ul>
     </div>
   </footer>
+  <!-- <div class="se-pre-con"></div> -->
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
+  <script>
+      $(window).on('load', function(){
+       $('.se-pre-con').delay(1500).fadeOut('slow');
+     });
+   </script>
+  
   <script>
     $(document).ready(function() {
       $('.customer-logos').slick({

@@ -5,9 +5,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>internify - Contact Us</title>
+  <title>Internify - Contact Us</title>
   <!-- Fontawesome 4 Cdn from BootstrapCDN -->
-  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
+  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.png') }}"/>
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="{{ asset('public/assets/web_assets/css/style.css')}}" rel="stylesheet">
   <link href="{{ asset('public/assets/web_assets/fonts/fonts.css')}}" rel="stylesheet">
@@ -89,10 +89,12 @@
       <div class="lgcontainer">
         <div class="aboutCont_box fw">
           <div class="innerrow">
-            <div class="col_grid12">
-              <h3>Reach Out!</h3>
-            </div>
             <div class="adress_cont col_grid5">
+              <div class="innerrow ">
+                <div class="col_grid12 contect-heading">
+                  <h3>Reach Out!</h3>
+                </div>
+              </div>
               <h4>Mumbai, India</h4>
               <ul class="adreeInfo">
                 <!-- <li><a href="#"><i><img src="{{ asset('public/assets/images/c_address.png')}}" alt="icon"></i>909 Sardis Station, Minneapolis, 55402</a></li> -->
@@ -140,9 +142,9 @@
                     <span style="display:none; color: red;" class="emailvalidation">Enter valid email address.!</span>
                     <span style="display:none; color: red;" class="emailvalidation1">Please Enter email address.!</span>
                   </div>
-                  <label>Write Message <span id="remainingC">(0/500)</span></label>
+                  
                   <div class="form-group col_grid12 write-message">
-
+                    <label>Write Message <span id="remainingC">(0/500)</span></label>
                     <textarea class="form-control" name="message" id="message" placeholder="Please provide any relevant details or expiation" required="" maxlength="500"></textarea>
                     <!-- <span style="display:none; color: red;" class="validate_msg">Please enter message.</span> -->
                   </div>
@@ -188,9 +190,16 @@
     </div>
   </footer>
 
+  <!-- <div class="se-pre-con"></div> -->
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
   <script src="{{ asset('public/assets/web_assets/js/commen-hd.js')}}"></script>
-  <script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+<script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+  <script>
+      $(window).on('load', function(){
+       $('.se-pre-con').delay(1500).fadeOut('slow');
+     });
+   </script>
+  
   <script type="text/javascript">
     CKEDITOR.replace('message');
   </script>
@@ -506,6 +515,7 @@
       $(this).addClass('active');
     });
   </script>
+  
 </body>
 
 </html>

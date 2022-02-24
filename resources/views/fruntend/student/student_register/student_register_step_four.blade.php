@@ -5,9 +5,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>internify - Login</title>
+  <title>Internify - Login</title>
   <!-- Fontawesome 4 Cdn from BootstrapCDN -->
-  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
+  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.png') }}"/>
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="{{ asset('public/assets/web_assets/css/style.css')}}" rel="stylesheet">
   <link href="{{ asset('public/assets/web_assets/fonts/fonts.css')}}" rel="stylesheet">
@@ -100,7 +100,7 @@
             <img src="{{ asset('public/assets/images/logo.svg') }}" alt="logo">
           </a>
         </div>
-        <form class="welcome_cont fw" action="{{ url('student_register_step_one') }}" method="POST" enctype="multipart/form-data" id="signup-form">
+        <form class="welcome_cont regsteptow-sec fw" action="{{ url('student_register_step_one') }}" method="POST" enctype="multipart/form-data" id="signup-form">
           @csrf
           <div class="innerrow">
             <div class="col_grid12 digitcode">
@@ -119,7 +119,7 @@
             <span class="glyphicon form-control-feedback" id="confirmPassword1">
           </div>
           <div class="text-right fw continue_topbtn">
-            <span class="continue_text pull-left">Just press "Enter " to continue</span>
+            <!-- <span class="continue_text pull-left">Just press "Enter " to continue</span> -->
             <span class="pull-right btn_continue">
               <button type="sumbit" class="input-btn">Continue <span><img src="{{ asset('public/assets/images/logininput_right.png')}}" class="wht-icon" alt="icon"></span><span><img src="{{ asset('public/assets/images/arrow_right_red.png')}}" class="none-img redimg-arrow" alt="icon"></span></button>
             </span>
@@ -128,7 +128,13 @@
       </div>
     </div>
   </div>
+  <!-- <div class="se-pre-con"></div> -->
   <script src="js/jquery-lb.js"></script>
+  <script>
+      $(window).on('load', function(){
+       $('.se-pre-con').delay(1500).fadeOut('slow');
+     });
+   </script>  
   <script type="text/javascript">
     var value = $("#password_reg").val();
 

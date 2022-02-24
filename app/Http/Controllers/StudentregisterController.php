@@ -83,44 +83,75 @@ class StudentregisterController extends Controller
 		} elseif ($request->setep_four == 'setep_four') {
 			$studentRegisterOne = app('App\User')->where('id', $request->student_id)->update([
 				'password' => Hash::make($request->confirmPassword),
-				'otp' => '0000',
+				'otp' => rand(1111, 9999),
 				'updated_at' => date("Y-m-d H:i:s")
 			]);
 			$data = app('App\User')->where('id', $request->student_id)->first();
 
-			$to = $data->email;
-			$subject = "Verification Code";
-
-			$message = 'Dear ' . $data->name . ',<br>';
-			$message .= "Your verification code is <br><br>" . $data->otp;
-			$message .= "Regards,<br>";
-			$message .= "The Internify,<br>";
-
-			// Always set content-type when sending HTML email
-			$headers = "MIME-Version: 1.0" . "\r\n";
-			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-
-			// More headers
-			$headers .= 'From: contact@theinternify.com' . "\r\n";
-			//$headers .= 'Cc: pathakmanish86@gmail.com' . "\r\n";
-
-			mail($to, $subject, $message, $headers);
+			$to = $data->email; // note the comma
+			// Subject
+			$subject = 'Registration Verification Email';
+			// Message
+			$message = "
+			<html>
+			<head>
+			<title>Registration Verification Email</title>
+			</head>
+			<body>
+			<p>Dear " . $data->name . "</p></br>
+			<p>We’re so glad you’re joining Internify today, get ready to realise your true potential!</p></br>
+			<p>Your verification code is " . $data->otp . ".</p></br>
+			<p>Welcome to Internify!</p></br>
+			<p>Best,</p></br>
+			<p>The Internify Team</p></br>
+			</body>
+			</html>";
+			// To send HTML mail, the Content-type header must be set
+			$headers[] = 'MIME-Version: 1.0';
+			$headers[] = 'Content-type: text/html; charset=iso-8859-1';
+			// Additional headers
+			//$headers[] = 'To: Mary <mary@example.com>, Kelly <kelly@example.com>';
+			//$headers[] = 'From: Registration Verification Email contact@theinternify.com';
+			//$headers[] = 'Cc: birthdayarchive@example.com';
+			//$headers[] = 'Bcc: birthdaycheck@example.com';
+			// Mail it
+			mail($to, $subject, $message, implode("\r\n", $headers));
 
 			return view('fruntend.student.student_register.student_register_step_five')->with([
 				'insertid' => $request->student_id
 			]);
 		} elseif ($request->setep_five == 'setep_five') {
-			$data = app('App\User')->where('id', $request->student_id)->first();
-			$data = app('App\User')->where('id', $request->student_id)->update([
-				'email_verified_at' => date("Y-m-d H:i:s")
-			]);
-			if (Auth::loginUsingId($request->student_id)) {
-				return redirect('student-dashboard');
+			//dd($request->all());
+
+			$otpcheck = app('App\User')->where('id', $request->student_id)->where('otp', $request->otp)->first();
+			if ($otpcheck == true) {
+				$data = app('App\User')->where('id', $request->student_id)->first();
+				$data = app('App\User')->where('id', $request->student_id)->update([
+					'email_verified_at' => date("Y-m-d H:i:s"),
+					'otp' => ''
+				]);
+				if (Auth::loginUsingId($request->student_id)) {
+					return redirect('student-dashboard');
+				}
 			} else {
 				return view('fruntend.student.student_register.student_register_step_five')->with([
 					'insertid' => $request->student_id
 				]);
 			}
+
+
+
+			// $data = app('App\User')->where('id', $request->student_id)->first();
+			// $data = app('App\User')->where('id', $request->student_id)->update([
+			// 	'email_verified_at' => date("Y-m-d H:i:s")
+			// ]);
+			// if (Auth::loginUsingId($request->student_id)) {
+			// 	return redirect('student-dashboard');
+			// } else {
+			// 	return view('fruntend.student.student_register.student_register_step_five')->with([
+			// 		'insertid' => $request->student_id
+			// 	]);
+			// }
 		}
 	}
 	/* student register controllers End */

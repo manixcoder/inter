@@ -6,9 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf_token" content="{{csrf_token()}}">
-  <title>internify - Home</title>
+  <title>Internify - Home</title>
   <!-- Fontawesome 4 Cdn from BootstrapCDN -->
-  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
+  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.png') }}" />
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="{{ asset('public/assets/web_assets/css/style.css')}}" rel="stylesheet">
   <link href="{{ asset('public/assets/web_assets/fonts/fonts.css')}}" rel="stylesheet">
@@ -69,18 +69,22 @@
         <div class="innerrow">
           <div class="col_grid9">
             <div class="profile_publicimg">
-
+              <i class="camara-sdudentcamara"><img src="{{ asset('public/assets/images/camera-icon.png')}}" alt="icon" /></i>
               @if($OrgData->users_role =='2')
               <img id="stu_id" src="{{ asset('public/uploads/')}}/{{$OrgData->profile_image}}" alt="img" />
               @else
               <img src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="img" />
               @endif
               @if($userRole !='3')
-              <div class="form-group">
-                <label>Profile Image</label>
-                <input type="file" name="student_image" id="studentImage">
+              <div class="form-group fileupload">
+                <input type="file" name="student_image" id="studentImage" class="fileupload-btn">
               </div>
               @endif
+              <form method="post" action="{{url('remove-profile-image')}}" class="remoovicon">
+                @csrf
+                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                <button type="submit">&#215;</button>
+              </form>
             </div>
             <div class="profile_publicDetail">
               <h4 class="clrwht font36text  semiboldfont_fmly">
@@ -112,8 +116,8 @@
     <div class="tabCompnay_profile profileDetail_tab text-center fw">
       <div class="lgcontainer">
         <ul class=" profileDetail_ul" id="profileTab_link">
-        @if($userid != Auth::user()->id)
-        @else
+          @if($userid != Auth::user()->id)
+          @else
           <li>
             <a href="{{url('student-profile-basic-info')}}" class="active">My Details</a>
           </li>
@@ -131,7 +135,7 @@
           <div class="lgcontainer">
             <div class="innerrow">
               <div class="col_grid12 text-left">
-                <h3 class="font36text  bukhariSrptfont_fmly clrred">Personal Details <a style="display:none" href="javascript:void(0);" class="open-modal" data-modal="#personal_DtlPop_edit"><span class="pull-right font20Text"><i><img src="{{ asset('public/assets/images/edit.png')}}" alt="img" /></i>Edit</span></a></h3>
+                <h3 class="font36text  bukhariSrptfont_fmly clrred">Personal Details <a style="display:none" href="javascript:void(0);" class="open-modal" data-modal="#personal_DtlPop_edit"><span class="pull-right font20Text"><i><img src="{{ asset('public/assets/images/edit.png')}}" alt="img" /></i></span></a></h3>
                 <div class="innerrow">
                   <form class="form_sec fw col_grid12" action="{{ url('update_student_personal_details') }}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -243,7 +247,7 @@
                     </div>
                   </div>
                   <div class="col_grid12">
-                    <div class="form_btm_sec">
+                    <div class="form_btm_sec education-view-sec ">
                       <div class="innerrow">
                         <div class="col_grid4">
                           <div class="form-group">
@@ -265,20 +269,19 @@
                         </div>
                         @if($userid != Auth::user()->id)
                         @else
-                        <div class="smaeHeading rightedit_sec">
-                          <a class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#education_update_detail_{{$ed->id}}">
-                            <i>
-                              <img src="{{ asset('public/assets/images/edit.png')}}" alt="img" />
-                            </i>
-                            Edit
-                          </a>
-                          <a class="pull-right font20Text" href="{{ url('delete-course') }}/{{$ed->id}}">
-                            <i>
-                              <img src="{{ asset('public/assets/images/edit.png')}}" alt="img" />
-                            </i>
-                            Delete
-                          </a>
-
+                        <div class="smaeHeading rightedit_sec ">
+                          <div class="certificatesSec-edit">
+                            <a class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#education_update_detail_{{$ed->id}}">
+                              <i>
+                                <img src="{{ asset('public/assets/images/edit.png')}}" alt="img" />
+                              </i>
+                            </a>
+                            <a class="pull-right font20Text" href="{{ url('delete-course') }}/{{$ed->id}}">
+                              <i>
+                                <img src="{{ asset('public/assets/images/delete.png')}}" alt="img" class="delete-icon" />
+                              </i>
+                            </a>
+                          </div>
                         </div>
                         @endif
                       </div>
@@ -371,23 +374,26 @@
                       <h4 class="font24Text clrBlack">
                         {{$exp->company_name}} <br /> {{$exp->profile}}
                       </h4>
-                      <p class="font24Text clrGray">{{$exp->location}} <br /> {{$exp->duration_from}} - {{$exp->duration_to}}</p>
+                      <p class="font24Text clrGray">{{$exp->location}} <br /> {{$exp->duration_from}} - <?php if ($exp->current == '0') {
+                                                                                                          echo $exp->duration_to;
+                                                                                                        } else {
+                                                                                                          echo "Current";
+                                                                                                        }
+                                                                                                        ?></p>
                     </div>
                   </div>
                   @if($userid != Auth::user()->id)
                   @else
-                  <div class="col_grid3">
-                    <span class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#experience_update_detail_{{$exp->id}}">
+                  <div class="col_grid3 experience-edit">
+                    <span class=" font20Text open-modal" href="javascript:void(0);" data-modal="#experience_update_detail_{{$exp->id}}">
                       <i>
                         <img src="{{ asset('public/assets/images/edit.png')}}" alt="img">
                       </i>
-                      Edit
                     </span>
-                    <a class="pull-right font20Text" href="{{ url('delete-experience') }}/{{$exp->id}}">
+                    <a class="font20Text" href="{{ url('delete-experience') }}/{{$exp->id}}">
                       <i>
-                        <img src="{{ asset('public/assets/images/edit.png')}}" alt="img" />
+                        <img src="{{ asset('public/assets/images/delete.png')}}" alt="img" class="delete-icon" />
                       </i>
-                      Delete
                     </a>
                   </div>
                   @endif
@@ -417,35 +423,49 @@
                           </div>
                           <div class="col_grid6 ">
                             <div class="form-group">
-                              <label>From</label>
-                              <input type="date" name="duration_from" value="{{ $exp->duration_from }}" class="form-control" required />
-                            </div>
-                          </div>
-                          <div class="col_grid6 ">
-                            <div class="form-group">
-                              <label>To</label>
-                              <input type="date" name="duration_to" value="{{ $exp->duration_to }}" maxlength="200" class="form-control" required />
-                            </div>
-                          </div>
-                          <div class="col_grid6 ">
-                            <div class="form-group">
                               <label>Location</label>
                               <input type="text" name="location" value="{{$exp->location}}" maxlength="200" class="form-control" required />
                             </div>
                           </div>
                           <div class="col_grid6 file-popupinput">
-                            <div class="form-group">
+                            <div class="form-group fileupload-group">
                               <label>Company logo</label>
                               <input type="file" name="company_image" class="form-control" />
+                              <span class="fileupload-popup"></span>
+                            </div>
+                          </div>
+                          <div class="col_grid6 ">
+                            <div class="form-group">
+                              <label>From</label>
+                              <input type="date" name="duration_from" value="{{ $exp->duration_from }}" class="form-control" required />
+                            </div>
+                          </div>
+                          <div class=" current col_grid6 duration_group " <?php if ($exp->current == '0') { ?> style='display: block;' <?php } else { ?> style='display: none;' <?php } ?>>
+                         
+                            <div class="form-group ">
+                              <label>To</label>
+                              <input type="date" name="duration_to" value="{{ $exp->duration_to }}" maxlength="200" class="form-control" />
+                            </div>
+                           
+                          </div>
+                          <div class="col_grid6 ">
+                            <div class="form-group">
+                              <label>Current</label>
+                              <div class="checkbox-current">
+                                <div class="checkbox-date">
+                                  <input type="checkbox" name="current" value="current" <?php if ($exp->current == '1') { ?> checked<?php } ?> class="form-control" />
+                                  <span></span>
+                                </div>
+                              </div>
                             </div>
                           </div>
                           <div class="col_grid6 file-popupinput ">
                             <div class="form-group">
 
                               @if(!empty($exp->company_image))
-                              <img style="width:100px" src="{{ asset('public/uploads/'.$exp->company_image)}}" alt="icon" />
+                              <img style="width:100px; float:left;" src="{{ asset('public/uploads/'.$exp->company_image)}}" alt="icon" />
                               @else
-                              <img style="width:100px" src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="icon" />
+                              <img style="width:100px; float: left;" src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="icon" />
                               @endif
                             </div>
                           </div>
@@ -508,19 +528,19 @@
                   <div class="smaeHeading rightedit_sec">
                     @if($userid != Auth::user()->id)
                     @else
-                    <h3>
-                      <span class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#certificate_update_detail_{{$cert->id}}">
+                    <h3 class="certificatesSec-edit">
+                      <span class=" font20Text open-modal" href="javascript:void(0);" data-modal="#certificate_update_detail_{{$cert->id}}">
                         <i>
-                          <img src="{{ asset('public/assets/images/add.png')}}" alt="img" />
+                          <img src="{{ asset('public/assets/images/edit.png')}}" alt="img" />
                         </i>
-                        Edit
                       </span>
-                      <a class="pull-right font20Text" href="{{ url('delete-certificate') }}/{{$cert->id}}">
-                        <i>
-                          <img src="{{ asset('public/assets/images/add.png')}}" alt="img" />
-                        </i>
-                        Delete
-                      </a>
+                      <span class=" font20Text">
+                        <a class=" font20Text" href="{{ url('delete-certificate') }}/{{$cert->id}}">
+                          <i>
+                            <img src="{{ asset('public/assets/images/delete.png')}}" alt="img" class="delete-icon" />
+                          </i>
+                        </a>
+                      </span>
                     </h3>
                     @endif
                   </div>
@@ -676,27 +696,34 @@
         <div class="fw educationSec aboutusBg smaeHeading paddTop0 lastdiv">
           <div class="fw aboutusBg_sec form_sec">
             <div class="lgcontainer">
+              <h3 class="font36text  bukhariSrptfont_fmly clrred @if($userid != Auth::user()->id)
+                @else open-modal @endif">
+                <!-- <h3 data-modal="#accomplishment_add_detail" class="font36text  bukhariSrptfont_fmly clrred "> -->
+                Accomplishments
+                @if($userid != Auth::user()->id)
+                @else
+                <span class="pull-right font20Text toggle-Acmntsbtn">
+                  <i><img src="{{ asset('public/assets/images/add.png')}}" alt="img" /></i>
+                  Add
+                  <!-- <select name="" id="" class="font36text  bukhariSrptfont_fmly clrred open-modal">
+                      <option value=""> Add</option>
+                      <option value="Course" data-modal="#accomplishment_add_detai4" >Course</option>
+                      <option value="Awards" data-modal="#accomplishment_add_detail3">Awards</option>
+                      <option value="Test Scores" data-modal="#accomplishment_add_detail2">Test Scores</option>
+                      <option value="Publications" data-modal="#accomplishment_add_detail1">Publications</option>
+                    </select> -->
+                </span>
+                <ul class="toggle-Acmnts" style="display:none;">
+                  <li><a href="#" data-modal="#accomplishment_add_detail" class="open-modal">Course</a></li>
+                  <li><a href="#" data-modal="#accomplishment_add_detail1" class="open-modal">Awards</a></li>
+                  <li><a href="#" data-modal="#accomplishment_add_detail2" class="open-modal">Test Scores</a></li>
+                  <li><a href="#" data-modal="#accomplishment_add_detail3" class="open-modal">Publications</a></li>
+                </ul>
+              </h3>
+              @endif
               <div class="boxShodewBg fw">
 
-                <h3 data-modal="#accomplishment_add_detail" class="font36text  bukhariSrptfont_fmly clrred @if($userid != Auth::user()->id)
-                @else open-modal @endif">
-                  <!-- <h3 data-modal="#accomplishment_add_detail" class="font36text  bukhariSrptfont_fmly clrred "> -->
-                  Accomplishments
-                  @if($userid != Auth::user()->id)
-                  @else
-                  <span class="pull-right font20Text">
-                    <i><img src="{{ asset('public/assets/images/add.png')}}" alt="img" /></i>
-                    Add
-                    <!-- <select name="" id="" class="font36text  bukhariSrptfont_fmly clrred open-modal">
-                      <option value=""> Add</option>
-                      <option value="Course" data-modal="#accomplishment_add_detail">Course</option>
-                      <option value="Awards" data-modal="#accomplishment_add_detail">Awards</option>
-                      <option value="Test Scores" data-modal="#accomplishment_add_detail">Test Scores</option>
-                      <option value="Publications" data-modal="#accomplishment_add_detail">Publications</option>
-                    </select> -->
-                  </span>
-                </h3>
-                @endif
+
 
                 <?php $i = 1; ?>
                 @foreach($accomData as $key=> $accom)
@@ -715,15 +742,18 @@
                       <span class="pull-right font20Text open-modal" href="javascript:void(0);" data-modal="#accomplishment_update_detail_{{$accom->id}}">
                         <i>
                           <img src="{{ asset('public/assets/images/edit.png')}}" alt="img"></i>
-                        Edit
                       </span>
                     </div>
                     @endif
                   </div>
                 </div>
                 <div class='modal personal_DtlPop' id='accomplishment_update_detail_{{$accom->id}}'>
+                  <?php  // dd($accom);
+                  ?>
                   <div class="close fw">
-                    <a class='btn close-modal' data-modal="#accomplishment_update_detail_{{$accom->id}}" href="#"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></a>
+                    <a class='btn close-modal' data-modal="#accomplishment_update_detail_{{$accom->id}}" href="#">
+                      <img src="{{ asset('public/assets/images/close.png')}}" alt="icon">
+                    </a>
                   </div>
                   <form class="form_sec fw col_grid12" action="{{ url('update_student_accomplishment') }}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -734,12 +764,13 @@
                           <div class="col_grid6">
                             <div class="form-group">
                               <label>Accomplishment Type</label>
-                              <select name="accomplishment_type" id="accomplishment_type" class="form-control" required>
+                              <input type="text" value="{{$accom->accomplishment_type}}" name="accomplishment_type" maxlength="200" class="form-control disable" />
+                              <!--select name="accomplishment_type" id="accomplishment_type" class="form-control" required>
                                 <option value="Course" {{ ( $accom->accomplishment_type == 'Course') ? 'selected' : '' }}>Course</option>
                                 <option value="Awards" {{ ( $accom->accomplishment_type == 'Awards') ? 'selected' : '' }}>Awards</option>
                                 <option value="Test Scores" {{ ( $accom->accomplishment_type == 'Test Scores') ? 'selected' : '' }}>Test Scores</option>
                                 <option value="Publications" {{ ( $accom->accomplishment_type == 'Publications') ? 'selected' : '' }}>Publications</option>
-                              </select>
+                              </select -->
                             </div>
                           </div>
                           <div class="col_grid6">
@@ -793,6 +824,7 @@
   <footer class="fw">
     @include('fruntend.student.inc.footer')
   </footer>
+  <!-- <div class="se-pre-con"></div> -->
   <div class='modal personal_DtlPop createNewPost_popup' id='createHomePostrecuriter'>
     <div class="close fw">
       <a class='btn close-modal' data-modal="#createHomePostrecuriter" href="#"><img src="{{ asset('public/assets/images/close.png')}}')}}" alt="icon"></a>
@@ -903,35 +935,48 @@
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
-                <label>From</label>
-                <input type="date" name="duration_from" placeholder="Ex. 2021-08-02" class="form-control" required />
-              </div>
-            </div>
-            <div class="col_grid6 ">
-              <div class="form-group">
-                <label>To</label>
-                <input type="date" name="duration_to" placeholder="Ex. 2023-08-02" class="form-control" required />
-              </div>
-            </div>
-            <div class="col_grid6 ">
-              <div class="form-group">
                 <label>Location</label>
                 <input type="text" name="location" class="form-control" maxlength="500" required />
               </div>
             </div>
             <div class="col_grid6 file-popupinput">
-              <div class="form-group">
+              <div class="form-group fileupload-group">
                 <label>Company Logo</label>
                 <input type="file" name="company_image" class="form-control" />
+                <span class="fileupload-popup"></span>
+              </div>
+            </div>
+            <div class="col_grid6 ">
+              <div class="form-group">
+                <label>From</label>
+                <input type="date" name="duration_from" placeholder="Ex. 2021-08-02" class="form-control" required />
+              </div>
+            </div>
+            <div class="col_grid6 duration_group">
+              <div class="form-group ">
+                <label>To</label>
+                <input type="date" name="duration_to" placeholder="Ex. 2023-08-02" class="form-control" />
+              </div>
+            </div>
+            <div class="col_grid6 ">
+              <div class="form-group">
+                <label>Current</label>
+                <div class="checkbox-current">
+                  <div class="checkbox-date">
+                    <input type="checkbox" name="current" placeholder="Ex. 2023-08-02" class="form-control" />
+                    <span></span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="confirmApply fw">
-            <button type="submit" class="input-btn">Save</button>
-          </div>
+        </div>
+        <div class="confirmApply fw">
+          <button type="submit" class="input-btn">Save</button>
         </div>
       </div>
-    </form>
+  </div>
+  </form>
   </div>
 
 
@@ -1075,13 +1120,15 @@
           <div class="innerrow">
             <div class="col_grid6">
               <div class="form-group">
+
                 <label>Accomplishment Type</label>
-                <select name="accomplishment_type" id="accomplishment_type" class="form-control" required>
+                <input type="text" name="accomplishment_type" class="form-control disable" value="Course">
+                <!-- <select name="accomplishment_type" id="accomplishment_type" class="form-control" required>
                   <option value="Course">Course</option>
                   <option value="Awards">Awards</option>
                   <option value="Test Scores">Test Scores</option>
                   <option value="Publications">Publications</option>
-                </select>
+                </select> -->
               </div>
             </div>
             <div class="col_grid6">
@@ -1116,8 +1163,153 @@
       </div>
     </form>
   </div>
+  <div class='modal personal_DtlPop' id='accomplishment_add_detail1'>
+    <div class="close fw">
+      <a class='btn close-modal' data-modal="#accomplishment_add_detail1" href="#"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></a>
+    </div>
+    <form class="form_sec fw col_grid12" action="{{ url('add_student_accomplishment') }}" method="POST" enctype="multipart/form-data">
+      @csrf
+      <div class='content fw'>
+        <h3 class="modal_heading">Add Accomplishment</h3>
+        <div class="form_sec fw ">
+          <div class="innerrow">
+            <div class="col_grid6">
+              <div class="form-group">
+                <label>Accomplishment Type</label>
+                <input type="text" name="accomplishment_type" class="form-control disable" value="Awards">
 
+              </div>
+            </div>
+            <div class="col_grid6">
+              <div class="form-group">
+                <label>Course Name</label>
+                <input type="text" name="course_name" maxlength="200" class="form-control" />
+              </div>
+            </div>
+            <div class="col_grid6 ">
+              <div class="form-group">
+                <label>Award</label>
+                <input type="text" name="award" maxlength="200" class="form-control" />
+              </div>
+            </div>
+            <div class="col_grid6 ">
+              <div class="form-group">
+                <label>Test Scores</label>
+                <input type="text" name="test_scores" maxlength="200" class="form-control" />
+              </div>
+            </div>
+            <div class="col_grid6 ">
+              <div class="form-group">
+                <label>Publications</label>
+                <input type="text" name="publications" maxlength="200" class="form-control" />
+              </div>
+            </div>
+          </div>
+          <div class="confirmApply fw">
+            <button type="submit" class="input-btn">Save</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class='modal personal_DtlPop' id='accomplishment_add_detail2'>
+    <div class="close fw">
+      <a class='btn close-modal' data-modal="#accomplishment_add_detail2" href="#"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></a>
+    </div>
+    <form class="form_sec fw col_grid12" action="{{ url('add_student_accomplishment') }}" method="POST" enctype="multipart/form-data">
+      @csrf
+      <div class='content fw'>
+        <h3 class="modal_heading">Add Accomplishment</h3>
+        <div class="form_sec fw ">
+          <div class="innerrow">
+            <div class="col_grid6">
+              <div class="form-group">
+                <label>Accomplishment Type</label>
+                <input type="text" name="accomplishment_type" class="form-control disable" value="Test Scores">
 
+              </div>
+            </div>
+            <div class="col_grid6">
+              <div class="form-group">
+                <label>Course Name</label>
+                <input type="text" name="course_name" maxlength="200" class="form-control" />
+              </div>
+            </div>
+            <div class="col_grid6 ">
+              <div class="form-group">
+                <label>Award</label>
+                <input type="text" name="award" maxlength="200" class="form-control" />
+              </div>
+            </div>
+            <div class="col_grid6 ">
+              <div class="form-group">
+                <label>Test Scores</label>
+                <input type="text" name="test_scores" maxlength="200" class="form-control" />
+              </div>
+            </div>
+            <div class="col_grid6 ">
+              <div class="form-group">
+                <label>Publications</label>
+                <input type="text" name="publications" maxlength="200" class="form-control" />
+              </div>
+            </div>
+          </div>
+          <div class="confirmApply fw">
+            <button type="submit" class="input-btn">Save</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class='modal personal_DtlPop' id='accomplishment_add_detail3'>
+    <div class="close fw">
+      <a class='btn close-modal' data-modal="#accomplishment_add_detail3" href="#"><img src="{{ asset('public/assets/images/close.png')}}" alt="icon"></a>
+    </div>
+    <form class="form_sec fw col_grid12" action="{{ url('add_student_accomplishment') }}" method="POST" enctype="multipart/form-data">
+      @csrf
+      <div class='content fw'>
+        <h3 class="modal_heading">Add Accomplishment</h3>
+        <div class="form_sec fw ">
+          <div class="innerrow">
+            <div class="col_grid6">
+              <div class="form-group">
+                <label>Accomplishment Type</label>
+                <input type="text" name="accomplishment_type" class="form-control disable" value="Publications">
+
+              </div>
+            </div>
+            <div class="col_grid6">
+              <div class="form-group">
+                <label>Course Name</label>
+                <input type="text" name="course_name" maxlength="200" class="form-control" />
+              </div>
+            </div>
+            <div class="col_grid6 ">
+              <div class="form-group">
+                <label>Award</label>
+                <input type="text" name="award" maxlength="200" class="form-control" />
+              </div>
+            </div>
+            <div class="col_grid6 ">
+              <div class="form-group">
+                <label>Test Scores</label>
+                <input type="text" name="test_scores" maxlength="200" class="form-control" />
+              </div>
+            </div>
+            <div class="col_grid6 ">
+              <div class="form-group">
+                <label>Publications</label>
+                <input type="text" name="publications" maxlength="200" class="form-control" />
+              </div>
+            </div>
+          </div>
+          <div class="confirmApply fw">
+            <button type="submit" class="input-btn">Save</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 
   <div class='modal personal_DtlPop' id='createNewPost'>
     <div class="close fw">
@@ -1162,8 +1354,23 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
   <script type="text/javascript">
+            $(document).ready(function() {
+                $('input[type="checkbox"]').click(function() {
+                    var inputValue = $(this).attr("value");
+                    // alert(inputValue);
+                    $("." + inputValue).toggle();
+  
+                });
+            });
+        </script>
+  <script>
+    $(window).on('load', function() {
+      $('.se-pre-con').delay(1500).fadeOut('slow');
+    });
+  </script>
+  <script type="text/javascript">
     $('#studentImage').on('change', function(ev) {
-      console.log("here inside");
+      //console.log("here inside");
       var filedata = this.files[0];
       var imgtype = filedata.type;
       var match = ['image/jpeg', 'image/jpg', 'image/png'];
@@ -1193,6 +1400,8 @@
         data: postData,
         processData: false,
         success: function() {
+          location.reload();
+          return false;
           console.log("success");
         }
       });
@@ -1459,6 +1668,30 @@
 
     $('.close-modal').click(function() {
       location.reload();
+    });
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.toggle-Acmntsbtn').click(function() {
+        $(".toggle-Acmnts").toggleClass("toggle-contpopup");
+      });
+      $(".toggle-Acmnts li a").click(function() {
+        $(".toggle-Acmnts").removeClass("toggle-contpopup");
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function() {
+      $(".header_sec .togglebtn").click(function() {
+        $(".header_sec ").toggleClass("opne_flow2header");
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function() {
+      $(".checkbox-date .form-control").click(function() {
+        $(".duration_group").toggleClass("datetype-remove");
+      });
     });
   </script>
 </body>

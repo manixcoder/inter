@@ -5,9 +5,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>internify - Home</title>
+  <title>Internify - Home</title>
   <!-- Fontawesome 4 Cdn from BootstrapCDN -->
-  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.jpeg') }}"/>
+  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.png') }}"/>
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="{{ asset('public/assets/web_assets/css/style.css')}}" rel="stylesheet">
   <link href="{{ asset('public/assets/web_assets/fonts/fonts.css')}}" rel="stylesheet">
@@ -142,9 +142,6 @@
                             <option value="0" {{ $OrgData->gender==0 ? 'selected' : '' }}>Male</option>
                             <option value="1" {{ $OrgData->gender==1 ? 'selected' : '' }}>Female</option>
                             <option value="2" {{ $OrgData->gender==2 ? 'selected' : '' }}>Non-Binary</option>
-                           
-                           
-
                           </select>
                         </div>
                       </div>
@@ -815,6 +812,7 @@
   <footer class="fw">
     @include('fruntend.student.inc.footer')
   </footer>
+  <!-- <div class="se-pre-con"></div> -->
   <div class='modal personal_DtlPop createNewPost_popup' id='createHomePostrecuriter'>
     <div class="close fw">
       <a class='btn close-modal' data-modal="#createHomePostrecuriter" href="#"><img src="{{ asset('public/assets/images/close.png')}}')}}" alt="icon"></a>
@@ -1029,6 +1027,11 @@
 
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
   <script>
+      $(window).on('load', function(){
+       $('.se-pre-con').delay(1500).fadeOut('slow');
+     });
+   </script>
+  <script>
     $(document).ready(function() {
       $(".clicktobtm").click(function() {
         $("html, body").animate({
@@ -1208,6 +1211,13 @@
       $(' .menu_right li').removeClass('active');
       $(this).addClass('active');
     });
+  </script>
+  <script >
+    $(document).ready(function(){
+    $(".header_sec .togglebtn").click(function(){
+      $(".header_sec ").toggleClass("opne_flow2header");
+    });
+  });
   </script>
 </body>
 

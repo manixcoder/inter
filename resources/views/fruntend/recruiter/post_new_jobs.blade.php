@@ -88,7 +88,7 @@
                   <input type="file" name="logo" onchange="loadFile(event)" accept="image/png, image/gif, image/jpeg" required>
                   <div class="file_cont">
                     <img src="{{ asset('public/assets/images/attach_img.png')}}" id="output" alt="icon" class="jobpostnew-file" />
-                    <h4 class="font24Text clrBlack">Attach any organization or work culture photo (It's optional)</h4>
+                    <h4 class="font24Text clrBlack">Attach any organization or work culture photo</h4>
                   </div>
                 </div>
               </div>
@@ -197,13 +197,6 @@
       </div>
     </div>
   </div>
-
-
-
-
-
-
-
   @include('fruntend.common_pages.web_footer')
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
@@ -265,7 +258,6 @@
       });
     });
   </script>
-
   <script>
     /* Script for success popup */
     $(document).ready(function() {
@@ -291,4 +283,11 @@
         URL.revokeObjectURL(output.src) // free memory
       }
     };
+  </script>
+  <script >
+    $(document).ready(function(){
+    $(".header_sec .togglebtn").click(function(){
+      $(".header_sec ").toggleClass("opne_flow2header");
+    });
+  });
   </script>
