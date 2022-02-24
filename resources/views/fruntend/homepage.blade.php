@@ -92,3 +92,10 @@
        $('.se-pre-con').delay(1500).fadeOut('slow');
      });
    </script>
+   <script >
+    $(document).ready(function(){
+    $(".header_sec .togglebtn").click(function(){
+      $(".header_sec ").toggleClass("opne_flow2header");
+    });
+  });
+  </script>

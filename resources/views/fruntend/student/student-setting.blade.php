@@ -555,6 +555,7 @@
 
 
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
+  
 <script>
       $(window).on('load', function(){
        $('.se-pre-con').delay(1500).fadeOut('slow');
@@ -757,6 +758,7 @@
       }
     });
   </script>
+  
 </body>
 
 </html>

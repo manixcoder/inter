@@ -10085,3 +10085,80 @@ div#internships_id .arrowheading_site.recruiterGreenText {
 .body_wht-inners.basicInfo_tab.banner_image {
     margin-top: 104px;
 }
+.login_user .user_dropdown:after {
+    position: absolute;
+    content: "";
+    right: -6px;
+    top: 17px;
+    font-size: 28px;
+    color: #fff;
+    opacity: 0;
+    background: url(../../images/user-downarrow.png);
+    width: 13px;
+    height: 8px;
+    display: inline-block;
+    background-repeat: no-repeat;
+}
+@media(max-width: 991px){
+.login_user .user_dropdown:after{
+    opacity: 1;
+}
+}
+.opne_flow2header .togglebtn span {
+    background: #fff !important;
+}
+@media(max-width: 767px){
+.tabCompnay_profile ul#profileTab_link li {
+    margin: 0 0px;
+}
+}
+.blog_header + .header_sec  .togglebtn span{margin-bottom: 10px;}
+body.body_blog.flow2header .logo-flow2 img + .wth-logo-hide {
+    display: block;
+}
+
+.checkbox-date .form-control {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    height: 100% !important;
+    width: 100%;
+    cursor: pointer;
+    opacity: 0;
+    z-index: 99;
+}
+.checkbox-date {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    margin: 0;
+    float: left;
+    border: 1px solid #ba3143;
+    border-radius: 4px;
+    margin-top: 20px;
+}
+.checkbox-date span {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: #ba3143;
+    opacity: 0;
+}
+.checkbox-date span:after {
+    content: "\2714";
+    color: #fff;
+}
+.checkbox-date .form-control:checked + span {opacity: 1;}
+.checkbox-current {
+    float: left;
+    width: 100%;
+    min-height: 60px;
+}
+
+.col_grid6.duration_group.datetype-remove {
+    display: none;
+}

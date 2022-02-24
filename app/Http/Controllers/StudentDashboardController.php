@@ -193,8 +193,7 @@ class StudentDashboardController extends Controller
     <p>We are delighted to inform you that we have shortlisted your application for our " . $INSERTJOBNAMEHERE . "position. Your remarkable track record and outstanding achievements have amazed our team and we’d like to hop on a quick call with you to discuss your possible future with us at " . $INSERTCOMPANYNAME . ".</p>
     <p>We hope you can consider.</p>
     <p>Thank you for your cooperation.</p>
-    <p>Best,
-    " . $recuratorData->org_name . "</p>
+    <p>Best," . $recuratorData->org_name . "</p>
    
     </body>
     </html>";
@@ -334,6 +333,7 @@ class StudentDashboardController extends Controller
   }
   public function add_student_experience(Request $request)
   {
+    //dd($request->all());
     $id = Session::get('gorgID');
     if ($files = $request->company_image) {
       $destinationPath = public_path('/uploads/');
@@ -342,24 +342,38 @@ class StudentDashboardController extends Controller
     } else {
       $profileImage = "blank-profile-picture.png";
     }
-
-    $update = DB::table('experience')
-      ->insert([
+    if($request->current=='on'){
+      $update = DB::table('experience')->insert([
         'user_id' => $id,
         'company_image' => $profileImage,
         'company_name' => $request->company_name,
         'profile' => $request->profile_type,
         'duration_from' => $request->duration_from,
         'duration_to' => $request->duration_to,
+        'current'=>'1',
         'location' => $request->location,
         'created_at' => date("Y-m-d H:i:s"),
         'updated_at' => date("Y-m-d H:i:s")
       ]);
+}else{
+  $update = DB::table('experience')->insert([
+        'user_id' => $id,
+        'company_image' => $profileImage,
+        'company_name' => $request->company_name,
+        'profile' => $request->profile_type,
+        'duration_from' => $request->duration_from,
+        'duration_to' => $request->duration_to,
+        'current'=>'0',
+        'location' => $request->location,
+        'created_at' => date("Y-m-d H:i:s"),
+        'updated_at' => date("Y-m-d H:i:s")
+      ]);
+      }
     return redirect()->back()->with(array('status' => 'success', 'message' => 'add student experience successfully.'));
   }
   public function update_student_experience(Request $request)
   {
-
+// dd($request->all());
     $id = Session::get('gorgID');
 
     if ($files = $request->company_image) {
@@ -370,6 +384,7 @@ class StudentDashboardController extends Controller
       $experienceData = DB::table('experience')->where('id', $request->id)->first();
       $profileImage = $experienceData->company_image;
     }
+    if($request->current=='current'){
     $update = DB::table('experience')->where('id', $request->id)
       ->update([
         'user_id' => $id,
@@ -378,9 +393,24 @@ class StudentDashboardController extends Controller
         'profile' => $request->profile_type,
         'duration_from' => $request->duration_from,
         'duration_to' => $request->duration_to,
+        'current'=>'1',
         'location' => $request->location,
         'updated_at' => date("Y-m-d H:i:s")
       ]);
+      }else{
+        $update = DB::table('experience')->where('id', $request->id)
+      ->update([
+        'user_id' => $id,
+        'company_image' => $profileImage,
+        'company_name' => $request->company_name,
+        'profile' => $request->profile_type,
+        'duration_from' => $request->duration_from,
+        'duration_to' => $request->duration_to,
+        'current'=>'0',
+        'location' => $request->location,
+        'updated_at' => date("Y-m-d H:i:s")
+      ]);
+        }
     /*if ($files = $request->image) {
       $update = DB::table('experience')->where('id', $request->id)
         ->update([

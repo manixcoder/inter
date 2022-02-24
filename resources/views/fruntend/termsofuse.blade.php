@@ -51,8 +51,9 @@
       <div class="innerrow">
         <div class="col_grid3">
           <a href="{{ URL::to('/') }}" class="logo-flow2">
-            <img src="images/logo.svg" alt="logo-img" />
-            <img class="hidelogo_header" src="images/header-logo.svg" alt="logo-img" />
+            
+            <img src="{{ asset('public/assets/images/logo.svg')}}" alt="wht-logo" />
+            <img src="{{ asset('public/assets/images/header-logo.svg')}}" alt="logo" class="wth-logo-hide"  />
           </a>
         </div>
         <div class="col_grid9 text-right">

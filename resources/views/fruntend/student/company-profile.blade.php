@@ -756,6 +756,13 @@
             $(this).addClass('active');
         });
     </script>
+    <script >
+    $(document).ready(function(){
+    $(".header_sec .togglebtn").click(function(){
+      $(".header_sec ").toggleClass("opne_flow2header");
+    });
+  });
+  </script>
 </body>
 
 </html>

@@ -622,7 +622,13 @@
     </div></div -->
 
   <!----------------Popup end----------------------->
-
+<script >
+    $(document).ready(function(){
+      $(".header_sec .togglebtn").click(function(){
+        $(".header_sec ").toggleClass("opne_flow2header");
+      });
+    });
+  </script>
 
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
   <script>
@@ -815,6 +821,7 @@
       location.reload();
     });
   </script>
+  
 </body>
 
 </html>

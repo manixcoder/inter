@@ -314,7 +314,8 @@
        contentType: 'application/json',
        success: function(data) {
          var url = window.location.href;
-         $(".lightwht_bg").load(url);
+         location.reload();
+        // $(".lightwht_bg").load(url);
        }
      });
    }

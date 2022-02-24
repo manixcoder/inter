@@ -241,7 +241,7 @@
               <form class="fw">
                 <div class="from-group">
                   <div class="input-icon">
-                    <i><img src="images/searchIcon.png" alt="icon"></i>
+                    <i><img src="{{ URL::asset('/public/assets/images/searchIcon.png') }}" alt="icon"></i>
                     <input class="form-control" type="text" name="search" placeholder="Find your friends or companies you want to work at!">
                   </div>
                   <div class="btn_group">
@@ -600,6 +600,12 @@
          }
       };
     </script>
-
+<script >
+    $(document).ready(function(){
+    $(".header_sec .togglebtn").click(function(){
+      $(".header_sec ").toggleClass("opne_flow2header");
+    });
+  });
+  </script>
   @include('fruntend.common_pages.web_footer')  
     

@@ -374,7 +374,12 @@
                       <h4 class="font24Text clrBlack">
                         {{$exp->company_name}} <br /> {{$exp->profile}}
                       </h4>
-                      <p class="font24Text clrGray">{{$exp->location}} <br /> {{$exp->duration_from}} - {{$exp->duration_to}}</p>
+                      <p class="font24Text clrGray">{{$exp->location}} <br /> {{$exp->duration_from}} - <?php if ($exp->current == '0') {
+                                                                                                          echo $exp->duration_to;
+                                                                                                        } else {
+                                                                                                          echo "Current";
+                                                                                                        }
+                                                                                                        ?></p>
                     </div>
                   </div>
                   @if($userid != Auth::user()->id)
@@ -418,18 +423,6 @@
                           </div>
                           <div class="col_grid6 ">
                             <div class="form-group">
-                              <label>From</label>
-                              <input type="date" name="duration_from" value="{{ $exp->duration_from }}" class="form-control" required />
-                            </div>
-                          </div>
-                          <div class="col_grid6 ">
-                            <div class="form-group">
-                              <label>To</label>
-                              <input type="date" name="duration_to" value="{{ $exp->duration_to }}" maxlength="200" class="form-control" required />
-                            </div>
-                          </div>
-                          <div class="col_grid6 ">
-                            <div class="form-group">
                               <label>Location</label>
                               <input type="text" name="location" value="{{$exp->location}}" maxlength="200" class="form-control" required />
                             </div>
@@ -441,13 +434,38 @@
                               <span class="fileupload-popup"></span>
                             </div>
                           </div>
+                          <div class="col_grid6 ">
+                            <div class="form-group">
+                              <label>From</label>
+                              <input type="date" name="duration_from" value="{{ $exp->duration_from }}" class="form-control" required />
+                            </div>
+                          </div>
+                          <div class=" current col_grid6 duration_group " <?php if ($exp->current == '0') { ?> style='display: block;' <?php } else { ?> style='display: none;' <?php } ?>>
+                         
+                            <div class="form-group ">
+                              <label>To</label>
+                              <input type="date" name="duration_to" value="{{ $exp->duration_to }}" maxlength="200" class="form-control" />
+                            </div>
+                           
+                          </div>
+                          <div class="col_grid6 ">
+                            <div class="form-group">
+                              <label>Current</label>
+                              <div class="checkbox-current">
+                                <div class="checkbox-date">
+                                  <input type="checkbox" name="current" value="current" <?php if ($exp->current == '1') { ?> checked<?php } ?> class="form-control" />
+                                  <span></span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                           <div class="col_grid6 file-popupinput ">
                             <div class="form-group">
 
                               @if(!empty($exp->company_image))
-                              <img style="width:100px" src="{{ asset('public/uploads/'.$exp->company_image)}}" alt="icon" />
+                              <img style="width:100px; float:left;" src="{{ asset('public/uploads/'.$exp->company_image)}}" alt="icon" />
                               @else
-                              <img style="width:100px" src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="icon" />
+                              <img style="width:100px; float: left;" src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="icon" />
                               @endif
                             </div>
                           </div>
@@ -746,7 +764,7 @@
                           <div class="col_grid6">
                             <div class="form-group">
                               <label>Accomplishment Type</label>
-                              <input type="text" value="{{$accom->accomplishment_type}}" name="accomplishment_type"  maxlength="200" class="form-control disable" />
+                              <input type="text" value="{{$accom->accomplishment_type}}" name="accomplishment_type" maxlength="200" class="form-control disable" />
                               <!--select name="accomplishment_type" id="accomplishment_type" class="form-control" required>
                                 <option value="Course" {{ ( $accom->accomplishment_type == 'Course') ? 'selected' : '' }}>Course</option>
                                 <option value="Awards" {{ ( $accom->accomplishment_type == 'Awards') ? 'selected' : '' }}>Awards</option>
@@ -917,24 +935,6 @@
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
-                <label>From</label>
-                <input type="date" name="duration_from" placeholder="Ex. 2021-08-02" class="form-control" required />
-              </div>
-            </div>
-            <div class="col_grid6 ">
-              <div class="form-group">
-                <label>To</label>
-                <input type="date" name="duration_to" placeholder="Ex. 2023-08-02" class="form-control" required />
-              </div>
-            </div>
-            <div class="col_grid6 ">
-              <div class="form-group">
-                <label>To</label>
-                <input type="date" name="duration_to" placeholder="Ex. 2023-08-02" class="form-control" required />
-                </div>
-            </div>
-            <div class="col_grid6 ">
-              <div class="form-group">
                 <label>Location</label>
                 <input type="text" name="location" class="form-control" maxlength="500" required />
               </div>
@@ -946,13 +946,37 @@
                 <span class="fileupload-popup"></span>
               </div>
             </div>
-          </div>
-          <div class="confirmApply fw">
-            <button type="submit" class="input-btn">Save</button>
+            <div class="col_grid6 ">
+              <div class="form-group">
+                <label>From</label>
+                <input type="date" name="duration_from" placeholder="Ex. 2021-08-02" class="form-control" required />
+              </div>
+            </div>
+            <div class="col_grid6 duration_group">
+              <div class="form-group ">
+                <label>To</label>
+                <input type="date" name="duration_to" placeholder="Ex. 2023-08-02" class="form-control" />
+              </div>
+            </div>
+            <div class="col_grid6 ">
+              <div class="form-group">
+                <label>Current</label>
+                <div class="checkbox-current">
+                  <div class="checkbox-date">
+                    <input type="checkbox" name="current" placeholder="Ex. 2023-08-02" class="form-control" />
+                    <span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+        <div class="confirmApply fw">
+          <button type="submit" class="input-btn">Save</button>
+        </div>
       </div>
-    </form>
+  </div>
+  </form>
   </div>
 
 
@@ -1096,9 +1120,9 @@
           <div class="innerrow">
             <div class="col_grid6">
               <div class="form-group">
-             
+
                 <label>Accomplishment Type</label>
-                <input type="text" name="accomplishment_type"  class="form-control disable" value="Course">
+                <input type="text" name="accomplishment_type" class="form-control disable" value="Course">
                 <!-- <select name="accomplishment_type" id="accomplishment_type" class="form-control" required>
                   <option value="Course">Course</option>
                   <option value="Awards">Awards</option>
@@ -1328,6 +1352,17 @@
   <!----------------Popup end----------------------->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript">
+            $(document).ready(function() {
+                $('input[type="checkbox"]').click(function() {
+                    var inputValue = $(this).attr("value");
+                    // alert(inputValue);
+                    $("." + inputValue).toggle();
+  
+                });
+            });
+        </script>
   <script>
     $(window).on('load', function() {
       $('.se-pre-con').delay(1500).fadeOut('slow');
@@ -1642,6 +1677,20 @@
       });
       $(".toggle-Acmnts li a").click(function() {
         $(".toggle-Acmnts").removeClass("toggle-contpopup");
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function() {
+      $(".header_sec .togglebtn").click(function() {
+        $(".header_sec ").toggleClass("opne_flow2header");
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function() {
+      $(".checkbox-date .form-control").click(function() {
+        $(".duration_group").toggleClass("datetype-remove");
       });
     });
   </script>

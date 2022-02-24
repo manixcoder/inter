@@ -231,6 +231,14 @@
 
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
   <script src="{{ asset('public/assets/web_assets/js/commen-hd.js')}}"></script>
+  
+  <script >
+    $(document).ready(function(){
+    $(".header_sec .togglebtn").click(function(){
+      $(".header_sec ").toggleClass("opne_flow2header");
+    });
+  });
+  </script>
   <script>
     $(document).ready(function() {
       $(".clicktobtm").click(function() {

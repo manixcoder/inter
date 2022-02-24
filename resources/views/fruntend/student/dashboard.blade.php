@@ -92,7 +92,8 @@
               <ul class="userTablink_cont fw">
                 <li><a href="{{ url('student-profile-basic-info') }}">View Profile</a></li>
                 <!-- <li><a href="{{ url('student-posts') }}">My Posts</a></li> -->
-                <li><a href="{{ url('student-applications') }}">My Application</a></li><!-- 
+                <li><a href="{{ url('student-applications') }}">My Application</a></li>
+                <!-- 
                 <li><a href="{{ URL::to('/message')}}" target="_blank">Messages</a></li> -->
               </ul>
             </div>
@@ -178,7 +179,7 @@
                 <p> <?php echo $post->description; ?></p>
               </div>
               <!-- <p class="site-pra" id="short_{{ $post->id}}">
-                <?php 
+                <?php
                 // echo substr($post->description, 0, 500); 
                 ?>
                 <button class="readmore" id="button_{{ $post->id}}" onclick="showhide()">Read More</button>
@@ -365,11 +366,11 @@
 
 
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
-    <script>
-      $(window).on('load', function(){
-       $('.se-pre-con').delay(1500).fadeOut('slow');
-     });
-   </script>
+  <script>
+    $(window).on('load', function() {
+      $('.se-pre-con').delay(1500).fadeOut('slow');
+    });
+  </script>
   <!-- image viewer -->
   <script>
     var loadFile = function(event) {
@@ -395,7 +396,8 @@
         contentType: 'application/json',
         success: function(data) {
           var url = window.location.href;
-          $(".lightwht_bg").load(url);
+          location.reload();
+          //$(".lightwht_bg").load(url);
         }
       });
     }
