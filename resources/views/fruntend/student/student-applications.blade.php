@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Internify - Home</title>
   <!-- Fontawesome 4 Cdn from BootstrapCDN -->
-  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.png') }}"/>
+  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.png') }}" />
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="{{ asset('public/assets/web_assets/css/style.css')}}" rel="stylesheet">
   <link href="{{ asset('public/assets/web_assets/fonts/fonts.css')}}" rel="stylesheet">
@@ -126,9 +126,6 @@
               @php
               $userRole = Session::get('userRole');
               $id = Session::get('gorgID');
-
-
-
               $applications=DB::table('job_applied as ja')
               ->join('jobs as jo', 'ja.job_id', '=', 'jo.id')
               ->join('users as r', 'jo.user_id', '=', 'r.id')
@@ -191,7 +188,7 @@
   <footer class="fw">
     @include('fruntend.student.inc.footer')
   </footer>
-<!-- <div class="se-pre-con"></div> -->
+  <!-- <div class="se-pre-con"></div> -->
   <div class='modal personal_DtlPop createNewPost_popup' id='createHomePostrecuriter'>
     <div class="close fw">
       <a class='btn close-modal' data-modal="#createHomePostrecuriter" href="#"><img src="{{ asset('public/assets/images/close.png')}}')}}" alt="icon"></a>
@@ -470,7 +467,7 @@
         <h3 class="modal_heading">Add Accomplishment</h3>
         <div class="form_sec fw ">
           <div class="innerrow">
-          <div class="col_grid6">
+            <div class="col_grid6">
               <div class="form-group">
                 <label>Accomplishment Type</label>
                 <select name="accomplishment_type" id="accomplishment_type" class="form-control" required>
@@ -484,25 +481,25 @@
             <div class="col_grid6">
               <div class="form-group">
                 <label>Course Name</label>
-                <input type="text" name="course_name" class="form-control"/>
+                <input type="text" name="course_name" class="form-control" />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Award</label>
-                <input type="text" name="award" class="form-control"/>
+                <input type="text" name="award" class="form-control" />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Test Scores</label>
-                <input type="text" name="test_scores" class="form-control"/>
+                <input type="text" name="test_scores" class="form-control" />
               </div>
             </div>
             <div class="col_grid6 ">
               <div class="form-group">
                 <label>Publications</label>
-                <input type="text" name="publications" class="form-control"/>
+                <input type="text" name="publications" class="form-control" />
               </div>
             </div>
           </div>
@@ -562,10 +559,10 @@
 
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
   <script>
-      $(window).on('load', function(){
-       $('.se-pre-con').delay(1500).fadeOut('slow');
-     });
-   </script>
+    $(window).on('load', function() {
+      $('.se-pre-con').delay(1500).fadeOut('slow');
+    });
+  </script>
   <script>
     $(document).ready(function() {
       $(".clicktobtm").click(function() {
@@ -748,12 +745,12 @@
       $(this).addClass('active');
     });
   </script>
-  <script >
-    $(document).ready(function(){
-    $(".header_sec .togglebtn").click(function(){
-      $(".header_sec ").toggleClass("opne_flow2header");
+  <script>
+    $(document).ready(function() {
+      $(".header_sec .togglebtn").click(function() {
+        $(".header_sec ").toggleClass("opne_flow2header");
+      });
     });
-  });
   </script>
 </body>
 

@@ -111,7 +111,7 @@
                 <span>
                   Contact:
                   <a href="mailto:{{ $orgData->email }}" class="lightblue_text">
-                    {{ $orgData->email }}
+                    {{ $orgData->email ?? '' }}
                   </a>
                 </span>
               </div>
