@@ -121,7 +121,7 @@
                             </p>
                             <p class="font20Text clrBlack">
                                 <span class="clrGray">
-                                    Industry: :
+                                    Industry:
                                 </span>
                                 {{ $OrgData->industry ?? '' }}
                             </p>

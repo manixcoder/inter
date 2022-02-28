@@ -100,7 +100,7 @@
                   <button type="submit" class="input-btn" data-modal="#successfullyModal">Apply</button>
                 </form>
                 @else
-                <a class="input-btn">Applied</a>
+                <a class="input-btn appliedbtn">Applied</a>
                 @endif
               </div>
             </div>
@@ -135,7 +135,7 @@
         </ul>
       </div>
       <div class="jobDescriptions_sec fw">
-        <h3 class="borderBox_heading">Job Descriptions</h3>
+        <h3 class="borderBox_heading">Job Description</h3>
         <p>{!! $appl->job_description !!}</p>
       </div>
       @if($appl->attachment !='')

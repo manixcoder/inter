@@ -448,27 +448,27 @@
                             </div>
                            
                           </div>
-                          <div class="col_grid6 ">
-                            <div class="form-group">
-                              <label>Current</label>
-                              <div class="checkbox-current">
-                                <div class="checkbox-date">
-                                  <input type="checkbox" name="current" value="current" <?php if ($exp->current == '1') { ?> checked<?php } ?> class="form-control" />
-                                  <span></span>
+                              <!-- <div class="col_grid6 file-popupinput ">
+                                <div class="form-group">
+
+                                  @if(!empty($exp->company_image))
+                                  <img style="width:100px; float:left;" src="{{ asset('public/uploads/'.$exp->company_image)}}" alt="icon" />
+                                  @else
+                                  <img style="width:100px; float: left;" src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="icon" />
+                                  @endif
+                                </div>
+                              </div> -->
+                              <div class="col_grid6 checkcurrent-inline">
+                                <div class="form-group">
+                                  <label>Current</label>
+                                  <div class="checkbox-current inline">
+                                    <div class="checkbox-date">
+                                      <input type="checkbox" name="current" value="current" <?php if ($exp->current == '1') { ?> checked<?php } ?> class="form-control" />
+                                      <span></span>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                          </div>
-                          <div class="col_grid6 file-popupinput ">
-                            <div class="form-group">
-
-                              @if(!empty($exp->company_image))
-                              <img style="width:100px; float:left;" src="{{ asset('public/uploads/'.$exp->company_image)}}" alt="icon" />
-                              @else
-                              <img style="width:100px; float: left;" src="{{ asset('public/assets/images/userimg-icon.png')}}" alt="icon" />
-                              @endif
-                            </div>
-                          </div>
                         </div>
                         <div class="confirmApply fw">
                           <button type="submit" class="input-btn">Save</button>
@@ -952,16 +952,16 @@
                 <input type="date" name="duration_from" placeholder="Ex. 2021-08-02" class="form-control" required />
               </div>
             </div>
-            <div class="col_grid6 duration_group">
+            <div class="col_grid6 duration_group mrbtm0">
               <div class="form-group ">
                 <label>To</label>
                 <input type="date" name="duration_to" placeholder="Ex. 2023-08-02" class="form-control" />
               </div>
             </div>
-            <div class="col_grid6 ">
+            <div class="col_grid6 checkcurrent-inline">
               <div class="form-group">
                 <label>Current</label>
-                <div class="checkbox-current">
+                <div class="checkbox-current inline">
                   <div class="checkbox-date">
                     <input type="checkbox" name="current" placeholder="Ex. 2023-08-02" class="form-control" />
                     <span></span>

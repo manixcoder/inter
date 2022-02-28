@@ -63,7 +63,6 @@ class StudentregisterController extends Controller
 				]);
 			}
 		} elseif ($request->setep_three == 'setep_three') {
-
 			$emailCount = DB::table('users')->where('email', $request->email)->count();
 
 			if ($emailCount == 0) {
@@ -99,7 +98,7 @@ class StudentregisterController extends Controller
 			</head>
 			<body>
 			<p>Dear " . $data->name . "</p></br>
-			<p>We’re so glad you’re joining Internify today, get ready to realise your true potential!</p></br>
+			<p>We are so glad you are joining Internify today, get ready to realise your true potential!</p></br>
 			<p>Your verification code is " . $data->otp . ".</p></br>
 			<p>Welcome to Internify!</p></br>
 			<p>Best,</p></br>
@@ -111,7 +110,7 @@ class StudentregisterController extends Controller
 			$headers[] = 'Content-type: text/html; charset=iso-8859-1';
 			// Additional headers
 			//$headers[] = 'To: Mary <mary@example.com>, Kelly <kelly@example.com>';
-			//$headers[] = 'From: Registration Verification Email contact@theinternify.com';
+			  $headers[] = 'From: The Internify contact@theinternify.com';
 			//$headers[] = 'Cc: birthdayarchive@example.com';
 			//$headers[] = 'Bcc: birthdaycheck@example.com';
 			// Mail it
