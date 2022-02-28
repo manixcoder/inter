@@ -127,7 +127,7 @@ class HomeController extends Controller
   {
     $email = $request->input('email');
     $password = $request->input('password');
-    $rolecheck = DB::table('users')->where('email', $email)->first();
+    $rolecheck = DB::table('users')->where('email', $email)->where('users_role', '!=', '1')->first();
     if ($rolecheck == null) {
       return redirect()->back()->with(array(
         'error_msg' => 'Email not registered',
@@ -436,7 +436,7 @@ class HomeController extends Controller
       </head>
       <body>
       <p>Dear " . $data->name . "</p></br>
-      <p>We’re so glad you’re joining Internify today, get ready to realise your true potential!</p></br>
+      <p>We are so glad you are joining Internify today, get ready to realise your true potential!</p></br>
       <p>Your verification code is " . $data->otp . ".</p></br>
       <p>Welcome to Internify!</p></br>
       <p>Best,</p></br>
@@ -449,15 +449,13 @@ class HomeController extends Controller
 
       // Additional headers
       // $headers[] = 'To: Mary <mary@example.com>, Kelly <kelly@example.com>';
-      // $headers[] = 'From: Registration Verification Email contact@theinternify.com';
+      $headers[] = 'From: The Internify contact@theinternify.com';
       //$headers[] = 'Cc: birthdayarchive@example.com';
       //$headers[] = 'Bcc: birthdaycheck@example.com';
       // Mail it
       mail($to, $subject, $message, implode("\r\n", $headers));
 
       return view('fruntend.recruiter_register.recruiter_register_step_nine')->with(['insertid' => $request->recruiterid]);
-      // $message = 'register successfully.!';
-      // return view('fruntend.web_login')->with(['message' => $message]);
     } elseif ($request->setep_nine == 'setep_nine') {
       //dd($request->all());
       $otpcheck = app('App\User')->where('id', $request->recruiterid)->where('otp', $request->otp)->first();

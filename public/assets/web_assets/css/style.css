@@ -9234,6 +9234,7 @@ small.shareclosebtn img {
     position: relative;
     padding-bottom: 8px;
     cursor: pointer;
+    background: transparent !important;
 }
 .tabCompnay_profile .profileTab li button:after {
     position: absolute;
@@ -10161,4 +10162,64 @@ body.body_blog.flow2header .logo-flow2 img + .wth-logo-hide {
 
 .col_grid6.duration_group.datetype-remove {
     display: none;
+}
+.checkcurrent-inline label {
+    color: #ba3143 !important;
+    font-family: 'Bukhari Script' !important;
+    font-size: 18px !important;
+    display: inline-block;
+    width: auto !important;
+    margin: 0 !important;
+    vertical-align: middle !important;
+    float: left !important;
+    margin-right: 25px !important;
+}
+
+.checkcurrent-inline .checkbox-current.inline {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+    min-height: 1px;
+    margin-top: 2px;
+}
+.personal_DtlPop .form_sec .checkcurrent-inline .form-group {
+    margin-bottom: 0 !important;
+    margin-top: 45px;
+}
+.personal_DtlPop .form_sec  .current.col_grid6.duration_group[style="display: block;"] .form-group {
+    margin-bottom: -20px !important;
+}
+.col_grid6.checkcurrent-inline {
+    float: right;
+}
+.col_grid6.checkcurrent-inline .checkbox-date {
+    margin-top: 0 !important;
+}
+div#experience_update_detail_15 .confirmApply.fw {
+    margin-top: 30px;
+}
+.personal_DtlPop .form_sec .duration_group.mrbtm0 .form-group {
+    margin-bottom: -20px !important;
+}
+div#experience_add_detail .confirmApply.fw {
+    margin-top: 30px;
+}
+a.input-btn.appliedbtn {
+    background: #ba3143;
+}
+span.lightFontWht:after {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    content: "";
+    background: #ddd;
+    border-radius: 15px;
+    left: 0;
+    top: 7px;
+}
+
+span.lightFontWht {
+    position: relative;
+    padding-left: 20px;
+    margin-left: 5px;
 }

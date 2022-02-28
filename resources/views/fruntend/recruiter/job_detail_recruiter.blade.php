@@ -55,7 +55,7 @@
               </ul>
             </div>
             <div class="jobDescriptions_sec fw">
-              <h3 class="borderBox_heading">Job Descriptions</h3>
+              <h3 class="borderBox_heading">Job Description</h3>
               <?php echo $Data[0]->job_description; ?>
             </div>
           </div> 

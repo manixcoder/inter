@@ -38,9 +38,9 @@
                 </span>
               </h4>
               <p>
-                {{ $notification->data['notification_type']}}!
+                {{ $notification->data['notification_type']}}
                 @if($notification->data['notification_type'] =='applied for')
-                {{ $notification->data['post_title']}}
+                {{ $notification->data['post_title']}}!
                 @endif
               </p>
             </div>

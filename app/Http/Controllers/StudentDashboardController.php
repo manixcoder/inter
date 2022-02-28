@@ -132,33 +132,25 @@ class StudentDashboardController extends Controller
     ]);
     // dd($recuratorData);
     $to = $studentData->email;
-    $INSERTJOBNAMEHERE = $jobData->job_title;
+    $job_title = $jobData->job_title;
     $subject = "Rejection Mail";
 
     $message = "
         <html>
           <head></head>
           <body>
-            <p> Dear " . $studentData->name . " </p>
+            <p> Dear " . $studentData->name . ", </p>
             <p>I hope this email finds you well.</p> 
             <p>
-            Thank you for taking the time to apply to our " . $INSERTJOBNAMEHERE . " position. 
+            Thank you for taking the time to apply to our " . $job_title . " position. 
             We wanted to let you know that we have chosen to move forward with a different candidate for our position.
             </p> 
             <p>Our team was impressed by your outstanding accomplishments and we think you could be a good fit for other future openings and we will reach out again if we find a good match.</p>
             <p>We wish you all the best in your job search and future professional endeavours.</p>
-            <p> Best,<br> " . $recuratorData->org_name . " </p>     
+            <p> Best,<br> " . $recuratorData->org_name ?? 'The Internify' . " </p>     
           </body>
        </html>";
-    // Dear INSERT STUDENT NAME HERE,
-    // I hope this email finds you well.
-    // Thank you for taking the time to apply to our INSERT JOB NAME HERE position. We wanted to let you know that we have chosen to move forward with a different candidate for our position.
-    // Our team was impressed by your outstanding accomplishments and we think you could be a good fit for other future openings and we will reach out again if we find a good match.
-    // We wish you all the best in your job search and future professional endeavours.
-    // Best,
-    // COMPANY NAME
 
-    // Always set content-type when sending HTML email
     $headers = "MIME-Version: 1.0" . "\r\n";
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
@@ -180,21 +172,22 @@ class StudentDashboardController extends Controller
     ]);
     // dd($recuratorData);
     $to = $studentData->email;
-    $INSERTJOBNAMEHERE = $jobData->job_title;
-    $INSERTCOMPANYNAME = $recuratorData->org_name;
+    $job_title = $jobData->job_title;
+    $org_name = $recuratorData->org_name;
     $subject = "Selection Email";
     $message = "
     <html>
     <head>
     </head>
     <body>
-    <p> Dear " . $studentData->name . " </p>
+    <p> Dear " . $studentData->name . ", </p>
     <p>I hope this email finds you well.</p> 
-    <p>We are delighted to inform you that we have shortlisted your application for our " . $INSERTJOBNAMEHERE . "position. Your remarkable track record and outstanding achievements have amazed our team and we’d like to hop on a quick call with you to discuss your possible future with us at " . $INSERTCOMPANYNAME . ".</p>
+    <p>We are delighted to inform you that we have shortlisted your application for our " . $job_title . "position. 
+    Your remarkable track record and outstanding achievements have amazed our team and we’d like to hop on a quick call with you to discuss your possible future with us at 
+    " . $org_name . ".</p>
     <p>We hope you can consider.</p>
     <p>Thank you for your cooperation.</p>
-    <p>Best," . $recuratorData->org_name . "</p>
-   
+    <p>Best," . $recuratorData->org_name ?? 'The Internify' . "</p>   
     </body>
     </html>";
 
@@ -207,7 +200,10 @@ class StudentDashboardController extends Controller
     //$headers .= 'Cc: pathakmanish86@gmail.com' . "\r\n";
 
     mail($to, $subject, $message, $headers);
-    return redirect()->back()->with(array('status' => 'success', 'message' => 'Mail send successfully for selection or shortlist.'));
+    return redirect()->back()->with(array(
+      'status' => 'success',
+      'message' => 'Mail send successfully for selection or shortlist.'
+    ));
   }
   public function student_posts(Request $request)
   {
@@ -342,7 +338,7 @@ class StudentDashboardController extends Controller
     } else {
       $profileImage = "blank-profile-picture.png";
     }
-    if($request->current=='on'){
+    if ($request->current == 'on') {
       $update = DB::table('experience')->insert([
         'user_id' => $id,
         'company_image' => $profileImage,
@@ -350,30 +346,30 @@ class StudentDashboardController extends Controller
         'profile' => $request->profile_type,
         'duration_from' => $request->duration_from,
         'duration_to' => $request->duration_to,
-        'current'=>'1',
+        'current' => '1',
         'location' => $request->location,
         'created_at' => date("Y-m-d H:i:s"),
         'updated_at' => date("Y-m-d H:i:s")
       ]);
-}else{
-  $update = DB::table('experience')->insert([
+    } else {
+      $update = DB::table('experience')->insert([
         'user_id' => $id,
         'company_image' => $profileImage,
         'company_name' => $request->company_name,
         'profile' => $request->profile_type,
         'duration_from' => $request->duration_from,
         'duration_to' => $request->duration_to,
-        'current'=>'0',
+        'current' => '0',
         'location' => $request->location,
         'created_at' => date("Y-m-d H:i:s"),
         'updated_at' => date("Y-m-d H:i:s")
       ]);
-      }
+    }
     return redirect()->back()->with(array('status' => 'success', 'message' => 'add student experience successfully.'));
   }
   public function update_student_experience(Request $request)
   {
-// dd($request->all());
+    // dd($request->all());
     $id = Session::get('gorgID');
 
     if ($files = $request->company_image) {
@@ -384,33 +380,33 @@ class StudentDashboardController extends Controller
       $experienceData = DB::table('experience')->where('id', $request->id)->first();
       $profileImage = $experienceData->company_image;
     }
-    if($request->current=='current'){
-    $update = DB::table('experience')->where('id', $request->id)
-      ->update([
-        'user_id' => $id,
-        'company_image' => $profileImage,
-        'company_name' => $request->company_name,
-        'profile' => $request->profile_type,
-        'duration_from' => $request->duration_from,
-        'duration_to' => $request->duration_to,
-        'current'=>'1',
-        'location' => $request->location,
-        'updated_at' => date("Y-m-d H:i:s")
-      ]);
-      }else{
-        $update = DB::table('experience')->where('id', $request->id)
-      ->update([
-        'user_id' => $id,
-        'company_image' => $profileImage,
-        'company_name' => $request->company_name,
-        'profile' => $request->profile_type,
-        'duration_from' => $request->duration_from,
-        'duration_to' => $request->duration_to,
-        'current'=>'0',
-        'location' => $request->location,
-        'updated_at' => date("Y-m-d H:i:s")
-      ]);
-        }
+    if ($request->current == 'current') {
+      $update = DB::table('experience')->where('id', $request->id)
+        ->update([
+          'user_id' => $id,
+          'company_image' => $profileImage,
+          'company_name' => $request->company_name,
+          'profile' => $request->profile_type,
+          'duration_from' => $request->duration_from,
+          'duration_to' => $request->duration_to,
+          'current' => '1',
+          'location' => $request->location,
+          'updated_at' => date("Y-m-d H:i:s")
+        ]);
+    } else {
+      $update = DB::table('experience')->where('id', $request->id)
+        ->update([
+          'user_id' => $id,
+          'company_image' => $profileImage,
+          'company_name' => $request->company_name,
+          'profile' => $request->profile_type,
+          'duration_from' => $request->duration_from,
+          'duration_to' => $request->duration_to,
+          'current' => '0',
+          'location' => $request->location,
+          'updated_at' => date("Y-m-d H:i:s")
+        ]);
+    }
     /*if ($files = $request->image) {
       $update = DB::table('experience')->where('id', $request->id)
         ->update([
