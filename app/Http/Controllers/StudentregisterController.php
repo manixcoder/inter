@@ -110,7 +110,7 @@ class StudentregisterController extends Controller
 			$headers[] = 'Content-type: text/html; charset=iso-8859-1';
 			// Additional headers
 			//$headers[] = 'To: Mary <mary@example.com>, Kelly <kelly@example.com>';
-			  $headers[] = 'From: The Internify contact@theinternify.com';
+			$headers[] = 'From: The Internify contact@theinternify.com';
 			//$headers[] = 'Cc: birthdayarchive@example.com';
 			//$headers[] = 'Bcc: birthdaycheck@example.com';
 			// Mail it

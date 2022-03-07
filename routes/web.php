@@ -74,6 +74,10 @@ Route::get('termsofuse', function () {
 	return view('fruntend.termsofuse');
 });
 
+Route::get('questionnaire', function () {
+	return view('fruntend.questionnaire');
+});
+
 Route::get('privacypolicy', function () {
 	return view('fruntend.privacypolicy');
 });

@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
 				'users_role' => '1',
 				'profile_image' => 'userimg-icon.png',
 				'org_image' => 'userimg-icon.png',
-				'name' => 'Super Admin',
+				'name' => 'The Internify',
 				'org_name' => '',
 				'email' => 'admin@gmail.com',
 				'phone' => '8054251404',

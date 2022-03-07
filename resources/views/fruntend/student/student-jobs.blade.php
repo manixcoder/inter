@@ -68,7 +68,7 @@
     <div class="middle_container middleContainerbox">
       <div class="manage_resume_sec fw text-left">
         <span>
-          <a href="#" class="input-btn redBGmanage_btn">Manage Questionnaire</a>
+          <a href="{{ URL::to('questionnaire') }}" class="input-btn redBGmanage_btn" target="_blank">Manage Questionnaire</a>
         </span>
         <span>
           <a href="javascript:void(0); " class="input-btn redBGmanage_btn open-modal" data-modal="#resumeUpload">Manage Resume</a>

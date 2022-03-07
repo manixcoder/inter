@@ -133,7 +133,7 @@ class StudentDashboardController extends Controller
     // dd($recuratorData);
     $to = $studentData->email;
     $job_title = $jobData->job_title;
-    $subject = "Rejection Mail";
+    $subject = "An update on your job application";
 
     $message = "
         <html>
@@ -147,7 +147,8 @@ class StudentDashboardController extends Controller
             </p> 
             <p>Our team was impressed by your outstanding accomplishments and we think you could be a good fit for other future openings and we will reach out again if we find a good match.</p>
             <p>We wish you all the best in your job search and future professional endeavours.</p>
-            <p> Best,<br> " . $recuratorData->org_name ?? 'The Internify' . " </p>     
+            <p> Best,<br> </p>
+            <p>" . $recuratorData->org_name ?? 'The Internify' . " </p>     
           </body>
        </html>";
 
@@ -174,7 +175,7 @@ class StudentDashboardController extends Controller
     $to = $studentData->email;
     $job_title = $jobData->job_title;
     $org_name = $recuratorData->org_name;
-    $subject = "Selection Email";
+    $subject = "An update on your job application";
     $message = "
     <html>
     <head>
@@ -182,12 +183,13 @@ class StudentDashboardController extends Controller
     <body>
     <p> Dear " . $studentData->name . ", </p>
     <p>I hope this email finds you well.</p> 
-    <p>We are delighted to inform you that we have shortlisted your application for our " . $job_title . "position. 
-    Your remarkable track record and outstanding achievements have amazed our team and we’d like to hop on a quick call with you to discuss your possible future with us at 
+    <p>We are delighted to inform you that we have shortlisted your application for our " . $job_title . " position. 
+    Your remarkable track record and outstanding achievements have amazed our team and we had like to hop on a quick call with you to discuss your possible future with us at 
     " . $org_name . ".</p>
     <p>We hope you can consider.</p>
     <p>Thank you for your cooperation.</p>
-    <p>Best," . $recuratorData->org_name ?? 'The Internify' . "</p>   
+    <p>Best,<br></p> 
+    <p> " . $recuratorData->org_name ?? 'The Internify' . " </p>
     </body>
     </html>";
 

@@ -10223,3 +10223,10 @@ span.lightFontWht {
     padding-left: 20px;
     margin-left: 5px;
 }
+
+p strong, p b {
+    font-weight: 700 !important;
+}
+a {
+    color: #72cbcb;
+}
