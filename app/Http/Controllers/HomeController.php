@@ -244,20 +244,31 @@ class HomeController extends Controller
   {
     $check_otp = DB::table('users')->where('email', $request->email)->first();
     if ($check_otp->otp == $request->otp) {
-      return view('fruntend.common_pages.resetpassword')->with('email', $request->email);
+      return view('fruntend.common_pages.resetpassword')
+        ->with('email', $request->email);
     } else {
       $msg = 'Please enter valid OTP.';
-      return view('fruntend.common_pages.verification_code')->with(['email' => $request->email, 'alert' => $msg]);
+      return view('fruntend.common_pages.verification_code')
+        ->with([
+          'email' => $request->email,
+          'alert' => $msg
+        ]);
     }
   }
   public function otp_verify(Request $request)
   {
     $check_otp = DB::table('users')->where('email', $request->email)->first();
     if ($check_otp->otp == $request->otp) {
-      return view('admin.reset_password')->with('email', $request->email);
+      return view('admin.reset_password')->with(
+        'email',
+        $request->email
+      );
     } else {
       $msg = 'Please enter valid OTP.';
-      return view('admin.verification_code')->with(['email' => $request->email, 'alert' => $msg]);
+      return view('admin.verification_code')->with([
+        'email' => $request->email,
+        'alert' => $msg
+      ]);
     }
   }
   public function web_password_update(Request $request)
@@ -435,7 +446,7 @@ class HomeController extends Controller
       <title>Registration Verification Email</title>
       </head>
       <body>
-      <p>Dear " . $data->name . "</p></br>
+      <p>Dear " . $data->name . " ,</p></br>
       <p>We are so glad you are joining Internify today, get ready to realise your true potential!</p></br>
       <p>Your verification code is " . $data->otp . ".</p></br>
       <p>Welcome to Internify!</p></br>
@@ -486,6 +497,28 @@ class HomeController extends Controller
         ]);
       }
     }
+  }
+
+  public function questionnaireSave(Request $request)
+  {
+    // dd(Auth::user()->id);
+    $languages = implode(", ", $request->languages);
+    //dd($languages);
+    $exData   = DB::table('questionnaires')->insert([
+      'user_id' => Auth::user()->id,
+      'age' => $request->age,
+      'languages' => $languages,
+      'accessories' => $request->accessories,
+      'work_hours' => $request->work_hours,
+      'work_days' => $request->work_days,
+      'experience' => $request->experience,
+      'background_check' => $request->background_check,
+      'drug_test' => $request->drug_test,
+      'salary_amount' => $request->salary_amount,
+      'created_at' => date("Y-m-d H:i:s"),
+      'updated_at' => date("Y-m-d H:i:s")
+    ]);
+    return redirect('student/jobs')->with(['status' => 'success', 'message' => 'New Questionnaires added Successfully!']);
   }
   /* Recruiter register controllers End */
 }

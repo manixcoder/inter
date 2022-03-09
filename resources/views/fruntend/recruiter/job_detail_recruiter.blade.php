@@ -147,7 +147,7 @@
                         </div>
 
                         <div class="retextbtn_sec pull-right rightside-cont">
-                          <button class="input-btn redBGmanage_btn whtbg-btn "> Questionnaire</button>
+                          <a href="{{ URL::to('questionnaire-details') }}" class="input-btn redBGmanage_btn whtbg-btn "> Questionnaire</a>
 
                           <!-- <span>
                               <img src="{{ URL::asset('/public/assets/images/arrow_right_red.png') }}" alt="redarrow">

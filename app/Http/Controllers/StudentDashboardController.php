@@ -141,8 +141,7 @@ class StudentDashboardController extends Controller
           <body>
             <p> Dear " . $studentData->name . ", </p>
             <p>I hope this email finds you well.</p> 
-            <p>
-            Thank you for taking the time to apply to our " . $job_title . " position. 
+            <p>Thank you for taking the time to apply to our " . $job_title . " position. 
             We wanted to let you know that we have chosen to move forward with a different candidate for our position.
             </p> 
             <p>Our team was impressed by your outstanding accomplishments and we think you could be a good fit for other future openings and we will reach out again if we find a good match.</p>
@@ -182,16 +181,16 @@ class StudentDashboardController extends Controller
     </head>
     <body>
     <p> Dear " . $studentData->name . ", </p>
-    <p>I hope this email finds you well.</p> 
-    <p>We are delighted to inform you that we have shortlisted your application for our " . $job_title . " position. 
-    Your remarkable track record and outstanding achievements have amazed our team and we had like to hop on a quick call with you to discuss your possible future with us at 
-    " . $org_name . ".</p>
+    <p>I hope this email finds you well.</p>
+    <p>We are delighted to inform you that we have shortlisted your application for our " . $job_title . " position.Your remarkable track record and outstanding achievements have amazed our team and we had like to hop on a quick call with you to discuss your possible future with us at " . $org_name . ". </p> 
     <p>We hope you can consider.</p>
     <p>Thank you for your cooperation.</p>
-    <p>Best,<br></p> 
+    <p>Best,<br></p>
     <p> " . $recuratorData->org_name ?? 'The Internify' . " </p>
     </body>
     </html>";
+
+
 
 
     $headers = "MIME-Version: 1.0" . "\r\n";

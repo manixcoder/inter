@@ -8,12 +8,12 @@ Route::get('clear-cache', function () {
 	$exitCode = Artisan::call('route:clear');
 	$exitCode = Artisan::call('view:clear');
 	$exitCode = Artisan::call('config:cache');
-	Session::flash('success', 'All Clear'); 
+	Session::flash('success', 'All Clear');
 	echo "DONE";
 });
 
 
-/* All web link Start... */ 
+/* All web link Start... */
 /* Recruiter basic info */
 Route::get('basic/info', function () {
 	return view('fruntend.recruiter_profile_section.basic_info');
@@ -76,6 +76,9 @@ Route::get('termsofuse', function () {
 
 Route::get('questionnaire', function () {
 	return view('fruntend.questionnaire');
+});
+Route::get('questionnaire-details', function () {
+	return view('fruntend.questionnaire-details');
 });
 
 Route::get('privacypolicy', function () {
@@ -158,7 +161,7 @@ Route::get('recruiter/mylisting', function () {
 
 Route::any('edit/recruiter/profile', 'RecruiterwebController@edit_recruiter_profile');
 Route::any('edit/recruiter/about', 'RecruiterwebController@edit_recruiter_about');
-Route::any('remove-profile-image','RecruiterwebController@removeProfileImage');
+Route::any('remove-profile-image', 'RecruiterwebController@removeProfileImage');
 /* After web login pages End */
 
 
@@ -258,7 +261,7 @@ Route::post('update_student_accomplishment', 'StudentDashboardController@update_
 Route::post('add_post', 'StudentDashboardController@add_post');
 
 Route::any('delete_student_post/{id}', 'StudentDashboardController@delete_student_post');
-Route::any('delete-student-resume/{id}','StudentDashboardController@deleteStudentResume');
+Route::any('delete-student-resume/{id}', 'StudentDashboardController@deleteStudentResume');
 
 Route::get('student/jobs', 'StudentDashboardController@student_jobs');
 
@@ -290,6 +293,8 @@ Route::post('update_student_about', 'StudentDashboardController@update_student_a
 /* Admin login Routes */
 Route::any('admin_logged_in', 'AdminController@admin_logged_in');
 Route::any('web-login-dashboard', 'HomeController@web_login');
+
+Route::any('save-questionnaire', 'HomeController@questionnaireSave');
 Route::any('search-header', 'DashboardController@search_header');
 Route::any('contactus_queryes', 'DashboardController@contactus_queryes');
 Route::any('query-delete/{id}', 'DashboardController@query_delete');
@@ -403,21 +408,21 @@ Route::any('delete-privacypolicy/{id}', 'PrivacyPolicyController@delete');
 Route::any('add-privacypolicy', 'PrivacyPolicyController@create');
 
 Auth::routes();
-Route::prefix('facebook')->name('facebook.')->group( function(){
-    Route::get('auth', 'FaceBookController@loginUsingFacebook')->name('login');
-    Route::get('callback', 'FaceBookController@callbackFromFacebook')->name('callback');
+Route::prefix('facebook')->name('facebook.')->group(function () {
+	Route::get('auth', 'FaceBookController@loginUsingFacebook')->name('login');
+	Route::get('callback', 'FaceBookController@callbackFromFacebook')->name('callback');
 });
-Route::prefix('linkedin')->name('linkedin.')->group( function(){
-Route::get('/auth', 'SocialAuthLinkedinController@loginUsinglinkedin')->name('login');
-Route::get('/callback', 'SocialAuthLinkedinController@callbackFromLinkedin')->name('callback');
+Route::prefix('linkedin')->name('linkedin.')->group(function () {
+	Route::get('/auth', 'SocialAuthLinkedinController@loginUsinglinkedin')->name('login');
+	Route::get('/callback', 'SocialAuthLinkedinController@callbackFromLinkedin')->name('callback');
 });
 
-Route::prefix('google')->name('google.')->group( function(){
+Route::prefix('google')->name('google.')->group(function () {
 	Route::get('google', 'GoogleController@redirectToGoogle')->name('login');
 	Route::get('callback', 'GoogleController@handleGoogleCallback')->name('callback');
 });
 
-Route::prefix('twitter')->name('twitter.')->group( function(){
+Route::prefix('twitter')->name('twitter.')->group(function () {
 	Route::get('twitter', 'GoogleController@redirectToGoogle')->name('login');
 	Route::get('callback', 'GoogleController@handleGoogleCallback')->name('callback');
 });

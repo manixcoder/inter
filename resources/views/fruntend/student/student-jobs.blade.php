@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Internify - Home</title>
   <!-- Fontawesome 4 Cdn from BootstrapCDN -->
-  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.png') }}"/>
+  <link rel="icon" type="image/png" href="{{ URL::asset('/public/uploads/favicon.png') }}" />
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="{{ asset('public/assets/web_assets/css/style.css')}}" rel="stylesheet">
   <link href="{{ asset('public/assets/web_assets/fonts/fonts.css')}}" rel="stylesheet">
@@ -58,9 +58,9 @@
     </div>
   </header>
 
-  @if(Session::has('success_msg'))
+  @if(Session::has('status'))
   <div class="col_grid8" style="color:green">
-    {{ Session::get('success_msg') }}
+  {{ Session::get('message') }}
   </div>
   @endif
 
@@ -74,8 +74,8 @@
           <a href="javascript:void(0); " class="input-btn redBGmanage_btn open-modal" data-modal="#resumeUpload">Manage Resume</a>
         </span>
       </div>
-
      
+
       <div class="unlock_sec jobSearch_sec">
         <h4>Find internships that inspire</h4>
         <form method="get" action="{{url('student/jobs')}}">
@@ -169,10 +169,9 @@
             <div class="col_grid9">
               <ul>
                 @foreach(unserialize($appl->offer) as $key=> $offer)
-                @if($key < 3)
-                <li><?php echo $offer ?></li>
-                @endif
-                @endforeach
+                @if($key < 3) <li><?php echo $offer ?></li>
+                  @endif
+                  @endforeach
               </ul>
             </div>
             <div class="col_grid3">
@@ -622,9 +621,9 @@
     </div></div -->
 
   <!----------------Popup end----------------------->
-<script >
-    $(document).ready(function(){
-      $(".header_sec .togglebtn").click(function(){
+  <script>
+    $(document).ready(function() {
+      $(".header_sec .togglebtn").click(function() {
         $(".header_sec ").toggleClass("opne_flow2header");
       });
     });
@@ -632,10 +631,10 @@
 
   <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
   <script>
-      $(window).on('load', function(){
-       $('.se-pre-con').delay(1500).fadeOut('slow');
-     });
-   </script>
+    $(window).on('load', function() {
+      $('.se-pre-con').delay(1500).fadeOut('slow');
+    });
+  </script>
   <script>
     $(document).ready(function() {
       $(".clicktobtm").click(function() {
@@ -821,7 +820,7 @@
       location.reload();
     });
   </script>
-  
+
 </body>
 
 </html>
