@@ -16,19 +16,14 @@
 <body class="questions-redbgbody ">
   <div class="questions-sec">
     <div class="questions-middle">
-      <!-- <h2>Hello!</h2>
-            <p>Fill out a few questions so we can macth you to the best and most relevant employers. (This will be submitted to every employer you apply to for an intership)</p>
-            <div class="questions-btnsec">
-              <button type="submit" class="whait-btn">NEXT</button>
-            </div> -->
-
       <form action="{{ url('save-questionnaire') }}" method="POST" enctype="multipart/form-data" id="regForm">
         @csrf
         <div class="tab step1-box">
           <h2>Hello!</h2>
-          <p>Fill out a few questions so we can match you to the <br /> best and most relevant employers. (This will be submitted to every employer you apply to for an <br /> internship) </p>
-
-
+          <p>
+            Fill out a few questions so we can match you to the <br /> best and most relevant employers. (This will be submitted to every employer you apply to for an
+            <br /> internship)
+          </p>
         </div>
         <div class="tab step2-box">
           <h3>Questionnaire</h3>
@@ -56,52 +51,13 @@
 
               <select class="form-control selectpicker" id="select-country" data-live-search="true" multiple name="languages[]">
                 @foreach($languageData as $language)
-                <option data-tokens="{{ $language->language_name}}"   value="{{ $language->language_name}}">{{ $language->language_name}}</option>
+                <option data-tokens="{{ $language->language_name}}" value="{{ $language->language_name}}">{{ $language->language_name}}</option>
                 @endforeach
               </select>
             </div>
           </div>
         </div>
-        <!-- <div class="tab step4-box">
-          <h3>Questionnaire</h3>
-          <div class="text-ecnter">
-            <h4>
-              3. Will you be able to bring your own laptop or phone to the internship (depending on the needs of your employer)?
-            </h4>
-            <div class="form-group">
-              <div class="checkbox-questionr">
-                <input type="radio" class="inputcheckbox" name="accessories" value="Yes, both">
-                <div class="questionr-opction">
-                  <span>A</span>  Yes, both
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="checkbox-questionr">
-                <input type="radio" class="inputcheckbox" name="accessories" value="Yes, leptop">
-                <div class="questionr-opction">
-                  <span>B</span> Yes, laptop
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="checkbox-questionr">
-                <input type="radio" class="inputcheckbox" name="accessories" value="Yes, phone">
-                <div class="questionr-opction">
-                   <span>C</span>  Yes, phone
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="checkbox-questionr">
-                <input type="radio" class="inputcheckbox" name="accessories" value="No, None">
-                <div class="questionr-opction">
-                  <span>D</span>  No, none
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
+
         <div class="tab step5-box">
           <h3>Questionnaire</h3>
           <div class="text-ecnter">

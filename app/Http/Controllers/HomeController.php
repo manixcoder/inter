@@ -501,23 +501,36 @@ class HomeController extends Controller
 
   public function questionnaireSave(Request $request)
   {
-    // dd(Auth::user()->id);
+    $questionnairesData = DB::table('questionnaires')->where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->first();
     $languages = implode(", ", $request->languages);
-    //dd($languages);
-    $exData   = DB::table('questionnaires')->insert([
-      'user_id' => Auth::user()->id,
-      'age' => $request->age,
-      'languages' => $languages,
-      'accessories' => $request->accessories,
-      'work_hours' => $request->work_hours,
-      'work_days' => $request->work_days,
-      'experience' => $request->experience,
-      'background_check' => $request->background_check,
-      'drug_test' => $request->drug_test,
-      'salary_amount' => $request->salary_amount,
-      'created_at' => date("Y-m-d H:i:s"),
-      'updated_at' => date("Y-m-d H:i:s")
-    ]);
+    if (!empty($questionnairesData)) {
+      DB::table('questionnaires')->where('user_id', Auth::user()->id)->update([
+        'age' => $request->age,
+        'languages' => $languages,
+        'work_hours' => $request->work_hours,
+        'work_days' => $request->work_days,
+        'experience' => $request->experience,
+        'background_check' => $request->background_check,
+        'drug_test' => $request->drug_test,
+        'salary_amount' => $request->salary_amount,
+        'updated_at' => date("Y-m-d H:i:s")
+      ]);
+    } else {
+      DB::table('questionnaires')->insert([
+        'user_id' => Auth::user()->id,
+        'age' => $request->age,
+        'languages' => $languages,
+        'work_hours' => $request->work_hours,
+        'work_days' => $request->work_days,
+        'experience' => $request->experience,
+        'background_check' => $request->background_check,
+        'drug_test' => $request->drug_test,
+        'salary_amount' => $request->salary_amount,
+        'created_at' => date("Y-m-d H:i:s"),
+        'updated_at' => date("Y-m-d H:i:s")
+      ]);
+    }
+
     return redirect('student/jobs')->with(['status' => 'success', 'message' => 'New Questionnaires added Successfully!']);
   }
   /* Recruiter register controllers End */
@@ -530,7 +543,7 @@ class HomeController extends Controller
     } else {
       return back();
     }
-   // dd($questionnairesData);
+    // dd($questionnairesData);
     return view('fruntend.questionnaire-details')->with([
       'status' => 'success',
       'message' => 'Successfully!',

@@ -18,7 +18,7 @@ class CreateQuestionnairesTable extends Migration
             $table->integer('user_id');
             $table->string('age')->nullable();
             $table->string('languages')->nullable();
-            $table->string('accessories')->nullable();
+            //$table->string('accessories')->nullable();
             $table->string('work_hours')->nullable();
             $table->string('work_days')->nullable();
             $table->string('experience')->nullable();
