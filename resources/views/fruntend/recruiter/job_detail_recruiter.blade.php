@@ -58,7 +58,7 @@
               <h3 class="borderBox_heading">Job Description</h3>
               <?php echo $Data[0]->job_description; ?>
             </div>
-          </div> 
+          </div>
           <div class="col_grid12 Jobextend_details text-center fw">
             <a href="javascript:void(0);" class="lightblue_text" id="extend">
               Extend Details
@@ -67,7 +67,7 @@
               </span>
             </a>
           </div>
-          
+
 
 
           <div class=" intercandidates_sec fw">
@@ -145,15 +145,26 @@
                             </span>
                           </a>
                         </div>
-
+                        @php
+                        $questionnairesData = DB::table('questionnaires')->where('user_id', $studentDetails->id)->orderBy('id', 'DESC')->first();
+                        
+                        @endphp
+                        @if($questionnairesData)
                         <div class="retextbtn_sec pull-right rightside-cont">
-                          <a href="{{ URL::to('questionnaire-details') }}" class="input-btn redBGmanage_btn whtbg-btn "> Questionnaire</a>
+                          <form action="{{ URL::to('questionnaire-details') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="student_id" value="{{ $studentDetails->id }}">
+                            <button type="submit" class="input-btn redBGmanage_btn whtbg-btn ">Questionnaire</button>
+                          </form>
+                          <!-- <a href="{{ URL::to('questionnaire-details') }}" target="_blank" class="input-btn redBGmanage_btn whtbg-btn "> Questionnaire</a> -->
 
                           <!-- <span>
                               <img src="{{ URL::asset('/public/assets/images/arrow_right_red.png') }}" alt="redarrow">
                             </span> -->
                           </a>
                         </div>
+                        @endif
+                        
                       </div>
 
                     </div>
@@ -354,12 +365,12 @@
       });
     });
   </script>
-  <script >
-    $(document).ready(function(){
-    $(".header_sec .togglebtn").click(function(){
-      $(".header_sec ").toggleClass("opne_flow2header");
+  <script>
+    $(document).ready(function() {
+      $(".header_sec .togglebtn").click(function() {
+        $(".header_sec ").toggleClass("opne_flow2header");
+      });
     });
-  });
   </script>
   </body>
 

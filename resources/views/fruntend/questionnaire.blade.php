@@ -56,13 +56,13 @@
 
               <select class="form-control selectpicker" id="select-country" data-live-search="true" multiple name="languages[]">
                 @foreach($languageData as $language)
-                <option data-tokens="{{ $language->language_name}}" value="{{ $language->language_name}}">{{ $language->language_name}}</option>
+                <option data-tokens="{{ $language->language_name}}"   value="{{ $language->language_name}}">{{ $language->language_name}}</option>
                 @endforeach
               </select>
             </div>
           </div>
         </div>
-        <div class="tab step4-box">
+        <!-- <div class="tab step4-box">
           <h3>Questionnaire</h3>
           <div class="text-ecnter">
             <h4>
@@ -72,7 +72,7 @@
               <div class="checkbox-questionr">
                 <input type="radio" class="inputcheckbox" name="accessories" value="Yes, both">
                 <div class="questionr-opction">
-                  <span>A</span> Yes, both
+                  <span>A</span>  Yes, both
                 </div>
               </div>
             </div>
@@ -80,7 +80,7 @@
               <div class="checkbox-questionr">
                 <input type="radio" class="inputcheckbox" name="accessories" value="Yes, leptop">
                 <div class="questionr-opction">
-                  <span>B</span> Yes, leptop
+                  <span>B</span> Yes, laptop
                 </div>
               </div>
             </div>
@@ -88,7 +88,7 @@
               <div class="checkbox-questionr">
                 <input type="radio" class="inputcheckbox" name="accessories" value="Yes, phone">
                 <div class="questionr-opction">
-                  <span>C</span> Yes, phone
+                   <span>C</span>  Yes, phone
                 </div>
               </div>
             </div>
@@ -96,16 +96,16 @@
               <div class="checkbox-questionr">
                 <input type="radio" class="inputcheckbox" name="accessories" value="No, None">
                 <div class="questionr-opction">
-                  <span>D</span> No, none
+                  <span>D</span>  No, none
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="tab step5-box">
           <h3>Questionnaire</h3>
           <div class="text-ecnter">
-            <h4>4. How many hours can you work per day?</h4>
+            <h4>3. How many hours can you work per day?</h4>
             <div class="form-group">
               <div class="checkbox-questionr">
                 <input type="radio" class="inputcheckbox" name="work_hours" value="1">
@@ -191,7 +191,7 @@
         <div class="tab step5-box step6-box">
           <h3>Questionnaire</h3>
           <div class="text-ecnter">
-            <h4>5. How many days can you work per week?</h4>
+            <h4>4. How many days can you work per week?</h4>
             <div class="form-group">
               <div class="checkbox-questionr">
                 <input type="radio" class="inputcheckbox" name="work_days" value="1">
@@ -246,7 +246,7 @@
           <h3>Questionnaire</h3>
           <div class="text-ecnter">
             <h4>
-              6. Do you have experience with any specific tools or software? List them below!
+              5. Do you have experience with any specific tools or software? List them below!
             </h4>
             <div class="form-group">
               <input type="text" name="experience" placeholder="Type your answer here..." class="form-control" />
@@ -256,7 +256,7 @@
         <div class="tab step8-box">
           <h3>Questionnaire</h3>
           <div class="text-ecnter">
-            <h4>7. Are you willing to undergo a background check, in accordance to local law?</h4>
+            <h4>6. Are you willing to undergo a background check, in accordance to local law?</h4>
             <div class="form-group">
               <div class="checkbox-questionr">
                 <input type="radio" class="inputcheckbox" name="background_check" value="Yes">
@@ -278,7 +278,7 @@
         <div class="tab step9-box">
           <h3>Questionnaire</h3>
           <div class="text-ecnter">
-            <h4>8. Are you willing to undergo a drug test, in accordance to local law?</h4>
+            <h4>7. Are you willing to undergo a drug test, in accordance to local law?</h4>
             <div class="form-group">
               <div class="checkbox-questionr">
                 <input type="radio" class="inputcheckbox" name="drug_test" value="Yes">
@@ -301,7 +301,7 @@
           <h3>Questionnaire</h3>
           <div class="text-ecnter">
             <h4>
-              9. Do you need a salary for this internship? If so, how much?
+              8. Do you need a salary for this internship? If so, how much?
               <br />
               <small>
                 (Note: This limits the number of internship options that suit you)
@@ -353,7 +353,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" rel="stylesheet" />
 
 
-  <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script>
+  <!-- <script src="{{ asset('public/assets/web_assets/js/jquery-lb.js')}}"></script> -->
   <!-- jQuery easing plugin -->
   <script>
     var currentTab = 0; // Current tab is set to be the first tab (0)
@@ -401,7 +401,7 @@
       // This function deals with validation of the form fields
       var x, y, i, valid = true;
       x = document.getElementsByClassName("tab");
-      y = x[currentTab].getElementsByTagName("input");
+      y = x[currentTab].getElementsByTagName("input , .questions-sec .tab .form-group .bootstrap-select .dropdown-toggle .filter-option");
       // A loop that checks every input field in the current tab:
       for (i = 0; i < y.length; i++) {
         // If a field is empty...

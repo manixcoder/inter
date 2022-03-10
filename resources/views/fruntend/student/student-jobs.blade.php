@@ -58,11 +58,7 @@
     </div>
   </header>
 
-  @if(Session::has('status'))
-  <div class="col_grid8" style="color:green">
-  {{ Session::get('message') }}
-  </div>
-  @endif
+  
 
   <div class="body_wht-inners ">
     <div class="middle_container middleContainerbox">
@@ -617,7 +613,7 @@
         </div>
         <h3 class="">Job Applied Successfully</h3>
         <p>You will be contacted through <br> your email or phone number, hang tight!</p>
-      </div>	
+      </div>  
     </div></div -->
 
   <!----------------Popup end----------------------->

@@ -521,4 +521,20 @@ class HomeController extends Controller
     return redirect('student/jobs')->with(['status' => 'success', 'message' => 'New Questionnaires added Successfully!']);
   }
   /* Recruiter register controllers End */
+
+  public function questionnaireDetails(Request $request)
+  {
+    $questionnairesData = DB::table('questionnaires')->where('user_id', $request->student_id)->orderBy('id', 'DESC')->first();
+    if (!empty($questionnairesData)) {
+      $questionnairesData = $questionnairesData;
+    } else {
+      return back();
+    }
+   // dd($questionnairesData);
+    return view('fruntend.questionnaire-details')->with([
+      'status' => 'success',
+      'message' => 'Successfully!',
+      'student_id' => $request->student_id
+    ]);
+  }
 }
