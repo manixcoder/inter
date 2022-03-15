@@ -82,7 +82,8 @@ Route::get('questionnaire', function () {
 // 	return view('fruntend.questionnaire-details');
 // });
 Route::any('questionnaire-details', 'HomeController@questionnaireDetails');
-
+Route::any('questionnaire-update', 'HomeController@questionnaireUpdate');
+Route::any('update-questionnaire', 'HomeController@updateQuestionnaire');
 Route::get('privacypolicy', function () {
 	return view('fruntend.privacypolicy');
 });
@@ -297,6 +298,7 @@ Route::any('admin_logged_in', 'AdminController@admin_logged_in');
 Route::any('web-login-dashboard', 'HomeController@web_login');
 
 Route::any('save-questionnaire', 'HomeController@questionnaireSave');
+
 Route::any('search-header', 'DashboardController@search_header');
 Route::any('contactus_queryes', 'DashboardController@contactus_queryes');
 Route::any('query-delete/{id}', 'DashboardController@query_delete');

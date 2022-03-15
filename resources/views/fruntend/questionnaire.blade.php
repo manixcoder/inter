@@ -15,6 +15,7 @@
 
 <body class="questions-redbgbody ">
   <div class="questions-sec">
+
     <div class="questions-middle">
       <form action="{{ url('save-questionnaire') }}" method="POST" enctype="multipart/form-data" id="regForm">
         @csrf
@@ -25,12 +26,22 @@
             <br /> internship)
           </p>
         </div>
+        <!-- @if($errors->any())
+        <div class="alert alert-danger">
+          <p><strong>Opps Something went wrong</strong></p>
+          <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+        @endif -->
         <div class="tab step2-box">
           <h3>Questionnaire</h3>
           <div class="text-ecnter">
             <h4>1. How old are you?</h4>
             <div class="form-group">
-              <input type="text" name="age" placeholder="Type your answer here..." class="form-control" />
+              <input type="text" name="age" placeholder="Type your answer here..." class="form-control" require />
             </div>
           </div>
         </div>
@@ -49,7 +60,7 @@
                 <option>Type or select an option 3</option>
               </select> -->
 
-              <select class="form-control selectpicker" id="select-country" data-live-search="true" multiple name="languages[]">
+              <select class="form-control selectpicker" id="select-country" data-live-search="true" multiple name="languages[]" require>
                 @foreach($languageData as $language)
                 <option data-tokens="{{ $language->language_name}}" value="{{ $language->language_name}}">{{ $language->language_name}}</option>
                 @endforeach
@@ -64,7 +75,7 @@
             <h4>3. How many hours can you work per day?</h4>
             <div class="form-group">
               <div class="checkbox-questionr">
-                <input type="radio" class="inputcheckbox" name="work_hours" value="1">
+                <input type="radio" class="inputcheckbox" name="work_hours" value="1" require>
                 <div class="questionr-opction">
                   1
                 </div>
@@ -72,7 +83,7 @@
             </div>
             <div class="form-group">
               <div class="checkbox-questionr">
-                <input type="radio" class="inputcheckbox" name="work_hours" value="2">
+                <input type="radio" class="inputcheckbox" name="work_hours" value="2"  >
                 <div class="questionr-opction">
                   2
                 </div>
@@ -150,7 +161,7 @@
             <h4>4. How many days can you work per week?</h4>
             <div class="form-group">
               <div class="checkbox-questionr">
-                <input type="radio" class="inputcheckbox" name="work_days" value="1">
+                <input type="radio" class="inputcheckbox" name="work_days" value="1" require> 
                 <div class="questionr-opction">
                   1
                 </div>
@@ -205,7 +216,7 @@
               5. Do you have experience with any specific tools or software? List them below!
             </h4>
             <div class="form-group">
-              <input type="text" name="experience" placeholder="Type your answer here..." class="form-control" />
+              <input type="text" name="experience" placeholder="Type your answer here..." class="form-control" require/>
             </div>
           </div>
         </div>
@@ -215,7 +226,7 @@
             <h4>6. Are you willing to undergo a background check, in accordance to local law?</h4>
             <div class="form-group">
               <div class="checkbox-questionr">
-                <input type="radio" class="inputcheckbox" name="background_check" value="Yes">
+                <input type="radio" class="inputcheckbox" name="background_check" value="Yes" require>
                 <div class="questionr-opction">
                   <span>Y</span> Yes
                 </div>
@@ -237,7 +248,7 @@
             <h4>7. Are you willing to undergo a drug test, in accordance to local law?</h4>
             <div class="form-group">
               <div class="checkbox-questionr">
-                <input type="radio" class="inputcheckbox" name="drug_test" value="Yes">
+                <input type="radio" class="inputcheckbox" name="drug_test" value="Yes" require>
                 <div class="questionr-opction">
                   <span>Y</span> Yes
                 </div>
@@ -264,7 +275,7 @@
               </small>
             </h4>
             <div class="form-group">
-              <input type="text" placeholder="Type your answer here..." name="salary_amount" class="form-control" />
+              <input type="text" placeholder="Type your answer here..." name="salary_amount" class="form-control" require/>
             </div>
           </div>
         </div>
@@ -357,7 +368,7 @@
       // This function deals with validation of the form fields
       var x, y, i, valid = true;
       x = document.getElementsByClassName("tab");
-      y = x[currentTab].getElementsByTagName("input , .questions-sec .tab .form-group .bootstrap-select .dropdown-toggle .filter-option");
+      y = x[currentTab].getElementsByTagName("input");
       // A loop that checks every input field in the current tab:
       for (i = 0; i < y.length; i++) {
         // If a field is empty...
@@ -374,6 +385,9 @@
       }
       return valid; // return the valid status
     }
+
+  
+    
 
     function fixStepIndicator(n) {
       // This function removes the "active" class of all steps...

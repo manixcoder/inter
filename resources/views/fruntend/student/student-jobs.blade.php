@@ -52,25 +52,31 @@
       if ($accomplishments) {
         $count = $count + 5;
       }
-
+      $questionnaires = DB::table('questionnaires')->where('user_id', $userid)->get();
       ?>
 
     </div>
   </header>
 
-  
+
 
   <div class="body_wht-inners ">
     <div class="middle_container middleContainerbox">
       <div class="manage_resume_sec fw text-left">
+        @if(count($questionnaires) > 0)
+        <span>
+          <a href="{{ URL::to('questionnaire-update') }}" class="input-btn redBGmanage_btn" target="_blank">Manage Questionnaire</a>
+        </span>
+        @else
         <span>
           <a href="{{ URL::to('questionnaire') }}" class="input-btn redBGmanage_btn" target="_blank">Manage Questionnaire</a>
         </span>
+        @endif
         <span>
           <a href="javascript:void(0); " class="input-btn redBGmanage_btn open-modal" data-modal="#resumeUpload">Manage Resume</a>
         </span>
       </div>
-     
+
 
       <div class="unlock_sec jobSearch_sec">
         <h4>Find internships that inspire</h4>

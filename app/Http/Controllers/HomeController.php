@@ -206,11 +206,7 @@ class HomeController extends Controller
       $otp = 0000;
       $user = DB::table('users')->where('email', '=', $check_email->email)->update(['otp' => $otp]);
 
-      /*$data = ['body' => 'Your OTP is : '. $otp];
-        Mail::send('admin.verification_code', $data, function($message)
-        {
-          $message->to('hareshsingh121@gmail.com', 'Jon Doe')->subject('Otp Verification');
-        });*/
+
 
       return view('admin.verification_code')->with(['email' => $check_email->email, 'alert' => '']);
     } else {
@@ -228,11 +224,7 @@ class HomeController extends Controller
       $otp = 0000;
       $user = DB::table('users')->where('email', '=', $check_email->email)->update(['otp' => $otp]);
 
-      /*$data = ['body' => 'Your OTP is : '. $otp];
-        Mail::send('admin.verification_code', $data, function($message)
-        {
-          $message->to('hareshsingh121@gmail.com', 'Jon Doe')->subject('Otp Verification');
-        });*/
+
 
       return view('fruntend.common_pages.verification_code')->with(['email' => $check_email->email, 'alert' => '']);
     } else {
@@ -287,18 +279,6 @@ class HomeController extends Controller
         'status' => 'success',
         'message' => 'Password changed successfully!'
       ));
-
-
-      // return view('fruntend.web_login')->with(['alert' => $msg]);
-      /* switch ($role_id) 
-        {
-          case 1:
-                return redirect('web-login');
-            break;
-          case 2:
-                return redirect('web-login');
-            break;
-        }*/
     } else {
       echo 'something went wrong';
     }
@@ -501,37 +481,58 @@ class HomeController extends Controller
 
   public function questionnaireSave(Request $request)
   {
-    $questionnairesData = DB::table('questionnaires')->where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->first();
-    $languages = implode(", ", $request->languages);
-    if (!empty($questionnairesData)) {
-      DB::table('questionnaires')->where('user_id', Auth::user()->id)->update([
-        'age' => $request->age,
-        'languages' => $languages,
-        'work_hours' => $request->work_hours,
-        'work_days' => $request->work_days,
-        'experience' => $request->experience,
-        'background_check' => $request->background_check,
-        'drug_test' => $request->drug_test,
-        'salary_amount' => $request->salary_amount,
-        'updated_at' => date("Y-m-d H:i:s")
-      ]);
-    } else {
-      DB::table('questionnaires')->insert([
-        'user_id' => Auth::user()->id,
-        'age' => $request->age,
-        'languages' => $languages,
-        'work_hours' => $request->work_hours,
-        'work_days' => $request->work_days,
-        'experience' => $request->experience,
-        'background_check' => $request->background_check,
-        'drug_test' => $request->drug_test,
-        'salary_amount' => $request->salary_amount,
-        'created_at' => date("Y-m-d H:i:s"),
-        'updated_at' => date("Y-m-d H:i:s")
-      ]);
+    // dd($request->all());
+    $validator = Validator::make(
+      $request->all(),
+      [
+        'age' => 'required',
+        'languages' => 'required',
+        'work_hours' => 'required',
+        'work_days' => 'required',
+        'experience' => 'required',
+        'background_check' => 'required',
+        'drug_test' => 'required',
+        'salary_amount' => 'required',
+      ]
+    );
+    if ($validator->fails()) {
+      return back()->withErrors($validator)->withInput();
     }
+    try {
 
-    return redirect('student/jobs')->with(['status' => 'success', 'message' => 'New Questionnaires added Successfully!']);
+      $questionnairesData = DB::table('questionnaires')->where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->first();
+      $languages = implode(", ", $request->languages);
+      if (!empty($questionnairesData)) {
+        DB::table('questionnaires')->where('user_id', Auth::user()->id)->update([
+          'age' => $request->age,
+          'languages' => $languages,
+          'work_hours' => $request->work_hours,
+          'work_days' => $request->work_days,
+          'experience' => $request->experience,
+          'background_check' => $request->background_check,
+          'drug_test' => $request->drug_test,
+          'salary_amount' => $request->salary_amount,
+          'updated_at' => date("Y-m-d H:i:s")
+        ]);
+      } else {
+        DB::table('questionnaires')->insert([
+          'user_id' => Auth::user()->id,
+          'age' => $request->age,
+          'languages' => $languages,
+          'work_hours' => $request->work_hours,
+          'work_days' => $request->work_days,
+          'experience' => $request->experience,
+          'background_check' => $request->background_check,
+          'drug_test' => $request->drug_test,
+          'salary_amount' => $request->salary_amount,
+          'created_at' => date("Y-m-d H:i:s"),
+          'updated_at' => date("Y-m-d H:i:s")
+        ]);
+      }
+      return redirect('student/jobs')->with(['status' => 'success', 'message' => 'New Questionnaires added Successfully!']);
+    } catch (\Exception $e) {
+      return redirect()->route('listingsAdmin')->with(['status' => 'danger', 'message' => 'Something went wrong. Please try again later.']);
+    }
   }
   /* Recruiter register controllers End */
 
@@ -549,5 +550,59 @@ class HomeController extends Controller
       'message' => 'Successfully!',
       'student_id' => $request->student_id
     ]);
+  }
+
+  public function questionnaireUpdate(Request $request)
+  {
+    $questionnairesData = DB::table('questionnaires')
+      ->where('user_id', Auth::user()->id)
+      ->orderBy('id', 'DESC')
+      ->first();
+    // dd($questionnairesData);
+
+    // dd($questionnairesData);
+    return view('fruntend.questionnaire-update')->with([
+      'status' => 'success',
+      'message' => 'Successfully!',
+      'student_id' => Auth::user()->id
+    ]);
+  }
+  public function updateQuestionnaire(Request $request)
+  {
+    //dd($request->all());
+    $validator = Validator::make($request->all(),[
+        'age' => 'required',
+        'languages' => 'required',
+        'work_hours' => 'required',
+        'work_days' => 'required',
+        'experience' => 'required',
+        'background_check' => 'required',
+        'drug_test' => 'required',
+        'salary_amount' => 'required',
+      ]
+    );
+    if ($validator->fails()) {
+      return back()->withErrors($validator)->withInput();
+    }
+    try {
+      $questionnairesData = DB::table('questionnaires')->where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->first();
+      $languages = implode(", ", $request->languages);
+      
+        DB::table('questionnaires')->where('user_id', Auth::user()->id)->update([
+          'age' => $request->age,
+          'languages' => $languages,
+          'work_hours' => $request->work_hours,
+          'work_days' => $request->work_days,
+          'experience' => $request->experience,
+          'background_check' => $request->background_check,
+          'drug_test' => $request->drug_test,
+          'salary_amount' => $request->salary_amount,
+          'updated_at' => date("Y-m-d H:i:s")
+        ]);
+      
+      return redirect('student/jobs')->with(['status' => 'success', 'message' => 'New Questionnaires added Successfully!']);
+    } catch (\Exception $e) {
+      return redirect('student/jobs')->with(['status' => 'danger', 'message' => 'Something went wrong. Please try again later.']);
+    }
   }
 }

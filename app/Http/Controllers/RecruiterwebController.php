@@ -45,7 +45,7 @@ class RecruiterwebController extends Controller
   public function removeProfileImage(Request $request)
   {
     DB::table('users')->where('id', $request->user_id)->update([
-      'profile_image'=>'blank-profile-picture.png'
+      'profile_image' => 'blank-profile-picture.png'
     ]);
     return back()->with('status', 'update successfully !');
   }

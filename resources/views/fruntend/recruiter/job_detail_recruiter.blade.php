@@ -147,7 +147,7 @@
                         </div>
                         @php
                         $questionnairesData = DB::table('questionnaires')->where('user_id', $studentDetails->id)->orderBy('id', 'DESC')->first();
-                        
+
                         @endphp
                         @if($questionnairesData)
                         <div class="retextbtn_sec pull-right rightside-cont">
@@ -164,7 +164,7 @@
                           </a>
                         </div>
                         @endif
-                        
+
                       </div>
 
                     </div>

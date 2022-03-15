@@ -62,7 +62,7 @@ class StudentregisterController extends Controller
 					'error_msg' => 'Sorry, Your phone already exist.'
 				]);
 			}
-		} elseif ($request->setep_three == 'setep_three') {
+		} elseif( $request->setep_three == 'setep_three' ) {
 			$emailCount = DB::table('users')->where('email', $request->email)->count();
 
 			if ($emailCount == 0) {
@@ -86,7 +86,6 @@ class StudentregisterController extends Controller
 				'updated_at' => date("Y-m-d H:i:s")
 			]);
 			$data = app('App\User')->where('id', $request->student_id)->first();
-
 			$to = $data->email; // note the comma
 			// Subject
 			$subject = 'Registration Verification Email';
